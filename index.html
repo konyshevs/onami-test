@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./favicons/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>Onami</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="jquery-3.5.0.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="logo-bar">
+          <div>
+            <div id="lang"><a href="en.html">EN</a></div>
+            <div id="menu-butt">תפריט</div>
+          </div>
+          <a href="https://onami.co.il"
+            ><img alt="Onami logo" src="logo-onami3.png"
+          /></a>
+        </div>
+        <div id="nav-container">
+          <div id="nav">
+            <nav>
+              <div class="nav-cat-title">מטבח</div>
+              <div data-link="appetisers" class="nav-butt">ראשונות</div>
+              <div data-link="skewers" class="nav-butt">שיפודים</div>
+              <div data-link="mainDishes" class="nav-butt">עיקריות</div>
+              <div data-link="desserts" class="nav-butt">קינוחים</div>
+              <div class="nav-cat-title">סושי</div>
+              <div data-link="seshimi" class="nav-butt">סשימי / ניגירי</div>
+              <div data-link="inari" class="nav-butt">אינרי / גונקן</div>
+              <div data-link="hosomaki" class="nav-butt">הוסומאקי</div>
+              <div data-link="temaki" class="nav-butt">טמאקי</div>
+              <div data-link="irodori" class="nav-butt">i/o אירודורי</div>
+              <div data-link="combinations" class="nav-butt">קומבינציות</div>
+              <div class="nav-cat-title">עסקיות</div>
+              <div data-link="lunch75" class="nav-butt">עסקית 75</div>
+              <div data-link="lunch90" class="nav-butt">עסקית 90</div>
+              <div data-link="lunch105" class="nav-butt">עסקית 105</div>
+              <div class="nav-cat-title">משקאות</div>
+              <div data-link="wine" class="nav-butt">יינות</div>
+              <div data-link="sake" class="nav-butt">סאקה ובירות</div>
+              <div data-link="coctails" class="nav-butt">קוקטיילים</div>
+              <div data-link="softDrinks" class="nav-butt">שתייה קלה</div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div id="main-container" class="container">
+        <section id="appetisers" class="menu">
+          <div class="menu-title">
+            <div class="">ראשונות קרות</div>
+            <div class="menu-description dish-description"></div>
+          </div>
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>סלט וואקאמה</div>
+                <div class="veg"></div>
+              </div>
+              <div class="dish-price">₪ 24</div>
+            </div>
+            <div class="dish-description">
+              אצות וואקאמה, צנונית, מלפפון ובצל ברוטב וואפו (ניתן לבקש ללא
+              גלוטן)
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>סלט הרוסאמה</div>
+              </div>
+              <div class="dish-price">₪ 32</div>
+            </div>
+            <div class="dish-description">
+              אטריות תפוחי אדמה, מלפפון, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש
+              ללא גלוטן)
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>סלט מידורי</div>
+                <div class="veg"></div>
+              </div>
+              <div class="dish-price">₪ 52</div>
+            </div>
+            <div class="dish-description">
+              סלט עלי חסה, רוקט, צנונית, מלפפון, תפוח, בצל ושקדים קלויים ברוטב
+              למון ג'ויו (טבעוני, ללא גלוטן)
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>בוטרגה סובה</div>
+              </div>
+              <div class="dish-price">₪ 58</div>
+            </div>
+            <div class="dish-description">
+              אטריות סובה עם בוטרגה, חלמון כבוש ואיקורה
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>איוואגקי</div>
+              </div>
+              <div class="dish-price">₪ 36</div>
+            </div>
+            <div class="dish-description">
+              אוייסטר מוגש על קרח כתוש בליווי רוטב ספייסי פונזו
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>בורה יוזו אבורה דושי</div>
+              </div>
+              <div class="dish-price">₪ 52</div>
+            </div>
+            <div class="dish-description">
+              סשימי בורי בחיתוך דק צרוב בשמן שומשום חם ויוזו, סויה וג'ינג'ר
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>סאקה אבוקדו קוקטייל</div>
+              </div>
+              <div class="dish-price">₪ 58</div>
+            </div>
+            <div class="dish-description">
+              טרטר סלמון ואבוקדו עם סויה, ווסאבי קראנץ' בעיטור ביצי סלמון
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>מגורו יוקה</div>
+              </div>
+              <div class="dish-price">₪ 68</div>
+            </div>
+            <div class="dish-description">
+              טרטר טונה מתובל בסויה, בצל ירוק, שום וחלמון ביצת שליו
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>מגורו טטאקי</div>
+              </div>
+              <div class="dish-price">₪ 68</div>
+            </div>
+            <div class="dish-description">
+              סשימי טונה צרובה בליווי רוטב ספייסי פונזו וג'ינג'ר טרי
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>וואפו יוקה</div>
+              </div>
+              <div class="dish-price">₪ 72</div>
+            </div>
+            <div class="dish-description">טרטר בקר וחלמון ביצת שליו</div>
+          </div>
+
+          <div class="menu-title">
+            <div class="dish-title">ראשונות חמות</div>
+            <div class="dish-description"></div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>אדה ממה</div>
+                <div class="veg"></div>
+              </div>
+              <div class="dish-price">₪ 26</div>
+            </div>
+            <div class="dish-description">
+              פולי סויה חלוטים ומומלחים (טבעוני ללא גלוטן)
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>אומיסו שירו</div>
+              </div>
+              <div class="dish-price">₪ 28</div>
+            </div>
+            <div class="dish-description">
+              מרק מיסו עם אצות וואקאמה, טופו ובצל ירוק
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>אגדאשי דופו</div>
+              </div>
+              <div class="dish-price">₪ 36/44</div>
+            </div>
+            <div class="dish-description">
+              קוביות טופו פריכות ברוטב טנצויו חם, צנון כתוש, בצל ירוק ופטריות
+              נמקו (ניתן לבקש טבעוני)
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>אבי/ איקה טמפורה</div>
+              </div>
+              <div class="dish-price">₪ 38</div>
+            </div>
+            <div class="dish-description">
+              שרימפ/ קלמארי טמפורה בליווי רוטב טנצויו חם, צנון וג'ינג'ר כתושים
+            </div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>סקאנה באטר שואיו</div>
+              </div>
+              <div class="dish-price">₪ 52</div>
+            </div>
+            <div class="dish-description">בורי עשוי במחבת בחמאה, שום וסויה</div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>קאיסן באטר שואיו</div>
+              </div>
+              <div class="dish-price">₪ 58</div>
+            </div>
+            <div class="dish-description">
+              פירות ים מוקפצים בחמאה, שום וסויה
+            </div>
+          </div>
+        </section>
+
+        <!-- <section id="skewers" class="menu">
+          <div class="menu-title">
+            <div class="">שיפודי עץ על הגריל</div>
+            <div class="dish-description"></div>
+          </div>
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>נגימה</div>
+              </div>
+              <div class="dish-price">₪ 24</div>
+            </div>
+            <div class="dish-description">פרגית עם בצל ירוק</div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>אספרה בייקון שיו יאקי</div>
+              </div>
+              <div class="dish-price">₪ 26</div>
+            </div>
+            <div class="dish-description">אספרגוס עטוף בבייקון שיו יאקי</div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>סאקה יאקי</div>
+              </div>
+              <div class="dish-price">₪ 28</div>
+            </div>
+            <div class="dish-description">סלמון</div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>אבי יאקי</div>
+              </div>
+              <div class="dish-price">₪ 28</div>
+            </div>
+            <div class="dish-description">שרימפ</div>
+          </div>
+
+          <div class="dish">
+            <div class="title-price-section">
+              <div class="dish-title">
+                <div>הוטטה בייקון מאקי</div>
+              </div>
+              <div class="dish-price">₪ 38</div>
+            </div>
+            <div class="dish-description">סקלופ עטוף בבייקון</div>
+          </div>
+        </section>
+
+        <section id="main-dishes" class="menu">
+          <div class="menu-title">
+            <div class="">מנות עיקריות</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="desserts" class="menu">
+          <div class="menu-title">
+            <div class="">קינוחים</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="seshimi" class="menu">
+          <div class="menu-title">
+            <div class="">סשימי / ניגירי</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="inari" class="menu">
+          <div class="menu-title">
+            <div class="">אינרי / גונקן</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="hosomaki" class="menu">
+          <div class="menu-title">
+            <div class="">הוסומקי</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="temaki" class="menu">
+          <div class="menu-title">
+            <div class="">טמקי - קונוס</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="irodori" class="menu">
+          <div class="menu-title">
+            <div class="">אירודורי - I\O</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="combinations" class="menu">
+          <div class="menu-title">
+            <div class="">קומבינציות</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="lunch75" class="menu">
+          <div class="menu-title">
+            <div class="">עסקית 75</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="lunch90" class="menu">
+          <div class="menu-title">
+            <div class="">עסקית 90</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="lunch105" class="menu">
+          <div class="menu-title">
+            <div class="">עסקית 105</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="wine" class="menu">
+          <div class="menu-title">
+            <div class="">יינות</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="sake" class="menu">
+          <div class="menu-title">
+            <div class="">סאקה</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="coctails" class="menu">
+          <div class="menu-title">
+            <div class="">קוקטיילים</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section>
+
+        <section id="soft-drinks" class="menu">
+          <div class="menu-title">
+            <div class="">שתייה קלה</div>
+            <div class="dish-description">עמוד בבניה</div>
+          </div>
+        </section> -->
+      </div>
+    </main>
+  </body>
+</html>

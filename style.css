@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap");
+
+html body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+body {
+  color: white;
+  font-family: "Alef";
+  font-variant: small-caps;
+}
+
+header {
+  height: 72px;
+  overflow: visible;
+  position: fixed;
+  width: 100%;
+  background: black;
+  box-shadow: 0 2px 10px black;
+}
+
+header .container {
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 10px;
+  min-width: 280px;
+  max-width: 1024px;
+}
+
+/* .hidden {
+  display: none;
+} */
+
+#logo-bar {
+  padding: 10px 10px 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+#logo-bar img,
+#logo-bar a {
+  height: 52px;
+}
+
+#lang {
+  /* text-align: right; */
+  font-weight: bold;
+  font-size: 12px;
+  height: 20px;
+}
+
+#menu-butt {
+  display: none;
+  margin-top: 5px;
+  text-align: center;
+  border: 1px solid white;
+  cursor: pointer;
+  height: 15px;
+  width: 70px;
+  font-weight: bold;
+  padding-bottom: 9px;
+  position: relative;
+}
+
+#nav-container {
+  transition: 0.5s;
+  display: flex;
+  justify-content: flex-start;
+  width: auto;
+  /* background-color: #00000060; */
+}
+
+#nav {
+  background-color: #000000;
+  height: 1000px;
+  width: 150px;
+  /* text-align: right; */
+  z-index: 2;
+  overflow: hidden;
+  padding-top: 10px;
+}
+
+#nav div {
+  width: 120px;
+}
+
+.nav-cat-title {
+  padding-top: 10px;
+  border-bottom: 1px solid white;
+  font-weight: bold;
+  margin: 0 20px;
+  color: #e30613;
+  font-size: 20px;
+}
+
+.nav-butt {
+  cursor: pointer;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.nav-butt:hover {
+  transition: 0.2s;
+  background-color: white;
+  color: black;
+}
+
+main {
+  background-color: white;
+  color: black;
+}
+section {
+  margin-top: 45px;
+  margin-right: 150px;
+  padding: 10px 10px 40px 10px;
+}
+
+.menu-title {
+  padding-top: 30px;
+  color: #e30613;
+  border-bottom: 1px solid black;
+  /* text-align: right; */
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.menu-postscriptum {
+  padding-top: 30px;
+}
+
+#appetisers {
+  display: block;
+}
+
+.dish {
+  border-bottom: 1px solid black;
+  /* text-align: right; */
+  padding: 5px 0;
+}
+
+.title-price-section {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.dish-title {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.dish-description {
+  color: black;
+  font-weight: normal;
+}
+
+.veg {
+  background-image: url(leaf.png);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 12px;
+  margin-right: 2px;
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 480px) {
+  #menu-butt {
+    display: block;
+  }
+
+  #nav {
+    width: 0;
+  }
+
+  #nav-container {
+    display: none;
+    background-color: #00000060;
+  }
+
+  section {
+    margin-right: 0;
+    padding: 10px 10px 40px 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  #logo-bar img,
+  #logo-bar a {
+    height: 45px;
+  }
+
+  header {
+    height: 65px;
+  }
+
+  #lang {
+    height: 13px;
+  }
+
+  #menu-butt {
+    width: 60px;
+  }
+
+  section {
+    margin-top: 35px;
+  }
+}
+
+@media (max-width: 320px) {
+  #logo-bar img,
+  #logo-bar a {
+    height: 40px;
+  }
+
+  header {
+    height: 60px;
+  }
+
+  #lang {
+    height: 13px;
+  }
+
+  #menu-butt {
+    width: 60px;
+    font-size: 14px;
+    height: 11px;
+  }
+
+  .nav-cat-title {
+    padding: 0;
+  }
+
+  section {
+    margin-top: 30px;
+  }
+}
