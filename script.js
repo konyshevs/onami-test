@@ -2,6 +2,10 @@ $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
 
+  // Меняет отступ для английской версии для большого экрана
+  if (lang === "EN" && window.innerWidth > 480)
+    dishBlockEl.style.margin = "45px 0 0 150px";
+
   function shake(thing) {
     //тресет объект
     const interval = 100;
@@ -103,7 +107,7 @@ const state = {
       titleHE: "ראשונות קרות",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "appetisers",
+      titleEN: "Cold appetisers",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [
@@ -143,7 +147,7 @@ const state = {
       titleHE: "ראשונות חמות",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "appetisers",
+      titleEN: "Hot appetisers",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [
@@ -182,7 +186,7 @@ const state = {
     titleHE: "שיפודי עץ על הגריל",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "skewers",
+    titleEN: "Skewers",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -191,7 +195,7 @@ const state = {
     titleHE: "מנות עיקריות",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "main dishes",
+    titleEN: "Main dishes",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -200,7 +204,7 @@ const state = {
     titleHE: "קינוחים",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "desserts",
+    titleEN: "Desserts",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -209,7 +213,7 @@ const state = {
     titleHE: "סשימי / ניגירי",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "seshimi / nigiri",
+    titleEN: "Seshimi / Nigiri",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -219,7 +223,7 @@ const state = {
       titleHE: "אינרי / גונקן",
       descriptionHE: "עמוד בבניה",
       postScriptumHE: "",
-      titleEN: "inari / gunkan",
+      titleEN: "Inari / Gunkan",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -239,7 +243,7 @@ const state = {
     titleHE: "הוסומקי",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "hosomaki",
+    titleEN: "Hosomaki",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -248,7 +252,7 @@ const state = {
     titleHE: "טמקי - קונוס",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "temaki",
+    titleEN: "Temaki",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -257,7 +261,7 @@ const state = {
     titleHE: "אירודורי - IO",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "irodori i/o",
+    titleEN: "Irodori i/o",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -266,7 +270,7 @@ const state = {
     titleHE: "קומבינציות",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "combinations",
+    titleEN: "Combinations",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -275,7 +279,7 @@ const state = {
     titleHE: "עסקית 75",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "lunch 75",
+    titleEN: "Lunch 75",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -284,7 +288,7 @@ const state = {
     titleHE: "עסקית 90",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "lunch 90",
+    titleEN: "Lunch 90",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -293,7 +297,7 @@ const state = {
     titleHE: "עסקית 105",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "lunch 105",
+    titleEN: "Lunch 105",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -302,7 +306,7 @@ const state = {
     titleHE: "יינות",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "wine",
+    titleEN: "Wine",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -311,7 +315,7 @@ const state = {
     titleHE: "סאקה",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "sake & beer",
+    titleEN: "Sake & Beer",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -320,7 +324,7 @@ const state = {
     titleHE: "קוקטיילים",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "coctails",
+    titleEN: "Coctails",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -329,7 +333,7 @@ const state = {
     titleHE: "שתייה קלה",
     descriptionHE: "עמוד בבניה",
     postScriptumHE: "",
-    titleEN: "soft drinks",
+    titleEN: "Soft drinks",
     descriptionEN: "",
     postScriptumEN: "",
     dishes: [],
@@ -535,7 +539,7 @@ const dish = new HotAppetiser(
 const negima = new Skewer(
   "נגימה",
   "פרגית עם בצל ירוק",
-  "negima",
+  "Negima",
   "Spring chicken & scallion",
   24
 );
@@ -545,7 +549,8 @@ const ingenDofu = new MainDish(
   "טופו מוקפץ עם שעועית ירוקה, פטריות שמפניון ובצל לבן ברוטב יאקיניקו (טבעוני)",
   "Ingen Doufu",
   "Stir fried tofu, green beans, champignon mushrooms & onion with yakiniku sauce",
-  54
+  54,
+  true
 );
 
 const rio = new Dessert(
@@ -555,31 +560,39 @@ const rio = new Dessert(
   "",
   44
 );
+
 const seshimiSake = new SeshimiNigiri("סאקה", "סלמון", "Sake", "Salmon", [
   18,
   34,
 ]);
+
 const inariYasay = new InariGunkan(
   "יאסאי קוקטייל",
   "אספרגוס טמפורה, אבוקדו, צנון מוחמץ, בצל ירוק, שומשום, שקדים קלויים וטריאקי",
   "Yasai Cocktail",
   "Asparagus tempura, avocado, pickled radish, scallion, sesame seeds, roasted almonds & teriyaki",
-  [15, 19]
+  [15, 19],
+  true
 );
+
 const specialVegitarian = new InariSpecial(
   "אינארי ספיישל צמחוני",
   "אינארי טמפורה, שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, אספרגוס טמפורה, ספייסי מיונז וטריאקי",
   "Inari Special Vegetarian",
   "Inari tempura, Shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
-  22
+  22,
+  true
 );
+
 const kappaMaki = new Hosomaki(
   "קאפה מאקי",
   "מלפפון ושומשום",
   "Kappa Maki",
   "Cucumber & sesame seeds",
-  14
+  14,
+  true
 );
+
 const californiaTemaki = new Temaki(
   "קליפורניה טמאקי",
   "סלמון, אבוקדו ומלפפון",
@@ -587,10 +600,12 @@ const californiaTemaki = new Temaki(
   "Salmon, avocado & cucumber",
   28
 );
+
 const vegiterianRoll = new Irodori(
   "רול צמחוני",
   "אבוקדו, שיטאקה, בצל ירוק, מלפפון, גזר, ספייסי מיונז וטריאקי",
   "Vegetarian Roll",
   "Shiitake, avocado, cucumber, carrot, scallion, spicy mayonnaise & teriyaki",
-  22
+  22,
+  true
 );

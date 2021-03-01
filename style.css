@@ -14,7 +14,6 @@ a {
 body {
   color: white;
   font-family: "Alef";
-  font-variant: small-caps;
 }
 
 header {
@@ -82,6 +81,7 @@ header .container {
 }
 
 #nav {
+  font-variant: small-caps;
   background-color: #000000;
   height: 1000px;
   width: 150px;
@@ -120,9 +120,8 @@ main {
   background-color: white;
   color: black;
 }
-section {
-  margin-top: 45px;
-  margin-right: 150px;
+.menu {
+  margin: 45px 150px 0 0;
   padding: 10px 10px 40px 10px;
 }
 
@@ -189,8 +188,8 @@ section {
     background-color: #00000060;
   }
 
-  section {
-    margin-right: 0;
+  .menu {
+    margin: 45px 0 0 0;
     padding: 10px 10px 40px 10px;
   }
 }
