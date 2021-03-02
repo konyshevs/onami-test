@@ -2,9 +2,17 @@ $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
 
-  // Меняет отступ для английской версии для большого экрана
+  // Меняет направление отступа для английской версии для большого экрана
   if (lang === "EN" && window.innerWidth > 480)
     dishBlockEl.style.margin = "45px 0 0 150px";
+
+  window.addEventListener("resize", function (e) {
+    console.log(e);
+    if (e.currentTarget.innerWidth > 480 && lang === "EN")
+      dishBlockEl.style.margin = "45px 0 0 150px";
+    if (e.currentTarget.innerWidth < 480 && lang === "EN")
+      dishBlockEl.style.margin = "45px 0 0 0";
+  });
 
   function shake(thing) {
     //тресет объект
@@ -71,12 +79,13 @@ $("document").ready(function () {
             <div>${dish[`title${lang}`]}</div>
             ${dish.isVegi ? '<div class="veg"></div>' : ""}
           </div>
-          <div class="dish-price">₪ ${price}</div>
+          <div class="dish-price">${price ? "₪" : ""} ${price}</div>
        </div>
         <div class="dish-description">${dish[`description${lang}`]}</div>
      </div>`;
     }
 
+    // <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
@@ -184,7 +193,7 @@ const state = {
   ],
   skewers: {
     titleHE: "שיפודי עץ על הגריל",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Skewers",
     descriptionEN: "",
@@ -193,7 +202,7 @@ const state = {
   },
   mainDishes: {
     titleHE: "מנות עיקריות",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Main dishes",
     descriptionEN: "",
@@ -202,7 +211,7 @@ const state = {
   },
   desserts: {
     titleHE: "קינוחים",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Desserts",
     descriptionEN: "",
@@ -211,26 +220,33 @@ const state = {
   },
   seshimi: {
     titleHE: "סשימי / ניגירי",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE:
+      "סשימי - פילה דג או פרי ים ללא אורז<br> ניגירי - כדור אורז ועליו נתח דג / פרי ים / ירק",
     postScriptumHE: "",
-    titleEN: "Seshimi / Nigiri",
-    descriptionEN: "",
+    titleEN: "Nigiri / Seshimi",
+    descriptionEN:
+      "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
     postScriptumEN: "",
     dishes: [],
   },
   inari: [
     {
       titleHE: "אינרי / גונקן",
-      descriptionHE: "עמוד בבניה",
+      descriptionHE:
+        "אינרי - כיס טופו מתקתק במילוי אורז, דג / פרי ים / ירקות<br>גונקן - כדור אורז עטוף באצה במילוי דג / פרי ים / ירקות",
       postScriptumHE: "",
-      titleEN: "Inari / Gunkan",
-      descriptionEN: "",
+      // priceHE: "אינרי/גונקן",
+      titleEN: "Gunkan / Inari",
+      descriptionEN:
+        "Guncan - rice ball wrapped with Nori & filled with fish / seafood / vegetables<br>Inari - sweet tofu pocket filled with rice, fish / seafood / vegetables",
       postScriptumEN: "",
+      // priceEN: "inari/gunkan",
       dishes: [],
     },
     {
       titleHE: "אינארי ספיישל",
-      descriptionHE: "עמוד בבניה",
+      descriptionHE:
+        "כדור אורז עטוף אינארי בטמפורה ואצת נורי במילוי דג / פרי ים / ירקות",
       postScriptumHE: "",
       titleEN: "Inari Special",
       descriptionEN: "",
@@ -241,34 +257,35 @@ const state = {
 
   hosomaki: {
     titleHE: "הוסומקי",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE:
+      "אצת נורי במילוי אורז, דג / פרי ים / ירקות (חתוך ל-8) אינסייד אאוט (חתוך ל-4)",
     postScriptumHE: "",
     titleEN: "Hosomaki",
-    descriptionEN: "",
+    descriptionEN: "Thin roll (Cut into 8)",
     postScriptumEN: "",
     dishes: [],
   },
   temaki: {
     titleHE: "טמקי - קונוס",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "קונוס נורי במילוי אורז / דג / פרי ים / ירקות",
     postScriptumHE: "",
     titleEN: "Temaki",
-    descriptionEN: "",
+    descriptionEN: "Hand roll",
     postScriptumEN: "",
     dishes: [],
   },
   irodori: {
     titleHE: "אירודורי - IO",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "אורז עוטף אצה במילוי ירק / פרי ים / דג (חתוך ל-4)",
     postScriptumHE: "",
     titleEN: "Irodori i/o",
-    descriptionEN: "",
+    descriptionEN: "Inside-Out roll - cut into 4",
     postScriptumEN: "",
     dishes: [],
   },
   combinations: {
     titleHE: "קומבינציות",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Combinations",
     descriptionEN: "",
@@ -277,34 +294,40 @@ const state = {
   },
   lunch75: {
     titleHE: "עסקית 75",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE:
+      "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪ ",
     postScriptumHE: "",
     titleEN: "Lunch 75",
-    descriptionEN: "",
+    descriptionEN:
+      "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪",
     postScriptumEN: "",
     dishes: [],
   },
   lunch90: {
     titleHE: "עסקית 90",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE:
+      "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪ ",
     postScriptumHE: "",
     titleEN: "Lunch 90",
-    descriptionEN: "",
+    descriptionEN:
+      "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪",
     postScriptumEN: "",
     dishes: [],
   },
   lunch105: {
     titleHE: "עסקית 105",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE:
+      "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪ ",
     postScriptumHE: "",
     titleEN: "Lunch 105",
-    descriptionEN: "",
+    descriptionEN:
+      "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪",
     postScriptumEN: "",
     dishes: [],
   },
   wine: {
     titleHE: "יינות",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Wine",
     descriptionEN: "",
@@ -313,7 +336,7 @@ const state = {
   },
   sake: {
     titleHE: "סאקה",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Sake & Beer",
     descriptionEN: "",
@@ -322,7 +345,7 @@ const state = {
   },
   coctails: {
     titleHE: "קוקטיילים",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Coctails",
     descriptionEN: "",
@@ -331,7 +354,7 @@ const state = {
   },
   softDrinks: {
     titleHE: "שתייה קלה",
-    descriptionHE: "עמוד בבניה",
+    descriptionHE: "",
     postScriptumHE: "",
     titleEN: "Soft drinks",
     descriptionEN: "",

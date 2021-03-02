@@ -87,7 +87,7 @@ header .container {
   width: 150px;
   /* text-align: right; */
   z-index: 2;
-  overflow: hidden;
+  /* overflow: visible; */
   padding-top: 10px;
 }
 
@@ -134,9 +134,22 @@ main {
   font-weight: bold;
 }
 
+.menu-description {
+  color: black;
+  font-weight: normal;
+  margin: 10px 0 10px 0;
+  font-style: italic;
+}
+
 .menu-postscriptum {
   padding-top: 30px;
 }
+
+/* .price-description {
+  text-align: end;
+  color: #000000;
+  font-size: 12px;
+} */
 
 #appetisers {
   display: block;
