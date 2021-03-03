@@ -66,25 +66,38 @@ $("document").ready(function () {
   });
 
   // MENU RENDERING
+  function genDishMarkup(dish) {
+    const price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
+
+    return `<div class="dish">
+     <div class="title-price-section">
+        <div class="dish-title">
+          <div>${dish[`title${lang}`]}</div>
+          ${dish.isVegi ? '<div class="veg"></div>' : ""}
+        </div>
+        <div class="dish-price">${price ? "₪" : ""} ${price}</div>
+     </div>
+      <div class="dish-description">${dish[`description${lang}`]}</div>
+   </div>`;
+  }
+
+  function genDishMarkupOneLine(dish) {
+    const price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
+
+    return `<div class="dish one-line">
+     <div class="title-price-section">
+        <div class="dish-title">
+          <div>${
+            dish[`title${lang}`]
+          }<span class="dish-description"> ${dish[`description${lang}`]}</span></div>
+          ${dish.isVegi ? '<div class="veg"></div>' : ""}
+        </div>
+        <div class="dish-price">${price ? "₪" : ""} ${price}</div>
+     </div>
+   </div>`;
+  }
 
   function genMenuMarkup(menuObj) {
-    function gendishMarkup(dish) {
-      const price = Array.isArray(dish.price)
-        ? dish.price.join("/")
-        : dish.price;
-
-      return `<div class="dish">
-       <div class="title-price-section">
-          <div class="dish-title">
-            <div>${dish[`title${lang}`]}</div>
-            ${dish.isVegi ? '<div class="veg"></div>' : ""}
-          </div>
-          <div class="dish-price">${price ? "₪" : ""} ${price}</div>
-       </div>
-        <div class="dish-description">${dish[`description${lang}`]}</div>
-     </div>`;
-    }
-
     // <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
     return `
     <div class="menu-title">
@@ -93,13 +106,34 @@ $("document").ready(function () {
           menuObj[`description${lang}`]
         }</div>
     </div>
-    ${menuObj.dishes.map(dish => gendishMarkup(dish)).join("")}
+    ${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
     <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>  
     `;
+  }
+  function genSeshimiMarkup(menuObj) {
+    return `
+    <div class="menu-title">
+        <div class="">${menuObj[`title${lang}`]}</div>
+        <div class="menu-description dish-description">${
+          menuObj[`description${lang}`]
+        }</div>
+    </div>
+    ${menuObj.types
+      .map(
+        type => `<div class="type-name">${type[`title${lang}`]}</div>
+      ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
+      )
+      .join("")}`;
+    console.log(markup);
   }
 
   function renderMenuPage(page) {
     dishBlockEl.innerHTML = "";
+    if (page === state.seshimi)
+      return dishBlockEl.insertAdjacentHTML(
+        "beforeend",
+        genSeshimiMarkup(page)
+      );
     if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
@@ -155,10 +189,10 @@ const state = {
     {
       titleHE: "ראשונות חמות",
       descriptionHE: "",
-      postScriptumHE: "",
+      postScriptumHE: "שף <b>עידו כהן צדק</b>",
       titleEN: "Hot appetisers",
       descriptionEN: "",
-      postScriptumEN: "",
+      postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
       dishes: [
         {
           titleHE: "אדה ממה",
@@ -194,19 +228,19 @@ const state = {
   skewers: {
     titleHE: "שיפודי עץ על הגריל",
     descriptionHE: "",
-    postScriptumHE: "",
+    postScriptumHE: "שף <b>עידו כהן צדק</b>",
     titleEN: "Skewers",
     descriptionEN: "",
-    postScriptumEN: "",
+    postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
     dishes: [],
   },
   mainDishes: {
     titleHE: "מנות עיקריות",
     descriptionHE: "",
-    postScriptumHE: "",
+    postScriptumHE: "שף <b>עידו כהן צדק</b>",
     titleEN: "Main dishes",
     descriptionEN: "",
-    postScriptumEN: "",
+    postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
     dishes: [],
   },
   desserts: {
@@ -227,7 +261,13 @@ const state = {
     descriptionEN:
       "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
     postScriptumEN: "",
-    dishes: [],
+    types: [
+      { titleHE: "דגי ים", titleEN: "SEA FISH", dishes: [] },
+      { titleHE: "מים מתוקים", titleEN: "SWEET WATER FISH", dishes: [] },
+      { titleHE: "פירות ים", titleEN: "SEA FOOD", dishes: [] },
+      { titleHE: "שונות", titleEN: "OTHERS", dishes: [] },
+      { titleHE: "רק בעונה", titleEN: "ONLY IN SEASON", dishes: [] },
+    ],
   },
   inari: [
     {
@@ -366,14 +406,7 @@ const state = {
 const menuList = [];
 
 class Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     this.titleHE = titleHE;
     this.descriptionHE = descriptionHE;
     this.titleEN = titleEN;
@@ -396,56 +429,28 @@ class ColdAppetiser extends Menu {
 }
 
 class HotAppetiser extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.appetisers[1].dishes.push(this);
   }
 }
 
 class Skewer extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.skewers.dishes.push(this);
   }
 }
 
 class MainDish extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.mainDishes.dishes.push(this);
   }
 }
 
 class Dessert extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts.dishes.push(this);
   }
@@ -453,83 +458,49 @@ class Dessert extends Menu {
 
 class SeshimiNigiri extends Menu {
   constructor(
+    type,
     titleHE,
     descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi
   ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.seshimi.dishes.push(this);
+    state.seshimi.types[type].dishes.push(this);
   }
 }
 
 class InariGunkan extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.inari[0].dishes.push(this);
   }
 }
 
 class InariSpecial extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.inari[1].dishes.push(this);
   }
 }
 
 class Hosomaki extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.hosomaki.dishes.push(this);
   }
 }
 
 class Temaki extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.temaki.dishes.push(this);
   }
 }
 
 class Irodori extends Menu {
-  constructor(
-    titleHE,
-    descriptionHE,
-    titleEN = "",
-    descriptionEN = "",
-    price = 0,
-    isVegi = false
-  ) {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.irodori.dishes.push(this);
   }
@@ -584,10 +555,38 @@ const rio = new Dessert(
   44
 );
 
-const seshimiSake = new SeshimiNigiri("סאקה", "סלמון", "Sake", "Salmon", [
+const seshimiSake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [
   18,
   34,
 ]);
+
+const seshimiBora = new SeshimiNigiri(1, "בורה", "בורי", "Bora", "Mullet", [
+  16,
+  32,
+]);
+
+const seshimiEbi = new SeshimiNigiri(
+  2,
+  "אבי",
+  "שרימפ מאודה",
+  "Ebi",
+  "Steamed shrimp",
+  [14, 28]
+);
+
+const seshimiAvocado = new SeshimiNigiri(3, "אבוקדו", "", "Avocado", "", [
+  "-",
+  12,
+]);
+
+const seshimiShimaAji = new SeshimiNigiri(
+  4,
+  "שימה אג'י",
+  "טרחון",
+  "Shima-Aji",
+  "Yellow jack",
+  [20, 42]
+);
 
 const inariYasay = new InariGunkan(
   "יאסאי קוקטייל",

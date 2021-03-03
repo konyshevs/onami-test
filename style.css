@@ -4,16 +4,13 @@ html body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  color: white;
+  font-family: "Alef";
 }
 
 a {
   text-decoration: none;
   color: white;
-}
-
-body {
-  color: white;
-  font-family: "Alef";
 }
 
 header {
@@ -128,10 +125,11 @@ main {
 .menu-title {
   padding-top: 30px;
   color: #e30613;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   /* text-align: right; */
   padding-bottom: 5px;
   font-weight: bold;
+  font-size: 17px;
 }
 
 .menu-description {
@@ -151,6 +149,14 @@ main {
   font-size: 12px;
 } */
 
+.type-name {
+  border-bottom: 1px solid black;
+  font-weight: bold;
+  font-style: italic;
+  /* font-size: 17px; */
+  padding: 10px 0 5px 0;
+}
+
 #appetisers {
   display: block;
 }
@@ -159,6 +165,10 @@ main {
   border-bottom: 1px solid black;
   /* text-align: right; */
   padding: 5px 0;
+}
+
+.one-line {
+  border: none;
 }
 
 .title-price-section {
