@@ -2,17 +2,19 @@ $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
 
-  // Меняет направление отступа для английской версии для большого экрана
-  if (lang === "EN" && window.innerWidth > 480)
-    dishBlockEl.style.margin = "45px 0 0 150px";
-
-  window.addEventListener("resize", function (e) {
-    console.log(e);
-    if (e.currentTarget.innerWidth > 480 && lang === "EN")
+  function init() {
+    // Меняет направление отступа для английской версии для большого экрана
+    if (lang === "EN" && window.innerWidth > 480)
       dishBlockEl.style.margin = "45px 0 0 150px";
-    if (e.currentTarget.innerWidth < 480 && lang === "EN")
-      dishBlockEl.style.margin = "45px 0 0 0";
-  });
+
+    window.addEventListener("resize", function (e) {
+      if (e.currentTarget.innerWidth > 480 && lang === "EN")
+        dishBlockEl.style.margin = "45px 0 0 150px";
+      if (e.currentTarget.innerWidth < 480 && lang === "EN")
+        dishBlockEl.style.margin = "45px 0 0 0";
+    });
+    renderMenuPage(state.appetisers);
+  }
 
   function shake(thing) {
     //тресет объект
@@ -102,9 +104,7 @@ $("document").ready(function () {
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
-        <div class="menu-description dish-description">${
-          menuObj[`description${lang}`]
-        }</div>
+        <div class="menu-description">${menuObj[`description${lang}`]}</div>
     </div>
     ${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
     <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>  
@@ -114,9 +114,7 @@ $("document").ready(function () {
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
-        <div class="menu-description dish-description">${
-          menuObj[`description${lang}`]
-        }</div>
+        <div class="menu-description">${menuObj[`description${lang}`]}</div>
     </div>
     ${menuObj.types
       .map(
@@ -124,7 +122,50 @@ $("document").ready(function () {
       ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
       )
       .join("")}`;
-    console.log(markup);
+  }
+
+  function genLunchMarkup(lunchObj) {
+    function genDishMarkupOneLine(dish) {
+      if (dish.isTypeTitle)
+        return `
+      <div class="dish one-line">
+      <div class="title-price-section">
+         <div class="lunch-sushi-type">
+           <div>${dish[`title${lang}`]}</div>
+         </div>
+      </div>
+    </div>
+      `;
+
+      return `<div class="dish one-line">
+       <div class="title-price-section">
+          <div class="dish-title">
+            <div>${
+              dish[`title${lang}`]
+            }<span class="dish-description"> ${dish[`description${lang}`]}${dish.price >= 100 ? "(+ 20 ₪)" : ""}</span></div>
+            ${dish.isVegi ? '<div class="veg"></div>' : ""}
+          </div>
+       </div>
+     </div>`;
+    }
+
+    return `
+  <div class="">
+      <div class="lunch-title">${lunchObj[`title${lang}`]}</div>
+      <div class="menu-description center">${
+        lunchObj[`description${lang}`]
+      }</div>
+  </div>
+  ${lunchObj.types
+    .map(
+      type =>
+        `<div class="menu-title">
+          <div class="lunch-type">${type[`title${lang}`]}</div>
+          <div class="menu-description ">${type[`description${lang}`]}</div>
+        </div>
+    ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
+    )
+    .join("")}`;
   }
 
   function renderMenuPage(page) {
@@ -134,15 +175,29 @@ $("document").ready(function () {
         "beforeend",
         genSeshimiMarkup(page)
       );
+    if (
+      page === state.lunch75 ||
+      page === state.lunch90 ||
+      page === state.lunch105
+    )
+      return dishBlockEl.insertAdjacentHTML("beforeend", genLunchMarkup(page));
     if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
       );
     else dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(page));
   }
+
+  init();
 });
 
 // STATE
+
+const lunchDescriptionHE =
+  "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪";
+
+const lunchDescriptionEN =
+  "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪";
 
 const state = {
   appetisers: [
@@ -153,38 +208,7 @@ const state = {
       titleEN: "Cold appetisers",
       descriptionEN: "",
       postScriptumEN: "",
-      dishes: [
-        {
-          titleHE: "סלט וואקאמה",
-          descriptionHE:
-            "אצות וואקאמה, צנונית, מלפפון ובצל ברוטב וואפו (ניתן לבקש ללא גלוטן)",
-          titleEN: "",
-          descriptionEN: "",
-          price: 24,
-          isVegi: true,
-          imgUrl: "",
-        },
-        {
-          titleHE: "סלט הרוסאמה",
-          descriptionHE:
-            "אטריות תפוחי אדמה, מלפפון, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש ללא גלוטן)",
-          titleEN: "",
-          descriptionEN: "",
-          price: 32,
-          isVegi: false,
-          imgUrl: "",
-        },
-        {
-          titleHE: "סלט מידורי",
-          descriptionHE:
-            "סלט עלי חסה, רוקט, צנונית, מלפפון, תפוח, בצל ושקדים קלויים ברוטב למון ג'ויו (טבעוני, ללא גלוטן)",
-          titleEN: "",
-          descriptionEN: "",
-          price: 52,
-          isVegi: true,
-          imgUrl: "",
-        },
-      ],
+      dishes: [],
     },
     {
       titleHE: "ראשונות חמות",
@@ -193,36 +217,7 @@ const state = {
       titleEN: "Hot appetisers",
       descriptionEN: "",
       postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
-      dishes: [
-        {
-          titleHE: "אדה ממה",
-          descriptionHE: "פולי סויה חלוטים ומומלחים (טבעוני ללא גלוטן)",
-          titleEN: "",
-          descriptionEN: "",
-          price: 26,
-          isVegi: true,
-          imgUrl: "",
-        },
-        {
-          titleHE: "אומיסו שירו",
-          descriptionHE: "מרק מיסו עם אצות וואקאמה, טופו ובצל ירוק",
-          titleEN: "",
-          descriptionEN: "",
-          price: 28,
-          isVegi: false,
-          imgUrl: "",
-        },
-        {
-          titleHE: "אגדאשי דופו",
-          descriptionHE:
-            "קוביות טופו פריכות ברוטב טנצויו חם, צנון כתוש, בצל ירוק ופטריות נמקו (ניתן לבקש טבעוני)",
-          titleEN: "",
-          descriptionEN: "",
-          price: [36, 44],
-          isVegi: false,
-          imgUrl: "",
-        },
-      ],
+      dishes: [],
     },
   ],
   skewers: {
@@ -333,37 +328,100 @@ const state = {
     dishes: [],
   },
   lunch75: {
-    titleHE: "עסקית 75",
-    descriptionHE:
-      "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪ ",
+    titleHE: "עסקית 75 ₪",
+    descriptionHE: lunchDescriptionHE,
     postScriptumHE: "",
-    titleEN: "Lunch 75",
-    descriptionEN:
-      "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪",
+    titleEN: "Lunch 75 ₪",
+    descriptionEN: lunchDescriptionEN,
     postScriptumEN: "",
-    dishes: [],
+    types: [
+      {
+        titleHE: "מנה ראשונה",
+        descriptionHE: "",
+        titleEN: "FIRST COURSE",
+        descriptionEN: "",
+        dishes: [],
+      },
+      {
+        titleHE: "מנה עיקרית מהמטבח ",
+        descriptionHE: "",
+        titleEN: "MAIN COURSE. KITCHEN",
+        descriptionEN: "",
+        dishes: [],
+      },
+      {
+        titleHE: "מנה עיקרית סושי ",
+        descriptionHE:
+          "המנה מורכבת מ-3 רולים (רול I/O חתוך ל-4 ומאקי חתוך ל-8) לבחירתך:",
+        titleEN: "MAIN COURSE. SUSHI",
+        descriptionEN: "Sushi Combination 3 rolls of your choice",
+        dishes: [],
+      },
+    ],
   },
   lunch90: {
-    titleHE: "עסקית 90",
-    descriptionHE:
-      "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪ ",
+    titleHE: "עסקית 90 ₪",
+    descriptionHE: lunchDescriptionHE,
     postScriptumHE: "",
-    titleEN: "Lunch 90",
-    descriptionEN:
-      "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪",
+    titleEN: "Lunch 90 ₪",
+    descriptionEN: lunchDescriptionEN,
     postScriptumEN: "",
-    dishes: [],
+    types: [
+      {
+        titleHE: "מנה ראשונה",
+        descriptionHE: "",
+        titleEN: "FIRST COURSE",
+        descriptionEN: "",
+        dishes: [],
+      },
+      {
+        titleHE: "מנה עיקרית מהמטבח ",
+        descriptionHE: "",
+        titleEN: "MAIN COURSE. KITCHEN",
+        descriptionEN: "",
+        dishes: [],
+      },
+      {
+        titleHE: "מנה עיקרית סושי ",
+        descriptionHE:
+          "המנה מורכבת מ-3 רולים (רול I/O חתוך ל-4 ומאקי חתוך ל-8) לבחירתך:",
+        titleEN: "MAIN COURSE. SUSHI",
+        descriptionEN: "Sushi Combination 3 rolls of your choice",
+        dishes: [],
+      },
+    ],
   },
   lunch105: {
-    titleHE: "עסקית 105",
-    descriptionHE:
-      "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪ ",
+    titleHE: "עסקית 105 ₪",
+    descriptionHE: lunchDescriptionHE,
     postScriptumHE: "",
-    titleEN: "Lunch 105",
-    descriptionEN:
-      "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪",
+    titleEN: "Lunch 105 ₪",
+    descriptionEN: lunchDescriptionEN,
     postScriptumEN: "",
-    dishes: [],
+    types: [
+      {
+        titleHE: "מנה ראשונה",
+        descriptionHE: "",
+        titleEN: "FIRST COURSE",
+        descriptionEN: "",
+        dishes: [],
+      },
+      {
+        titleHE: "מנה עיקרית מהמטבח ",
+        descriptionHE: "",
+        titleEN: "MAIN COURSE. KITCHEN",
+        descriptionEN: "",
+        dishes: [],
+      },
+      {
+        titleHE: "מנה עיקרית סושי ",
+        descriptionHE: "4 פריטים לבחירה (פריט אחד מכל קבוצה)",
+        titleEN: "MAIN COURSE. SUSHI",
+        descriptionEN:
+          "Sushi Combination. 4 items of your choice - one item per section",
+        dishes: [],
+      },
+    ],
   },
   wine: {
     titleHE: "יינות",
@@ -506,15 +564,35 @@ class Irodori extends Menu {
   }
 }
 
-// const dish = new ColdAppetiser(
-//   "",
-//   "",
-//   "",
-//   "",
-//   0
-// )
+// COLD APPETISERS
 
-const botargaSoba = new ColdAppetiser(
+const wakameSalad = new ColdAppetiser(
+  "סלט וואקאמה",
+  "אצות וואקאמה, צנונית, מלפפון ובצל ברוטב וואפו (ניתן לבקש ללא גלוטן)",
+  "Wakame Salad",
+  "Wakame seaweed, radish, cucumber & onion served with Wafu sauce",
+  24,
+  true
+);
+
+const harusameSalad = new ColdAppetiser(
+  "סלט הרוסאמה",
+  "אטריות תפוחי אדמה, מלפפון, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש ללא גלוטן)",
+  "Harusame Salad",
+  "Cold potato noodles, cucumber, scallion & salmon served with Wafu sauce",
+  32
+);
+
+const midoriSalad = new ColdAppetiser(
+  "סלט מידורי",
+  "סלט עלי חסה, רוקט, צנונית, מלפפון, תפוח, בצל ושקדים קלויים ברוטב למון ג'ויו (טבעוני, ללא גלוטן)",
+  "Midori Salad",
+  "Lettuce, rocket leaves, radish, cucumber, apple, onion, roasted almonds served with lemon jouyo sauce",
+  52,
+  true
+);
+
+const bottargaSoba = new ColdAppetiser(
   "בוטרגה סובה",
   "אטריות סובה עם בוטרגה, חלמון כבוש ואיקורה",
   "Bottarga Soba",
@@ -522,14 +600,113 @@ const botargaSoba = new ColdAppetiser(
   58
 );
 
+const iwaGaki = new ColdAppetiser(
+  "איוואגקי",
+  "אוייסטר מוגש על קרח כתוש בליווי רוטב ספייסי פונזו",
+  "Iwa Gaki",
+  "Fresh oyster on crushed ice served with spicy ponzu sauce",
+  36
+);
+
+const boraYuzuAburaDoushi = new ColdAppetiser(
+  "בורה יוזו אבורה דושי",
+  "סשימי בורי בחיתוך דק צרוב בשמן שומשום חם ויוזו, סויה וג'ינג'ר",
+  "Bora Yuzu Abura Doushi",
+  "Grey mullet sashimi thinly sliced, seared with hot sesame oil, yuzu, soy sauce & ginger",
+  52
+);
+
+const sakeAvocadoCocktail = new ColdAppetiser(
+  "סאקה אבוקדו קוקטייל",
+  "טרטר סלמון ואבוקדו עם סויה, ווסאבי קראנץ' בעיטור ביצי סלמון",
+  "Sake & Avocado Cocktail",
+  "Diced salmon & avocado tartar with wasabi seasoned beans & soy sauce topped with salmon roe",
+  58
+);
+
+const maguroYukke = new ColdAppetiser(
+  "מגורו יוקה",
+  "טרטר טונה מתובל בסויה, בצל ירוק וחלמון ביצת שליו נא",
+  "Maguro Yukke",
+  "Tuna tartar seasoned with garlic, scallion & soy sauce, served with quail egg yolk",
+  68
+);
+
+const maguroTataki = new ColdAppetiser(
+  "מגורו טטאקי",
+  "סשימי טונה צרובה, רוטב ספייסי פונזו וג'ינג'ר טרי",
+  "Maguro Tataki",
+  "Lightly seared & sliced tuna sashimi served with spicy ginger ponzu sauce",
+  68
+);
+
+const wafuYukke = new ColdAppetiser(
+  "וואפו יוקה",
+  "טרטר בקר וחלמון ביצת שליו נא",
+  "Wafu Yukke",
+  "Beef tartar served with quail egg yolk",
+  72
+);
+
+// HOT APPETISERS
+const spicyEdamame = new HotAppetiser(
+  "ספייסי אדה ממה",
+  "פולי סויה חלוטים ומומלחים עם צ'ילי גרוס (טבעוני ללא גלוטן)",
+  "Spicy Edamame",
+  "",
+  26,
+  true
+);
+
+const omisoShiru = new HotAppetiser(
+  "אומיסו שירו",
+  "מרק מיסו עם אצות וואקאמה, טופו ובצל ירוק",
+  "Omiso Shiru",
+  "Miso soup with wakame seaweed, fresh tofu & scallion",
+  28
+);
+
+const agedashiDoufu = new HotAppetiser(
+  "אגדאשי דופו",
+  "קוביות טופו פריכות ברוטב טנצויו חם, צנון כתוש, בצל ירוק ופטריות נמקו (ניתן לבקש טבעוני)",
+  "Agedashi Doufu",
+  "Crispy tofu cubes in hot tentsuyu sauce with nameko mushrooms, minced radish & scallion",
+  [36, 44]
+);
+
 const dish = new HotAppetiser(
   "אבי/ איקה טמפורה",
   "שרימפ/ קלמארי טמפורה בליווי רוטב טנצויו חם, צנון וג'ינג'ר כתושים",
   "Ebi/Ika Tempura",
   "Shrimp/calamari tempura served with tentsuyu sauce, minced radish & ginger",
+  38
+);
+
+const zakanaButterShoyu = new HotAppetiser(
+  "סקאנה באטר שואיו",
+  "נתחי בורי בחמאה, שום, סויה, סאקה ומירי",
+  "Zakana Butter Shoyu",
+  "Sautéed grey mullet with soy sauce, butter & garlic",
+  52
+);
+
+const kaisenButterShoyu = new HotAppetiser(
+  "קאיסן באטר שואיו",
+  "פירות ים בחמאה, שום, סויה, סאקה ומירין",
+  "Kaisen Butter Shoyu",
+  "Sautéed sea food with soy sauce, butter & garlic",
   58
 );
 
+const koroUdon = new HotAppetiser(
+  "קורו אודון",
+  "אטריות אודון שחורות, שרימפ, בחמאה, צ'ילי ושום",
+  "Koro Udon",
+  "",
+  58
+);
+
+// SKEWERS
 const negima = new Skewer(
   "נגימה",
   "פרגית עם בצל ירוק",
@@ -538,6 +715,15 @@ const negima = new Skewer(
   24
 );
 
+// MAID DISHES
+
+// const dish = new MainDish(
+//   "",
+//   "",
+//   "",
+//   "",
+//   0
+// )
 const ingenDofu = new MainDish(
   "אינגן דופו",
   "טופו מוקפץ עם שעועית ירוקה, פטריות שמפניון ובצל לבן ברוטב יאקיניקו (טבעוני)",
@@ -547,6 +733,7 @@ const ingenDofu = new MainDish(
   true
 );
 
+// DESSERTS
 const rio = new Dessert(
   "ריו",
   "מוס שוקולד מריר, קראנץ' נוגט וקציפת שוקולד לבן",
@@ -555,17 +742,12 @@ const rio = new Dessert(
   44
 );
 
-const seshimiSake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [
-  18,
-  34,
-]);
+// SESHIMI
+const sake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [18, 34]);
 
-const seshimiBora = new SeshimiNigiri(1, "בורה", "בורי", "Bora", "Mullet", [
-  16,
-  32,
-]);
+const bora = new SeshimiNigiri(1, "בורה", "בורי", "Bora", "Mullet", [16, 32]);
 
-const seshimiEbi = new SeshimiNigiri(
+const ebi = new SeshimiNigiri(
   2,
   "אבי",
   "שרימפ מאודה",
@@ -574,12 +756,9 @@ const seshimiEbi = new SeshimiNigiri(
   [14, 28]
 );
 
-const seshimiAvocado = new SeshimiNigiri(3, "אבוקדו", "", "Avocado", "", [
-  "-",
-  12,
-]);
+const avocado = new SeshimiNigiri(3, "אבוקדו", "", "Avocado", "", ["-", 12]);
 
-const seshimiShimaAji = new SeshimiNigiri(
+const shimaAji = new SeshimiNigiri(
   4,
   "שימה אג'י",
   "טרחון",
@@ -588,6 +767,7 @@ const seshimiShimaAji = new SeshimiNigiri(
   [20, 42]
 );
 
+// INARI GUNKAN
 const inariYasay = new InariGunkan(
   "יאסאי קוקטייל",
   "אספרגוס טמפורה, אבוקדו, צנון מוחמץ, בצל ירוק, שומשום, שקדים קלויים וטריאקי",
@@ -597,6 +777,7 @@ const inariYasay = new InariGunkan(
   true
 );
 
+// INARI SPECIAL
 const specialVegitarian = new InariSpecial(
   "אינארי ספיישל צמחוני",
   "אינארי טמפורה, שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, אספרגוס טמפורה, ספייסי מיונז וטריאקי",
@@ -606,6 +787,7 @@ const specialVegitarian = new InariSpecial(
   true
 );
 
+// HOSOMAKI
 const kappaMaki = new Hosomaki(
   "קאפה מאקי",
   "מלפפון ושומשום",
@@ -615,6 +797,7 @@ const kappaMaki = new Hosomaki(
   true
 );
 
+// TEMAKI
 const californiaTemaki = new Temaki(
   "קליפורניה טמאקי",
   "סלמון, אבוקדו ומלפפון",
@@ -623,6 +806,7 @@ const californiaTemaki = new Temaki(
   28
 );
 
+// IRODORI
 const vegiterianRoll = new Irodori(
   "רול צמחוני",
   "אבוקדו, שיטאקה, בצל ירוק, מלפפון, גזר, ספייסי מיונז וטריאקי",
@@ -631,3 +815,54 @@ const vegiterianRoll = new Irodori(
   22,
   true
 );
+
+//LUNCH MENU
+const lunchSushiTypeNigiri = {
+  titleHE: "ניגירי (זוג):",
+  titleEN: "Nigiri (a pair):",
+  isTypeTitle: true,
+};
+const lunchSushiTypeSeshimi = {
+  titleHE: "סשימי (מנת סשימי כוללת 2 פרוסות):",
+  titleEN: "Sashimi (2 slices):",
+  isTypeTitle: true,
+};
+const lunchSushiTypeIrodori = {
+  titleHE: "אירודורי רול (I/O חתוך ל-4):",
+  titleEN: "I/O Irodori Roll (cut into 4):",
+  isTypeTitle: true,
+};
+const lunchSushiTypeHosomaki = {
+  titleHE: "הוסומאקי (חתוך ל-8):",
+  titleEN: "Hosomaki (cut into 8):",
+  isTypeTitle: true,
+};
+const lunchSushiTypeTemaki = {
+  titleHE: "טמאקי - קונוס:",
+  titleEN: "Temaki - Hand Rol:",
+  isTypeTitle: true,
+};
+const lunchSushiTypeGunkan = {
+  titleHE: "גונקן- כדור אורז עטוף אצה:",
+  titleEN: "Gunkan - Rice ball wrapped with Nori:",
+  isTypeTitle: true,
+};
+
+state.lunch75.types[0].dishes = [wakameSalad, harusameSalad, agedashiDoufu];
+state.lunch75.types[1].dishes = [ingenDofu];
+state.lunch75.types[2].dishes = [];
+
+state.lunch90.types[0].dishes = state.lunch75.types[0].dishes;
+state.lunch90.types[1].dishes = [];
+state.lunch90.types[2].dishes = [];
+
+state.lunch105.types[0].dishes = [...state.lunch75.types[0].dishes];
+state.lunch105.types[1].dishes = [];
+state.lunch105.types[2].dishes = [
+  lunchSushiTypeNigiri,
+  lunchSushiTypeSeshimi,
+  lunchSushiTypeIrodori,
+  lunchSushiTypeHosomaki,
+  lunchSushiTypeTemaki,
+  lunchSushiTypeGunkan,
+];

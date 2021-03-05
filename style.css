@@ -35,6 +35,10 @@ header .container {
   max-width: 1024px;
 }
 
+.center {
+  text-align: center;
+}
+
 /* .hidden {
   display: none;
 } */
@@ -119,15 +123,13 @@ main {
 }
 .menu {
   margin: 45px 150px 0 0;
-  padding: 10px 10px 40px 10px;
+  padding: 40px 10px 40px 10px;
 }
 
 .menu-title {
-  padding-top: 30px;
   color: #e30613;
-  /* border-bottom: 1px solid black; */
-  /* text-align: right; */
-  padding-bottom: 5px;
+  border-bottom: 1px solid black;
+  /* padding-bottom: 5px; */
   font-weight: bold;
   font-size: 17px;
 }
@@ -135,8 +137,9 @@ main {
 .menu-description {
   color: black;
   font-weight: normal;
-  margin: 10px 0 10px 0;
+  margin: 5px 0 5px 0;
   font-style: italic;
+  font-size: 15px;
 }
 
 .menu-postscriptum {
@@ -157,13 +160,8 @@ main {
   padding: 10px 0 5px 0;
 }
 
-#appetisers {
-  display: block;
-}
-
 .dish {
   border-bottom: 1px solid black;
-  /* text-align: right; */
   padding: 5px 0;
 }
 
@@ -187,13 +185,35 @@ main {
   font-weight: normal;
 }
 
+.dish-price {
+  min-width: 65px;
+  text-align: left;
+}
+
+.lunch-title {
+  color: #e30613;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.lunch-type {
+  margin-top: 15px;
+}
+
+.lunch-sushi-type {
+  font-weight: bold;
+  font-style: italic;
+  padding: 10px 0 0px 0;
+}
+
 .veg {
   background-image: url(leaf.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 12px;
   margin-right: 2px;
-  width: 16px;
+  min-width: 16px;
   height: 16px;
 }
 
