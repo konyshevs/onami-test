@@ -124,6 +124,42 @@ $("document").ready(function () {
       .join("")}`;
   }
 
+  function genCombitionsMarkup(menuObj) {
+    function genDishMarkupOneLine(dish) {
+      return `<div class="dish one-line">
+       <div class="title-price-section">
+          <div class="dish-title">
+            <div>${
+              dish[0][`title${lang}`]
+            }<span class="dish-description"> ${dish[0][`description${lang}`]} ${dish[1]}</span></div>
+          </div>
+       </div>
+     </div>`;
+    }
+
+    return `
+    <div class="lunch-title center">
+        <div class="">${menuObj[`title${lang}`]}</div>
+    </div>
+    ${menuObj.types
+      .map(
+        type => `
+        <div class="dish one-line">
+           <div class="title-price-section">
+              <div class="combi-title">
+                <div>${type[`title${lang}`]}</div>
+                ${type.isVegi ? '<div class="veg"></div>' : ""}
+              </div>
+              <div class="combi-price">${type.price ? "₪" : ""} ${
+          type.price
+        }</div>
+           </div>
+         </div> 
+      ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
+      )
+      .join("")}`;
+  }
+
   function genLunchMarkup(lunchObj) {
     function genDishMarkupOneLine(dish) {
       if (dish.isTypeTitle)
@@ -175,12 +211,19 @@ $("document").ready(function () {
         "beforeend",
         genSeshimiMarkup(page)
       );
+
     if (
       page === state.lunch75 ||
       page === state.lunch90 ||
       page === state.lunch105
     )
       return dishBlockEl.insertAdjacentHTML("beforeend", genLunchMarkup(page));
+
+    if (page === state.combinations)
+      return dishBlockEl.insertAdjacentHTML(
+        "beforeend",
+        genCombitionsMarkup(page)
+      );
     if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
@@ -325,7 +368,26 @@ const state = {
     titleEN: "Combinations",
     descriptionEN: "",
     postScriptumEN: "",
-    dishes: [],
+    types: [
+      {
+        titleHE: "צמחונית",
+        titleEN: "VEGETARIAN",
+        price: 135,
+        dishes: [],
+      },
+      {
+        titleHE: "סקאנה",
+        titleEN: "SAKANA",
+        price: 198,
+        dishes: [],
+      },
+      {
+        titleHE: "קאיסן",
+        titleEN: "KAISEN",
+        price: 225,
+        dishes: [],
+      },
+    ],
   },
   lunch75: {
     titleHE: "עסקית 75 ₪",
@@ -715,15 +777,18 @@ const negima = new Skewer(
   24
 );
 
+const sakeYaki = new Skewer(
+  "סאקה יאקי",
+  "סלמון",
+  "Sake Yaki",
+  "Salmon fillet",
+  28
+);
+
+const ebiYaki = new Skewer("אבי יאקי", "שרימפ", "Ebi Yaki", "Shrimp", 28);
+
 // MAID DISHES
 
-// const dish = new MainDish(
-//   "",
-//   "",
-//   "",
-//   "",
-//   0
-// )
 const ingenDofu = new MainDish(
   "אינגן דופו",
   "טופו מוקפץ עם שעועית ירוקה, פטריות שמפניון ובצל לבן ברוטב יאקיניקו (טבעוני)",
@@ -733,11 +798,75 @@ const ingenDofu = new MainDish(
   true
 );
 
+const suzukiAgedashi = new MainDish(
+  "סוזוקי אגדאשי",
+  " פילה בס ובצל פריך מוגש לצד רוטב טנצויו חם ושבבי בוניטו",
+  "Suzuki Agedashi",
+  "Crispy bass and onion served with tentsuyu sauce and bonito flakes",
+  72
+);
+
+const kaisenShougaItame = new MainDish(
+  "קאיסן שוגה איטמה",
+  "סקלופ, שרימפ, קלמארי ומולים מוקפצים עם אטריות הרוסאמה בסאקה, ג'ינג'ר, שום וסויה",
+  "Kaisen Shouga Itame",
+  "Harusame noodles, scallop, shrimp, calamari & mussels stir fried with sake, soy sauce, ginger & garlic",
+  92
+);
+
+const zakanaChirashi = new MainDish(
+  "סקאנה צ'יראשי",
+  "סשימי סלמון, דניס, טונה, שרימפ, ביצי סלמון ואומלט יפני על אורז סושי בעיטור בצל ירוק ושומשום קלוי",
+  "Zakana Chirashi",
+  "Sashimi of salmon, sea bream, tuna, shrimp, salmon roe, japanese omelet on sushi rice, topped with scallion & roasted sesame seeds",
+  98
+);
+
+const kurodaiSugatayaki = new MainDish(
+  "קורודאי סוגטאיאקי",
+  "דניס שלם על הגריל במלח מוגש בליווי רוטב פונזו ואורז שום",
+  "Kurodai Sugatayaki",
+  "Grilled & salted sea bream served with minced radish, ponzu sauce & garlic rice",
+  116
+);
+
+const sakamushi = new MainDish(
+  "סקאמושי",
+  "פילה לברק וירקות מאודים בסאקה. מוגש עם אורז מאודה",
+  "Sakamushi",
+  "Sea bass fillete with vegetables, steamed in sake",
+  118
+);
+
+const wafuHireSteak = new MainDish(
+  "וואפו הירה סטייק",
+  "פילה בקר בגריל",
+  "Wafu Hire Steak",
+  "Grilled beef fillet",
+  160
+);
+
 // DESSERTS
-const rio = new Dessert(
-  "ריו",
-  "מוס שוקולד מריר, קראנץ' נוגט וקציפת שוקולד לבן",
-  "Rio",
+const gomaParfe = new Dessert(
+  "גומא פרפה",
+  "פרפה חלווה בציפוי שוקולד לבן על רוטב חלווה ומחית פיסטוק",
+  "",
+  "",
+  46
+);
+
+const machaBrule = new Dessert(
+  "מאצ'ה ברולה",
+  "ברולה תה ירוק ושוקולד לבן (ללא גלוטן)",
+  "",
+  "",
+  46
+);
+
+const ananasLemin = new Dessert(
+  "אננס לימון",
+  "קרם אננס, קציפת לימון וקרוטוני בננה פריכים (ללא גלוטן)",
+  "",
   "",
   44
 );
@@ -866,3 +995,7 @@ state.lunch105.types[2].dishes = [
   lunchSushiTypeTemaki,
   lunchSushiTypeGunkan,
 ];
+
+// COMBINATIONS
+
+state.combinations.types[0].dishes = [];
