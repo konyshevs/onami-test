@@ -863,7 +863,7 @@ const machaBrule = new Dessert(
   46
 );
 
-const ananasLemin = new Dessert(
+const ananasLemon = new Dessert(
   "אננס לימון",
   "קרם אננס, קציפת לימון וקרוטוני בננה פריכים (ללא גלוטן)",
   "",
@@ -874,7 +874,67 @@ const ananasLemin = new Dessert(
 // SESHIMI
 const sake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [18, 34]);
 
+const sakeTeriyaki = new SeshimiNigiri(
+  0,
+  "סאקה טריאקי",
+  "סלמון מבושל ברוטב טריאקי",
+  "Sake Teriyaki",
+  "Cooked in teriyaki",
+  ["-", 20]
+);
+
+const beniToro = new SeshimiNigiri(
+  0,
+  "בני טורו",
+  "סלמון שמן",
+  "Beni-Toro",
+  "Fatty salmon",
+  [18, 34]
+);
+
+const kurodai = new SeshimiNigiri(
+  0,
+  "קורודאי",
+  "דניס",
+  "Kurodai",
+  "Sea bream",
+  [18, 38]
+);
+const shiroguchi = new SeshimiNigiri(
+  0,
+  "שירוגוצ‘י",
+  "מוסר ים",
+  "Shiroguchi",
+  "Croaker",
+  [18, 39]
+);
+
+const maguro = new SeshimiNigiri(0, "מגורו", "טונה", "Maguro", "Tuna", [
+  22,
+  48,
+]);
+
+const hamachi = new SeshimiNigiri(
+  0,
+  "המאצ'י",
+  "ילוטייל",
+  "Hamachi",
+  "Yellowtail",
+  [22, 48]
+);
+
 const bora = new SeshimiNigiri(1, "בורה", "בורי", "Bora", "Mullet", [16, 32]);
+
+const suzuki = new SeshimiNigiri(1, "סוזוקי", "בס", "Suzuki", "Bass", [16, 32]);
+
+const unagi = new SeshimiNigiri(
+  1,
+  "אונאגי",
+  "צלופח מבושל ברוטב טריאקי",
+  "Unagi",
+  "Eel cooked in teriyaki",
+  ["-", 28]
+);
 
 const ebi = new SeshimiNigiri(
   2,
@@ -885,7 +945,39 @@ const ebi = new SeshimiNigiri(
   [14, 28]
 );
 
-const avocado = new SeshimiNigiri(3, "אבוקדו", "", "Avocado", "", ["-", 12]);
+const hotate = new SeshimiNigiri(2, "הוטטה", "סקלופ", "Hotate", "Scallop", [
+  22,
+  39,
+]);
+
+const hotateTeriyaki = new SeshimiNigiri(
+  2,
+  "הוטטה טריאקי",
+  "סקלופ מבושל ברוטב טריאקי",
+  "Hotate Teriyaki",
+  "Cooked in teriyaki",
+  ["-", 24]
+);
+
+const avocado = new SeshimiNigiri(
+  3,
+  "אבוקדו",
+  "",
+  "Avocado",
+  "",
+  ["-", 12],
+  true
+);
+
+const tamago = new SeshimiNigiri(
+  3,
+  "טמאגו",
+  "אומלט יפני",
+  "Tamago",
+  "Japanese omelet",
+  [14, 20],
+  true
+);
 
 const shimaAji = new SeshimiNigiri(
   4,
@@ -894,6 +986,38 @@ const shimaAji = new SeshimiNigiri(
   "Shima-Aji",
   "Yellow jack",
   [20, 42]
+);
+
+const hiramasa = new SeshimiNigiri(
+  4,
+  "היראמאסה",
+  "אינטיאס",
+  "Hiramasa",
+  "Amberjack",
+  [20, 42]
+);
+
+const hiramasaTeriyaki = new SeshimiNigiri(
+  4,
+  "היראמאסה טריאקי",
+  "אינטיאס מבושל ברוטב טריאקי",
+  "Hiramasa Teriyaki",
+  "Cooked in teriyaki",
+  ["-", 22]
+);
+
+const madai = new SeshimiNigiri(4, "מאדאי", "פרידה", "Madai", "Red snapper", [
+  26,
+  54,
+]);
+
+const ohToro = new SeshimiNigiri(
+  4,
+  "או טורו",
+  "טונה שמנה",
+  "Oh-Toro",
+  "Fatty tuna",
+  [28, 64]
 );
 
 // INARI GUNKAN
@@ -986,10 +1110,27 @@ state.lunch90.types[1].dishes = [];
 state.lunch90.types[2].dishes = [];
 
 state.lunch105.types[0].dishes = [...state.lunch75.types[0].dishes];
-state.lunch105.types[1].dishes = [];
+state.lunch105.types[1].dishes = [kaisenShougaItame];
 state.lunch105.types[2].dishes = [
   lunchSushiTypeNigiri,
+  sake,
+  beniToro,
+  kurodai,
+  suzuki,
+  bora,
+  shiroguchi,
+  tamago,
+  ebi,
   lunchSushiTypeSeshimi,
+  sake,
+  beniToro,
+  kurodai,
+  suzuki,
+  bora,
+  shiroguchi,
+  tamago,
+  ebi,
+
   lunchSushiTypeIrodori,
   lunchSushiTypeHosomaki,
   lunchSushiTypeTemaki,
