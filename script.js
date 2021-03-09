@@ -847,27 +847,27 @@ const wafuHireSteak = new MainDish(
 );
 
 // DESSERTS
-const gomaParfe = new Dessert(
+const gomaParfait = new Dessert(
   "גומא פרפה",
   "פרפה חלווה בציפוי שוקולד לבן על רוטב חלווה ומחית פיסטוק",
-  "",
-  "",
+  "Goma Parfait",
+  "Halva & white chocolate parfait, halva sauce & pistachio puree",
   46
 );
 
-const machaBrule = new Dessert(
+const matchaBrulee = new Dessert(
   "מאצ'ה ברולה",
   "ברולה תה ירוק ושוקולד לבן (ללא גלוטן)",
-  "",
-  "",
+  "Matcha Brulee",
+  "Greem tea brulee with white chocolate (Gluten free)",
   46
 );
 
-const ananasLemon = new Dessert(
+const lemonPineappleCream = new Dessert(
   "אננס לימון",
   "קרם אננס, קציפת לימון וקרוטוני בננה פריכים (ללא גלוטן)",
-  "",
-  "",
+  "Lemon & Pineapple Cream",
+  "Pineapple cream on a bed of crispy banana croutons, topped with Lemon foam (Gluten free)",
   44
 );
 
