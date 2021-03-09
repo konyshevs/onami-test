@@ -69,7 +69,9 @@ $("document").ready(function () {
 
   // MENU RENDERING
   function genDishMarkup(dish) {
-    const price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
+    let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
+    if (lang === "EN" && typeof dish.price[0] === "string")
+      price = `${dish.price[1]}/${dish.price[0]}`;
 
     return `<div class="dish">
      <div class="title-price-section">
@@ -84,7 +86,11 @@ $("document").ready(function () {
   }
 
   function genDishMarkupOneLine(dish) {
-    const price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
+    const isString = item => typeof item === "string";
+    let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
+
+    if (lang === "EN" && isString(dish.price[0]))
+      price = `${dish.price[1]}/${dish.price[0]}`;
 
     return `<div class="dish one-line">
      <div class="title-price-section">
@@ -1021,23 +1027,161 @@ const ohToro = new SeshimiNigiri(
 );
 
 // INARI GUNKAN
-const inariYasay = new InariGunkan(
+const gunkanYasay = new InariGunkan(
   "יאסאי קוקטייל",
-  "אספרגוס טמפורה, אבוקדו, צנון מוחמץ, בצל ירוק, שומשום, שקדים קלויים וטריאקי",
+  "אספרגוס טמפורה, אבוקדו, צנון מוחמץ, בצל ירוק, שומשום, שקדים קלויים וטריאקי (טבעוני)",
   "Yasai Cocktail",
   "Asparagus tempura, avocado, pickled radish, scallion, sesame seeds, roasted almonds & teriyaki",
   [15, 19],
   true
 );
 
+const gunkanVegetarian = new InariGunkan(
+  "צמחוני",
+  "שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, ספייסי מיונז וטריאקי",
+  "Vegetarian",
+  "Inari tempura, Shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
+  [15, 19],
+  true
+);
+
+const gunkanSakeMix = new InariGunkan(
+  "סאקה מיקס",
+  "סלמון קצוץ, ביצי סלמון, בצל ירוק, ושמן צ'ילי",
+  "Sake Mix",
+  "Salmon, salmon roe, scallion & chili oil",
+  [22, 26]
+);
+
+const gunkanShiroZakanaMix = new InariGunkan(
+  "שירו סקאנה מיקס",
+  "דגים לבנים קצוצים, אבוקדו, שקדים קלויים, בצל ירוק וספייסי מיונז",
+  "Shiro Zakana Mix",
+  "White fish mix, avocado, roasted almonds, scallion & spicy mayonnaise",
+  [25, 29]
+);
+
+const gunkanKaisenCocktail = new InariGunkan(
+  "קאיסן קוקטייל",
+  "שרימפ, סקלופ וקלמארי קצוצים, ביצי סלמון, בצל ירוק, ספייסי מיונז וטריאקי",
+  "Kaisen Cocktail",
+  "Shrimp, scallop, calamari, salmon roe, scallion, spicy mayonnaise & teriyaki",
+  [24, 28]
+);
+
+const gunkanTobikoUzura = new InariGunkan(
+  "טוביקו אוזורה",
+  "ביצי דג דאון וחלמון ביצת שליו",
+  "Tobiko Uzura",
+  "Flying fish roe & quail egg yolk",
+  [26, 30]
+);
+
+const gunkanSpicyTekka = new InariGunkan(
+  "ספייסי טקה",
+  "טונה קצוצה עם בצל ירוק ושמן צ'ילי",
+  "Spicy Tekka",
+  "Tuna with scallion & chili oil",
+  [32, 36]
+);
+
+const gunkanUnagiMix = new InariGunkan(
+  "אונאגי מיקס",
+  "צלופח מבושל בטריאקי קצוץ, אבוקדו, אושינקו, שקדים קלויים, בצל ירוק ושומשום לבן",
+  "Unagi Mix Teriyaki",
+  "Eel cooked in teriyaki, avocado, sesame seeds, roasted almonds, pickled radish & chili oil",
+  [32, 36]
+);
+
+const gunkanIkuraUzura = new InariGunkan(
+  "איקורה אוזורה",
+  "ביצי סלמון וחלמון ביצת שליו",
+  "Ikura Uzura",
+  "Salmon roe & quail egg yolk",
+  [32, 36]
+);
+
+const gunkanKurumaMaguro = new InariGunkan(
+  "קורומה מגורו",
+  "ג'מבו שרימפ קצוץ, אבוקדו, בצל ירוק, שומשום שחור, טריאקי וספייסי מיונז עטוף בסשימי טונה",
+  "Kuruma Maguro Gunkan",
+  "Prawn, black sesame seeds, avocado, scallion, spicy mayonnaise & teriyaki, wrapped with tuna sashimi",
+  ["-", 36]
+);
+
+const gunkanNemaGaki = new InariGunkan(
+  "נמה גקי",
+  "אוייסטר",
+  "Nema Gaki",
+  "Oyster",
+  [36, 40]
+);
+
 // INARI SPECIAL
+const specialYasaiCocktail = new InariSpecial(
+  "אינארי ספיישל יאסאי קוקטייל",
+  "אינארי טמפורה, אספרגוס טמפורה, אבוקדו, צנון מוחמץ, בצל ירוק, שומשום, שקדים קלויים וטריאקי (טבעוני)",
+  "Inari Special Yasai Cocktail",
+  "Inari tempura, asparagus tempura, avocado, pickled radish, scallion, sesame seeds, roasted almonds & teriyaki",
+  22,
+  true
+);
+
 const specialVegitarian = new InariSpecial(
   "אינארי ספיישל צמחוני",
   "אינארי טמפורה, שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, אספרגוס טמפורה, ספייסי מיונז וטריאקי",
   "Inari Special Vegetarian",
-  "Inari tempura, Shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
+  "Inari tempura, shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
   22,
   true
+);
+
+const specialSake = new InariSpecial(
+  "אינארי ספיישל סאקה",
+  "אינארי טמפורה, סלמון קצוץ, ביצי סלמון, אספרגוס טמפורה, בצל ירוק ושמן צ'ילי",
+  "Inari Special Sake",
+  "Inari tempura, salmon, salmon roe, asparagus tempura, scallion & chili oil",
+  28
+);
+
+const specialKuruma = new InariSpecial(
+  "אינארי ספיישל קורומה",
+  "אינארי טמפורה, ג'מבו שרימפ קצוץ, אבוקדו, בצל ירוק, שומשום שחור, אספרגוס, טמפורה, טריאקי וספייסי מיונז",
+  "Inari Special Kuruma",
+  "Inari tempura, prawn, avocado, black sesame seeds, scallion, spicy mayonnaise & teriyaki",
+  30
+);
+
+const specialShiroZakana = new InariSpecial(
+  "אינארי ספיישל שירו סקאנה",
+  "אינארי טמפורה, דגים לבנים קצוצים, בצל ירוק, ביצי סלמון, אספרגוס טמפורה וספייסי מיונז",
+  "Inari Special Shiro Zakana",
+  "Inari tempura, white fish mix, scallion, salmon roe, asparagus tempura & spicy mayonnaise",
+  32
+);
+
+const specialUnagiMix = new InariSpecial(
+  "אינארי ספיישל אונאגי",
+  "אינארי טמפורה, צלופח מבושל בטריאקי קצוץ, אבוקדו, אושינקו, שקדים קלויים, בצל ירוק ושומשום לבן",
+  "Inari Unagi Mix",
+  "Inari tempura, eel cooked in teriyaki, asparagus tempura, avocado, sesame seeds, roasted almonds, pickled radish & chili oil",
+  38
+);
+
+const specialSpicyTekka = new InariSpecial(
+  "אינארי ספיישל ספייסי טקה",
+  "אינארי טמפורה, טונה קצוצה עם בצל ירוק, אספרגוס טמפורה ושמן צ'ילי",
+  "Inari Spicy Tekka",
+  "Inari tempura , tuna with scallion, asparagus tempura & chili oil",
+  38
+);
+
+const specialTobiko = new InariSpecial(
+  "אינארי ספיישל טוביקו",
+  "אינארי טמפורה, סלמון וטונה קצוצים, טוביקו וואסאבי, דלעת ממותקת, צנון מוחמץ, בצל סגול, בצל ירוק, אספרגוס טמפורה, טריאקי וספייסי מיונז",
+  "Inari Special Tobiko",
+  "Inari tempura, salmon, tuna, wasabi tobiko, seasoned pumpkin, pickled radish, red onion, scallion, asparagus tempura, teriyaki & spicy mayonnaise",
+  38
 );
 
 // HOSOMAKI
@@ -1135,6 +1279,9 @@ state.lunch105.types[2].dishes = [
   lunchSushiTypeHosomaki,
   lunchSushiTypeTemaki,
   lunchSushiTypeGunkan,
+  gunkanKaisenCocktail,
+  gunkanSakeMix,
+  gunkanShiroZakanaMix,
 ];
 
 // COMBINATIONS
