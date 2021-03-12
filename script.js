@@ -112,7 +112,11 @@ $("document").ready(function () {
         <div class="">${menuObj[`title${lang}`]}</div>
         <div class="menu-description">${menuObj[`description${lang}`]}</div>
     </div>
-    ${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
+    ${menuObj.dishes
+      .map(dish =>
+        dish.titleHE ? genDishMarkup(dish) : genDishMarkupOneLine(dish)
+      )
+      .join("")}
     <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>  
     `;
   }
@@ -137,7 +141,7 @@ $("document").ready(function () {
           <div class="dish-title">
             <div>${
               dish[0][`title${lang}`]
-            }<span class="dish-description"> ${dish[0][`description${lang}`]} ${dish[1]}</span></div>
+            }${dish[1].type ? ` ${dish[1].type[lang]}` : ""}<span class="dish-description"> ${dish[0][`description${lang}`]} (${dish[1][lang]})</span></div>
           </div>
        </div>
      </div>`;
@@ -150,7 +154,7 @@ $("document").ready(function () {
     ${menuObj.types
       .map(
         type => `
-        <div class="dish one-line">
+        <div class="dish one-line, margin-butt">
            <div class="title-price-section">
               <div class="combi-title">
                 <div>${type[`title${lang}`]}</div>
@@ -278,15 +282,17 @@ const state = {
     postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
     dishes: [],
   },
-  mainDishes: {
-    titleHE: "מנות עיקריות",
-    descriptionHE: "",
-    postScriptumHE: "שף <b>עידו כהן צדק</b>",
-    titleEN: "Main dishes",
-    descriptionEN: "",
-    postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
-    dishes: [],
-  },
+  mainDishes: [
+    {
+      titleHE: "מנות עיקריות",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Main dishes",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+  ],
   desserts: {
     titleHE: "קינוחים",
     descriptionHE: "",
@@ -339,16 +345,26 @@ const state = {
     },
   ],
 
-  hosomaki: {
-    titleHE: "הוסומקי",
-    descriptionHE:
-      "אצת נורי במילוי אורז, דג / פרי ים / ירקות (חתוך ל-8) אינסייד אאוט (חתוך ל-4)",
-    postScriptumHE: "",
-    titleEN: "Hosomaki",
-    descriptionEN: "Thin roll (Cut into 8)",
-    postScriptumEN: "",
-    dishes: [],
-  },
+  hosomaki: [
+    {
+      titleHE: "הוסומקי",
+      descriptionHE: "אצת נורי במילוי אורז, דג / פרי ים / ירקות (חתוך ל-8))",
+      postScriptumHE: "",
+      titleEN: "Hosomaki",
+      descriptionEN: "Thin roll (Cut into 8)",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "תוספות אפשריות למאקי",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Optional ingredients",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+  ],
   temaki: {
     titleHE: "טמקי - קונוס",
     descriptionHE: "קונוס נורי במילוי אורז / דג / פרי ים / ירקות",
@@ -358,15 +374,26 @@ const state = {
     postScriptumEN: "",
     dishes: [],
   },
-  irodori: {
-    titleHE: "אירודורי - IO",
-    descriptionHE: "אורז עוטף אצה במילוי ירק / פרי ים / דג (חתוך ל-4)",
-    postScriptumHE: "",
-    titleEN: "Irodori i/o",
-    descriptionEN: "Inside-Out roll - cut into 4",
-    postScriptumEN: "",
-    dishes: [],
-  },
+  irodori: [
+    {
+      titleHE: "אירודורי - IO",
+      descriptionHE: "אורז עוטף אצה במילוי ירק / פרי ים / דג (חתוך ל-4)",
+      postScriptumHE: "",
+      titleEN: "Irodori i/o",
+      descriptionEN: "Inside-Out roll - cut into 4",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "תוספות אפשריות (בחוץ)",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Optional ingredients (outside)",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+  ],
   combinations: {
     titleHE: "קומבינציות",
     descriptionHE: "",
@@ -529,6 +556,8 @@ const state = {
   },
 };
 
+state.mainDishes.push(state.skewers); // Adding skewers to main dishes
+
 const menuList = [];
 
 class Menu {
@@ -571,7 +600,7 @@ class Skewer extends Menu {
 class MainDish extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.mainDishes.dishes.push(this);
+    state.mainDishes[0].dishes.push(this);
   }
 }
 
@@ -614,7 +643,14 @@ class InariSpecial extends Menu {
 class Hosomaki extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.hosomaki.dishes.push(this);
+    state.hosomaki[0].dishes.push(this);
+  }
+}
+
+class HosomakiIngredient extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.hosomaki[1].dishes.push(this);
   }
 }
 
@@ -628,7 +664,14 @@ class Temaki extends Menu {
 class Irodori extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.irodori.dishes.push(this);
+    state.irodori[0].dishes.push(this);
+  }
+}
+
+class IrodoriIngredient extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.irodori[1].dishes.push(this);
   }
 }
 
@@ -766,11 +809,11 @@ const kaisenButterShoyu = new HotAppetiser(
   58
 );
 
-const koroUdon = new HotAppetiser(
+const kuroUdon = new HotAppetiser(
   "קורו אודון",
-  "אטריות אודון שחורות, שרימפ, בחמאה, צ'ילי ושום",
-  "Koro Udon",
-  "",
+  "אטריות אודון שחורות עם שרימפ בחמאה, צ'ילי ושום",
+  "Kuro Udon",
+  "Black udon noodles with shrimps, butter, chili & garlic",
   58
 );
 
@@ -1194,6 +1237,135 @@ const kappaMaki = new Hosomaki(
   true
 );
 
+const oshinkoMaki = new Hosomaki(
+  "אושינקו מאקי",
+  "צנון מוחמץ ושומשום",
+  "Oshinko Maki",
+  "Pickled radish & sesame seeds",
+  15,
+  true
+);
+
+const avocadoMaki = new Hosomaki(
+  "אבוקדו מאקי",
+  "אבוקדו",
+  "Avocado Maki",
+  "Avocado",
+  15,
+  true
+);
+
+const kanpyoTamagoMaki = new Hosomaki(
+  "קאנפיו טמאגו מאקי",
+  "דלעת ממותקת ואומלט יפני",
+  "Kanpyo Tamago Maki",
+  "Seasoned pumpkin & Japanese omelet",
+  16,
+  true
+);
+
+const asparaMaki = new Hosomaki(
+  "אספרה מאקי",
+  "אספרגוס ושומשום",
+  "Aspara Maki",
+  "Asparagus & sesame seeds",
+  16,
+  true
+);
+
+const shiitakeMaki = new Hosomaki(
+  "שיטאקה מאקי",
+  "פטריות שיטאקה ושומשום",
+  "Shiitake Maki",
+  "Japanese mushroom & sesame seeds",
+  16,
+  true
+);
+
+const ebikyuMaki = new Hosomaki(
+  "אביקיו מאקי",
+  "שרימפ מאודה / בטמפורה ומלפפון",
+  "Ebikyu Maki",
+  "Steamed shrimp & cucumber",
+  24
+);
+
+const sakekawaMaki = new Hosomaki(
+  "סאקה קאווה מאקי",
+  "סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ומלפפון (לא קריספי)",
+  "Sakekawa Maki",
+  "Chopped salmon skin, mayonnaise, scallion & cucumber (not crispy)",
+  25
+);
+
+const californiaMaki = new Hosomaki(
+  "קליפורניה מאקי",
+  "סלמון, אבוקדו ומלפפון",
+  "California Maki",
+  "Salmon, avocado & cucumber",
+  25
+);
+
+const torotakuMaki = new Hosomaki(
+  "טורוטאקו מאקי",
+  "סלמון שמן וצנון מוחמץ",
+  "Torotaku Maki",
+  "Fatty salmon & pickled radish",
+  25
+);
+
+const negiShiroZakanaMaki = new Hosomaki(
+  "נגי שירו סקאנה מאקי",
+  "דגים לבנים קצוצים, בצל ירוק, מלפפון וגזר",
+  "Negi Shiro Zakana Maki",
+  "White fish mix, scallion, cucumber & carrot",
+  28
+);
+
+const hokkaiMaki = new Hosomaki(
+  "הוקאיי מאקי",
+  "שרימפ ואספרגוס טמפורה עם אבוקדו",
+  "Hokkai Maki",
+  "Shrimp & asparagus tempura",
+  29
+);
+
+const ebiSakekawaMaki = new Hosomaki(
+  "אבי סאקה קאווה מאקי",
+  "שרימפ טמפורה, סלמון סקין ואבוקדו",
+  "Ebi Sakekawa Maki",
+  "Shrimp tempura, salmon skin & avocado",
+  30
+);
+
+const tekkaMaki = new Hosomaki("טקה מאקי", "טונה", "Tekka Maki", "Tuna", 32);
+
+const spicyTekkaMaki = new Hosomaki(
+  "ספייסי טקה מאקי",
+  "טונה ובצל ירוק קצוצים, שמן צ'ילי ומלפפון",
+  "Spicy Tekka Maki",
+  "Minced tuna & scallion, chili oil & cucumber",
+  32
+);
+
+const unakyuMaki = new Hosomaki(
+  "אונקיו מאקי",
+  "צלופח מבושל בטריאקי ומלפפון",
+  "Unakyu Maki",
+  "Teriyaki eel & cucumber",
+  36
+);
+
+// HOSOMAKI Ingredients
+new HosomakiIngredient("", "צנון מוחמץ", "", "Pickled radish", 5);
+new HosomakiIngredient("", "דלעת ממותקת", "", "Kanpyo", 5);
+new HosomakiIngredient("", "טמאגו", "", "Tamago", 5);
+new HosomakiIngredient("", "שקדים קלויים", "", "Roasted Almonds", 5);
+new HosomakiIngredient("", "שיטאקה/אספרגוס", "", "Shiitake / Asparagus", 6);
+new HosomakiIngredient("", "פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", 6);
+new HosomakiIngredient("", "ביצי דג דאון", "", "Flying Fish roe", 12);
+new HosomakiIngredient("", "ביצי סלמון", "", "Salmon roe", 14);
+
 // TEMAKI
 const californiaTemaki = new Temaki(
   "קליפורניה טמאקי",
@@ -1201,6 +1373,78 @@ const californiaTemaki = new Temaki(
   "California Temaki",
   "Salmon, avocado & cucumber",
   28
+);
+
+const sakemoriTemaki = new Temaki(
+  "סאקמורי טמאקי",
+  "סלמון, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי), אבוקדו ומלפפון",
+  "Sakemori Temaki",
+  "Salmon, salmon skin, avocado & cucumber",
+  28
+);
+
+const kaisenCocktailTemaki = new Temaki(
+  "קאיסן קוקטייל טמאקי",
+  "שרימפ, סקלופ וקלמארי קצוצים, ביצי סלמון, בצל ירוק, ספייסי מיונז וטריאקי",
+  "Kaisen Cocktail Temaki",
+  "Shrimp, scallop, calamari, salmon roe, scallion, spicy mayonnaise & teriyaki",
+  30
+);
+
+const negiShiroZakanaTemaki = new Temaki(
+  "נגי שירו סקאנה טמאקי",
+  "דגים לבנים קצוצים, בצל ירוק, מלפפון וגזר",
+  "Negi Shiro Zakana Temaki",
+  "White fish mix, scallion, cucumber & carrot",
+  30
+);
+
+const sakeMixTemaki = new Temaki(
+  "סאקה מיקס טמאקי",
+  "סלמון קצוץ, ביצי סלמון, בצל ירוק, ושמן צ'ילי",
+  "Sake Mix Temaki",
+  "Salmon, salmon roe, scallion & chili oil",
+  30
+);
+
+const hokkaiTemaki = new Temaki(
+  "הוקאיי טמאקי",
+  "שרימפ ואספרגוס טמפורה עם אבוקדו",
+  "Hokkai Temaki",
+  "Shrimp & asparagus tempura with avocado",
+  32
+);
+
+const ebiSakekawaTemaki = new Temaki(
+  "אבי סאקה קאווה טמאקי",
+  "שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
+  "Ebi Sakekawa Temaki",
+  "Shrimp tempura, Salmon skin & avocado",
+  35
+);
+
+const spicyTekkaTemaki = new Temaki(
+  "ספייסי טקה טמאקי",
+  "טונה ובצל ירוק קצוצים, שמן צ'ילי ומלפפון",
+  "Spicy Tekka Temaki",
+  "Minced tuna & scallion, chili oil & cucumber",
+  39
+);
+
+const onamiTemaki = new Temaki(
+  "אונמי טמאקי",
+  "שרימפ טמפורה, סלמון, טונה ומלפפון",
+  "Onami Temaki",
+  "Shrimp tempura, salmon, tuna & cucumber",
+  42
+);
+
+const unagiEbiTemaki = new Temaki(
+  "אונאגי אבי טמאקי",
+  "צלופח מבושל בטריאקי, שרימפ ואספרגוס בטמפורה, ביצי סלמון וספייסי מיונז",
+  "Unagi Ebi Temaki",
+  "Teriyaki eel, shrimp & asparagus tempura, salmon roe & spicy mayonnaise",
+  48
 );
 
 // IRODORI
@@ -1213,7 +1457,237 @@ const vegiterianRoll = new Irodori(
   true
 );
 
+const midoriRoll = new Irodori(
+  "מידורי רול",
+  "אספרגוס, אבוקדו, רוקט, מיונז, במעטפת ווסאבי קראנץ'",
+  "Midori Roll",
+  "Asparagus, avocado, rocket, mayonnaise & wasabi crunch outside",
+  24,
+  true
+);
+
+const yasaiCocktailRoll = new Irodori(
+  "יאסאי קוקטייל רול",
+  "אספרגוס טמפורה, אבוקדו, צנון מוחמץ, שקדים קלויים, שומשום, בצל ירוק וטריאקי",
+  "Yasai Cocktail Roll",
+  "Asparagus tempura, avocado, sesame seeds, scallion, pickled radish, roasted almonds & teriyaki",
+  24,
+  true
+);
+
+const sakemoriRoll = new Irodori(
+  "סאקמורי רול",
+  "סלמון, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי), אבוקדו ומלפפון",
+  "Sakemori Roll",
+  "Salmon, salmon skin, avocado & cucumber",
+  28
+);
+
+const californiaRoll = new Irodori(
+  "קליפורניה רול",
+  "סלמון, אבוקדו ומלפפון",
+  "California Roll",
+  "Salmon, avocado & cucumber",
+  28
+);
+
+const beniToroRoll = new Irodori(
+  "בני טורו רול",
+  "סלמון שמן, מלפפון ובצל ירוק",
+  "Beni Toro Roll",
+  "Fatty salmon, cucumber & scallion",
+  28
+);
+
+const ebikyuRoll = new Irodori(
+  "אביקיו רול",
+  "שרימפ מאודה, דלעת ממותקת, אבוקדו, בצל ירוק וספייסי מיונז",
+  "Ebikyu Roll",
+  "Steamed shrimp, avocado, seasoned pumpkin, spicy mayonnaise & scallion",
+  30
+);
+
+const ebiSakekawaRoll = new Irodori(
+  "אבי סאקה קאווה רול",
+  "שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
+  "Ebi Sakekawa Roll",
+  "Shrimp tempura, Salmon skin & avocado",
+  35
+);
+
+const shiroZakanaRoll = new Irodori(
+  "שירו סקאנה רול",
+  "דגים לבנים קצוצים, בצל ירוק, אבוקדו וספייסי מיונז עטוף בסשימי סלמון",
+  "Shiro Zakana Roll",
+  "White fish mix, avocado, spicy mayonnaise & scallion with salmon outside",
+  39
+);
+
+const spicyTekkaRoll = new Irodori(
+  "ספייסי טקה רול",
+  "טונה ובצל ירוק קצוצים, שמן צ'ילי, אבוקדו ואספרגוס",
+  "Spicy Tekka Roll",
+  "Minced tuna & scallion, chili oil, avocado & asparagus",
+  39
+);
+
+const hotateTobikoRoll = new Irodori(
+  "הוטטה טוביקו רול",
+  "סקלופ, אספרגוס, צנון מוחמץ, ביצי דג דאון וספייסי מיונז",
+  "Hotate Tobiko Roll",
+  "Scallop, asparagus, pickled radish, spicy mayonnaise & flying fish roe",
+  42
+);
+
+const onamiRoll = new Irodori(
+  "אונמי רול",
+  "שרימפ טמפורה, סלמון, טונה ומלפפון",
+  "Onami Roll",
+  "Shrimp tempura, salmon, tuna & cucumber",
+  42
+);
+
+const unagiEbiRoll = new Irodori(
+  "אונאגי אבי רול",
+  "לופח מבושל בטריאקי, שרימפ ואספרגוס בטמפורה, ביצי סלמון וספייסי מיונז",
+  "Unagi Ebi Roll",
+  "Teriyaki eel, shrimp & asparagus tempura, salmon roe & spicy mayonnaise",
+  48
+);
+
+const OnamiDream = new Irodori(
+  "אונמי דרים",
+  "אינארי טמפורה, שרימפ טמפורה, סלמון, ביצי סלמון, שיטאקה, טמאגו, צנון מוחמץ, אבוקדו, מלפפון וגזר",
+  "Onami Dream",
+  "Shrimp tempura, salmon, salmon roe, shiitake, tamago, pickled radish, cucumber, avocado & carrot wrapped with inari tempura",
+  58
+);
+
+// IRODORI INGRIDIENTS
+new IrodoriIngredient("", "שקדים קלויים", "", "Roasted almonds", 5);
+new IrodoriIngredient("", "פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", 6);
+new IrodoriIngredient("", "אבוקדו", "", "Avocado", 6);
+new IrodoriIngredient("", "ביצי דג דאון", "", "Flying fish roe", 12);
+new IrodoriIngredient("", "סלמון", "", "Salmon fillet", 16);
+new IrodoriIngredient("", "דג לבן", "", "White fish", 20);
+new IrodoriIngredient("", "טונה", "", "Tuna fillet", 26);
+
 //LUNCH MENU
+
+// const negiShiroZakanaRoll = new Menu(
+//   "",
+//   "",
+//   "",
+//   "",
+//   0
+// );
+
+const negiShiroZakanaRoll = new Menu(
+  "נגי שירו סקאנה רול",
+  negiShiroZakanaTemaki.descriptionHE,
+  "Negi Shiro Zakana Roll",
+  negiShiroZakanaTemaki.descriptionEN,
+  28
+);
+
+const boraMaki = new Menu(
+  "בורה מאקי",
+  "בורי, אבוקדו ובצל ירוק",
+  "Bora Maki",
+  "Mullet, avocado & scallion",
+  0
+);
+
+const kaisenCocktaiMaki = new Menu(
+  "קאיסן קוקטייל מאקי",
+  kaisenCocktailTemaki.descriptionHE,
+  "Kaisen Cocktail Maki",
+  kaisenCocktailTemaki.descriptionEN,
+  30
+);
+
+const vegetarianMixMaki = new Menu(
+  "מיקס צמחוני מאקי",
+  gunkanVegetarian.descriptionHE,
+  "Vegetarian Mix Maki",
+  gunkanVegetarian.descriptionEN,
+  0,
+  true
+);
+
+const ebiFurai = new Menu(
+  "אבי פוראי",
+  "שרימפ פריך בציפוי פאנקו בליווי מיונז יפני",
+  "Ebi Furai",
+  "Crispy shrimp coated in panko served with mayonnaise",
+  0
+);
+
+const ebiTempura = new Menu(
+  "אבי טמפורה",
+  "שרימפ טמפורה בליווי רוטב טנצויו חם, צנון וג‘ינג‘ר כתושים",
+  "Ebi Tempura",
+  "Shrimp tempura served with tentsuyu sauce, minced radish & ginger",
+  0
+);
+
+const yasaiKareUdon = new Menu(
+  "יאסאי קארה אודון",
+  "אטריות קמח חיטה, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף (טבעוני)",
+  "Yasai Kare Udon",
+  "Stir fried wheat flour noodles,carrot,sprouts & green beans with spicy japanese curry sauce",
+  0,
+  true
+);
+
+const toriKareUdon = new Menu(
+  "טורי קארה אודון",
+  "אטריות קמח חיטה, עוף, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף",
+  "Tori Kare Udon",
+  "Stir fried wheat flour noodles,spring chicken, carrot, sprouts & green beans with spicy japanese curry sauce",
+  0
+);
+
+const wakadoriGrill = new Menu(
+  "וואקאדורי גריל",
+  "פרגית בגריל עם בצל מוקפץ ואורז שום",
+  "Wakadori Grill",
+  "Grilled spring chicken, served with sautéed onion & garlic rice",
+  0
+);
+
+const yakinikuLousujyu = new Menu(
+  "יאקיניקו לוסוג'יו",
+  "נתחי אנטריקוט מוקפצים עם בצל ברוטב יאקיניקו בעיטור בצל ירוק ושומשום. מוגש על אורז מאודה",
+  "Yakiniku Lousujyu",
+  "Beef strips with yakiniku sauce on steamed rice",
+  0
+);
+
+const toriRamen = new Menu(
+  "טורי ראמן",
+  "ציר עוף, אטריות ראמן, פרגית, נבטים, ביצה חצי קשה, פטריית אוזן ובצל ירוק",
+  "Tori Ramen",
+  "Noodles soup with spring chicken, kikurage mushroom, sprouts, boiled egg & scallion",
+  0
+);
+
+const kaisenUdon = new Menu(
+  "קאיסן אודון",
+  "מרק אטריות אודון, שרימפ, סקלופ, קלמארי, ברוקולי, פטריות שמפיניון, אצות וואקאמה, ביצה חצי קשה ובצל ירוק",
+  "Kaisen Udon",
+  "Noodles soup with shrimp, scallop, calamari, broccoli, mushrooms, carrot, Wakame seaweed, boiled egg & scallion",
+  0
+);
+
+const sakeSteak = new Menu(
+  "סאקה סטייק",
+  "פילה סלמון בגריל",
+  "Sake Steak",
+  "Grilled salmon fillet",
+  100
+);
+
 const lunchSushiTypeNigiri = {
   titleHE: "ניגירי (זוג):",
   titleEN: "Nigiri (a pair):",
@@ -1245,16 +1719,51 @@ const lunchSushiTypeGunkan = {
   isTypeTitle: true,
 };
 
-state.lunch75.types[0].dishes = [wakameSalad, harusameSalad, agedashiDoufu];
-state.lunch75.types[1].dishes = [ingenDofu];
-state.lunch75.types[2].dishes = [];
+state.lunch75.types[0].dishes = [
+  wakameSalad,
+  harusameSalad,
+  ebiFurai,
+  agedashiDoufu,
+  sakemoriRoll,
+  ebiSakekawaTemaki,
+];
+state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu];
+state.lunch75.types[2].dishes = [
+  midoriRoll,
+  yasaiCocktailRoll,
+  vegetarianMixMaki,
+  shiitakeMaki,
+  asparaMaki,
+  kanpyoTamagoMaki,
+];
 
 state.lunch90.types[0].dishes = state.lunch75.types[0].dishes;
-state.lunch90.types[1].dishes = [];
-state.lunch90.types[2].dishes = [];
+state.lunch90.types[1].dishes = [
+  toriKareUdon,
+  wakadoriGrill,
+  yakinikuLousujyu,
+  toriRamen,
+];
+state.lunch90.types[2].dishes = [
+  negiShiroZakanaMaki,
+  californiaMaki,
+  boraMaki,
+  sakemoriRoll,
+  ebikyuRoll,
+  kaisenCocktaiMaki,
+];
 
-state.lunch105.types[0].dishes = [...state.lunch75.types[0].dishes];
-state.lunch105.types[1].dishes = [kaisenShougaItame];
+state.lunch105.types[0].dishes = [
+  ...state.lunch75.types[0].dishes,
+  ebiTempura,
+  wafuYukke,
+];
+state.lunch105.types[1].dishes = [
+  kaisenShougaItame,
+  kaisenUdon,
+  sakeSteak,
+  kurodaiSugatayaki,
+];
 state.lunch105.types[2].dishes = [
   lunchSushiTypeNigiri,
   sake,
@@ -1265,6 +1774,7 @@ state.lunch105.types[2].dishes = [
   shiroguchi,
   tamago,
   ebi,
+
   lunchSushiTypeSeshimi,
   sake,
   beniToro,
@@ -1276,8 +1786,23 @@ state.lunch105.types[2].dishes = [
   ebi,
 
   lunchSushiTypeIrodori,
+  californiaRoll,
+  negiShiroZakanaRoll,
+  ebikyuRoll,
+  sakemoriRoll,
+
   lunchSushiTypeHosomaki,
+  spicyTekkaMaki,
+  californiaMaki,
+  hokkaiMaki,
+  ebiSakekawaMaki,
+
   lunchSushiTypeTemaki,
+  californiaTemaki,
+  negiShiroZakanaTemaki,
+  ebiSakekawaTemaki,
+  kaisenCocktailTemaki,
+
   lunchSushiTypeGunkan,
   gunkanKaisenCocktail,
   gunkanSakeMix,
@@ -1285,5 +1810,32 @@ state.lunch105.types[2].dishes = [
 ];
 
 // COMBINATIONS
+const combiTypeGunkan = { HE: "גונקן", EN: "Gunkan" };
+const combiTypeNigiri = { HE: "ניגירי", EN: "Nigiri" };
 
-state.combinations.types[0].dishes = [];
+state.combinations.types[0].dishes = [
+  [specialVegitarian, { HE: "2 יח'", EN: "2 pieces" }],
+  [gunkanYasay, { HE: "2 יח'", EN: "2 pieces", type: combiTypeGunkan }],
+  [tamago, { HE: "2 יח'", EN: "2 pieces", type: combiTypeNigiri }],
+  [midoriRoll, { HE: "4 יח'", EN: "4 pieces" }],
+  [kanpyoTamagoMaki, { HE: "8 יח'", EN: "8 pieces" }],
+];
+
+state.combinations.types[1].dishes = [
+  [specialSake, { HE: "2 יח'", EN: "2 pieces" }],
+  [
+    gunkanShiroZakanaMix,
+    { HE: "2 יח'", EN: "2 pieces", type: combiTypeGunkan },
+  ],
+  [kurodai, { HE: "2 יח'", EN: "2 pieces", type: combiTypeNigiri }],
+  [shiroZakanaRoll, { HE: "4 יח'", EN: "4 pieces" }],
+  [spicyTekkaMaki, { HE: "8 יח'", EN: "8 pieces" }],
+];
+
+state.combinations.types[2].dishes = [
+  [specialKuruma, { HE: "2 יח'", EN: "2 pieces" }],
+  [gunkanSakeMix, { HE: "2 יח'", EN: "2 pieces", type: combiTypeGunkan }],
+  [unagi, { HE: "2 יח'", EN: "2 pieces", type: combiTypeNigiri }],
+  [hotateTobikoRoll, { HE: "4 יח'", EN: "4 pieces" }],
+  [hokkaiMaki, { HE: "8 יח'", EN: "8 pieces" }],
+];
