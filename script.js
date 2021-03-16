@@ -1644,8 +1644,7 @@ const yasaiUdon = new Menu(
   "מרק עם אטריות אודון, ברוקולי, שמפיניון, גזר, וואקמה, ביצה חצי קשה ובצל ירוק",
   "Yasai Udon",
   "Noodles soup with broccoli, mushrooms, carrot, Wakame seaweed, boiled egg & scallion",
-  0,
-  true
+  0
 );
 
 const toriKareUdon = new Menu(
