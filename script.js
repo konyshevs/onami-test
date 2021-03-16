@@ -154,7 +154,7 @@ $("document").ready(function () {
     ${menuObj.types
       .map(
         type => `
-        <div class="dish one-line, margin-butt">
+        <div class="dish one-line, margin-top">
            <div class="title-price-section">
               <div class="combi-title">
                 <div>${type[`title${lang}`]}</div>
@@ -266,10 +266,10 @@ const state = {
     {
       titleHE: "ראשונות חמות",
       descriptionHE: "",
-      postScriptumHE: "שף <b>עידו כהן צדק</b>",
+      postScriptumHE: "",
       titleEN: "Hot appetisers",
       descriptionEN: "",
-      postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
+      postScriptumEN: "",
       dishes: [],
     },
   ],
@@ -282,17 +282,16 @@ const state = {
     postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
     dishes: [],
   },
-  mainDishes: [
-    {
-      titleHE: "מנות עיקריות",
-      descriptionHE: "",
-      postScriptumHE: "",
-      titleEN: "Main dishes",
-      descriptionEN: "",
-      postScriptumEN: "",
-      dishes: [],
-    },
-  ],
+  mainDishes: {
+    titleHE: "מנות עיקריות",
+    descriptionHE: "",
+    postScriptumHE: "",
+    titleEN: "Main dishes",
+    descriptionEN: "",
+    postScriptumEN: "",
+    dishes: [],
+  },
+
   desserts: {
     titleHE: "קינוחים",
     descriptionHE: "",
@@ -556,7 +555,7 @@ const state = {
   },
 };
 
-state.mainDishes.push(state.skewers); // Adding skewers to main dishes
+state.appetisers.push(state.skewers); // Adding skewers to main dishes
 
 const menuList = [];
 
@@ -600,7 +599,7 @@ class Skewer extends Menu {
 class MainDish extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.mainDishes[0].dishes.push(this);
+    state.mainDishes.dishes.push(this);
   }
 }
 
@@ -675,6 +674,13 @@ class IrodoriIngredient extends Menu {
   }
 }
 
+class Cocktail extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    state.coctails.dishes.push(this);
+  }
+}
+
 // COLD APPETISERS
 
 const wakameSalad = new ColdAppetiser(
@@ -705,7 +711,7 @@ const midoriSalad = new ColdAppetiser(
 
 const bottargaSoba = new ColdAppetiser(
   "בוטרגה סובה",
-  "אטריות סובה עם בוטרגה, חלמון כבוש ואיקורה",
+  "אטריות סובה עם בוטרגה, חלמון מגורד ואיקורה",
   "Bottarga Soba",
   "Soba noodles with bottarga, grated egg yolk & ikura",
   58
@@ -737,9 +743,9 @@ const sakeAvocadoCocktail = new ColdAppetiser(
 
 const maguroYukke = new ColdAppetiser(
   "מגורו יוקה",
-  "טרטר טונה מתובל בסויה, בצל ירוק וחלמון ביצת שליו נא",
+  "טרטר טונה מתובל בסויה, עירית וחלמון ביצת שליו נא",
   "Maguro Yukke",
-  "Tuna tartar seasoned with garlic, scallion & soy sauce, served with quail egg yolk",
+  "Tuna tartar seasoned with garlic, chive & soy sauce, served with quail egg yolk",
   68
 );
 
@@ -1024,8 +1030,7 @@ const tamago = new SeshimiNigiri(
   "אומלט יפני",
   "Tamago",
   "Japanese omelet",
-  [14, 20],
-  true
+  [14, 20]
 );
 
 const shimaAji = new SeshimiNigiri(
@@ -1084,8 +1089,7 @@ const gunkanVegetarian = new InariGunkan(
   "שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, ספייסי מיונז וטריאקי",
   "Vegetarian",
   "Inari tempura, Shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
-  [15, 19],
-  true
+  [15, 19]
 );
 
 const gunkanSakeMix = new InariGunkan(
@@ -1175,8 +1179,7 @@ const specialVegitarian = new InariSpecial(
   "אינארי טמפורה, שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, אספרגוס טמפורה, ספייסי מיונז וטריאקי",
   "Inari Special Vegetarian",
   "Inari tempura, shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
-  22,
-  true
+  22
 );
 
 const specialSake = new InariSpecial(
@@ -1260,8 +1263,7 @@ const kanpyoTamagoMaki = new Hosomaki(
   "דלעת ממותקת ואומלט יפני",
   "Kanpyo Tamago Maki",
   "Seasoned pumpkin & Japanese omelet",
-  16,
-  true
+  16
 );
 
 const asparaMaki = new Hosomaki(
@@ -1324,7 +1326,7 @@ const negiShiroZakanaMaki = new Hosomaki(
 
 const hokkaiMaki = new Hosomaki(
   "הוקאיי מאקי",
-  "שרימפ ואספרגוס טמפורה עם אבוקדו",
+  "שרימפ ואספרגוס טמפורה ",
   "Hokkai Maki",
   "Shrimp & asparagus tempura",
   29
@@ -1453,8 +1455,7 @@ const vegiterianRoll = new Irodori(
   "אבוקדו, שיטאקה, בצל ירוק, מלפפון, גזר, ספייסי מיונז וטריאקי",
   "Vegetarian Roll",
   "Shiitake, avocado, cucumber, carrot, scallion, spicy mayonnaise & teriyaki",
-  22,
-  true
+  22
 );
 
 const midoriRoll = new Irodori(
@@ -1462,8 +1463,7 @@ const midoriRoll = new Irodori(
   "אספרגוס, אבוקדו, רוקט, מיונז, במעטפת ווסאבי קראנץ'",
   "Midori Roll",
   "Asparagus, avocado, rocket, mayonnaise & wasabi crunch outside",
-  24,
-  true
+  24
 );
 
 const yasaiCocktailRoll = new Irodori(
@@ -1549,7 +1549,7 @@ const onamiRoll = new Irodori(
 
 const unagiEbiRoll = new Irodori(
   "אונאגי אבי רול",
-  "לופח מבושל בטריאקי, שרימפ ואספרגוס בטמפורה, ביצי סלמון וספייסי מיונז",
+  "צלופח מבושל בטריאקי, שרימפ ואספרגוס בטמפורה, ביצי סלמון וספייסי מיונז",
   "Unagi Ebi Roll",
   "Teriyaki eel, shrimp & asparagus tempura, salmon roe & spicy mayonnaise",
   48
@@ -1611,8 +1611,7 @@ const vegetarianMixMaki = new Menu(
   gunkanVegetarian.descriptionHE,
   "Vegetarian Mix Maki",
   gunkanVegetarian.descriptionEN,
-  0,
-  true
+  0
 );
 
 const ebiFurai = new Menu(
@@ -1636,6 +1635,15 @@ const yasaiKareUdon = new Menu(
   "אטריות קמח חיטה, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף (טבעוני)",
   "Yasai Kare Udon",
   "Stir fried wheat flour noodles,carrot,sprouts & green beans with spicy japanese curry sauce",
+  0,
+  true
+);
+
+const yasaiUdon = new Menu(
+  "יאסאי אודון",
+  "מרק עם אטריות אודון, ברוקולי, שמפיניון, גזר, וואקמה, ביצה חצי קשה ובצל ירוק",
+  "Yasai Udon",
+  "Noodles soup with broccoli, mushrooms, carrot, Wakame seaweed, boiled egg & scallion",
   0,
   true
 );
@@ -1727,7 +1735,7 @@ state.lunch75.types[0].dishes = [
   sakemoriRoll,
   ebiSakekawaTemaki,
 ];
-state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu];
+state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu, yasaiUdon];
 state.lunch75.types[2].dishes = [
   midoriRoll,
   yasaiCocktailRoll,
@@ -1839,3 +1847,67 @@ state.combinations.types[2].dishes = [
   [hotateTobikoRoll, { HE: "4 יח'", EN: "4 pieces" }],
   [hokkaiMaki, { HE: "8 יח'", EN: "8 pieces" }],
 ];
+
+// COCTAILS
+new Cocktail(
+  "סאקה פירות",
+  "קוקטייל על בסיס סאקה ומבחר פירות העונה",
+  "Fruit sake",
+  "Sake based cocktail with seasonal fruits",
+  38
+);
+
+new Cocktail(
+  "Maid in Cuba",
+  "רום לבן, מלפפונים, מיץ לימון טרי ונענע",
+  "Maid in Cuba",
+  "White Rum, cucumber, lemon juice & mint",
+  46
+);
+
+new Cocktail(
+  "גרידי",
+  "קטל ואן ציטרון, פסיפלורה, ג'ינג'ר אייל וכוסברה",
+  "Gridi",
+  "Ketel One Citroen, passion fruit, ginger ale & coriander",
+  48
+);
+
+new Cocktail(
+  "פיצג'רלד",
+  "ג'ין, מיץ לימון טרי, אנגוסטורה וסירופ קנה סוכר",
+  "Fitzgerald",
+  "Gin, lemon juice, Angostura bitters, sugar cane syrup",
+  48
+);
+
+new Cocktail(
+  "מרטיני וואסאבי",
+  "סטולי חלפיניו, סירופ וואסאבי ומיץ לימון טרי",
+  "Wasabi Martini",
+  "Stoli Jalapeno, homemade wasabi syrup & lemon juice",
+  48
+);
+
+new Cocktail(
+  "מרגריטה הדרים",
+  "סטולי תפוז, טקילה רפוסדו, סירופ אשכולית וליים",
+  "Citrus Margarita",
+  "Stoli orange, Tequila Reposado, grapefruit syrup & lime juice",
+  48
+);
+
+new Cocktail(
+  "ביטלג'וס",
+  "ג'ין, טקילה רפוסדו, קיווי ופסיפלורה",
+  "Beetlejuice",
+  "Gin, Tequila Reposado, kiwi & passion fruit",
+  52
+);
+new Cocktail(
+  "מינט ג'ולפ",
+  "ברבן, מיץ לימון טרי, סודה, נענע ואנגוסטורה",
+  "Mint julep",
+  "Bourbon, mint, Angostura bitters, lemon juice & soda",
+  52
+);
