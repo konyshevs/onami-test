@@ -526,15 +526,26 @@ const state = {
     postScriptumEN: "",
     dishes: [],
   },
-  sake: {
-    titleHE: "סאקה",
-    descriptionHE: "",
-    postScriptumHE: "",
-    titleEN: "Sake & Beer",
-    descriptionEN: "",
-    postScriptumEN: "",
-    dishes: [],
-  },
+  sake: [
+    {
+      titleHE: "בירות",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "BEER",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "סאקה ואומשו",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "UMESHU & SAKE",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+  ],
   coctails: {
     titleHE: "קוקטיילים",
     descriptionHE: "",
@@ -678,6 +689,27 @@ class Cocktail extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.coctails.dishes.push(this);
+  }
+}
+
+class Beer extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    state.sake[0].dishes.push(this);
+  }
+}
+
+class Sake extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    state.sake[1].dishes.push(this);
+  }
+}
+
+class SoftDrink extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    state.softDrinks.dishes.push(this);
   }
 }
 
@@ -1910,3 +1942,107 @@ new Cocktail(
   "Bourbon, mint, Angostura bitters, lemon juice & soda",
   52
 );
+
+// BEER
+
+new Beer(
+  "קירין היצ'יבאן (חבית)",
+  "לאגר בהיר 4.9% (יפן)",
+  "Kirin Ichiban (Draft Beer)",
+  "Lager 4.9% (Japan)",
+  28
+);
+new Beer(
+  "וויט אייל היטאצ'ינו",
+  "אייל חיטה 5.5% (יפן)	",
+  "Hitachino White Ale",
+  "Wheat ale 5.5% (Japan)",
+  34
+);
+new Beer(
+  "רד רייס היטאצ'ינו",
+  "אייל אורז אדום 7% (יפן)",
+  "Hitachino Red Rice",
+  "Red rice ale 7% (Japan)",
+  34
+);
+new Beer(
+  "מלכה בלונד",
+  "אייל בהיר  6.5% (ישראל)",
+  "Malka",
+  "Blonde Ale 6.5% (Israel)",
+  36
+);
+new Beer(
+  "לה שוף",
+  "אייל בהיר מסורתי  8% (בלגיה)",
+  "La Chouffe",
+  "Traditional Belgian ale 8% (Belgium)",
+  36
+);
+
+// SAKE
+
+new Sake("קנקן סאקה חם", '(120 מ"ל)', "Hot sake", "(120 ml)", 34);
+new Sake(
+  "אומשו קיוצ'י",
+  'שיכר שזיפים (75/500 מ"ל)',
+  "Umeshu Kiuchi",
+  "(75/500 ml)",
+  [34, 190]
+);
+new Sake(
+  "שיראיוקי ג'ונמאי",
+  'יבש, רך וחלק	 (180 מ"ל)',
+  "Shirayuki Junmai",
+  "(180 ml)",
+  44
+);
+new Sake(
+  "שלג מושלם",
+  'סאקה ניגורי לא מסונן, מתקתק, בעל גוף מלא ודומיננטי בטעמים (300 מ"ל)',
+  "Perfect Snow",
+  "Unfiltered Nigori sake (300 ml)",
+  80
+);
+new Sake(
+  "קיקוסוי ג'ונמאי גינג'ו",
+  'בעל יובש מעודן ונעים (300 מ"ל)',
+  "Kikusui Junmai ginjo",
+  "(300 ml)",
+  95
+);
+new Sake(
+  "שוהו ג'ונמאי דאייגינג'ו",
+  'סאקה יבש, עשיר, עגול ופירותי (300 מ"ל)',
+  "Shuho Junmai daiginjo",
+  "(300 ml)",
+  110
+);
+new Sake(
+  "היאשיבורי ג'ונמאי דאייגינג'ו",
+  'פירותי ומרענן אך יבש ואלגנטי	(720 מ"ל)',
+  "Hiyashibori Junmai daiginjo",
+  "(720 ml)",
+  160
+);
+
+// SOFT DRINKS
+
+new SoftDrink("קוקה קולה", "", "Coca Cola", "", 14);
+new SoftDrink("דיאט קוקה קולה", "", "Diet Coca Cola", "", 14);
+new SoftDrink("קולה קולה זירו", "", "Coca Cola Zero", "", 14);
+new SoftDrink("ספרייט ", "", "Sprite", "", 14);
+new SoftDrink("ספרייט זירו", "", "Sprite Zero", "", 14);
+new SoftDrink("קינלי סודה", "", "Kinley Soda Water", "", 12);
+new SoftDrink("נביעות מים מינרלים", "", "Neviot mineral water", "", 12);
+new SoftDrink("ג'ינג'ר אייל ", "", "Ginger ale", "", 14);
+new SoftDrink("מי טוניק", "", "Tonic water", "", 14);
+new SoftDrink("ג'ינג'ר ביר", "", "Ginger beer", "", 14);
+new SoftDrink("לימונדה", "", "Lemonade", "", 12);
+new SoftDrink("מיץ חמוציות", "", "Cranberry juice", "", 14);
+new SoftDrink("מיץ עגבניות", "", "Tomato juice", "", 14);
+new SoftDrink("סיידר צלול", "", "Apple juice", "", 15);
+new SoftDrink("סיידר מוגז", "", "Sparkling apple juice", "", 15);
+new SoftDrink("סאן פלגרינו", "", "San Pellegrino", "", [14, 28]);
+new SoftDrink("אקווה פנה", "", "Acqua Panna", "", 28);
