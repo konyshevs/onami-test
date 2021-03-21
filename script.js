@@ -105,16 +105,18 @@ $("document").ready(function () {
    </div>`;
   }
 
-  function genMenuMarkup(menuObj) {
-    // <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
+  function genMenuMarkup(menuObj, oneLine = false) {
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
         <div class="menu-description">${menuObj[`description${lang}`]}</div>
+        <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
     </div>
     ${menuObj.dishes
       .map(dish =>
-        dish.titleHE ? genDishMarkup(dish) : genDishMarkupOneLine(dish)
+        !dish.titleHE || oneLine
+          ? genDishMarkupOneLine(dish)
+          : genDishMarkup(dish)
       )
       .join("")}
     <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>  
@@ -128,7 +130,12 @@ $("document").ready(function () {
     </div>
     ${menuObj.types
       .map(
-        type => `<div class="type-name">${type[`title${lang}`]}</div>
+        type => `<div class="type-name">${
+          type[`title${lang}`]
+        }<div class="price-description-seshimi">${
+          menuObj[`price${lang}`] || ""
+        }</div></div>
+        
       ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
       )
       .join("")}`;
@@ -214,6 +221,40 @@ $("document").ready(function () {
     .join("")}`;
   }
 
+  function genWineMarkup(page) {
+    function genWineDishMarkup(dish) {
+      return `<div class="dish">
+     <div class="title-price-section">
+        <div class="dish-title">
+          <div>${dish[`title${lang}`]}</div>
+          ${dish.isVegi ? '<div class="veg"></div>' : ""}
+        </div>
+        <div class="dish-price">${dish.price ? "₪" : ""} ${dish.price}</div>
+     </div>
+      <div class="dish-description">${
+        dish[`description${lang}`]
+      } ${dish.vintage}</div>
+   </div>`;
+    }
+
+    function genWineTypeMarkup(menuObj) {
+      return `
+    <div class="menu-title">
+        <div class="">${menuObj[`title${lang}`]}</div>
+        <div class="menu-description">${menuObj[`description${lang}`]}</div>
+    </div>
+    ${menuObj.types
+      .map(
+        type => `<div class="type-name">${type[`title${lang}`]}</div>
+      ${type.dishes.map(dish => genWineDishMarkup(dish)).join("")}`
+      )
+      .join("")}
+      <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`;
+    }
+
+    return page.map(menu => genWineTypeMarkup(menu)).join("");
+  }
+
   function renderMenuPage(page) {
     dishBlockEl.innerHTML = "";
     if (page === state.seshimi)
@@ -221,7 +262,11 @@ $("document").ready(function () {
         "beforeend",
         genSeshimiMarkup(page)
       );
-
+    if (page === state.softDrinks)
+      return dishBlockEl.insertAdjacentHTML(
+        "beforeend",
+        genMenuMarkup(page, true)
+      );
     if (
       page === state.lunch75 ||
       page === state.lunch90 ||
@@ -234,6 +279,10 @@ $("document").ready(function () {
         "beforeend",
         genCombitionsMarkup(page)
       );
+    if (page === state.wine) {
+      console.log("!");
+      return dishBlockEl.insertAdjacentHTML("beforeend", genWineMarkup(page));
+    }
     if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
@@ -285,10 +334,10 @@ const state = {
   mainDishes: {
     titleHE: "מנות עיקריות",
     descriptionHE: "",
-    postScriptumHE: "",
+    postScriptumHE: "שף <b>עידו כהן צדק</b>",
     titleEN: "Main dishes",
     descriptionEN: "",
-    postScriptumEN: "",
+    postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
     dishes: [],
   },
 
@@ -306,10 +355,12 @@ const state = {
     descriptionHE:
       "סשימי - פילה דג או פרי ים ללא אורז<br> ניגירי - כדור אורז ועליו נתח דג / פרי ים / ירק",
     postScriptumHE: "",
+    priceHE: "סשימי/ניגירי",
     titleEN: "Nigiri / Seshimi",
     descriptionEN:
       "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
     postScriptumEN: "",
+    priceEN: "Nigiri/Seshimi",
     types: [
       { titleHE: "דגי ים", titleEN: "SEA FISH", dishes: [] },
       { titleHE: "מים מתוקים", titleEN: "SWEET WATER FISH", dishes: [] },
@@ -324,12 +375,12 @@ const state = {
       descriptionHE:
         "אינרי - כיס טופו מתקתק במילוי אורז, דג / פרי ים / ירקות<br>גונקן - כדור אורז עטוף באצה במילוי דג / פרי ים / ירקות",
       postScriptumHE: "",
-      // priceHE: "אינרי/גונקן",
+      priceHE: "אינרי/גונקן",
       titleEN: "Gunkan / Inari",
       descriptionEN:
         "Guncan - rice ball wrapped with Nori & filled with fish / seafood / vegetables<br>Inari - sweet tofu pocket filled with rice, fish / seafood / vegetables",
       postScriptumEN: "",
-      // priceEN: "inari/gunkan",
+      priceEN: "Gunkan/Inari",
       dishes: [],
     },
     {
@@ -517,15 +568,58 @@ const state = {
       },
     ],
   },
-  wine: {
-    titleHE: "יינות",
-    descriptionHE: "",
-    postScriptumHE: "",
-    titleEN: "Wine",
-    descriptionEN: "",
-    postScriptumEN: "",
-    dishes: [],
-  },
+  wine: [
+    {
+      titleHE: "יין בכוסות",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "WINE BY THE GLASS",
+      descriptionEN: "",
+      postScriptumEN: "",
+      types: [
+        {
+          titleHE: "לבן",
+          titleEN: "White",
+          dishes: [],
+        },
+        {
+          titleHE: "מבעבע ורוזה",
+          titleEN: "Sparkling & Rose",
+          dishes: [],
+        },
+        {
+          titleHE: "אדום",
+          titleEN: "Red",
+          dishes: [],
+        },
+      ],
+    },
+    // {
+    //   titleHE: "יין בבקבוק",
+    //   descriptionHE: "",
+    //   postScriptumHE: "",
+    //   titleEN: "WINE BY THE BOTTLE",
+    //   descriptionEN: "",
+    //   postScriptumEN: "",
+    //   types: [
+    //     {
+    //       titleHE: "לבן",
+    //       titleEN: "White",
+    //       dishes: [],
+    //     },
+    //     {
+    //       titleHE: "מבעבע ורוזה",
+    //       titleEN: "Sparkling & Rose",
+    //       dishes: [],
+    //     },
+    //     {
+    //       titleHE: "אדום",
+    //       titleEN: "Red",
+    //       dishes: [],
+    //     },
+    //   ],
+    // },
+  ],
   sake: [
     {
       titleHE: "בירות",
@@ -713,6 +807,36 @@ class SoftDrink extends Menu {
   }
 }
 
+// Classes of Wine
+
+class Wine extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    this.vintage = vintage;
+  }
+}
+
+class GlassWineWhite extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[0].types[0].dishes.push(this);
+  }
+}
+
+class GlassWineRose extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[0].types[1].dishes.push(this);
+  }
+}
+
+class GlassWineRed extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[0].types[2].dishes.push(this);
+  }
+}
+
 // COLD APPETISERS
 
 const wakameSalad = new ColdAppetiser(
@@ -777,7 +901,7 @@ const maguroYukke = new ColdAppetiser(
   "מגורו יוקה",
   "טרטר טונה מתובל בסויה, עירית וחלמון ביצת שליו נא",
   "Maguro Yukke",
-  "Tuna tartar seasoned with garlic, chive & soy sauce, served with quail egg yolk",
+  "Tuna tartar seasoned with chive & soy sauce, served with quail egg yolk",
   68
 );
 
@@ -833,9 +957,9 @@ const dish = new HotAppetiser(
 
 const zakanaButterShoyu = new HotAppetiser(
   "סקאנה באטר שואיו",
-  "נתחי בורי בחמאה, שום, סויה, סאקה ומירי",
+  "נתחי בורי בחמאה, שום, סויה, סאקה ומירין",
   "Zakana Butter Shoyu",
-  "Sautéed grey mullet with soy sauce, butter & garlic",
+  "Sautéed grey mullet with soy sauce, sake, mirin, butter & garlic",
   52
 );
 
@@ -843,7 +967,7 @@ const kaisenButterShoyu = new HotAppetiser(
   "קאיסן באטר שואיו",
   "פירות ים בחמאה, שום, סויה, סאקה ומירין",
   "Kaisen Butter Shoyu",
-  "Sautéed sea food with soy sauce, butter & garlic",
+  "Sautéed sea food with soy sauce, sake, mirin, butter & garlic",
   58
 );
 
@@ -851,7 +975,7 @@ const kuroUdon = new HotAppetiser(
   "קורו אודון",
   "אטריות אודון שחורות עם שרימפ בחמאה, צ'ילי ושום",
   "Kuro Udon",
-  "Black udon noodles with shrimps, butter, chili & garlic",
+  "Black udon noodles with shrimp, butter, chili & garlic",
   58
 );
 
@@ -1120,7 +1244,7 @@ const gunkanVegetarian = new InariGunkan(
   "צמחוני",
   "שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, ספייסי מיונז וטריאקי",
   "Vegetarian",
-  "Inari tempura, Shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
+  "Shiitake, avocado, cucumber, carrot, scallion, asparagus tempura, spicy mayonnaise & Teriyaki",
   [15, 19]
 );
 
@@ -1188,10 +1312,10 @@ const gunkanKurumaMaguro = new InariGunkan(
   ["-", 36]
 );
 
-const gunkanNemaGaki = new InariGunkan(
+const gunkanNamaGaki = new InariGunkan(
   "נמה גקי",
   "אוייסטר",
-  "Nema Gaki",
+  "Nama Gaki",
   "Oyster",
   [36, 40]
 );
@@ -1328,7 +1452,7 @@ const sakekawaMaki = new Hosomaki(
   "סאקה קאווה מאקי",
   "סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ומלפפון (לא קריספי)",
   "Sakekawa Maki",
-  "Chopped salmon skin, mayonnaise, scallion & cucumber (not crispy)",
+  "Chopped salmon skin, spicy mayonnaise, scallion & cucumber (not crispy)",
   25
 );
 
@@ -1666,7 +1790,7 @@ const yasaiKareUdon = new Menu(
   "יאסאי קארה אודון",
   "אטריות קמח חיטה, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף (טבעוני)",
   "Yasai Kare Udon",
-  "Stir fried wheat flour noodles,carrot,sprouts & green beans with spicy japanese curry sauce",
+  "Stir fried wheat flour noodles, carrot, sprouts & green beans with spicy japanese curry sauce",
   0,
   true
 );
@@ -1853,30 +1977,33 @@ const combiTypeGunkan = { HE: "גונקן", EN: "Gunkan" };
 const combiTypeNigiri = { HE: "ניגירי", EN: "Nigiri" };
 
 state.combinations.types[0].dishes = [
-  [specialVegitarian, { HE: "2 יח'", EN: "2 pieces" }],
-  [gunkanYasay, { HE: "2 יח'", EN: "2 pieces", type: combiTypeGunkan }],
-  [tamago, { HE: "2 יח'", EN: "2 pieces", type: combiTypeNigiri }],
-  [midoriRoll, { HE: "4 יח'", EN: "4 pieces" }],
-  [kanpyoTamagoMaki, { HE: "8 יח'", EN: "8 pieces" }],
+  [specialVegitarian, { HE: "2&nbspיח'", EN: "2&nbsppieces" }],
+  [gunkanYasay, { HE: "2&nbspיח'", EN: "2&nbsppieces", type: combiTypeGunkan }],
+  [tamago, { HE: "2&nbspיח'", EN: "2&nbsppieces", type: combiTypeNigiri }],
+  [midoriRoll, { HE: "4&nbspיח'", EN: "4&nbsppieces" }],
+  [kanpyoTamagoMaki, { HE: "8&nbspיח'", EN: "8&nbsppieces" }],
 ];
 
 state.combinations.types[1].dishes = [
-  [specialSake, { HE: "2 יח'", EN: "2 pieces" }],
+  [specialSake, { HE: "2&nbspיח'", EN: "2&nbsppieces" }],
   [
     gunkanShiroZakanaMix,
-    { HE: "2 יח'", EN: "2 pieces", type: combiTypeGunkan },
+    { HE: "2&nbspיח'", EN: "2&nbsppieces", type: combiTypeGunkan },
   ],
-  [kurodai, { HE: "2 יח'", EN: "2 pieces", type: combiTypeNigiri }],
-  [shiroZakanaRoll, { HE: "4 יח'", EN: "4 pieces" }],
-  [spicyTekkaMaki, { HE: "8 יח'", EN: "8 pieces" }],
+  [kurodai, { HE: "2&nbspיח'", EN: "2&nbsppieces", type: combiTypeNigiri }],
+  [shiroZakanaRoll, { HE: "4&nbspיח'", EN: "4&nbsppieces" }],
+  [spicyTekkaMaki, { HE: "8&nbspיח'", EN: "8&nbsppieces" }],
 ];
 
 state.combinations.types[2].dishes = [
-  [specialKuruma, { HE: "2 יח'", EN: "2 pieces" }],
-  [gunkanSakeMix, { HE: "2 יח'", EN: "2 pieces", type: combiTypeGunkan }],
-  [unagi, { HE: "2 יח'", EN: "2 pieces", type: combiTypeNigiri }],
-  [hotateTobikoRoll, { HE: "4 יח'", EN: "4 pieces" }],
-  [hokkaiMaki, { HE: "8 יח'", EN: "8 pieces" }],
+  [specialKuruma, { HE: "2&nbspיח'", EN: "2&nbsppieces" }],
+  [
+    gunkanSakeMix,
+    { HE: "2&nbspיח'", EN: "2&nbsppieces", type: combiTypeGunkan },
+  ],
+  [unagi, { HE: "2&nbspיח'", EN: "2&nbsppieces", type: combiTypeNigiri }],
+  [hotateTobikoRoll, { HE: "4&nbspיח'", EN: "4&nbsppieces" }],
+  [hokkaiMaki, { HE: "8&nbspיח'", EN: "8&nbsppieces" }],
 ];
 
 // COCTAILS
@@ -1914,9 +2041,9 @@ new Cocktail(
 
 new Cocktail(
   "מרטיני וואסאבי",
-  "סטולי חלפיניו, סירופ וואסאבי ומיץ לימון טרי",
+  "סטולי, סירופ וואסאבי ומיץ לימון טרי",
   "Wasabi Martini",
-  "Stoli Jalapeno, homemade wasabi syrup & lemon juice",
+  "Stoli, homemade wasabi syrup & lemon juice",
   48
 );
 
@@ -2046,3 +2173,71 @@ new SoftDrink("סיידר צלול", "", "Apple juice", "", 15);
 new SoftDrink("סיידר מוגז", "", "Sparkling apple juice", "", 15);
 new SoftDrink("סאן פלגרינו", "", "San Pellegrino", "", [14, 28]);
 new SoftDrink("אקווה פנה", "", "Acqua Panna", "", 28);
+
+// WINE
+
+new GlassWineWhite(
+  "סוביניון בלאן",
+  "וילה מריה, ניו-זילנד",
+  "Sauvignon Blanc",
+  "Villa Maria, New Zealand",
+  38,
+  2019
+);
+new GlassWineWhite(
+  "גוורצטרמינר",
+  "פפאפנהיים, צרפת",
+  "Gewurztraminer",
+  "Pfaffenheim, France",
+  44,
+  2016
+);
+new GlassWineWhite(
+  "שנסון",
+  "קלו דה גת , ישראל",
+  "Chanson",
+  "Clos De Gat, Israel",
+  48,
+  2020
+);
+
+new GlassWineRose(
+  "פרוסקו",
+  "מאסקיו דיי קאבליירי, איטליה",
+  "Prosecco",
+  "Maschio Dei Cavalieri, Italy",
+  36
+);
+new GlassWineRose(
+  "רוזה",
+  "וינייה דה ניקול,פול מאס,  צרפת",
+  "Rose",
+  "Vignes De Nicole, Paul Mas, France",
+  40,
+  2018
+);
+
+new GlassWineRed(
+  "מסע ישראלי",
+  "ויתקין, ישראל",
+  "Israeli Journey",
+  "Vitkin, Israel",
+  38,
+  2018
+);
+new GlassWineRed(
+  "מאלבק",
+  "אסטייט, פול מאס, צרפת",
+  "Malbec",
+  "Estate, Paul Mas, France",
+  42,
+  2017
+);
+new GlassWineRed(
+  "סירה",
+  "הראל, קלו דה גת,  ישראל",
+  "Syrah",
+  "Har'el, Clos De Gat, Israel",
+  52,
+  2016
+);

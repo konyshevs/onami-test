@@ -146,13 +146,19 @@ main {
   padding-top: 30px;
 }
 
-/* .price-description {
+.price-description {
   text-align: end;
   color: #000000;
   font-size: 12px;
-} */
+}
+
+.price-description-seshimi {
+  font-weight: normal;
+}
 
 .type-name {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid black;
   font-weight: bold;
   font-style: italic;
@@ -211,6 +217,7 @@ main {
 }
 
 .lunch-sushi-type {
+  font-size: 17px;
   font-weight: bold;
   font-style: italic;
   padding: 10px 0 0px 0;
