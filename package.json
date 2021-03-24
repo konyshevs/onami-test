@@ -1,0 +1,27 @@
+{
+  "name": "onami-web",
+  "version": "1.0.0",
+  "description": "Onami restourant menu application",
+  "main": "index.html",
+  "scripts": {
+    "build": "parcel build index.html",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konyshevs/onami-menu-app.git"
+  },
+  "author": "konyshevs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/konyshevs/onami-menu-app/issues"
+  },
+  "homepage": "https://onami.netlify.app",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-webmanifest": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.2"
+  }
+}

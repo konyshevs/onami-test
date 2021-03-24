@@ -1,2 +1,5 @@
-logo
-versions
+
+node_modules
+dist
+.parcel-cache
+.prettierrc

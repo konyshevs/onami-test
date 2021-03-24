@@ -1,3 +1,5 @@
+import * as $ from "jquery";
+
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
@@ -1035,9 +1037,9 @@ const zakanaChirashi = new MainDish(
 
 const kurodaiSugatayaki = new MainDish(
   "קורודאי סוגטאיאקי",
-  "דניס שלם על הגריל במלח מוגש בליווי רוטב פונזו ואורז שום",
+  "דניס שלם על הגריל במלח מוגש בליווי רוטב פונזו ואורז מאודה",
   "Kurodai Sugatayaki",
-  "Grilled & salted sea bream served with minced radish, ponzu sauce & garlic rice",
+  "Grilled & salted sea bream served with minced radish, ponzu sauce & steamed rice",
   116
 );
 
@@ -1725,7 +1727,7 @@ new IrodoriIngredient("", "פולי וואסאבי קראנץ‘", "", "Wasabi c
 new IrodoriIngredient("", "אבוקדו", "", "Avocado", 6);
 new IrodoriIngredient("", "ביצי דג דאון", "", "Flying fish roe", 12);
 new IrodoriIngredient("", "סלמון", "", "Salmon fillet", 16);
-new IrodoriIngredient("", "דג לבן", "", "White fish", 20);
+new IrodoriIngredient("", "דניס", "", "Sea bream fish", 20);
 new IrodoriIngredient("", "טונה", "", "Tuna fillet", 26);
 
 //LUNCH MENU
@@ -1813,9 +1815,9 @@ const toriKareUdon = new Menu(
 
 const wakadoriGrill = new Menu(
   "וואקאדורי גריל",
-  "פרגית בגריל עם בצל מוקפץ ואורז שום",
+  "פרגית בגריל עם בצל מוקפץ ואורז מאודה",
   "Wakadori Grill",
-  "Grilled spring chicken, served with sautéed onion & garlic rice",
+  "Grilled spring chicken, served with sautéed onion & steamed rice",
   0
 );
 
@@ -2182,7 +2184,7 @@ new GlassWineWhite(
   "Sauvignon Blanc",
   "Villa Maria, New Zealand",
   38,
-  2019
+  2020
 );
 new GlassWineWhite(
   "גוורצטרמינר",
@@ -2190,7 +2192,7 @@ new GlassWineWhite(
   "Gewurztraminer",
   "Pfaffenheim, France",
   44,
-  2016
+  2017
 );
 new GlassWineWhite(
   "שנסון",
@@ -2206,7 +2208,8 @@ new GlassWineRose(
   "מאסקיו דיי קאבליירי, איטליה",
   "Prosecco",
   "Maschio Dei Cavalieri, Italy",
-  36
+  36,
+  ""
 );
 new GlassWineRose(
   "רוזה",
@@ -2214,7 +2217,7 @@ new GlassWineRose(
   "Rose",
   "Vignes De Nicole, Paul Mas, France",
   40,
-  2018
+  2019
 );
 
 new GlassWineRed(
@@ -2223,7 +2226,7 @@ new GlassWineRed(
   "Israeli Journey",
   "Vitkin, Israel",
   38,
-  2018
+  2019
 );
 new GlassWineRed(
   "מאלבק",
@@ -2231,7 +2234,7 @@ new GlassWineRed(
   "Malbec",
   "Estate, Paul Mas, France",
   42,
-  2017
+  2019
 );
 new GlassWineRed(
   "סירה",
