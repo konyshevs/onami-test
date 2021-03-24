@@ -1,4 +1,5 @@
-import * as $ from "jquery";
+import $ from "jquery";
+import "core-js/stable";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
