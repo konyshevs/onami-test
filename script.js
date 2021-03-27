@@ -67,6 +67,7 @@ $("document").ready(function () {
   $("#nav-container").on("click", function (e) {
     if (e.target.classList.contains("nav-butt")) {
       renderMenuPage(state[e.target.dataset.link]);
+      document.body.scrollIntoView();
     }
   });
 
