@@ -4,6 +4,13 @@ import "core-js/stable";
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
+  // css colors
+  const color1 = getComputedStyle(document.documentElement).getPropertyValue(
+    "--color1"
+  );
+  const color2 = getComputedStyle(document.documentElement).getPropertyValue(
+    "--color2"
+  );
 
   function init() {
     // Меняет направление отступа для английской версии для большого экрана
@@ -50,12 +57,12 @@ $("document").ready(function () {
     const width = $("#nav").css("width");
     if (width == "0px") {
       $("#nav").animate({ width: "150px" }, 200);
-      $("#menu-butt").css({ color: "black", "background-color": "white" });
+      $("#menu-butt").css({ color: color1, "background-color": color2 });
       $("#nav-container").css({ display: "flex" });
       $("html,body").css("overflow", "hidden");
     } else {
       $("#nav").animate({ width: 0 }, 200);
-      $("#menu-butt").css({ color: "white", "background-color": "black" });
+      $("#menu-butt").css({ color: color2, "background-color": color1 });
       setTimeout(function () {
         $("#nav-container").css({ display: "none" });
       }, 200);
@@ -284,7 +291,6 @@ $("document").ready(function () {
         genCombitionsMarkup(page)
       );
     if (page === state.wine) {
-      console.log("!");
       return dishBlockEl.insertAdjacentHTML("beforeend", genWineMarkup(page));
     }
     if (Array.isArray(page))
@@ -382,7 +388,7 @@ const state = {
       priceHE: "אינרי/גונקן",
       titleEN: "Gunkan / Inari",
       descriptionEN:
-        "Guncan - rice ball wrapped with Nori & filled with fish / seafood / vegetables<br>Inari - sweet tofu pocket filled with rice, fish / seafood / vegetables",
+        "Gunkan - rice ball wrapped with Nori & filled with fish / seafood / vegetables<br>Inari - sweet tofu pocket filled with rice, fish / seafood / vegetables",
       postScriptumEN: "",
       priceEN: "Gunkan/Inari",
       dishes: [],
