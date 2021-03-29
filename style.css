@@ -182,6 +182,7 @@ main {
   font-style: italic;
   /* font-size: 17px; */
   padding: 10px 0 5px 0;
+  color: var(--heading-color);
 }
 
 .dish {
