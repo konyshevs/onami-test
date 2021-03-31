@@ -768,9 +768,9 @@ const zakanaChirashi = new MainDish(
 
 const kurodaiSugatayaki = new MainDish(
   "קורודאי סוגטאיאקי",
-  "דניס שלם על הגריל במלח מוגש בליווי רוטב פונזו ואורז מאודה",
+  "דניס שלם על הגריל במלח מוגש בליווי רוטב פונזו ואורז שום",
   "Kurodai Sugatayaki",
-  "Grilled & salted sea bream served with minced radish, ponzu sauce & steamed rice",
+  "Grilled & salted sea bream served with minced radish, ponzu sauce & garlic rice",
   116
 );
 
@@ -808,11 +808,11 @@ const matchaBrulee = new Dessert(
 );
 
 const lemonPineappleCream = new Dessert(
-  "אננס לימון",
-  "קרם אננס, קציפת לימון וקרוטוני בננה פריכים (ללא גלוטן)",
-  "Lemon & Pineapple Cream",
-  "Pineapple cream on a bed of crispy banana croutons, topped with Lemon foam (Gluten free)",
-  44
+  "טארט לימון",
+  "קרם לימון ומרנג איטלקי עם שמנת חמוצה ודובדבני אמרנה",
+  "Lemon Tart",
+  "Lemon cream, Italian maringue, sour cream & amarena cherries",
+  46
 );
 
 // SESHIMI
@@ -1546,9 +1546,9 @@ const toriKareUdon = new Menu(
 
 const wakadoriGrill = new Menu(
   "וואקאדורי גריל",
-  "פרגית בגריל עם בצל מוקפץ ואורז מאודה",
+  "פרגית בגריל עם בצל מוקפץ ואורז שום",
   "Wakadori Grill",
-  "Grilled spring chicken, served with sautéed onion & steamed rice",
+  "Grilled spring chicken, served with sautéed onion & garlic rice",
   0
 );
 
