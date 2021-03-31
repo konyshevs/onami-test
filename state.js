@@ -2066,13 +2066,7 @@ new WineRose(
   155,
   2019
 );
-new WineRose(
-  "מואט & שנדו",
-  'שמפיין, צרפת (375 מ"ל)',
-  "Moet & Chandon",
-  "Champagne, France (375 ml)",
-  275
-);
+
 new WineRose(
   "בולינג'ר",
   "ספיישל קווה, שמפיין, צרפת",
