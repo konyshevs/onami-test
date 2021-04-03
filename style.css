@@ -8,6 +8,7 @@
 
 :root {
   --color1: #545765;
+  --color1-ligther: rgb(129, 133, 150);
   --color1-opacity: #54576560;
   --color2: white;
   --heading-color: #50c878;
@@ -126,13 +127,14 @@ header .container {
 .nav-butt {
   cursor: pointer;
   margin: 0;
-  padding: 0 20px;
+  padding: 0 20px 0 10px;
+  font-size: 18px;
 }
 
 .nav-butt:hover {
   transition: 0.2s;
-  background-color: var(--color2);
-  color: var(--color1);
+  background-color: var(--color1-ligther);
+  /* color: var(--color1); */
 }
 
 main {

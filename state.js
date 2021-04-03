@@ -807,7 +807,7 @@ const matchaBrulee = new Dessert(
   46
 );
 
-const lemonPineappleCream = new Dessert(
+const lemonTart = new Dessert(
   "טארט לימון",
   "קרם לימון ומרנג איטלקי עם שמנת חמוצה ודובדבני אמרנה",
   "Lemon Tart",
