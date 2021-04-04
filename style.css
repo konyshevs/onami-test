@@ -105,14 +105,12 @@ header .container {
   background-color: var(--color1);
   height: 1000px;
   width: 150px;
-  /* text-align: right; */
   z-index: 2;
-  /* overflow: visible; */
   padding-top: 10px;
 }
 
 #nav div {
-  width: 120px;
+  width: 110px;
 }
 
 .nav-cat-title {
@@ -127,7 +125,7 @@ header .container {
 .nav-butt {
   cursor: pointer;
   margin: 0;
-  padding: 0 20px 0 10px;
+  padding: 0 20px 0 20px;
   font-size: 18px;
 }
 

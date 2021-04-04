@@ -1,7 +1,6 @@
 import $ from "jquery";
 import "core-js/stable";
 import { state } from "./state.js";
-console.log(state);
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -14,6 +13,15 @@ $("document").ready(function () {
     "--color2"
   );
 
+  const controlHashChange = function () {
+    const id = window.location.hash.slice(1);
+
+    if (!id) return renderMenuPage(state.appetisers);
+
+    renderMenuPage(state[id]);
+    document.body.scrollIntoView();
+  };
+
   function init() {
     // Меняет направление отступа для английской версии для большого экрана
     if (lang === "EN" && window.innerWidth > 480)
@@ -25,7 +33,9 @@ $("document").ready(function () {
       if (e.currentTarget.innerWidth < 480 && lang === "EN")
         dishBlockEl.style.margin = "45px 0 0 0";
     });
-    renderMenuPage(state.appetisers);
+    controlHashChange();
+    window.addEventListener("hashchange", controlHashChange, false);
+    // renderMenuPage(state.appetisers);
   }
 
   function shake(thing) {
@@ -73,12 +83,12 @@ $("document").ready(function () {
   });
 
   //MENU BTNS
-  $("#nav-container").on("click", function (e) {
-    if (e.target.classList.contains("nav-butt")) {
-      renderMenuPage(state[e.target.dataset.link]);
-      document.body.scrollIntoView();
-    }
-  });
+  // $("#nav-container").on("click", function (e) {
+  //   if (e.target.classList.contains("nav-butt")) {
+  //     renderMenuPage(state[e.target.dataset.link]);
+  //     document.body.scrollIntoView();
+  //   }
+  // });
 
   // MENU RENDERING
   function genDishMarkup(dish) {
