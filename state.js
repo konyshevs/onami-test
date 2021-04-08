@@ -680,12 +680,20 @@ const agedashiDoufu = new HotAppetiser(
   [36, 44]
 );
 
-const dish = new HotAppetiser(
-  "אבי/ איקה טמפורה",
-  "שרימפ/ קלמארי טמפורה בליווי רוטב טנצויו חם, צנון וג'ינג'ר כתושים",
-  "Ebi/Ika Tempura",
-  "Shrimp/calamari tempura served with tentsuyu sauce, minced radish & ginger",
+const ebiTempura = new HotAppetiser(
+  "אבי טמפורה",
+  "שרימפ טמפורה בליווי רוטב טנצויו חם, צנון וג'ינג'ר כתושים",
+  "Ebi Tempura",
+  "Shrimp tempura served with tentsuyu sauce, minced radish & ginger",
   38
+);
+
+const ikaGeso = new HotAppetiser(
+  "איקה ג׳סו",
+  "ראשי קלמארי פריכים עם מיונז יפני",
+  "Ika Geso",
+  "Crispy squid tentacles",
+  44
 );
 
 const zakanaButterShoyu = new HotAppetiser(
@@ -809,9 +817,9 @@ const matchaBrulee = new Dessert(
 
 const lemonTart = new Dessert(
   "טארט לימון",
-  "קרם לימון ומרנג איטלקי עם שמנת חמוצה ודובדבני אמרנה",
+  "טארט לימון, שמנת חמוצה ודובדבן אמרנה",
   "Lemon Tart",
-  "Lemon cream, Italian maringue, sour cream & amarena cherries",
+  "Lemon tart, sour cream & amarena cherry",
   46
 );
 
@@ -1508,14 +1516,6 @@ const ebiFurai = new Menu(
   "שרימפ פריך בציפוי פאנקו בליווי מיונז יפני",
   "Ebi Furai",
   "Crispy shrimp coated in panko served with mayonnaise",
-  0
-);
-
-const ebiTempura = new Menu(
-  "אבי טמפורה",
-  "שרימפ טמפורה בליווי רוטב טנצויו חם, צנון וג‘ינג‘ר כתושים",
-  "Ebi Tempura",
-  "Shrimp tempura served with tentsuyu sauce, minced radish & ginger",
   0
 );
 

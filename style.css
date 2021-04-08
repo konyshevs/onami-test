@@ -129,6 +129,11 @@ header .container {
   font-size: 18px;
 }
 
+.nav-btn-active {
+  transition: 0.2s;
+  background-color: var(--color1-ligther);
+}
+
 .nav-butt:hover {
   transition: 0.2s;
   background-color: var(--color1-ligther);
