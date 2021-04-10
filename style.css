@@ -130,7 +130,7 @@ header .container {
 }
 
 .nav-btn-active {
-  transition: 0.2s;
+  /* transition: 0.2s; */
   background-color: var(--color1-ligther);
 }
 

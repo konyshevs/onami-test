@@ -14,9 +14,12 @@ $("document").ready(function () {
   );
 
   const controlHashChange = function () {
-    const id = window.location.hash.slice(1);
-
-    if (!id) return renderMenuPage(state.appetisers);
+    let id = window.location.hash.slice(1);
+    if (!id) id = "appetisers";
+    document
+      .querySelectorAll(".nav-butt")
+      .forEach(el => el.classList.remove("nav-btn-active"));
+    document.getElementById(`${id}-btn`).classList.add("nav-btn-active");
 
     renderMenuPage(state[id]);
     document.body.scrollIntoView();
