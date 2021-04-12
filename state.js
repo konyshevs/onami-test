@@ -606,13 +606,13 @@ const bottargaSoba = new ColdAppetiser(
   58
 );
 
-const iwaGaki = new ColdAppetiser(
-  "איוואגקי",
-  "אוייסטר מוגש על קרח כתוש בליווי רוטב ספייסי פונזו",
-  "Iwa Gaki",
-  "Fresh oyster on crushed ice served with spicy ponzu sauce",
-  36
-);
+// const iwaGaki = new ColdAppetiser(
+//   "איוואגקי",
+//   "אוייסטר מוגש על קרח כתוש בליווי רוטב ספייסי פונזו",
+//   "Iwa Gaki",
+//   "Fresh oyster on crushed ice served with spicy ponzu sauce",
+//   36
+// );
 
 const boraYuzuAburaDoushi = new ColdAppetiser(
   "בורה יוזו אבורה דושי",
@@ -1053,13 +1053,13 @@ const gunkanKurumaMaguro = new InariGunkan(
   ["-", 36]
 );
 
-const gunkanNamaGaki = new InariGunkan(
-  "נמה גקי",
-  "אוייסטר",
-  "Nama Gaki",
-  "Oyster",
-  [36, 40]
-);
+// const gunkanNamaGaki = new InariGunkan(
+//   "נמה גקי",
+//   "אוייסטר",
+//   "Nama Gaki",
+//   "Oyster",
+//   [36, 40]
+// );
 
 // INARI SPECIAL
 const specialYasaiCocktail = new InariSpecial(
