@@ -1,10 +1,10 @@
 // STATE
 
 const lunchDescriptionHE =
-  "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן/ אדום/ רוזה- 28 ₪";
+  "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן / אדום / רוזה- 28 ₪";
 
 const lunchDescriptionEN =
-  "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red/ white/ rose 28 ₪";
+  "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 28 ₪<br>wine of the month red / white / rose 28 ₪";
 
 export const state = {
   appetisers: [
