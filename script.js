@@ -13,6 +13,10 @@ $("document").ready(function () {
     "--color2"
   );
 
+  const headingColor = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--heading-color");
+
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
     if (!id) id = "appetisers";
@@ -77,7 +81,7 @@ $("document").ready(function () {
       $("html,body").css("overflow", "hidden");
     } else {
       $("#nav").animate({ width: 0 }, 200);
-      $("#menu-butt").css({ color: color2, "background-color": color1 });
+      $("#menu-butt").css({ color: color2, "background-color": headingColor });
       setTimeout(function () {
         $("#nav-container").css({ display: "none" });
       }, 200);
