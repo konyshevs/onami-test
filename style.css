@@ -8,7 +8,7 @@
 
 :root {
   --color1: #545765;
-  --color1-ligther: rgb(129, 133, 150);
+  --color1-ligther: #73778a;
   --color1-opacity: #54576560;
   --color2: white;
   --heading-color: #50c878;
@@ -33,7 +33,7 @@ header {
   position: fixed;
   width: 100%;
   background: var(--color1);
-  box-shadow: 0 2px 10px var(--color1);
+  /* box-shadow: 0 2px 10px var(--color1); */
 }
 
 header .container {
@@ -102,9 +102,10 @@ header .container {
 }
 
 #nav {
+  overflow-y: auto;
   font-variant: small-caps;
   background-color: var(--color1);
-  height: 1000px;
+  height: 100vh;
   width: 150px;
   z-index: 2;
   padding-top: 10px;
@@ -112,6 +113,10 @@ header .container {
 
 #nav div {
   width: 110px;
+}
+
+nav {
+  padding-bottom: 100px;
 }
 
 .nav-cat-title {

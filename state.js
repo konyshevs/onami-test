@@ -178,10 +178,10 @@ export const state = {
     ],
   },
   lunch75: {
-    titleHE: "עסקית 75 ₪",
+    titleHE: "עסקית 80 ₪",
     descriptionHE: lunchDescriptionHE,
     postScriptumHE: "",
-    titleEN: "Lunch 75 ₪",
+    titleEN: "Lunch 80 ₪",
     descriptionEN: lunchDescriptionEN,
     postScriptumEN: "",
     types: [
@@ -242,10 +242,10 @@ export const state = {
     ],
   },
   lunch105: {
-    titleHE: "עסקית 105 ₪",
+    titleHE: "עסקית 110 ₪",
     descriptionHE: lunchDescriptionHE,
     postScriptumHE: "",
-    titleEN: "Lunch 105 ₪",
+    titleEN: "Lunch 110 ₪",
     descriptionEN: lunchDescriptionEN,
     postScriptumEN: "",
     types: [
@@ -572,21 +572,21 @@ class GlassWineRed extends Wine {
 
 // COLD APPETISERS
 
-const wakameSalad = new ColdAppetiser(
-  "סלט וואקאמה",
-  "אצות וואקאמה, צנונית, מלפפון ובצל ברוטב וואפו (ניתן לבקש ללא גלוטן)",
-  "Wakame Salad",
-  "Wakame seaweed, radish, cucumber & onion served with Wafu sauce",
-  24,
-  true
-);
+// const wakameSalad = new ColdAppetiser(
+//   "סלט וואקאמה",
+//   "אצות וואקאמה, צנונית, מלפפון ובצל ברוטב וואפו (ניתן לבקש ללא גלוטן)",
+//   "Wakame Salad",
+//   "Wakame seaweed, radish, cucumber & onion served with Wafu sauce",
+//   24,
+//   true
+// );
 
 const harusameSalad = new ColdAppetiser(
   "סלט הרוסאמה",
   "אטריות תפוחי אדמה, מלפפון, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש ללא גלוטן)",
   "Harusame Salad",
   "Cold potato noodles, cucumber, scallion & salmon served with Wafu sauce",
-  32
+  34
 );
 
 const midoriSalad = new ColdAppetiser(
@@ -594,7 +594,7 @@ const midoriSalad = new ColdAppetiser(
   "סלט עלי חסה, רוקט, צנונית, מלפפון, תפוח, בצל ושקדים קלויים ברוטב למון ג'ויו (טבעוני, ללא גלוטן)",
   "Midori Salad",
   "Lettuce, rocket leaves, radish, cucumber, apple, onion, roasted almonds served with lemon jouyo sauce",
-  52,
+  56,
   true
 );
 
@@ -655,14 +655,14 @@ const wafuYukke = new ColdAppetiser(
 );
 
 // HOT APPETISERS
-const spicyEdamame = new HotAppetiser(
-  "ספייסי אדה ממה",
-  "פולי סויה חלוטים ומומלחים עם צ'ילי גרוס (טבעוני ללא גלוטן)",
-  "Spicy Edamame",
-  "",
-  26,
-  true
-);
+// const spicyEdamame = new HotAppetiser(
+//   "ספייסי אדה ממה",
+//   "פולי סויה חלוטים ומומלחים עם צ'ילי גרוס (טבעוני ללא גלוטן)",
+//   "Spicy Edamame",
+//   "",
+//   26,
+//   true
+// );
 
 const omisoShiru = new HotAppetiser(
   "אומיסו שירו",
@@ -685,7 +685,7 @@ const ebiTempura = new HotAppetiser(
   "שרימפ טמפורה בליווי רוטב טנצויו חם, צנון וג'ינג'ר כתושים",
   "Ebi Tempura",
   "Shrimp tempura served with tentsuyu sauce, minced radish & ginger",
-  38
+  42
 );
 
 const ikaGeso = new HotAppetiser(
@@ -701,7 +701,7 @@ const zakanaButterShoyu = new HotAppetiser(
   "נתחי בורי בחמאה, שום, סויה, סאקה, ג'ינג'ר ומירין",
   "Zakana Butter Shoyu",
   "Sautéed grey mullet with soy sauce, sake, mirin, butter, garlic & ginger",
-  52
+  56
 );
 
 const kaisenButterShoyu = new HotAppetiser(
@@ -709,7 +709,7 @@ const kaisenButterShoyu = new HotAppetiser(
   "פירות ים בחמאה, שום, סויה, סאקה, ג'ינג'ר ומירין",
   "Kaisen Butter Shoyu",
   "Sautéed sea food with soy sauce, sake, mirin, butter, garlic & ginger",
-  58
+  62
 );
 
 const kuroUdon = new HotAppetiser(
@@ -726,7 +726,7 @@ const negima = new Skewer(
   "פרגית עם בצל ירוק",
   "Negima",
   "Spring chicken & scallion",
-  24
+  28
 );
 
 const sakeYaki = new Skewer(
@@ -1519,6 +1519,15 @@ const ebiFurai = new Menu(
   0
 );
 
+const yasaiGomaItame = new Menu(
+  "יאסאי גומה איטמה",
+  "ירקות העונה וטופו מוקפצים עם סאקה ומוגשים עם רוטב גומה אאה",
+  "Yasai Goma Itame",
+  "Vegetables and tofu stir fried with sake. Served with goma sauce",
+  0,
+  true
+);
+
 const yasaiKareUdon = new Menu(
   "יאסאי קארה אודון",
   "אטריות קמח חיטה, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף (טבעוני)",
@@ -1616,14 +1625,19 @@ const lunchSushiTypeGunkan = {
 };
 
 state.lunch75.types[0].dishes = [
-  wakameSalad,
+  omisoShiru,
   harusameSalad,
   ebiFurai,
   agedashiDoufu,
   sakemoriRoll,
   ebiSakekawaTemaki,
 ];
-state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu, yasaiUdon];
+state.lunch75.types[1].dishes = [
+  yasaiGomaItame,
+  yasaiKareUdon,
+  ingenDofu,
+  yasaiUdon,
+];
 state.lunch75.types[2].dishes = [
   midoriRoll,
   yasaiCocktailRoll,
