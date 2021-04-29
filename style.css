@@ -12,6 +12,7 @@
   --color1-opacity: #54576560;
   --color2: white;
   --heading-color: #50c878;
+  --heading-color-light: #6ad08c;
 }
 
 html body {
@@ -25,6 +26,30 @@ html body {
 a {
   text-decoration: none;
   color: var(--color2);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-align: center;
+  background-color: var(--heading-color);
+  border-radius: 5px;
+  cursor: pointer;
+  height: 20px;
+  width: 80px;
+  font-weight: bold;
+  padding-bottom: 9px;
+  padding-left: 3px;
+}
+.btn:hover {
+  transition: 0.2s;
+  background-color: var(--heading-color-light);
 }
 
 header {
@@ -75,22 +100,11 @@ header .container {
   height: 20px;
 }
 
-#menu-butt {
+.menu-butt {
   display: none;
-  font-size: 20px;
-  letter-spacing: 3px;
   margin-top: 9px;
-  text-align: center;
-  /* border: 1px solid var(--color2); */
-  background-color: var(--heading-color);
-  border-radius: 5px;
-  cursor: pointer;
-  height: 20px;
-  width: 80px;
-  font-weight: bold;
-  padding-bottom: 9px;
-  padding-left: 3px;
   position: relative;
+  background-color: var(--heading-color);
 }
 
 #nav-container {
@@ -139,16 +153,55 @@ nav {
   background-color: var(--color1-ligther);
 }
 
-.nav-butt:hover {
-  transition: 0.2s;
-  background-color: var(--color1-ligther);
-  /* color: var(--color1); */
-}
-
 main {
   background-color: var(--color2);
   color: var(--color1);
 }
+
+.pop-up-wrapper {
+  display: none;
+  background-color: var(--color1-opacity);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.pop-up-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.pop-up {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  min-width: 200px;
+  max-width: 450px;
+  /* height: 170px; */
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  font-size: 150%;
+  border-radius: 5px;
+}
+
+.pop-up p {
+  margin-bottom: 20px;
+}
+
+.pop-up i {
+  color: var(--heading-color);
+}
+
+.ok-btn {
+  margin: 0 auto;
+}
+
 .menu {
   margin: 55px 150px 0 0;
   padding: 45px 10px 40px 10px;
@@ -219,10 +272,21 @@ main {
   color: var(--color1);
   font-weight: normal;
 }
+.dish-description-HE {
+  padding-right: 30px;
+}
+.dish-description-EN {
+  padding-left: 30px;
+}
 
 .dish-price {
   min-width: 65px;
+}
+.dish-price-HE {
   text-align: left;
+}
+.dish-price-EN {
+  text-align: right;
 }
 
 .combi-title .combi-prise {
@@ -257,13 +321,26 @@ main {
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: 12px;
-  margin-right: 2px;
+  margin: 0 2px;
   min-width: 16px;
   height: 16px;
 }
 
+.favorite {
+  display: inline-block;
+  color: var(--heading-color);
+  font-size: 20px;
+  padding-top: 2px;
+}
+.favorite-EN {
+  margin-right: 10px;
+}
+.favorite-HE {
+  margin-left: 10px;
+}
+
 @media (max-width: 480px) {
-  #menu-butt {
+  .menu-butt {
     display: block;
   }
 
@@ -296,11 +373,6 @@ main {
     height: 13px;
   }
 
-  /* #menu-butt {
-    width: 70px;
-    font-size: 18px;
-  } */
-
   section {
     margin-top: 35px;
   }
@@ -321,7 +393,7 @@ main {
     font-size: 12px;
   }
 
-  #menu-butt {
+  .menu-butt {
     width: 60px;
     font-size: 14px;
     height: 11px;

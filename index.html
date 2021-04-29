@@ -18,19 +18,21 @@
       sizes="16x16"
       href="./favicons/favicon-16x16.png"
     />
-    <!-- <link rel="manifest" href="./favicons/site.webmanifest" /> -->
     <link
       rel="mask-icon"
       href="./favicons/safari-pinned-tab.svg"
       color="#5bbad5"
     />
+    <script
+      src="https://kit.fontawesome.com/bf94ea1f2d.js"
+      crossorigin="anonymous"
+    ></script>
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
     <title>Onami</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <!-- <script defer src="jquery-3.5.0.min.js"></script> -->
     <script defer src="script.js"></script>
   </head>
   <body>
@@ -39,7 +41,7 @@
         <div id="logo-bar">
           <div id="lang-menubtn-container">
             <div id="lang"><a href="en.html">EN</a></div>
-            <div id="menu-butt">תפריט</div>
+            <div class="menu-butt btn">תפריט</div>
           </div>
           <a href="#"><img alt="Onami logo" src="logo-green-short.png" /></a>
         </div>
@@ -107,6 +109,22 @@
       </div>
     </header>
     <main>
+      <div class="pop-up-wrapper">
+        <div class="pop-up-container">
+          <div class="pop-up">
+            <p>
+              אפשר לסמן מנות שאהבת,<br />
+              גם לפעמים הבאות
+            </p>
+            <p>
+              <i class="far fa-heart"></i>
+              <i class="fas fa-angle-double-left"></i>
+              <i class="fas fa-heart"></i>
+            </p>
+            <div class="ok-btn btn">הבנתי</div>
+          </div>
+        </div>
+      </div>
       <div id="main-container" class="container">
         <section class="menu"></section>
       </div>

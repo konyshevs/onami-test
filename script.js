@@ -1,10 +1,11 @@
 import $ from "jquery";
 import "core-js/stable";
-import { state } from "./state.js";
+import { menuList, state, favorits } from "./state.js";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
+  const popUpConteiner = document.querySelector(".pop-up-wrapper");
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
     "--color1"
@@ -97,6 +98,34 @@ $("document").ready(function () {
   //   }
   // });
 
+  // FAVORITS LOGIC
+
+  dishBlockEl.addEventListener("click", function (e) {
+    if (!e.target.closest(".favorite")) return;
+    e.target.classList.toggle("fas");
+    const id = e.target.dataset.id;
+    const dish = menuList.find(el => el.id === id);
+    dish.isFavorite = dish.isFavorite ? false : true;
+    if (dish.isFavorite) favorits.push(id);
+    else {
+      const index = favorits.findIndex(el => el === id);
+      favorits.splice(index, 1);
+    }
+
+    localStorage.setItem("favorits", JSON.stringify(favorits));
+  });
+
+  // POP-UP LOGIC
+  setTimeout(function () {
+    $(".pop-up-wrapper").fadeIn(500);
+    $("html,body").css("overflow", "hidden");
+  }, 1000);
+
+  $(".ok-btn, .pop-up-wrapper").on("click", function () {
+    $(".pop-up-wrapper").fadeOut();
+    $("html,body").css("overflow", "auto");
+  });
+
   // MENU RENDERING
   function genDishMarkup(dish) {
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
@@ -106,16 +135,19 @@ $("document").ready(function () {
     return `<div class="dish">
      <div class="title-price-section">
         <div class="dish-title">
+        <i data-id="${
+          dish.id
+        }" class="far ${dish.isFavorite ? "fas" : ""} fa-heart favorite favorite-${lang}"></i>
           <div>${dish[`title${lang}`]}</div>
           ${dish.isVegi ? '<div class="veg"></div>' : ""}
         </div>
-        <div class="dish-price">${price ? "₪" : ""} ${price}</div>
+        <div class="dish-price dish-price-${lang}">${price ? "₪" : ""} ${price}</div>
      </div>
-      <div class="dish-description">${dish[`description${lang}`]}</div>
+      <div class="dish-description dish-description-${lang}">${dish[`description${lang}`]}</div>
    </div>`;
   }
 
-  function genDishMarkupOneLine(dish) {
+  function genDishMarkupOneLine(dish, favorite = false) {
     const isString = item => typeof item === "string";
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
 
@@ -125,12 +157,19 @@ $("document").ready(function () {
     return `<div class="dish one-line">
      <div class="title-price-section">
         <div class="dish-title">
+        ${
+          favorite
+            ? `<i data-id="${dish.id}" class="far ${
+                dish.isFavorite ? "fas" : ""
+              } fa-heart favorite favorite-${lang}"></i>`
+            : ""
+        }
           <div>${
             dish[`title${lang}`]
           }<span class="dish-description"> ${dish[`description${lang}`]}</span></div>
           ${dish.isVegi ? '<div class="veg"></div>' : ""}
         </div>
-        <div class="dish-price">${price ? "₪" : ""} ${price}</div>
+        <div class="dish-price dish-price-${lang}">${price ? "₪" : ""} ${price}</div>
      </div>
    </div>`;
   }
@@ -149,7 +188,7 @@ $("document").ready(function () {
           : genDishMarkup(dish)
       )
       .join("")}
-    <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>  
+    <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>
     `;
   }
   function genSeshimiMarkup(menuObj) {
@@ -165,8 +204,8 @@ $("document").ready(function () {
         }<div class="price-description-seshimi">${
           menuObj[`price${lang}`] || ""
         }</div></div>
-        
-      ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
+
+      ${type.dishes.map(dish => genDishMarkupOneLine(dish, true)).join("")}`
       )
       .join("")}`;
   }
@@ -201,7 +240,7 @@ $("document").ready(function () {
           type.price
         }</div>
            </div>
-         </div> 
+         </div>
       ${type.dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
       )
       .join("")}`;
@@ -256,13 +295,14 @@ $("document").ready(function () {
       return `<div class="dish">
      <div class="title-price-section">
         <div class="dish-title">
+        <i data-id="${
+          dish.id
+        }" class="far ${dish.isFavorite ? "fas" : ""} fa-heart favorite favorite-${lang}"></i>
           <div>${dish[`title${lang}`]}</div>
         </div>
-        <div class="dish-price">${dish.price ? "₪" : ""} ${dish.price}</div>
+        <div class="dish-price dish-price-${lang}">${dish.price ? "₪" : ""} ${dish.price}</div>
      </div>
-      <div class="dish-description">${
-        dish[`description${lang}`]
-      } ${dish.vintage}</div>
+      <div class="dish-description dish-description-${lang}">${dish[`description${lang}`]} ${dish.vintage}</div>
    </div>`;
     }
 

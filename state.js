@@ -1,4 +1,12 @@
 // STATE
+export const menuList = [];
+export let favorits = [];
+
+const init = function () {
+  const storage = localStorage.getItem("favorits");
+  if (storage) favorits = JSON.parse(storage);
+};
+init();
 
 const lunchDescriptionHE =
   "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן / אדום / רוזה- 28 ₪";
@@ -363,11 +371,15 @@ export const state = {
     postScriptumEN: "",
     dishes: [],
   },
+  // favorites: [
+  //   state.appetisers[1],
+  //   state.appetisers[2],
+  //   state.appetisers[3],
+  //   state.mainDishes,
+  // ],
 };
 
-state.appetisers.push(state.skewers); // Adding skewers to main dishes
-
-const menuList = [];
+state.appetisers.push(state.skewers); // Adding skewers to appetisers
 
 class Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
@@ -378,11 +390,16 @@ class Menu {
     this.price = price;
     this.isVegi = isVegi;
     this._addID();
+    this._isFavorite();
     menuList.push(this);
   }
 
   _addID() {
     this.id = this.titleEN.toLowerCase().replaceAll(" ", "_");
+  }
+
+  _isFavorite() {
+    if (favorits.includes(this.id)) this.isFavorite = true;
   }
 }
 class ColdAppetiser extends Menu {
