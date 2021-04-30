@@ -8,6 +8,12 @@ const init = function () {
 };
 init();
 
+export let favoritesCount = 0;
+export function changeFavoritesCount(operator) {
+  if (operator === "+") favoritesCount++;
+  if (operator === "-") favoritesCount--;
+}
+
 const lunchDescriptionHE =
   "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 28 <br> כוס יין צהריים לבן / אדום / רוזה- 28 ₪";
 
@@ -371,15 +377,20 @@ export const state = {
     postScriptumEN: "",
     dishes: [],
   },
-  // favorites: [
-  //   state.appetisers[1],
-  //   state.appetisers[2],
-  //   state.appetisers[3],
-  //   state.mainDishes,
-  // ],
+  favorites: [],
 };
 
-state.appetisers.push(state.skewers); // Adding skewers to appetisers
+// Adding skewers to appetisers
+state.appetisers.push(state.skewers);
+
+// Adding menus to favorites
+state.favorites.push(
+  state.appetisers[0],
+  state.appetisers[1],
+  state.skewers,
+  state.mainDishes,
+  state.desserts
+);
 
 class Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
@@ -399,7 +410,10 @@ class Menu {
   }
 
   _isFavorite() {
-    if (favorits.includes(this.id)) this.isFavorite = true;
+    if (favorits.includes(this.id)) {
+      this.isFavorite = true;
+      favoritesCount++;
+    }
   }
 }
 class ColdAppetiser extends Menu {
@@ -838,6 +852,14 @@ const lemonTart = new Dessert(
   "Lemon Tart",
   "Lemon tart, sour cream & amarena cherry",
   46
+);
+
+const chocoreto = new Dessert(
+  "צ׳וקורטו",
+  "מוס שוקולד מריר, קרם פרלינה, שינקובה טראפל, קראמבל מיסו וטוויל קקאו",
+  "Chocoreto",
+  "Chocolate mousse, praline cream, shinkobe truffle, miso crumble & coco tuiles",
+  54
 );
 
 // SESHIMI
@@ -1843,20 +1865,20 @@ new Beer(
   "Lager 4.9% (Japan)",
   28
 );
-new Beer(
-  "וויט אייל היטאצ'ינו",
-  "אייל חיטה 5.5% (יפן)	",
-  "Hitachino White Ale",
-  "Wheat ale 5.5% (Japan)",
-  34
-);
-new Beer(
-  "רד רייס היטאצ'ינו",
-  "אייל אורז אדום 7% (יפן)",
-  "Hitachino Red Rice",
-  "Red rice ale 7% (Japan)",
-  34
-);
+// new Beer(
+//   "וויט אייל היטאצ'ינו",
+//   "אייל חיטה 5.5% (יפן)	",
+//   "Hitachino White Ale",
+//   "Wheat ale 5.5% (Japan)",
+//   34
+// );
+// new Beer(
+//   "רד רייס היטאצ'ינו",
+//   "אייל אורז אדום 7% (יפן)",
+//   "Hitachino Red Rice",
+//   "Red rice ale 7% (Japan)",
+//   34
+// );
 new Beer(
   "מלכה בלונד",
   "אייל בהיר  6.5% (ישראל)",
@@ -1941,11 +1963,19 @@ new SoftDrink("אקווה פנה", "", "Acqua Panna", "", 28);
 // WINE
 
 // Glass
+// new GlassWineWhite(
+//   "סוביניון בלאן",
+//   "וילה מריה, ניו-זילנד",
+//   "Sauvignon Blanc",
+//   "Villa Maria, New Zealand",
+//   38,
+//   2020
+// );
 new GlassWineWhite(
   "סוביניון בלאן",
-  "וילה מריה, ניו-זילנד",
+  "סקורפיוס, אסטרולאב, ניו-זילנד",
   "Sauvignon Blanc",
-  "Villa Maria, New Zealand",
+  "Scorpius, Astrolabe, New Zealand",
   38,
   2020
 );
@@ -2016,11 +2046,19 @@ new WineWhite(
   115,
   2019
 );
+// new WineWhite(
+//   "סוביניון בלאן",
+//   "וילה מריה, ניו-זילנד",
+//   "Sauvignon Blanc",
+//   "Villa Maria, New Zealand",
+//   150,
+//   2020
+// );
 new WineWhite(
   "סוביניון בלאן",
-  "וילה מריה, ניו-זילנד",
+  "סקורפיוס, אסטרולאב, ניו-זילנד",
   "Sauvignon Blanc",
-  "Villa Maria, New Zealand",
+  "Scorpius, Astrolabe, New Zealand",
   150,
   2020
 );

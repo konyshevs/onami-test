@@ -149,6 +149,16 @@ nav {
   font-size: 18px;
 }
 
+#favorites-btn {
+  margin-top: 20px;
+}
+
+#favorites-btn i {
+  margin-right: 10px;
+  display: inline-block;
+  color: var(--heading-color);
+}
+
 .nav-btn-active {
   background-color: var(--color1-ligther);
 }

@@ -1,6 +1,12 @@
 import $ from "jquery";
 import "core-js/stable";
-import { menuList, state, favorits } from "./state.js";
+import {
+  menuList,
+  state,
+  favorits,
+  changeFavoritesCount,
+  favoritesCount,
+} from "./state.js";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -18,6 +24,8 @@ $("document").ready(function () {
     document.documentElement
   ).getPropertyValue("--heading-color");
 
+  let ifPopUp = true;
+
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
     if (!id) id = "appetisers";
@@ -29,22 +37,6 @@ $("document").ready(function () {
     renderMenuPage(state[id]);
     document.body.scrollIntoView();
   };
-
-  function init() {
-    // Меняет направление отступа для английской версии для большого экрана
-    if (lang === "EN" && window.innerWidth > 480)
-      dishBlockEl.style.margin = "45px 0 0 150px";
-
-    window.addEventListener("resize", function (e) {
-      if (e.currentTarget.innerWidth > 480 && lang === "EN")
-        dishBlockEl.style.margin = "45px 0 0 150px";
-      if (e.currentTarget.innerWidth < 480 && lang === "EN")
-        dishBlockEl.style.margin = "45px 0 0 0";
-    });
-    controlHashChange();
-    window.addEventListener("hashchange", controlHashChange, false);
-    // renderMenuPage(state.appetisers);
-  }
 
   function shake(thing) {
     //тресет объект
@@ -72,7 +64,7 @@ $("document").ready(function () {
   shake("#menu-butt");
 
   // OPEN/CLOSE MENU
-  $("#menu-butt, #nav-container").on("click", function () {
+  $(".menu-butt, #nav-container").on("click", function () {
     if (window.outerWidth > 480) return;
     const width = $("#nav").css("width");
     if (width == "0px") {
@@ -105,26 +97,42 @@ $("document").ready(function () {
     e.target.classList.toggle("fas");
     const id = e.target.dataset.id;
     const dish = menuList.find(el => el.id === id);
-    dish.isFavorite = dish.isFavorite ? false : true;
-    if (dish.isFavorite) favorits.push(id);
-    else {
+
+    if (dish.isFavorite) {
+      dish.isFavorite = false;
+      changeFavoritesCount("-");
       const index = favorits.findIndex(el => el === id);
       favorits.splice(index, 1);
+    } else {
+      dish.isFavorite = true;
+      changeFavoritesCount("+");
+      favorits.push(id);
     }
 
     localStorage.setItem("favorits", JSON.stringify(favorits));
   });
 
   // POP-UP LOGIC
-  setTimeout(function () {
-    $(".pop-up-wrapper").fadeIn(500);
-    $("html,body").css("overflow", "hidden");
-  }, 1000);
+  function ifPopUpStorage() {
+    const storage = localStorage.getItem("ifPopUp");
+    if (storage) ifPopUp = JSON.parse(storage);
+  }
 
-  $(".ok-btn, .pop-up-wrapper").on("click", function () {
-    $(".pop-up-wrapper").fadeOut();
-    $("html,body").css("overflow", "auto");
-  });
+  function popUpRender() {
+    if (!ifPopUp) return;
+    setTimeout(function () {
+      $(".pop-up-wrapper").fadeIn(500);
+      $("html,body").css("overflow", "hidden");
+
+      ifPopUp = false;
+      localStorage.setItem("ifPopUp", JSON.stringify(ifPopUp));
+    }, 1000);
+
+    $(".ok-btn, .pop-up-wrapper").on("click", function () {
+      $(".pop-up-wrapper").fadeOut();
+      $("html,body").css("overflow", "auto");
+    });
+  }
 
   // MENU RENDERING
   function genDishMarkup(dish) {
@@ -324,6 +332,12 @@ $("document").ready(function () {
     return page.map(menu => genWineTypeMarkup(menu)).join("");
   }
 
+  function renderFavorites() {
+    const messageHE = `לא נבחרו מנות מועדפות עדיין.`;
+    const messageEN = `No favorite dishes have been selected yet.`;
+    if (!favoritesCount) return messageHE;
+  }
+
   function renderMenuPage(page) {
     dishBlockEl.innerHTML = "";
     if (page === state.seshimi)
@@ -351,6 +365,9 @@ $("document").ready(function () {
     if (page === state.wine) {
       return dishBlockEl.insertAdjacentHTML("beforeend", genWineMarkup(page));
     }
+
+    if (page === state.favorites)
+      return dishBlockEl.insertAdjacentHTML("beforeend", renderFavorites());
     if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
@@ -358,5 +375,22 @@ $("document").ready(function () {
     else dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(page));
   }
 
+  function init() {
+    // Меняет направление отступа для английской версии для большого экрана
+    if (lang === "EN" && window.innerWidth > 480)
+      dishBlockEl.style.margin = "45px 0 0 150px";
+
+    window.addEventListener("resize", function (e) {
+      if (e.currentTarget.innerWidth > 480 && lang === "EN")
+        dishBlockEl.style.margin = "45px 0 0 150px";
+      if (e.currentTarget.innerWidth < 480 && lang === "EN")
+        dishBlockEl.style.margin = "45px 0 0 0";
+    });
+    controlHashChange();
+    window.addEventListener("hashchange", controlHashChange, false);
+    ifPopUpStorage();
+    popUpRender();
+    // renderMenuPage(state.appetisers);
+  }
   init();
 });
