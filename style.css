@@ -154,9 +154,16 @@ nav {
 }
 
 #favorites-btn i {
-  margin-right: 10px;
   display: inline-block;
   color: var(--heading-color);
+}
+
+.favorite-btn-heart-HE {
+  margin-right: 5px;
+}
+
+.favorite-btn-heart-EN {
+  margin-left: 5px;
 }
 
 .nav-btn-active {
@@ -223,6 +230,7 @@ main {
   /* padding-bottom: 5px; */
   font-weight: bold;
   font-size: 18px;
+  margin-top: 20px;
 }
 
 .menu-description {
@@ -349,8 +357,19 @@ main {
   margin-left: 10px;
 }
 
+.full-menu-btn {
+  display: none;
+  /* margin: 0 auto; */
+  width: 150px;
+  margin-top: 20px;
+}
+
 @media (max-width: 480px) {
   .menu-butt {
+    display: block;
+  }
+
+  .full-menu-btn {
     display: block;
   }
 
@@ -364,7 +383,7 @@ main {
   }
 
   .menu {
-    margin: 65px 0 0 0;
+    margin: 45px 0 0 0;
     padding: 25px 10px 40px 10px;
   }
 }
@@ -415,7 +434,7 @@ main {
   }
 
   .menu {
-    margin: 65px 0 0 0;
+    margin: 45px 0 0 0;
     padding: 5px 10px 40px 10px;
   }
   section {

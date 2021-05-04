@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $, { map } from "jquery";
 import "core-js/stable";
 import {
   menuList,
@@ -24,11 +24,14 @@ $("document").ready(function () {
     document.documentElement
   ).getPropertyValue("--heading-color");
 
-  let ifPopUp = true;
+  let firstLoad = false;
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
-    if (!id) id = "appetisers";
+    if (!id) {
+      id = "appetisers";
+      firstLoad = true;
+    }
     document
       .querySelectorAll(".nav-butt")
       .forEach(el => el.classList.remove("nav-btn-active"));
@@ -62,25 +65,26 @@ $("document").ready(function () {
   }
 
   shake("#menu-butt");
-
   // OPEN/CLOSE MENU
-  $(".menu-butt, #nav-container").on("click", function () {
+  function openCloseMenu() {
     if (window.outerWidth > 480) return;
     const width = $("#nav").css("width");
     if (width == "0px") {
       $("#nav").animate({ width: "150px" }, 200);
-      $("#menu-butt").css({ color: color1, "background-color": color2 });
+      $(".menu-butt").css({ color: color1, "background-color": color2 });
       $("#nav-container").css({ display: "flex" });
       $("html,body").css("overflow", "hidden");
     } else {
       $("#nav").animate({ width: 0 }, 200);
-      $("#menu-butt").css({ color: color2, "background-color": headingColor });
+      $(".menu-butt").css({ color: color2, "background-color": headingColor });
       setTimeout(function () {
         $("#nav-container").css({ display: "none" });
       }, 200);
       $("html,body").css("overflow", "auto");
     }
-  });
+  }
+
+  $(".menu-butt, #nav-container").on("click", openCloseMenu);
 
   // MENU BTNS
   // $("#nav-container").on("click", function (e) {
@@ -113,19 +117,30 @@ $("document").ready(function () {
   });
 
   // POP-UP LOGIC
+  const ifPopUp = {
+    HE: true,
+    EN: true,
+  };
+
   function ifPopUpStorage() {
-    const storage = localStorage.getItem("ifPopUp");
-    if (storage) ifPopUp = JSON.parse(storage);
+    const storage =
+      lang === "HE"
+        ? localStorage.getItem("ifPopUpHE")
+        : localStorage.getItem("ifPopUpEN");
+    if (storage) ifPopUp[lang] = JSON.parse(storage);
   }
 
   function popUpRender() {
-    if (!ifPopUp) return;
+    if (!ifPopUp[lang]) return;
     setTimeout(function () {
       $(".pop-up-wrapper").fadeIn(500);
       $("html,body").css("overflow", "hidden");
 
-      ifPopUp = false;
-      localStorage.setItem("ifPopUp", JSON.stringify(ifPopUp));
+      ifPopUp[lang] = false;
+      if (lang === "HE")
+        localStorage.setItem("ifPopUpHE", JSON.stringify(ifPopUp.HE));
+      if (lang === "EN")
+        localStorage.setItem("ifPopUpEN", JSON.stringify(ifPopUp.EN));
     }, 1000);
 
     $(".ok-btn, .pop-up-wrapper").on("click", function () {
@@ -332,14 +347,59 @@ $("document").ready(function () {
     return page.map(menu => genWineTypeMarkup(menu)).join("");
   }
 
-  function renderFavorites() {
-    const messageHE = `לא נבחרו מנות מועדפות עדיין.`;
-    const messageEN = `No favorite dishes have been selected yet.`;
-    if (!favoritesCount) return messageHE;
+  function renderFavorites(page) {
+    function genFavoritesMenuMarkup(menuObj) {
+      return `
+    <div class="menu-title">
+        <div class="">${menuObj[`title${lang}`]}</div>
+        <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
+    </div>
+    ${menuObj.dishes
+      .map(dish => (dish.isFavorite ? genDishMarkup(dish) : ""))
+      .join("")}
+    `;
+    }
+
+    const messageHE = `לא נבחרו מנות מועדפות עדיין
+    <p>סמנו מנות אהובות, גם לפעם הבאה</p>`;
+    const messageEN = `No favorite dishes have been selected yet. <p>You can mark dishes you liked</p>`;
+    if (!favoritesCount)
+      return `<div class="pop-up-container">
+    <div class="pop-up">
+      <p>${lang === "HE" ? messageHE : messageEN}</p>
+      <p>
+        <i class="far fa-heart"></i>
+        <i class="fas fa-angle-double-left"></i>
+        <i class="fas fa-heart"></i>
+      </p>
+    </div>
+  </div>`;
+
+    return page
+      .map(menu => {
+        if (menu.dishes.filter(dish => dish.isFavorite).length > 0)
+          return genFavoritesMenuMarkup(menu);
+        else return "";
+      })
+      .join("");
   }
 
   function renderMenuPage(page) {
     dishBlockEl.innerHTML = "";
+    if (page === state.appetisers && firstLoad) {
+      page.forEach(menu =>
+        dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
+      );
+      dishBlockEl.insertAdjacentHTML(
+        "beforeend",
+        `<div class="full-menu-btn btn">${
+          lang === "HE" ? "תפריט מלא" : "Full menu"
+        }</div>`
+      );
+      firstLoad = false;
+      $(".full-menu-btn").on("click", openCloseMenu);
+      return;
+    }
     if (page === state.seshimi)
       return dishBlockEl.insertAdjacentHTML(
         "beforeend",
@@ -367,7 +427,7 @@ $("document").ready(function () {
     }
 
     if (page === state.favorites)
-      return dishBlockEl.insertAdjacentHTML("beforeend", renderFavorites());
+      return dishBlockEl.insertAdjacentHTML("beforeend", renderFavorites(page));
     if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))

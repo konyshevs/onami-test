@@ -80,6 +80,7 @@ export const state = {
       "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
     postScriptumEN: "",
     priceEN: "Nigiri/Seshimi",
+    dishes: [],
     types: [
       { titleHE: "דגי ים", titleEN: "SEA FISH", dishes: [] },
       { titleHE: "מים מתוקים", titleEN: "SWEET WATER FISH", dishes: [] },
@@ -295,6 +296,7 @@ export const state = {
       titleEN: "WINE BY THE GLASS",
       descriptionEN: "",
       postScriptumEN: "",
+      dishes: [],
       types: [
         {
           titleHE: "לבן",
@@ -320,6 +322,7 @@ export const state = {
       titleEN: "WINE BY THE BOTTLE",
       descriptionEN: "",
       postScriptumEN: "",
+      dishes: [],
       types: [
         {
           titleHE: "לבן",
@@ -389,7 +392,18 @@ state.favorites.push(
   state.appetisers[1],
   state.skewers,
   state.mainDishes,
-  state.desserts
+  state.desserts,
+  state.seshimi,
+  state.inari[0],
+  state.inari[1],
+  state.hosomaki[0],
+  state.temaki,
+  state.irodori[0],
+  state.wine[0],
+  state.wine[1],
+  state.sake[0],
+  state.sake[1],
+  state.coctails
 );
 
 class Menu {
@@ -463,6 +477,7 @@ class SeshimiNigiri extends Menu {
   ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.seshimi.types[type].dishes.push(this);
+    state.seshimi.dishes.push(this);
   }
 }
 
@@ -563,6 +578,7 @@ class GlassWineWhite extends Wine {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[0].types[0].dishes.push(this);
+    state.wine[0].dishes.push(this);
   }
 }
 
@@ -570,27 +586,7 @@ class GlassWineRose extends Wine {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[0].types[1].dishes.push(this);
-  }
-}
-
-class WineRed extends Wine {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[1].types[2].dishes.push(this);
-  }
-}
-
-class WineWhite extends Wine {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[1].types[0].dishes.push(this);
-  }
-}
-
-class WineRose extends Wine {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[1].types[1].dishes.push(this);
+    state.wine[0].dishes.push(this);
   }
 }
 
@@ -598,6 +594,31 @@ class GlassWineRed extends Wine {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[0].types[2].dishes.push(this);
+    state.wine[0].dishes.push(this);
+  }
+}
+
+class WineRed extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[1].types[2].dishes.push(this);
+    state.wine[1].dishes.push(this);
+  }
+}
+
+class WineWhite extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[1].types[0].dishes.push(this);
+    state.wine[1].dishes.push(this);
+  }
+}
+
+class WineRose extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[1].types[1].dishes.push(this);
+    state.wine[1].dishes.push(this);
   }
 }
 
@@ -1886,6 +1907,15 @@ new Beer(
   "Blonde Ale 6.5% (Israel)",
   36
 );
+
+new Beer(
+  "נגב IPA",
+  " אינדיה פייל אייל  5.8% (ישראל)",
+  "Negev IPA",
+  "India Pale Ale 5.8% (Israel)",
+  36
+);
+
 new Beer(
   "לה שוף",
   "אייל בהיר מסורתי  8% (בלגיה)",
