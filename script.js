@@ -70,11 +70,13 @@ $("document").ready(function () {
     if (window.outerWidth > 480) return;
     const width = $("#nav").css("width");
     if (width == "0px") {
+      document.addEventListener("backbutton", openCloseMenu, false);
       $("#nav").animate({ width: "150px" }, 200);
       $(".menu-butt").css({ color: color1, "background-color": color2 });
       $("#nav-container").css({ display: "flex" });
       $("html,body").css("overflow", "hidden");
     } else {
+      document.removeEventListener("backbutton", openCloseMenu, false);
       $("#nav").animate({ width: 0 }, 200);
       $(".menu-butt").css({ color: color2, "background-color": headingColor });
       setTimeout(function () {
