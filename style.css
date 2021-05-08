@@ -364,6 +364,19 @@ main {
   margin-top: 20px;
 }
 
+@media (max-height: 480px) {
+  header {
+    height: 50px;
+  }
+  #logo-bar img,
+  #logo-bar a {
+    height: 30px;
+  }
+  .menu {
+    padding: 5px 10px 40px 10px;
+  }
+}
+
 @media (max-width: 480px) {
   .menu-butt {
     display: block;
@@ -371,6 +384,10 @@ main {
 
   .full-menu-btn {
     display: block;
+  }
+
+  .menu {
+    margin: 10px 0 0 0;
   }
 
   #nav {
