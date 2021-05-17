@@ -6,12 +6,14 @@ import {
   favorits,
   changeFavoritesCount,
   favoritesCount,
-} from "./state.js";
+} from "./state";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
   const popUpConteiner = document.querySelector(".pop-up-wrapper");
+  const navConteiner = document.querySelector("#nav-container");
+  const nav = document.querySelector("#nav");
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
     "--color1"
@@ -436,15 +438,15 @@ $("document").ready(function () {
   }
 
   function init() {
-    // Меняет направление отступа для английской версии для большого экрана
-    if (lang === "EN" && window.innerWidth > 480)
-      dishBlockEl.style.margin = "45px 0 0 150px";
-
     window.addEventListener("resize", function (e) {
-      if (e.currentTarget.innerWidth > 480 && lang === "EN")
-        dishBlockEl.style.margin = "45px 0 0 150px";
-      if (e.currentTarget.innerWidth < 480 && lang === "EN")
-        dishBlockEl.style.margin = "45px 0 0 0";
+      if (e.currentTarget.innerWidth > 480) {
+        navConteiner.style.display = "block";
+        nav.style.width = "150px";
+      }
+      if (e.currentTarget.innerWidth < 480) {
+        navConteiner.style.display = "none";
+        nav.style.width = "0";
+      }
     });
     controlHashChange();
     window.addEventListener("hashchange", controlHashChange, false);
