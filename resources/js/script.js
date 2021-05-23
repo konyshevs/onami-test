@@ -11,9 +11,10 @@ import {
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
-  const popUpConteiner = document.querySelector(".pop-up-wrapper");
   const navConteiner = document.querySelector("#nav-container");
   const nav = document.querySelector("#nav");
+  const menuBtn = document.querySelector(".menu-butt");
+
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
     "--color1"
@@ -66,7 +67,7 @@ $("document").ready(function () {
     );
   }
 
-  shake("#menu-butt");
+  shake(".menu-butt");
   // OPEN/CLOSE MENU
   function openCloseMenu() {
     if (window.outerWidth > 480) return;
@@ -438,16 +439,30 @@ $("document").ready(function () {
   }
 
   function init() {
-    window.addEventListener("resize", function (e) {
-      if (e.currentTarget.innerWidth > 480) {
+    // window.addEventListener("resize", function (e) {
+    //   if (e.currentTarget.innerWidth > 480) {
+    //     navConteiner.style.display = "block";
+    //     nav.style.width = "150px";
+    //   }
+    //   if (e.currentTarget.innerWidth < 480) {
+    //     navConteiner.style.display = "none";
+    //     nav.style.width = "0";
+    //   }
+    // });
+
+    // @media query
+    window.matchMedia("(max-width: 480px)").addListener(function (e) {
+      if (e.matches) {
+        navConteiner.style.display = "none";
+        nav.style.width = "0";
+        menuBtn.style.cssText =
+          "color: var(--color2); background-color: var(--heading-color);";
+      } else {
         navConteiner.style.display = "block";
         nav.style.width = "150px";
       }
-      if (e.currentTarget.innerWidth < 480) {
-        navConteiner.style.display = "none";
-        nav.style.width = "0";
-      }
     });
+
     controlHashChange();
     window.addEventListener("hashchange", controlHashChange, false);
     ifPopUpStorage();
