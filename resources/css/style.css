@@ -34,6 +34,10 @@ p {
   padding: 0;
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .btn {
   color: #fff;
   font-size: 20px;
