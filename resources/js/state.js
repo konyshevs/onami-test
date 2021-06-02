@@ -921,10 +921,14 @@ const shiroguchi = new SeshimiNigiri(
   [18, 39]
 );
 
-const maguro = new SeshimiNigiri(0, "מגורו", "טונה", "Maguro", "Tuna", [
-  22,
-  48,
-]);
+const maguro = new SeshimiNigiri(
+  0,
+  "מגורו",
+  "טונה",
+  "Maguro",
+  "Tuna",
+  [22, 48]
+);
 
 const hamachi = new SeshimiNigiri(
   0,
@@ -957,10 +961,14 @@ const ebi = new SeshimiNigiri(
   [14, 28]
 );
 
-const hotate = new SeshimiNigiri(2, "הוטטה", "סקלופ", "Hotate", "Scallop", [
-  22,
-  39,
-]);
+const hotate = new SeshimiNigiri(
+  2,
+  "הוטטה",
+  "סקלופ",
+  "Hotate",
+  "Scallop",
+  [22, 39]
+);
 
 const hotateTeriyaki = new SeshimiNigiri(
   2,
@@ -1017,10 +1025,14 @@ const hiramasaTeriyaki = new SeshimiNigiri(
   ["-", 22]
 );
 
-const madai = new SeshimiNigiri(4, "מאדאי", "פרידה", "Madai", "Red snapper", [
-  26,
-  54,
-]);
+const madai = new SeshimiNigiri(
+  4,
+  "מאדאי",
+  "פרידה",
+  "Madai",
+  "Red snapper",
+  [26, 54]
+);
 
 const ohToro = new SeshimiNigiri(
   4,
@@ -1579,14 +1591,14 @@ const ebiFurai = new Menu(
   0
 );
 
-const yasaiGomaItame = new Menu(
-  "יאסאי גומה איטמה",
-  "ירקות העונה וטופו מוקפצים עם סאקה ומוגשים עם רוטב גומה אאה",
-  "Yasai Goma Itame",
-  "Vegetables and tofu stir fried with sake. Served with goma sauce",
-  0,
-  true
-);
+// const yasaiGomaItame = new Menu(
+//   "יאסאי גומה איטמה",
+//   "ירקות העונה וטופו מוקפצים עם סאקה ומוגשים עם רוטב גומה אאה",
+//   "Yasai Goma Itame",
+//   "Vegetables and tofu stir fried with sake. Served with goma sauce",
+//   0,
+//   true
+// );
 
 const yasaiKareUdon = new Menu(
   "יאסאי קארה אודון",
@@ -1692,12 +1704,7 @@ state.lunch75.types[0].dishes = [
   sakemoriRoll,
   ebiSakekawaTemaki,
 ];
-state.lunch75.types[1].dishes = [
-  yasaiGomaItame,
-  yasaiKareUdon,
-  ingenDofu,
-  yasaiUdon,
-];
+state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu, yasaiUdon];
 state.lunch75.types[2].dishes = [
   midoriRoll,
   yasaiCocktailRoll,
