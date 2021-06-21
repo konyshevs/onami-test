@@ -1191,23 +1191,6 @@ const specialTobiko = new InariSpecial(
 );
 
 // HOSOMAKI
-// const kappaMaki = new Hosomaki(
-//   "קאפה מאקי",
-//   "מלפפון ושומשום",
-//   "Kappa Maki",
-//   "Cucumber & sesame seeds",
-//   15,
-//   true
-// );
-
-// const oshinkoMaki = new Hosomaki(
-//   "אושינקו מאקי",
-//   "צנון מוחמץ ושומשום",
-//   "Oshinko Maki",
-//   "Pickled radish & sesame seeds",
-//   18,
-//   true
-// );
 
 const avocadoMaki = new Hosomaki(
   "אבוקדו מאקי",
