@@ -1272,7 +1272,7 @@ const hokkaiMaki = new Hosomaki(
   "שרימפ ואספרגוס טמפורה ",
   "Hokkai Maki",
   "Shrimp & asparagus tempura",
-  31
+  32
 );
 
 const ebiSakekawaMaki = new Hosomaki(
