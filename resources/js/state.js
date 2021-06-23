@@ -1511,9 +1511,9 @@ new IrodoriIngredient("", "שקדים קלויים", "", "Roasted almonds", 5);
 new IrodoriIngredient("", "פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", 6);
 new IrodoriIngredient("", "אבוקדו", "", "Avocado", 6);
 new IrodoriIngredient("", "ביצי דג דאון", "", "Flying fish roe", 12);
-new IrodoriIngredient("", "סלמון", "", "Salmon fillet", 16);
-new IrodoriIngredient("", "דניס", "", "Sea bream fish", 20);
-new IrodoriIngredient("", "טונה", "", "Tuna fillet", 26);
+new IrodoriIngredient("", "סלמון", "", "Salmon", 16);
+new IrodoriIngredient("", "דניס", "", "Sea bream", 20);
+new IrodoriIngredient("", "טונה", "", "Tuna", 26);
 
 //LUNCH MENU
 
@@ -1837,19 +1837,20 @@ new Cocktail(
 
 new Cocktail(
   "מרגריטה הדרים",
-  "סטולי תפוז, טקילה רפוסדו, סירופ אשכולית וליים",
+  " קטל ואן ציטרון, טקילה רפוסדו, סירופ אשכולית וליים",
   "Citrus Margarita",
-  "Stoli orange, Tequila Reposado, grapefruit syrup & lime juice",
+  "Ketel One Citroen, Tequila Reposado, grapefruit syrup & lime juice",
   48
 );
 
-new Cocktail(
-  "ביטלג'וס",
-  "ג'ין, טקילה רפוסדו, קיווי ופסיפלורה",
-  "Beetlejuice",
-  "Gin, Tequila Reposado, kiwi & passion fruit",
-  52
-);
+// new Cocktail(
+//   "ביטלג'וס",
+//   "ג'ין, טקילה רפוסדו, קיווי ופסיפלורה",
+//   "Beetlejuice",
+//   "Gin, Tequila Reposado, kiwi & passion fruit",
+//   52
+// );
+
 new Cocktail(
   "מינט ג'ולפ",
   "ברבן, מיץ לימון טרי, סודה, נענע ואנגוסטורה",
