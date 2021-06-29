@@ -635,9 +635,9 @@ class WineRose extends Wine {
 
 const harusameSalad = new ColdAppetiser(
   "סלט הרוסאמה",
-  "אטריות תפוחי אדמה, מלפפון, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש ללא גלוטן)",
+  "אטריות תפוחי אדמה, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש ללא גלוטן)",
   "Harusame Salad",
-  "Cold potato noodles, cucumber, scallion & salmon served with Wafu sauce",
+  "Cold potato noodles, scallion & salmon served with Wafu sauce",
   36
 );
 
@@ -1924,11 +1924,11 @@ new Sake(
   [34, 200]
 );
 new Sake(
-  "שיראיוקי ג'ונמאי",
-  'יבש, רך וחלק	 (180 מ"ל)',
-  "Shirayuki Junmai",
+  "שוקון ג'ונמאי גינג'ו",
+  'חצי יבש, קליל ומאוזן (180 מ"ל)',
+  "Shukon Junmai Ginjo",
   "(180 ml)",
-  44
+  48
 );
 new Sake(
   "שלג מושלם",
