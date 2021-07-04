@@ -352,6 +352,7 @@ $("document").ready(function () {
   }
 
   function renderFavorites(page) {
+    console.log(page);
     function genFavoritesMenuMarkup(menuObj) {
       return `
     <div class="menu-title">
