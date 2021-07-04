@@ -69,26 +69,37 @@ export const state = {
     postScriptumEN: "",
     dishes: [],
   },
-  seshimi: {
-    titleHE: "סשימי / ניגירי",
-    descriptionHE:
-      "סשימי - פילה דג או פרי ים ללא אורז<br> ניגירי - כדור אורז ועליו נתח דג / פרי ים / ירק",
-    postScriptumHE: "",
-    priceHE: "סשימי/ניגירי",
-    titleEN: "Nigiri / Seshimi",
-    descriptionEN:
-      "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
-    postScriptumEN: "",
-    priceEN: "Nigiri/Seshimi",
-    dishes: [],
-    types: [
-      { titleHE: "דגי ים", titleEN: "SEA FISH", dishes: [] },
-      { titleHE: "מים מתוקים", titleEN: "SWEET WATER FISH", dishes: [] },
-      { titleHE: "פירות ים", titleEN: "SEA FOOD", dishes: [] },
-      { titleHE: "שונות", titleEN: "OTHERS", dishes: [] },
-      { titleHE: "רק בעונה", titleEN: "ONLY IN SEASON", dishes: [] },
-    ],
-  },
+  seshimi: [
+    {
+      titleHE: "סשימי / ניגירי",
+      descriptionHE:
+        "סשימי - פילה דג או פרי ים ללא אורז<br> ניגירי - כדור אורז ועליו נתח דג / פרי ים / ירק",
+      postScriptumHE: "",
+      priceHE: "סשימי/ניגירי",
+      titleEN: "Nigiri / Seshimi",
+      descriptionEN:
+        "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
+      postScriptumEN: "",
+      priceEN: "Nigiri/Seshimi",
+      dishes: [],
+      types: [
+        { titleHE: "דגי ים", titleEN: "SEA FISH", dishes: [] },
+        { titleHE: "מים מתוקים", titleEN: "SWEET WATER FISH", dishes: [] },
+        { titleHE: "פירות ים", titleEN: "SEA FOOD", dishes: [] },
+        { titleHE: "שונות", titleEN: "OTHERS", dishes: [] },
+        { titleHE: "רק בעונה", titleEN: "ONLY IN SEASON", dishes: [] },
+      ],
+    },
+    {
+      titleHE: "סשימי ספיישל",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Seshimi Special",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+  ],
   inari: [
     {
       titleHE: "אינרי / גונקן",
@@ -476,8 +487,15 @@ class SeshimiNigiri extends Menu {
     isVegi
   ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.seshimi.types[type].dishes.push(this);
-    state.seshimi.dishes.push(this);
+    state.seshimi[0].types[type].dishes.push(this);
+    state.seshimi[0].dishes.push(this);
+  }
+}
+
+class SeshimiSpecial extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.seshimi[1].dishes.push(this);
   }
 }
 
@@ -740,13 +758,13 @@ const ebiTempura = new HotAppetiser(
   44
 );
 
-const ikaGeso = new HotAppetiser(
-  "איקה ג׳סו",
-  "ראשי קלמארי פריכים עם מיונז יפני",
-  "Ika Geso",
-  "Crispy squid tentacles",
-  44
-);
+// const ikaGeso = new HotAppetiser(
+//   "איקה ג׳סו",
+//   "ראשי קלמארי פריכים עם מיונז יפני",
+//   "Ika Geso",
+//   "Crispy squid tentacles",
+//   44
+// );
 
 const zakanaButterShoyu = new HotAppetiser(
   "סקאנה באטר שואיו",
@@ -1032,6 +1050,51 @@ const ohToro = new SeshimiNigiri(
   "Oh-Toro",
   "Fatty tuna",
   [30, 66]
+);
+
+// SESHIMI SPECIAL
+new SeshimiSpecial(
+  "סאקה אוסוזוקורי יוזופון",
+  "סשימי סלמון בחיתוך דק, בצל ירוק ושומשום. מוגש עם רוטב פונזו",
+  "Sake Usuzukuri Yuzupon",
+  "Salmon sashimi thinly sliced, topped with scallion & sesame seeds. Served with ponzu sauce",
+  48
+);
+
+new SeshimiSpecial(
+  "קורודאי יוזו אבורה דושי",
+  "סשימי דניס בחיתוך דק מוגש עם שמן שומשום חם ויוזו, סויה וג'ינג'ר",
+  "Kurodai Yuzu Abura Doushi",
+  "Sea bream sashimi thinly sliced, seared with hot sesame oil, yuzu, soy sauce & ginger",
+  64
+);
+new SeshimiSpecial(
+  "סאקה נורימאקי",
+  "סשימי סלמון עטוף בנורי ובמילוי ג'ינג'ר מוחמץ, בצל ירוק, גזר ושיטקה",
+  "Sake  Norimaki",
+  "Salmon sashimi rolled in nori with shiitake, scallion, ginger & carrot",
+  52
+);
+new SeshimiSpecial(
+  "מגורו נורימאקי",
+  "סשימי טונה עטוף בנורי ובמילוי ג'ינג'ר מוחמץ, בצל ירוק, גזר ושיטקה",
+  "Maguro Norimaki",
+  "Tuna sashimi rolled in nori with shiitake, scallion,	ginger & carrot",
+  72
+);
+new SeshimiSpecial(
+  "מגורו רוקט",
+  "רול של סשימי טונה במילוי רוקט טרי (4יח')",
+  "Maguro Rocket",
+  "Tuna sashimi roll filled with fresh rocket (cut into 4)",
+  72
+);
+new SeshimiSpecial(
+  "מאטסוקאווה זוקורי",
+  "סשימי פרידה צרובה  בסאקה בליווי רוטב פונזו לימונים	(עונתי)",
+  "Matsukawa Zukuri",
+  "Broiled red snapper slices with lemon ponzu sauce (Only in season)",
+  72
 );
 
 // INARI GUNKAN

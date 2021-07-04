@@ -233,7 +233,8 @@ $("document").ready(function () {
 
       ${type.dishes.map(dish => genDishMarkupOneLine(dish, true)).join("")}`
       )
-      .join("")}`;
+      .join("")}
+      <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`;
   }
 
   function genCombitionsMarkup(menuObj) {
@@ -406,7 +407,7 @@ $("document").ready(function () {
     if (page === state.seshimi)
       return dishBlockEl.insertAdjacentHTML(
         "beforeend",
-        genSeshimiMarkup(page)
+        genSeshimiMarkup(page[0]) + genMenuMarkup(page[1])
       );
     if (page === state.softDrinks)
       return dishBlockEl.insertAdjacentHTML(
