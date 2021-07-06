@@ -960,9 +960,9 @@ new Coffee("", "הפוך", "", "Cappuccino", [14, 16]);
 new Tea("", "תה ירוק יפני", "", "Japanese Green Tea", 24);
 new Tea("", "אינגליש ברקפסט", "", "English Breakfast", 12);
 new Tea("", "ארל גריי", "", "Earl Grey", 12);
-new Tea("", "ירוק פירוט טרופים", "", "Green tea with Fruits", 12);
+new Tea("", "ירוק פירות טרופים", "", "Green tea with Fruits", 12);
 new Tea("", "ירוק יסמין", "", "Green tea with Jasmine", 12);
-new Tea("", "תפוח אץ", "", "Apple Tea", 12);
+new Tea("", "תפוח עץ", "", "Apple Tea", 12);
 new Tea("", "פירות יער", "", "Wild Berries Tea", 12);
 new Tea("", "קמומיל (ללא&nbspקפאין)", "", "Chamomile (Decaf)", 12);
 new Tea(
