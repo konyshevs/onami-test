@@ -60,15 +60,44 @@ export const state = {
     dishes: [],
   },
 
-  desserts: {
-    titleHE: "קינוחים",
-    descriptionHE: "",
-    postScriptumHE: "",
-    titleEN: "Desserts",
-    descriptionEN: "",
-    postScriptumEN: "",
-    dishes: [],
-  },
+  desserts: [
+    {
+      titleHE: "קינוחים",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Desserts",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "קפה",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Coffee",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "תה",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Tea",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "פורט & שרי",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Port & Sherry",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+  ],
   seshimi: [
     {
       titleHE: "סשימי / ניגירי",
@@ -403,7 +432,7 @@ state.favorites.push(
   state.appetisers[1],
   state.skewers,
   state.mainDishes,
-  state.desserts,
+  state.desserts[0],
   state.seshimi[0],
   state.seshimi[1],
   state.inari[0],
@@ -473,7 +502,28 @@ class MainDish extends Menu {
 class Dessert extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
-    state.desserts.dishes.push(this);
+    state.desserts[0].dishes.push(this);
+  }
+}
+
+class Coffee extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.desserts[1].dishes.push(this);
+  }
+}
+
+class Tea extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.desserts[2].dishes.push(this);
+  }
+}
+
+class Port extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.desserts[3].dishes.push(this);
   }
 }
 
@@ -886,13 +936,13 @@ const matchaBrulee = new Dessert(
   48
 );
 
-const lemonTart = new Dessert(
-  "טארט לימון",
-  "טארט לימון, שמנת חמוצה ודובדבן אמרנה",
-  "Lemon Tart",
-  "Lemon tart, sour cream & amarena cherry",
-  48
-);
+// const lemonTart = new Dessert(
+//   "טארט לימון",
+//   "טארט לימון, שמנת חמוצה ודובדבן אמרנה",
+//   "Lemon Tart",
+//   "Lemon tart, sour cream & amarena cherry",
+//   48
+// );
 
 const chocoreto = new Dessert(
   "צ׳וקורטו",
@@ -901,6 +951,31 @@ const chocoreto = new Dessert(
   "Chocolate mousse, praline cream, shinkobe truffle, miso crumble & coco tuiles",
   58
 );
+
+// HOT DRINKS
+new Coffee("", "אספרסו", "", "Espresso", [12, 14]);
+new Coffee("", "אמריקנו", "", "Americano", 14);
+new Coffee("", "הפוך", "", "Cappuccino", [14, 16]);
+
+new Tea("", "תה ירוק יפני", "", "Japanese Green Tea", 24);
+new Tea("", "אינגליש ברקפסט", "", "English Breakfast", 12);
+new Tea("", "ארל גריי", "", "Earl Grey", 12);
+new Tea("", "ירוק פירוט טרופים", "", "Green tea with Fruits", 12);
+new Tea("", "ירוק יסמין", "", "Green tea with Jasmine", 12);
+new Tea("", "תפוח אץ", "", "Apple Tea", 12);
+new Tea("", "פירות יער", "", "Wild Berries Tea", 12);
+new Tea("", "קמומיל (ללא&nbspקפאין)", "", "Chamomile (Decaf)", 12);
+new Tea(
+  "",
+  "רויבוש תות ושמנת מתוקה (ללא&nbspקפאין)",
+  "",
+  "Rooibush Strawberry Cream (Decaf)",
+  12
+);
+new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (Decaf)", 12);
+
+new Port("", "אוטימה 10", "", "Otima 10", 36);
+new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", 44);
 
 // SESHIMI
 const sake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [20, 36]);
@@ -1071,23 +1146,23 @@ new SeshimiSpecial(
 );
 new SeshimiSpecial(
   "סאקה נורימאקי",
-  "סשימי סלמון עטוף בנורי ובמילוי ג'ינג'ר מוחמץ, בצל ירוק, גזר ושיטקה",
+  "רול של סשימי סלמון עטוף בנורי ובמילוי ג'ינג'ר מוחמץ, בצל ירוק, גזר ושיטקה (חתוך&nbspל-6)",
   "Sake  Norimaki",
-  "Salmon sashimi rolled in nori with shiitake, scallion, ginger & carrot",
+  "Salmon sashimi rolled in nori with shiitake, scallion, ginger & carrot (cut&nbspinto&nbsp6)",
   52
 );
 new SeshimiSpecial(
   "מגורו נורימאקי",
-  "סשימי טונה עטוף בנורי ובמילוי ג'ינג'ר מוחמץ, בצל ירוק, גזר ושיטקה",
+  "רול של סשימי טונה עטוף בנורי ובמילוי ג'ינג'ר מוחמץ, בצל ירוק, גזר ושיטקה (חתוך&nbspל-6)",
   "Maguro Norimaki",
-  "Tuna sashimi rolled in nori with shiitake, scallion,	ginger & carrot",
+  "Tuna sashimi rolled in nori with shiitake, scallion,	ginger & carrot (cut&nbspinto&nbsp6)",
   72
 );
 new SeshimiSpecial(
   "מגורו רוקט",
-  "רול של סשימי טונה במילוי רוקט טרי (4יח')",
+  "רול של סשימי טונה במילוי רוקט טרי (חתוך&nbspל-4)",
   "Maguro Rocket",
-  "Tuna sashimi roll filled with fresh rocket (cut into 4)",
+  "Tuna sashimi roll filled with fresh rocket (cut&nbspinto&nbsp4)",
   72
 );
 new SeshimiSpecial(
