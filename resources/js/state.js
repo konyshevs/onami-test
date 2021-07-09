@@ -936,13 +936,13 @@ const matchaBrulee = new Dessert(
   48
 );
 
-// const lemonTart = new Dessert(
-//   "טארט לימון",
-//   "טארט לימון, שמנת חמוצה ודובדבן אמרנה",
-//   "Lemon Tart",
-//   "Lemon tart, sour cream & amarena cherry",
-//   48
-// );
+const lemonTart = new Dessert(
+  "טארט לימון מפורק",
+  "קרם לימון, קראמבל, שמנת חמוצה ודובדבן אמרנה",
+  "Lemon Tart",
+  "Lemon cream, crumble, sour cream & amarena cherry",
+  48
+);
 
 const chocoreto = new Dessert(
   "צ׳וקורטו",
@@ -964,15 +964,15 @@ new Tea("", "ירוק פירות טרופים", "", "Green tea with Fruits", 12)
 new Tea("", "ירוק יסמין", "", "Green tea with Jasmine", 12);
 new Tea("", "תפוח עץ", "", "Apple Tea", 12);
 new Tea("", "פירות יער", "", "Wild Berries Tea", 12);
-new Tea("", "קמומיל (ללא&nbspקפאין)", "", "Chamomile (Decaf)", 12);
+new Tea("", "קמומיל (ללא&nbspקפאין)", "", "Chamomile (caffeine free)", 12);
 new Tea(
   "",
   "רויבוש תות ושמנת מתוקה (ללא&nbspקפאין)",
   "",
-  "Rooibush Strawberry Cream (Decaf)",
+  "Rooibush Strawberry Cream (caffeine free)",
   12
 );
-new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (Decaf)", 12);
+new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (caffeine free)", 12);
 
 new Port("", "אוטימה 10", "", "Otima 10", 36);
 new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", 44);
@@ -2130,12 +2130,12 @@ new SoftDrink("אקווה פנה", "", "Acqua Panna", "", 28);
 //   2020
 // );
 new GlassWineWhite(
-  "סוביניון בלאן",
-  "סקורפיוס, אסטרולאב, ניו-זילנד",
-  "Sauvignon Blanc",
-  "Scorpius, Astrolabe, New Zealand",
+  "מוסקדה",
+  "גפנים בוגרות, שרו קארה, צרפת",
+  "Muscadet",
+  "Comte Leloup, Chereau-Carre, France",
   38,
-  2020
+  2016
 );
 new GlassWineWhite(
   "גוורצטרמינר",
@@ -2213,12 +2213,12 @@ new WineWhite(
 //   2020
 // );
 new WineWhite(
-  "סוביניון בלאן",
-  "סקורפיוס, אסטרולאב, ניו-זילנד",
-  "Sauvignon Blanc",
-  "Scorpius, Astrolabe, New Zealand",
-  150,
-  2020
+  "מוסקדה",
+  "גפנים בוגרות, שרו קארה, צרפת",
+  "Muscadet",
+  "Comte Leloup, Chereau-Carre, France",
+  155,
+  2016
 );
 new WineWhite(
   "ריזלינג",
