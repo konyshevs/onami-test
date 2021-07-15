@@ -809,13 +809,13 @@ const ebiTempura = new HotAppetiser(
   44
 );
 
-// const ikaGeso = new HotAppetiser(
-//   "איקה ג׳סו",
-//   "ראשי קלמארי פריכים עם מיונז יפני",
-//   "Ika Geso",
-//   "Crispy squid tentacles",
-//   44
-// );
+const ikaGeso = new HotAppetiser(
+  "איקה ג׳סו",
+  "ראשי קלמארי פריכים עם מיונז יפני",
+  "Ika Geso",
+  "Crispy squid tentacles",
+  44
+);
 
 const zakanaButterShoyu = new HotAppetiser(
   "סקאנה באטר שואיו",
@@ -936,13 +936,13 @@ const matchaBrulee = new Dessert(
   48
 );
 
-const lemonTart = new Dessert(
-  "טארט לימון מפורק",
-  "קרם לימון, קראמבל, שמנת חמוצה ודובדבן אמרנה",
-  "Lemon Tart",
-  "Lemon cream, crumble, sour cream & amarena cherry",
-  48
-);
+// const lemonTart = new Dessert(
+//   "טארט לימון מפורק",
+//   "קרם לימון, קראמבל, שמנת חמוצה ודובדבן אמרנה",
+//   "Lemon Tart",
+//   "Lemon cream, crumble, sour cream & amarena cherry",
+//   48
+// );
 
 const chocoreto = new Dessert(
   "צ׳וקורטו",
@@ -2276,6 +2276,14 @@ new WineWhite(
   240,
   2018
 );
+// new WineWhite(
+//   "שאבלי",
+//   "פרימייר קרו, דומיין פורי, צרפת",
+//   "Chablis",
+//   "Premier Cru, Fourrey, France",
+//   220,
+//   2019
+// );
 
 new WineRose(
   "פרוסקו",
