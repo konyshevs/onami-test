@@ -2062,6 +2062,15 @@ new Sake(
   "(90/750 ml)",
   [34, 200]
 );
+
+new Sake(
+  "שיראיוקי ג'ונמאי",
+  'יבש, רך וחלק (180 מ"ל)',
+  "Shirayuki Junmai",
+  "(180 ml)",
+  44
+);
+
 new Sake(
   "שוקון ג'ונמאי גינג'ו",
   'חצי יבש, קליל ומאוזן (180 מ"ל)',
@@ -2268,22 +2277,22 @@ new WineWhite(
   220,
   2018
 );
-new WineWhite(
-  "שאבלי",
-  "סאן פייר, רנייאר, צרפת",
-  "Chablis",
-  "Saint Pierre, Regnard, France",
-  240,
-  2018
-);
 // new WineWhite(
 //   "שאבלי",
-//   "פרימייר קרו, דומיין פורי, צרפת",
+//   "סאן פייר, רנייאר, צרפת",
 //   "Chablis",
-//   "Premier Cru, Fourrey, France",
-//   220,
-//   2019
+//   "Saint Pierre, Regnard, France",
+//   240,
+//   2018
 // );
+new WineWhite(
+  "שאבלי",
+  "פרימייר קרו, דומיין פורי, צרפת",
+  "Chablis",
+  "Premier Cru, Domaine Fourrey, France",
+  220,
+  2019
+);
 
 new WineRose(
   "פרוסקו",
