@@ -2172,11 +2172,11 @@ new GlassWineRose(
 );
 new GlassWineRose(
   "רוזה",
-  "וינייה דה ניקול,פול מאס,  צרפת",
+  "מאליז דומיין קארטרון, צרפת",
   "Rose",
-  "Vignes De Nicole, Paul Mas, France",
+  "Domaine Carteyron, France",
   40,
-  2019
+  2020
 );
 
 new GlassWineRed(
