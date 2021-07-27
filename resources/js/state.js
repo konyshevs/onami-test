@@ -2164,11 +2164,11 @@ new GlassWineWhite(
 );
 
 new GlassWineRose(
-  "פרוסקו",
-  "מאסקיו דיי קאבליירי, איטליה",
-  "Prosecco",
-  "Maschio Dei Cavalieri, Italy",
-  36
+  "קרמאן דה לואר ל'אקסטרא",
+  "לאנגלואה שאטו, צרפת",
+  "Cremants De Lorie L'Extra",
+  "Langlois Chateau, France",
+  38
 );
 new GlassWineRose(
   "רוזה",
@@ -2295,12 +2295,11 @@ new WineWhite(
 );
 
 new WineRose(
-  "פרוסקו",
-  "מאסקיו דיי קאבליירי, איטליה",
-  "Prosecco",
-  "Maschio Dei Cavalieri, Italy",
-  150,
-  ""
+  "קרמאן דה לואר ל'אקסטרא",
+  "לאנגלואה שאטו, צרפת",
+  "Cremants De Lorie L'Extra",
+  "Langlois Chateau, France",
+  170
 );
 new WineRose(
   "רוזה",
