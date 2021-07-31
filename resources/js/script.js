@@ -169,7 +169,7 @@ $("document").ready(function () {
         </div>
         <div class="dish-price dish-price-${lang}">${price ? "₪" : ""} ${price}</div>
      </div>
-      <div class="dish-description dish-description-${lang}">${dish[`description${lang}`]}</div>
+      <div class="dish-description dish-description-${lang}">${dish[`description${lang}`]} ${dish.vintage || ""}</div>
    </div>`;
   }
 
@@ -318,36 +318,25 @@ $("document").ready(function () {
   }
 
   function genWineMarkup(page) {
-    function genWineDishMarkup(dish) {
-      return `<div class="dish">
-     <div class="title-price-section">
-        <div class="dish-title">
-        <i data-id="${
-          dish.id
-        }" class="far ${dish.isFavorite ? "fas" : ""} fa-heart favorite favorite-${lang}"></i>
-          <div>${dish[`title${lang}`]}</div>
-        </div>
-        <div class="dish-price dish-price-${lang}">${dish.price ? "₪" : ""} ${dish.price}</div>
-     </div>
-      <div class="dish-description dish-description-${lang}">${dish[`description${lang}`]} ${dish.vintage}</div>
-   </div>`;
-    }
-
     function genWineTypeMarkup(menuObj) {
       return `
-    <div class="menu-title">
-        <div class="">${menuObj[`title${lang}`]}</div>
-        <div class="menu-description">${menuObj[`description${lang}`]}</div>
-    </div>
-    ${menuObj.types
-      .map(
-        type => `<div class="type-name">${type[`title${lang}`]}</div>
-      ${type.dishes.map(dish => genWineDishMarkup(dish)).join("")}`
-      )
-      .join("")}
-      <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`;
+      <div class="menu-title">
+      <div class="">${menuObj[`title${lang}`]}</div>
+      <div class="menu-description">${menuObj[`description${lang}`]}</div>
+  </div>
+  ${
+    menuObj.types
+      ? `${menuObj.types
+          .map(
+            type => `<div class="type-name">${type[`title${lang}`]}</div>
+        ${type.dishes.map(dish => genDishMarkup(dish)).join("")}`
+          )
+          .join("")}
+        <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
+      : `${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
+  <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
+  }`;
     }
-
     return page.map(menu => genWineTypeMarkup(menu)).join("");
   }
 

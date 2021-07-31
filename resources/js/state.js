@@ -384,6 +384,15 @@ export const state = {
         },
       ],
     },
+    {
+      titleHE: "יינות מתיישנים",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "FROM THE CELLAR",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
   ],
   sake: [
     {
@@ -445,6 +454,7 @@ state.favorites.push(
   state.irodori[0],
   state.wine[0],
   state.wine[1],
+  state.wine[2],
   state.sake[0],
   state.sake[1],
   state.coctails
@@ -644,53 +654,108 @@ class Wine extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     this.vintage = vintage;
   }
+  _addID() {
+    this.id = `${this.titleEN
+      .toLowerCase()
+      .replaceAll(" ", "_")}_${this.descriptionEN
+      .toLowerCase()
+      .replaceAll(" ", "_")
+      .replaceAll(",", "")}`;
+  }
 }
 
-class GlassWineWhite extends Wine {
+class WineGlass extends Menu {
+  constructor(
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    vintage = ""
+  ) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    this.vintage = vintage;
+    state.wine[0].dishes.push(this);
+  }
+  _addID() {
+    this.id = `${this.titleEN
+      .toLowerCase()
+      .replaceAll(" ", "_")}_${this.descriptionEN
+      .toLowerCase()
+      .replaceAll(" ", "_")
+      .replaceAll(",", "")}_glass`;
+  }
+}
+
+class GlassWineWhite extends WineGlass {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[0].types[0].dishes.push(this);
-    state.wine[0].dishes.push(this);
   }
 }
 
-class GlassWineRose extends Wine {
+class GlassWineRose extends WineGlass {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[0].types[1].dishes.push(this);
-    state.wine[0].dishes.push(this);
   }
 }
 
-class GlassWineRed extends Wine {
+class GlassWineRed extends WineGlass {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[0].types[2].dishes.push(this);
-    state.wine[0].dishes.push(this);
   }
 }
 
-class WineRed extends Wine {
+class WineBottle extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[1].dishes.push(this);
+  }
+  _addID() {
+    this.id = `${this.titleEN
+      .toLowerCase()
+      .replaceAll(" ", "_")}_${this.descriptionEN
+      .toLowerCase()
+      .replaceAll(" ", "_")
+      .replaceAll(",", "")}_bottle`;
+  }
+}
+
+class WineRed extends WineBottle {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[1].types[2].dishes.push(this);
-    state.wine[1].dishes.push(this);
   }
 }
 
-class WineWhite extends Wine {
+class WineWhite extends WineBottle {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[1].types[0].dishes.push(this);
-    state.wine[1].dishes.push(this);
   }
 }
 
-class WineRose extends Wine {
+class WineRose extends WineBottle {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[1].types[1].dishes.push(this);
-    state.wine[1].dishes.push(this);
+  }
+}
+
+class WineCellar extends Wine {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+    state.wine[2].dishes.push(this);
+  }
+  _addID() {
+    this.id = `${this.titleEN
+      .toLowerCase()
+      .replaceAll(" ", "_")}_${this.descriptionEN
+      .toLowerCase()
+      .replaceAll(" ", "_")
+      .replaceAll(",", "")}_cellar`;
   }
 }
 
@@ -2252,14 +2317,6 @@ runBeforeDate(START_DATE, () => {
     190,
     2020
   );
-  new WineWhite(
-    "סאנסר",
-    "טראדיסיון, רולאן טיסייה, צרפת",
-    "Sancerre",
-    "Tradition, Roland Tissier, France",
-    220,
-    2018
-  );
 
   new WineWhite(
     "שאבלי",
@@ -2268,6 +2325,15 @@ runBeforeDate(START_DATE, () => {
     "Premier Cru, Domaine Fourrey, France",
     220,
     2019
+  );
+
+  new WineWhite(
+    "סאנסר",
+    "דומיין ושרון, צרפת",
+    "Sancerre",
+    "Domaine Vacheron, France",
+    260,
+    2020
   );
 
   new WineRose(
@@ -2473,9 +2539,9 @@ runAfterDate(START_DATE, () => {
     2020
   );
   new GlassWineWhite(
-    "גראז' דה פאפא",
+    "גראז' דה פאפא לבן",
     "לוינסון, ישראל",
-    "Garage De Papa",
+    "Garage De Papa White",
     "Lewinsohn, Israel",
     52,
     2020
@@ -2498,9 +2564,9 @@ runAfterDate(START_DATE, () => {
     38
   );
   new GlassWineRose(
-    "רוזה",
-    "מאליז דומיין קארטרון, צרפת",
-    "Rose",
+    "רוזה מאליז",
+    "דומיין קארטרון, צרפת",
+    "Rose Malyse",
     "Domaine Carteyron, France",
     40,
     2020
@@ -2515,9 +2581,9 @@ runAfterDate(START_DATE, () => {
     2019
   );
   new GlassWineRed(
-    "גראז' דה פאפא",
+    "גראז' דה פאפא אדום",
     "לוינסון, ישראל",
-    "Garage De Papa",
+    "Garage De Papa Red",
     "Lewinsohn, Israel",
     56,
     2020
@@ -2578,10 +2644,10 @@ runAfterDate(START_DATE, () => {
   );
 
   new WineWhite(
-    "שאבלי",
-    "פרימייר קרו, דומיין פורי, צרפת",
-    "Chablis",
-    "Premier Cru, Domaine Fourrey, France",
+    "שבלי פרימייר קרו",
+    "דומיין פורי, צרפת",
+    "Chablis Premier Cru",
+    "Domaine Fourrey, France",
     220,
     2019
   );
@@ -2595,9 +2661,9 @@ runAfterDate(START_DATE, () => {
   );
 
   new WineWhite(
-    "גראז' דה פאפא",
+    "גראז' דה פאפא לבן ",
     "לוינסון, ישראל",
-    "Garage De Papa",
+    "Garage De Papa White",
     "Lewinsohn, Israel",
     235,
     2020
@@ -2613,9 +2679,9 @@ runAfterDate(START_DATE, () => {
   );
 
   new WineRose(
-    "רוזה",
-    "מאליז דומיין קארטרון, צרפת",
-    "Rose",
+    "רוזה מאליז",
+    "דומיין קארטרון, צרפת",
+    "Rose Malyse",
     "Domaine Carteyron, France",
     170,
     2020
@@ -2641,10 +2707,10 @@ runAfterDate(START_DATE, () => {
 
   new WineRose(
     "בולינג'ר",
-    "ספיישל קווה, שמפיין, צרפת",
+    "ספיישל קווה, צרפת",
     "Bollinger",
-    "Special Cuvee, Champagne, France",
-    590
+    "Special Cuvee, France",
+    620
   );
 
   new WineRed(
@@ -2680,9 +2746,17 @@ runAfterDate(START_DATE, () => {
     "Merlot",
     "Har'el, Clos De Gat, Israel",
     210,
-    2017
+    2018
   );
 
+  new WineRed(
+    "גראז' דה פאפא אדום",
+    "לוינסון, ישראל",
+    "Garage De Papa Red",
+    "Lewinsohn, Israel",
+    235,
+    2020
+  );
   new WineRed(
     "אמרונה",
     'טומאסי, איטליה (375 מ"ל)',
@@ -2693,12 +2767,102 @@ runAfterDate(START_DATE, () => {
   );
 
   new WineRed(
-    "גראז' דה פאפא",
-    "לוינסון, ישראל",
-    "Garage De Papa",
-    "Lewinsohn, Israel",
-    235,
-    2020
+    "אמרונה",
+    "טומאסי, איטליה",
+    "Amarone",
+    "Tommasi, Italy",
+    360,
+    2016
+  );
+
+  // Wine from the cellar
+  new WineCellar(
+    "עמק איילון",
+    "קלו דה גת, ישראל",
+    "Ayalon Valley",
+    "Clos De Gat, Israel",
+    590,
+    2004
+  );
+  new WineCellar(
+    "מרלו סיקרא",
+    "קלו דה גת, ישראל",
+    "Merlot Sycra",
+    "Clos De Gat, Israel",
+    650,
+    2006
+  );
+  new WineCellar(
+    "אמרונה",
+    "טומאסי, איטליה",
+    "Amarone",
+    "Tomassi, Italy",
+    [750, 650],
+    "2006/2007"
+  );
+  new WineCellar(
+    "גואדו אל טאסו בולגרי",
+    "אנטינורי, איטליה",
+    "Guado al Tasso Bolgheri",
+    "Antinori, Italy",
+    820,
+    2005
+  );
+  new WineCellar(
+    "קברנה סוביניון ירדן",
+    "רמת הגולן,ישראל",
+    "Cabernet Sauvignon Yarden",
+    "Golan Heights, Israel",
+    850,
+    2004
+  );
+  new WineCellar(
+    "גראן וין",
+    "קסטל, ישראל",
+    "Grand Vin",
+    "Domaine du Castel, Israel",
+    850,
+    2007
+  );
+  new WineCellar(
+    "אליון וגה סיציליה",
+    "ספרד",
+    "Alion Vega Sicilia",
+    "Spain",
+    920,
+    2005
+  );
+  new WineCellar(
+    "יער יתיר",
+    "יתיר, ישראל",
+    "Yatir Forest",
+    "Yatir, Israel",
+    950,
+    2008
+  );
+  new WineCellar(
+    "רום ירדן",
+    "רמת הגולן, ישראל",
+    "Rom Yarden",
+    "Golan Heights, Israel",
+    1350,
+    2006
+  );
+  new WineCellar(
+    "סולאייה אנטינורי",
+    "טוסקנה, איטליה",
+    "Solaia Antinori",
+    "Toscany, Italy",
+    1800,
+    2004
+  );
+  new WineCellar(
+    "קצרין",
+    "רמת הגולן, ישראל",
+    "Katzrin",
+    "Golan Heights, Israel",
+    [1800, 1500],
+    "2007/2008"
   );
 });
 
