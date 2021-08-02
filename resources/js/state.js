@@ -2221,7 +2221,7 @@ runBeforeDate(START_DATE, () => {
   new GlassWineRose(
     "קרמאן דה לואר ל'אקסטרא",
     "לאנגלואה שאטו, צרפת",
-    "Cremants De Lorie L'Extra",
+    "Cremants De Loire L'Extra",
     "Langlois Chateau, France",
     38
   );
@@ -2339,7 +2339,7 @@ runBeforeDate(START_DATE, () => {
   new WineRose(
     "קרמאן דה לואר ל'אקסטרא",
     "לאנגלואה שאטו, צרפת",
-    "Cremants De Lorie L'Extra",
+    "Cremants De Loire L'Extra",
     "Langlois Chateau, France",
     170
   );
@@ -2559,7 +2559,7 @@ runAfterDate(START_DATE, () => {
   new GlassWineRose(
     "קרמאן דה לואר ל'אקסטרא",
     "לאנגלואה שאטו, צרפת",
-    "Cremants De Lorie L'Extra",
+    "Cremants De Loire L'Extra",
     "Langlois Chateau, France",
     38
   );
@@ -2692,7 +2692,7 @@ runAfterDate(START_DATE, () => {
   new WineRose(
     "קרמאן דה לואר ל'אקסטרא",
     "לאנגלואה שאטו, צרפת",
-    "Cremants De Lorie L'Extra",
+    "Cremants De Loire L'Extra",
     "Langlois Chateau, France",
     170
   );
