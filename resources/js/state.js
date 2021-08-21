@@ -83,10 +83,19 @@ export const state = {
       dishes: [],
     },
     {
-      titleHE: "תה",
+      titleHE: "תה חליטה",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Tea",
+      titleEN: "Infusion tea",
+      descriptionEN: "",
+      postScriptumEN: "",
+      dishes: [],
+    },
+    {
+      titleHE: "תיונים",
+      descriptionHE: "",
+      postScriptumHE: "",
+      titleEN: "Tea bags",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -526,17 +535,24 @@ class Coffee extends Menu {
   }
 }
 
-class Tea extends Menu {
+class TeaInfusion extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[2].dishes.push(this);
   }
 }
 
-class Port extends Menu {
+class Tea extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[3].dishes.push(this);
+  }
+}
+
+class Port extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.desserts[4].dishes.push(this);
   }
 }
 
@@ -676,6 +692,7 @@ class WineGlass extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     this.vintage = vintage;
     state.wine[0].dishes.push(this);
+    this._addID();
   }
   _addID() {
     this.id = `${this.titleEN
@@ -683,7 +700,7 @@ class WineGlass extends Menu {
       .replaceAll(" ", "_")}_${this.descriptionEN
       .toLowerCase()
       .replaceAll(" ", "_")
-      .replaceAll(",", "")}_glass`;
+      .replaceAll(",", "")}_glass_${this.vintage}`;
   }
 }
 
@@ -712,6 +729,7 @@ class WineBottle extends Wine {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[1].dishes.push(this);
+    this._addID();
   }
   _addID() {
     this.id = `${this.titleEN
@@ -719,7 +737,7 @@ class WineBottle extends Wine {
       .replaceAll(" ", "_")}_${this.descriptionEN
       .toLowerCase()
       .replaceAll(" ", "_")
-      .replaceAll(",", "")}_bottle`;
+      .replaceAll(",", "")}_bottle_${this.vintage}`;
   }
 }
 
@@ -748,6 +766,7 @@ class WineCellar extends Wine {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[2].dishes.push(this);
+    this._addID();
   }
   _addID() {
     this.id = `${this.titleEN
@@ -755,7 +774,7 @@ class WineCellar extends Wine {
       .replaceAll(" ", "_")}_${this.descriptionEN
       .toLowerCase()
       .replaceAll(" ", "_")
-      .replaceAll(",", "")}_cellar`;
+      .replaceAll(",", "")}_cellar_${this.vintage}`;
   }
 }
 
@@ -1025,7 +1044,7 @@ new Coffee("", "אספרסו", "", "Espresso", [12, 14]);
 new Coffee("", "אמריקנו", "", "Americano", 14);
 new Coffee("", "הפוך", "", "Cappuccino", [14, 16]);
 
-new Tea("", "תה ירוק יפני", "", "Japanese Green Tea", 24);
+new TeaInfusion("", "תה ירוק יפני", "", "Japanese Green Tea", 24);
 new Tea("", "אינגליש ברקפסט", "", "English Breakfast", 12);
 new Tea("", "ארל גריי", "", "Earl Grey", 12);
 new Tea("", "ירוק פירות טרופים", "", "Green tea with Fruits", 12);
@@ -1035,7 +1054,7 @@ new Tea("", "פירות יער", "", "Wild Berries Tea", 12);
 new Tea("", "קמומיל (ללא&nbspקפאין)", "", "Chamomile (caffeine free)", 12);
 new Tea(
   "",
-  "רויבוש תות ושמנת מתוקה (ללא&nbspקפאין)",
+  "רויבוש תות (ללא&nbspקפאין)",
   "",
   "Rooibush Strawberry Cream (caffeine free)",
   12
@@ -2020,9 +2039,9 @@ new Cocktail(
 
 new Cocktail(
   "גרידי",
-  "קטל ואן ציטרון, פסיפלורה, ג'ינג'ר אייל וכוסברה",
+  "קטל ואן ציטרון, פסיפלורה, ג'ינג'ר ביר וכוסברה",
   "Gridi",
-  "Ketel One Citroen, passion fruit, ginger ale & coriander",
+  "Ketel One Citroen, passion fruit, ginger beer & coriander",
   48
 );
 
@@ -2133,737 +2152,419 @@ new SoftDrink("סיידר מוגז", "", "Sparkling apple juice", "", 15);
 new SoftDrink("סאן פלגרינו", "", "San Pellegrino", "", [14, 28]);
 new SoftDrink("אקווה פנה", "", "Acqua Panna", "", 28);
 
-runBeforeDate(START_DATE, () => {
-  // SAKE
+// SAKE
 
-  new Sake("קנקן סאקה חם", '(120 מ"ל)', "Hot sake", "(120 ml)", 34);
+new Sake(
+  "קיקוסוי ג'ונמאי שו",
+  'קנקן סאקה חם (120 מ"ל)',
+  "Kikusui Junmai shu",
+  "Hot sake jar (120 ml)",
+  34
+);
 
-  new Sake(
-    "אומשו צ'ויה",
-    'שיכר שזיפים (90/750 מ"ל)',
-    "Umeshu Choya",
-    "(90/750 ml)",
-    [34, 200]
-  );
+new Sake(
+  "אומשו צ'ויה",
+  'שיכר שזיפים (90/750 מ"ל)',
+  "Umeshu Choya",
+  "(90/750 ml)",
+  [34, 200]
+);
 
-  new Sake(
-    "שיראיוקי ג'ונמאי",
-    'יבש, רך וחלק (180 מ"ל)',
-    "Shirayuki Junmai",
-    "(180 ml)",
-    44
-  );
+new Sake(
+  "שיראיוקי ג'ונמאי",
+  'יבש, רך וחלק (180 מ"ל)',
+  "Shirayuki Junmai",
+  "Dry, soft and smooth (180 ml)",
+  44
+);
 
-  new Sake(
-    "שוקון ג'ונמאי גינג'ו",
-    'חצי יבש, קליל ומאוזן (180 מ"ל)',
-    "Shukon Junmai Ginjo",
-    "(180 ml)",
-    48
-  );
-  new Sake(
-    "שלג מושלם",
-    'סאקה ניגורי לא מסונן, מתקתק, בעל גוף מלא ודומיננטי בטעמים (300 מ"ל)',
-    "Perfect Snow",
-    "Unfiltered Nigori sake (300 ml)",
-    80
-  );
-  new Sake(
-    "קיקוסוי ג'ונמאי גינג'ו",
-    'בעל יובש מעודן ונעים (300 מ"ל)',
-    "Kikusui Junmai ginjo",
-    "(300 ml)",
-    95
-  );
-  new Sake(
-    "שוהו ג'ונמאי דאייגינג'ו",
-    'סאקה יבש, עשיר, עגול ופירותי (300 מ"ל)',
-    "Shuho Junmai daiginjo",
-    "(300 ml)",
-    110
-  );
-  new Sake(
-    "היאשיבורי ג'ונמאי דאייגינג'ו",
-    'פירותי ומרענן אך יבש ואלגנטי	(720 מ"ל)',
-    "Hiyashibori Junmai daiginjo",
-    "(720 ml)",
-    160
-  );
+new Sake(
+  "שוקון ג'ונמאי גינג'ו",
+  'חצי יבש, קליל ומאוזן (180 מ"ל)',
+  "Shukon Junmai Ginjo",
+  "Light, semi-dry (180 ml)",
+  48
+);
+new Sake(
+  "ביזן אומאצ'י ג'ונמאי דאיגינג'ו ",
+  'שיוף האורז ל 50%, off dry, מאוזן , בעל סיומת מרעננת (180/500 מ"ל)',
+  "Bizen Omachi Junmai Daiginjo",
+  "Rice is polished to 50%, off dry, balanced, refreshing ending (180/500 ml)",
+  [85, 190]
+);
+new Sake(
+  "שלג מושלם",
+  'סאקה ניגורי לא מסונן, מתקתק, בעל גוף מלא ודומיננטי בטעמים (300 מ"ל)',
+  "Perfect Snow",
+  "Unfiltered Nigori sake, sweet, full-bodied with dominant flavors (300 ml)",
+  80
+);
+new Sake(
+  "קיקוסוי ג'ונמאי גינג'ו ",
+  'בעל יובש מעודן ונעים (300 מ"ל)',
+  "Kikusui Junmai Ginjo",
+  "Refined and pleasant dryness (300 ml)",
+  95
+);
+new Sake(
+  "דסאי 45 ג'ונמאי דאיגינג'ו",
+  'אולטרה פרימיום סאקה בעל גוף בינוני, ארומאטי ועגול (300 מ"ל)',
+  "Dassai 45 Junmai Daiginjo",
+  "Ultra premium sake, medium-bodied, aromatic with round ending (300 ml)",
+  120
+);
+new Sake(
+  "דסאי 39 ג'ונמאי דאיגינג'ו ",
+  'אולטרה פרימיום סאקה מאורז נישיקי, מופת של איזון והרמוניה (300 מ"ל)',
+  "Dassai 39 Junmai Daiginjo",
+  "Ultra premium sake, made from Nishiki rice. A masterpiece of balance and harmony (300 ml)",
+  185
+);
+new Sake(
+  "היאשיבורי ג'ונמאי דאיגינג'ו ",
+  'פירותי,יבש ואלגנטי (720 מ"ל)',
+  "Hiyashibori Junmai Daiginjo",
+  "Dry, fruity and elegant (720 ml)",
+  170
+);
 
-  // WINE
+//WINE
 
-  // Glass
-  new GlassWineWhite(
-    "מוסקדה",
-    "גפנים בוגרות, שרו קארה, צרפת",
-    "Muscadet",
-    "Comte Leloup, Chereau-Carre, France",
-    38,
-    2016
-  );
-  new GlassWineWhite(
-    "גוורצטרמינר",
-    "פפאפנהיים, צרפת",
-    "Gewurztraminer",
-    "Pfaffenheim, France",
-    44,
-    2017
-  );
-  new GlassWineWhite(
-    "שנסון",
-    "קלו דה גת , ישראל",
-    "Chanson",
-    "Clos De Gat, Israel",
-    48,
-    2020
-  );
+// Glass
+new GlassWineWhite(
+  "מוסקדה",
+  "גפנים בוגרות, שרו קארה, צרפת",
+  "Muscadet",
+  "Comte Leloup, Chereau-Carre, France",
+  38,
+  2016
+);
+new GlassWineWhite(
+  "גוורצטרמינר",
+  "פלטר, ישראל",
+  "Gewurztraminer",
+  "Pelter, Israel",
+  44,
+  2020
+);
+new GlassWineWhite(
+  "גראז' דה פאפא לבן",
+  "לוינסון, ישראל",
+  "Garage De Papa White",
+  "Lewinsohn, Israel",
+  52,
+  2020
+);
 
-  new GlassWineRose(
-    "קרמאן דה לואר ל'אקסטרא",
-    "לאנגלואה שאטו, צרפת",
-    "Cremants De Loire L'Extra",
-    "Langlois Chateau, France",
-    38
-  );
-  new GlassWineRose(
-    "רוזה",
-    "מאליז דומיין קארטרון, צרפת",
-    "Rose",
-    "Domaine Carteyron, France",
-    40,
-    2020
-  );
+new GlassWineWhite(
+  "סנסר",
+  "דומיין ושרון, צרפת",
+  "Sancerre",
+  "Domaine Vacheron, France",
+  58,
+  2020
+);
 
-  new GlassWineRed(
-    "מסע ישראלי",
-    "ויתקין, ישראל",
-    "Israeli Journey",
-    "Vitkin, Israel",
-    38,
-    2019
-  );
-  new GlassWineRed(
-    "מאלבק",
-    "אסטייט, פול מאס, צרפת",
-    "Malbec",
-    "Estate, Paul Mas, France",
-    42,
-    2019
-  );
-  new GlassWineRed(
-    "סירה",
-    "הראל, קלו דה גת,  ישראל",
-    "Syrah",
-    "Har'el, Clos De Gat, Israel",
-    52,
-    2016
-  );
+new GlassWineRose(
+  "קרמאן דה לואר ל'אקסטרא",
+  "לאנגלואה שאטו, צרפת",
+  "Cremants De Loire L'Extra",
+  "Langlois Chateau, France",
+  38
+);
+new GlassWineRose(
+  "רוזה מאליז",
+  "דומיין קארטרון, צרפת",
+  "Rose Malyse",
+  "Domaine Carteyron, France",
+  40,
+  2020
+);
 
-  // Bottles
-  new WineWhite(
-    "שאבלי",
-    'דומיין דה מאלאנד, צרפת (375 מ"ל)',
-    "Chablis",
-    "Domaine Des Malandes, France (375 ml)",
-    115,
-    2019
-  );
+new GlassWineRed(
+  "מנוט",
+  "מאס מרטינט, ספרד",
+  "Menut",
+  "Mas Martinet, Spain",
+  38,
+  2019
+);
+new GlassWineRed(
+  "גראז' דה פאפא אדום",
+  "לוינסון, ישראל",
+  "Garage De Papa Red",
+  "Lewinsohn, Israel",
+  56,
+  2020
+);
 
-  new WineWhite(
-    "מוסקדה",
-    "גפנים בוגרות, שרו קארה, צרפת",
-    "Muscadet",
-    "Comte Leloup, Chereau-Carre, France",
-    155,
-    2016
-  );
-  new WineWhite(
-    "ריזלינג",
-    'וילה בורקלין, ד"ר בורקלין וולף, גרמניה',
-    "Riesling",
-    "Villa Buerklin, Dr Buerklin Wolf, Germany",
-    160,
-    2018
-  );
-  new WineWhite(
-    "שרדונה",
-    "ברבדו , ישראל",
-    "Chardonnay",
-    "Bravdo, Israel",
-    170,
-    2019
-  );
-  new WineWhite(
-    "גוורצטרמינר",
-    "פפאפנהיים, צרפת",
-    "Gewurztraminer",
-    "Pfaffenheim, France",
-    170,
-    2017
-  );
-  new WineWhite(
-    "פינו בלאן",
-    'אסטייט, ד"ר בורקלין וולף, גרמניה',
-    "Pinot Blanc",
-    "Dr Buerklin Wolf, Germany",
-    170,
-    2018
-  );
-  new WineWhite(
-    "שנסון",
-    "קלו דה גת , ישראל",
-    "Chanson",
-    "Clos De Gat, Israel",
-    190,
-    2020
-  );
+// Bottles
+new WineWhite(
+  "ריזלינג",
+  'בסטהיים, צרפת  (375 מ"ל)',
+  "Riesling",
+  "Bestheim, France  (375 ml)",
+  75,
+  2018
+);
 
-  new WineWhite(
-    "שאבלי",
-    "פרימייר קרו, דומיין פורי, צרפת",
-    "Chablis",
-    "Premier Cru, Domaine Fourrey, France",
-    220,
-    2019
-  );
+new WineWhite(
+  "פינו גריג'יו",
+  'לה טונלה, איטליה (375 מ"ל)',
+  "Pinot Grigio",
+  "LaTunella, Italy (375 ml)",
+  85,
+  2020
+);
 
-  new WineWhite(
-    "סאנסר",
-    "דומיין ושרון, צרפת",
-    "Sancerre",
-    "Domaine Vacheron, France",
-    260,
-    2020
-  );
+new WineWhite(
+  "מוסקדה",
+  "גפנים בוגרות, שרו קארה, צרפת",
+  "Muscadet",
+  "Comte Leloup, Chereau-Carre, France",
+  155,
+  2016
+);
+new WineWhite(
+  "ריזלינג",
+  'וילה בורקלין, ד"ר בורקלין וולף, גרמניה',
+  "Riesling",
+  "Villa Buerklin, Dr Buerklin Wolf, Germany",
+  170,
+  2018
+);
 
-  new WineRose(
-    "קרמאן דה לואר ל'אקסטרא",
-    "לאנגלואה שאטו, צרפת",
-    "Cremants De Loire L'Extra",
-    "Langlois Chateau, France",
-    170
-  );
-  new WineRose(
-    "רוזה",
-    "מאליז דומיין קארטרון, צרפת",
-    "Rose",
-    "Domaine Carteyron, France",
-    170,
-    2020
-  );
+new WineWhite(
+  "גוורצטרמינר",
+  "פלטר, ישראל",
+  "Gewurztraminer",
+  "Pelter, Israel",
+  180,
+  2020
+);
 
-  new WineRose(
-    "בולינג'ר",
-    "ספיישל קווה, שמפיין, צרפת",
-    "Bollinger",
-    "Special Cuvee, Champagne, France",
-    590
-  );
+new WineWhite(
+  "שנסון",
+  "קלו דה גת , ישראל",
+  "Chanson",
+  "Clos De Gat, Israel",
+  190,
+  2020
+);
 
-  new WineRed(
-    "בלרוש",
-    'קוט דו רון, שאפוטייה, צרפת (375 מ"ל)',
-    "Belleruche",
-    "Cotes Du Rhone, Chapoutier,  France (375 ml)",
-    80,
-    2018
-  );
-  new WineRed(
-    "קברנה סובניון",
-    'אסטייט, דלתון, ישראל (375 מ"ל)',
-    "Cabernet Sauvignon",
-    "Estate, Dalton, Israel (375 ml)",
-    90,
-    2018
-  );
-  new WineRed(
-    "מסע ישראלי",
-    "ויתקין, ישראל",
-    "Israeli Journey",
-    "Vitkin, Israel",
-    150,
-    2019
-  );
-  new WineRed(
-    "מאלבק",
-    "אסטייט, פול מאס, צרפת",
-    "Malbec",
-    "Estate, Paul Mas, France",
-    165,
-    2019
-  );
-  new WineRed(
-    "פינו נואר",
-    "ויתקין, ישראל",
-    "Pinot Noir",
-    "Vitkin, Israel",
-    170,
-    2019
-  );
-  new WineRed(
-    "סירה",
-    "הראל, קלו דה גת,  ישראל",
-    "Syrah",
-    "Har'el, Clos De Gat, Israel",
-    200,
-    2016
-  );
-  new WineRed(
-    "קברנה פרנק",
-    "ויתקין, ישראל",
-    "Cabernet Franc",
-    "Vitkin, Israel",
-    205,
-    2017
-  );
-  new WineRed(
-    "קברנה סוביניון",
-    "ברבדו, ישראל",
-    "Cabernet Sauvignon",
-    "Bravdo, Israel",
-    210,
-    2018
-  );
-  new WineRed(
-    "מרלו",
-    "הראל, קלו דה גת, ישראל",
-    "Merlot",
-    "Har'el, Clos De Gat, Israel",
-    220,
-    2018
-  );
-  new WineRed(
-    "אמרונה",
-    'טומאסי, איטליה (375 מ"ל)',
-    "Amarone",
-    "Tommasi, Italy (375 ml)",
-    260,
-    2015
-  );
-});
+new WineWhite(
+  "שבלי פרימייר קרו",
+  "דומיין פורי, צרפת",
+  "Chablis Premier Cru",
+  "Domaine Fourrey, France",
+  220,
+  2019
+);
+new WineWhite(
+  "רוסאן-ויונייה",
+  "אחת, ישראל",
+  "Roussanne-Viogniers",
+  "Ahat, Israel",
+  230,
+  2019
+);
 
-runAfterDate(START_DATE, () => {
-  // SAKE
+new WineWhite(
+  "גראז' דה פאפא לבן ",
+  "לוינסון, ישראל",
+  "Garage De Papa White",
+  "Lewinsohn, Israel",
+  235,
+  2020
+);
 
-  new Sake(
-    "קיקוסוי ג'ונמאי שו",
-    'קנקן סאקה חם (120 מ"ל)',
-    "Kikusui Junmai shu",
-    "Hot sake jar (120 ml)",
-    34
-  );
+new WineWhite(
+  "סאנסר",
+  "דומיין ושרון, צרפת",
+  "Sancerre",
+  "Domaine Vacheron, France",
+  260,
+  2020
+);
 
-  new Sake(
-    "אומשו צ'ויה",
-    'שיכר שזיפים (90/750 מ"ל)',
-    "Umeshu Choya",
-    "(90/750 ml)",
-    [34, 200]
-  );
+new WineRose(
+  "רוזה מאליז",
+  "דומיין קארטרון, צרפת",
+  "Rose Malyse",
+  "Domaine Carteyron, France",
+  170,
+  2020
+);
 
-  new Sake(
-    "שיראיוקי ג'ונמאי",
-    'יבש, רך וחלק (180 מ"ל)',
-    "Shirayuki Junmai",
-    "Dry, soft and smooth (180 ml)",
-    44
-  );
+new WineRose("רוזה", "מיראבל, צרפת", "Rose", "Miraval, France", 220, 2020);
 
-  new Sake(
-    "שוקון ג'ונמאי גינג'ו",
-    'חצי יבש, קליל ומאוזן (180 מ"ל)',
-    "Shukon Junmai Ginjo",
-    "Light, semi-dry (180 ml)",
-    48
-  );
-  new Sake(
-    "ביזן אומאצ'י ג'ונמאי דאיגינג'ו ",
-    'שיוף האורז ל 50%, off dry, מאוזן , בעל סיומת מרעננת (180/500 מ"ל)',
-    "Bizen Omachi Junmai Daiginjo",
-    "Rice is polished to 50%, off dry, balanced, refreshing ending (180/500 ml)",
-    [85, 190]
-  );
-  new Sake(
-    "שלג מושלם",
-    'סאקה ניגורי לא מסונן, מתקתק, בעל גוף מלא ודומיננטי בטעמים (300 מ"ל)',
-    "Perfect Snow",
-    "Unfiltered Nigori sake, sweet, full-bodied with dominant flavors (300 ml)",
-    80
-  );
-  new Sake(
-    "קיקוסוי ג'ונמאי גינג'ו ",
-    'בעל יובש מעודן ונעים (300 מ"ל)',
-    "Kikusui Junmai Ginjo",
-    "Refined and pleasant dryness (300 ml)",
-    95
-  );
-  new Sake(
-    "דסאי 45 ג'ונמאי דאיגינג'ו",
-    'אולטרה פרימיום סאקה בעל גוף בינוני, ארומאטי ועגול (300 מ"ל)',
-    "Dassai 45 Junmai Daiginjo",
-    "Ultra premium sake, medium-bodied, aromatic with round ending (300 ml)",
-    120
-  );
-  new Sake(
-    "דסאי 39 ג'ונמאי דאיגינג'ו ",
-    'אולטרה פרימיום סאקה מאורז נישיקי, מופת של איזון והרמוניה (300 מ"ל)',
-    "Dassai 39 Junmai Daiginjo",
-    "Ultra premium sake, made from Nishiki rice. A masterpiece of balance and harmony (300 ml)",
-    185
-  );
-  new Sake(
-    "היאשיבורי ג'ונמאי דאיגינג'ו ",
-    'פירותי,יבש ואלגנטי (720 מ"ל)',
-    "Hiyashibori Junmai Daiginjo",
-    "Dry, fruity and elegant (720 ml)",
-    170
-  );
+new WineRose(
+  "קרמאן דה לואר ל'אקסטרא",
+  "לאנגלואה שאטו, צרפת",
+  "Cremants De Loire L'Extra",
+  "Langlois Chateau, France",
+  170
+);
 
-  //WINE
+new WineRose(
+  "מואט&שנדו",
+  "אימפריאל ברוט, צרפת",
+  "Moet & Chandon",
+  "Imperial Brut, France",
+  430
+);
 
-  // Glass
-  new GlassWineWhite(
-    "מוסקדה",
-    "גפנים בוגרות, שרו קארה, צרפת",
-    "Muscadet",
-    "Comte Leloup, Chereau-Carre, France",
-    38,
-    2016
-  );
-  new GlassWineWhite(
-    "גוורצטרמינר",
-    "פלטר, ישראל",
-    "Gewurztraminer",
-    "Pelter, Israel",
-    44,
-    2020
-  );
-  new GlassWineWhite(
-    "גראז' דה פאפא לבן",
-    "לוינסון, ישראל",
-    "Garage De Papa White",
-    "Lewinsohn, Israel",
-    52,
-    2020
-  );
+new WineRose(
+  "בולינג'ר",
+  "ספיישל קווה, צרפת",
+  "Bollinger",
+  "Special Cuvee, France",
+  620
+);
 
-  new GlassWineWhite(
-    "סנסר",
-    "דומיין ושרון, צרפת",
-    "Sancerre",
-    "Domaine Vacheron, France",
-    58,
-    2020
-  );
+new WineRed(
+  "קוט דו רון בלרוש",
+  'שאפוטייה, צרפת (375 מ"ל)',
+  "Belleruche",
+  "Cotes Du Rhone, France (375 ml)",
+  80,
+  2019
+);
 
-  new GlassWineRose(
-    "קרמאן דה לואר ל'אקסטרא",
-    "לאנגלואה שאטו, צרפת",
-    "Cremants De Loire L'Extra",
-    "Langlois Chateau, France",
-    38
-  );
-  new GlassWineRose(
-    "רוזה מאליז",
-    "דומיין קארטרון, צרפת",
-    "Rose Malyse",
-    "Domaine Carteyron, France",
-    40,
-    2020
-  );
+new WineRed(
+  "מנוט",
+  "מאס מרטינט, ספרד",
+  "Menut",
+  "Mas Martinet, Spain",
+  170,
+  2019
+);
 
-  new GlassWineRed(
-    "מנוט",
-    "מאס מרטינט, ספרד",
-    "Menut",
-    "Mas Martinet, Spain",
-    38,
-    2019
-  );
-  new GlassWineRed(
-    "גראז' דה פאפא אדום",
-    "לוינסון, ישראל",
-    "Garage De Papa Red",
-    "Lewinsohn, Israel",
-    56,
-    2020
-  );
+new WineRed(
+  "פינו נואר",
+  "ויתקין, ישראל",
+  "Pinot Noir",
+  "Vitkin, Israel",
+  185,
+  2019
+);
 
-  // Bottles
-  new WineWhite(
-    "ריזלינג",
-    'בסטהיים, צרפת  (375 מ"ל)',
-    "Riesling",
-    "Bestheim, France  (375 ml)",
-    75,
-    2018
-  );
+new WineRed(
+  "מרלו",
+  "הראל, קלו דה גת, ישראל",
+  "Merlot",
+  "Har'el, Clos De Gat, Israel",
+  210,
+  2018
+);
 
-  new WineWhite(
-    "פינו גריג'יו",
-    'לה טונלה, איטליה (375 מ"ל)',
-    "Pinot Grigio",
-    "LaTunella, Italy (375 ml)",
-    85,
-    2020
-  );
+new WineRed(
+  "גראז' דה פאפא אדום",
+  "לוינסון, ישראל",
+  "Garage De Papa Red",
+  "Lewinsohn, Israel",
+  235,
+  2020
+);
+new WineRed(
+  "אמרונה",
+  'טומאסי, איטליה (375 מ"ל)',
+  "Amarone",
+  "Tommasi, Italy (375 ml)",
+  240,
+  2016
+);
 
-  new WineWhite(
-    "מוסקדה",
-    "גפנים בוגרות, שרו קארה, צרפת",
-    "Muscadet",
-    "Comte Leloup, Chereau-Carre, France",
-    155,
-    2016
-  );
-  new WineWhite(
-    "ריזלינג",
-    'וילה בורקלין, ד"ר בורקלין וולף, גרמניה',
-    "Riesling",
-    "Villa Buerklin, Dr Buerklin Wolf, Germany",
-    170,
-    2018
-  );
+new WineRed("אמרונה", "טומאסי, איטליה", "Amarone", "Tommasi, Italy", 360, 2016);
 
-  new WineWhite(
-    "גוורצטרמינר",
-    "פלטר, ישראל",
-    "Gewurztraminer",
-    "Pelter, Israel",
-    180,
-    2020
-  );
-
-  new WineWhite(
-    "שנסון",
-    "קלו דה גת , ישראל",
-    "Chanson",
-    "Clos De Gat, Israel",
-    190,
-    2020
-  );
-
-  new WineWhite(
-    "שבלי פרימייר קרו",
-    "דומיין פורי, צרפת",
-    "Chablis Premier Cru",
-    "Domaine Fourrey, France",
-    220,
-    2019
-  );
-  new WineWhite(
-    "רוסאן-ויונייה",
-    "אחת, ישראל",
-    "Roussanne-Viogniers",
-    "Ahat, Israel",
-    230,
-    2019
-  );
-
-  new WineWhite(
-    "גראז' דה פאפא לבן ",
-    "לוינסון, ישראל",
-    "Garage De Papa White",
-    "Lewinsohn, Israel",
-    235,
-    2020
-  );
-
-  new WineWhite(
-    "סאנסר",
-    "דומיין ושרון, צרפת",
-    "Sancerre",
-    "Domaine Vacheron, France",
-    260,
-    2020
-  );
-
-  new WineRose(
-    "רוזה מאליז",
-    "דומיין קארטרון, צרפת",
-    "Rose Malyse",
-    "Domaine Carteyron, France",
-    170,
-    2020
-  );
-
-  new WineRose("רוזה", "מיראבל, צרפת", "Rose", "Miraval, France", 220, 2020);
-
-  new WineRose(
-    "קרמאן דה לואר ל'אקסטרא",
-    "לאנגלואה שאטו, צרפת",
-    "Cremants De Loire L'Extra",
-    "Langlois Chateau, France",
-    170
-  );
-
-  new WineRose(
-    "מואט&שנדו",
-    "אימפריאל ברוט, צרפת",
-    "Moet & Chandon",
-    "Imperial Brut, France",
-    430
-  );
-
-  new WineRose(
-    "בולינג'ר",
-    "ספיישל קווה, צרפת",
-    "Bollinger",
-    "Special Cuvee, France",
-    620
-  );
-
-  new WineRed(
-    "קוט דו רון בלרוש",
-    'שאפוטייה, צרפת (375 מ"ל)',
-    "Belleruche",
-    "Cotes Du Rhone, France (375 ml)",
-    80,
-    2019
-  );
-
-  new WineRed(
-    "מנוט",
-    "מאס מרטינט, ספרד",
-    "Menut",
-    "Mas Martinet, Spain",
-    170,
-    2019
-  );
-
-  new WineRed(
-    "פינו נואר",
-    "ויתקין, ישראל",
-    "Pinot Noir",
-    "Vitkin, Israel",
-    185,
-    2019
-  );
-
-  new WineRed(
-    "מרלו",
-    "הראל, קלו דה גת, ישראל",
-    "Merlot",
-    "Har'el, Clos De Gat, Israel",
-    210,
-    2018
-  );
-
-  new WineRed(
-    "גראז' דה פאפא אדום",
-    "לוינסון, ישראל",
-    "Garage De Papa Red",
-    "Lewinsohn, Israel",
-    235,
-    2020
-  );
-  new WineRed(
-    "אמרונה",
-    'טומאסי, איטליה (375 מ"ל)',
-    "Amarone",
-    "Tommasi, Italy (375 ml)",
-    240,
-    2016
-  );
-
-  new WineRed(
-    "אמרונה",
-    "טומאסי, איטליה",
-    "Amarone",
-    "Tommasi, Italy",
-    360,
-    2016
-  );
-
-  // Wine from the cellar
-  new WineCellar(
-    "עמק איילון",
-    "קלו דה גת, ישראל",
-    "Ayalon Valley",
-    "Clos De Gat, Israel",
-    590,
-    2004
-  );
-  new WineCellar(
-    "מרלו סיקרא",
-    "קלו דה גת, ישראל",
-    "Merlot Sycra",
-    "Clos De Gat, Israel",
-    650,
-    2006
-  );
-  new WineCellar(
-    "אמרונה",
-    "טומאסי, איטליה",
-    "Amarone",
-    "Tomassi, Italy",
-    [750, 650],
-    "2006/2007"
-  );
-  new WineCellar(
-    "גואדו אל טאסו בולגרי",
-    "אנטינורי, איטליה",
-    "Guado al Tasso Bolgheri",
-    "Antinori, Italy",
-    820,
-    2005
-  );
-  new WineCellar(
-    "קברנה סוביניון ירדן",
-    "רמת הגולן,ישראל",
-    "Cabernet Sauvignon Yarden",
-    "Golan Heights, Israel",
-    850,
-    2004
-  );
-  new WineCellar(
-    "גראן וין",
-    "קסטל, ישראל",
-    "Grand Vin",
-    "Domaine du Castel, Israel",
-    850,
-    2007
-  );
-  new WineCellar(
-    "אליון וגה סיציליה",
-    "ספרד",
-    "Alion Vega Sicilia",
-    "Spain",
-    920,
-    2005
-  );
-  new WineCellar(
-    "יער יתיר",
-    "יתיר, ישראל",
-    "Yatir Forest",
-    "Yatir, Israel",
-    950,
-    2008
-  );
-  new WineCellar(
-    "רום ירדן",
-    "רמת הגולן, ישראל",
-    "Rom Yarden",
-    "Golan Heights, Israel",
-    1350,
-    2006
-  );
-  new WineCellar(
-    "סולאייה אנטינורי",
-    "טוסקנה, איטליה",
-    "Solaia Antinori",
-    "Toscany, Italy",
-    1800,
-    2004
-  );
-  new WineCellar(
-    "קצרין",
-    "רמת הגולן, ישראל",
-    "Katzrin",
-    "Golan Heights, Israel",
-    [1800, 1500],
-    "2007/2008"
-  );
-});
+// Wine from the cellar
+new WineCellar(
+  "עמק איילון",
+  "קלו דה גת, ישראל",
+  "Ayalon Valley",
+  "Clos De Gat, Israel",
+  590,
+  2004
+);
+new WineCellar(
+  "מרלו סיקרא",
+  "קלו דה גת, ישראל",
+  "Merlot Sycra",
+  "Clos De Gat, Israel",
+  650,
+  2006
+);
+new WineCellar(
+  "אמרונה",
+  "טומאסי, איטליה",
+  "Amarone",
+  "Tomassi, Italy",
+  [750, 650],
+  "2006/2007"
+);
+new WineCellar(
+  "גואדו אל טאסו בולגרי",
+  "אנטינורי, איטליה",
+  "Guado al Tasso Bolgheri",
+  "Antinori, Italy",
+  820,
+  2005
+);
+new WineCellar(
+  "קברנה סוביניון ירדן",
+  "רמת הגולן,ישראל",
+  "Cabernet Sauvignon Yarden",
+  "Golan Heights, Israel",
+  850,
+  2004
+);
+new WineCellar(
+  "גראן וין",
+  "קסטל, ישראל",
+  "Grand Vin",
+  "Domaine du Castel, Israel",
+  850,
+  2007
+);
+new WineCellar(
+  "אליון וגה סיציליה",
+  "ספרד",
+  "Alion Vega Sicilia",
+  "Spain",
+  920,
+  2005
+);
+new WineCellar(
+  "יער יתיר",
+  "יתיר, ישראל",
+  "Yatir Forest",
+  "Yatir, Israel",
+  950,
+  2008
+);
+new WineCellar(
+  "רום ירדן",
+  "רמת הגולן, ישראל",
+  "Rom Yarden",
+  "Golan Heights, Israel",
+  1350,
+  2006
+);
+new WineCellar(
+  "סולאייה אנטינורי",
+  "טוסקנה, איטליה",
+  "Solaia Antinori",
+  "Toscany, Italy",
+  1800,
+  2004
+);
+new WineCellar(
+  "קצרין",
+  "רמת הגולן, ישראל",
+  "Katzrin",
+  "Golan Heights, Israel",
+  [1800, 1500],
+  "2007/2008"
+);
 
 //Made by konyshevs
