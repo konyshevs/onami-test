@@ -141,9 +141,6 @@ nav {
   padding-bottom: 100px;
 }
 
-nav a {
-}
-
 .nav-cat-title {
   padding-top: 10px;
   border-bottom: 1px solid var(--color2);
@@ -254,6 +251,20 @@ main {
   font-weight: bold;
   font-size: 18px;
   /* margin-top: 20px; */
+}
+
+.menu-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45vw;
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.menu-img {
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .menu-description {

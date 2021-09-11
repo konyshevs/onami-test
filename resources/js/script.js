@@ -204,6 +204,11 @@ $("document").ready(function () {
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
+        ${
+          menuObj.imageUrl
+            ? `<div class="menu-img-container"><div class="menu-img-wrapper"><img class="menu-img" src="${menuObj.imageUrl}" alt="${menuObj.titleEN}"></div></div>`
+            : ""
+        }
         <div class="menu-description">${menuObj[`description${lang}`]}</div>
         <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
     </div>
@@ -221,6 +226,11 @@ $("document").ready(function () {
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
+        ${
+          menuObj.imageUrl
+            ? `<div class="menu-img-container"><div class="menu-img-wrapper"><img class="menu-img" src="${menuObj.imageUrl}" alt="${menuObj.titleEN}"></div></div>`
+            : ""
+        }
         <div class="menu-description">${menuObj[`description${lang}`]}</div>
     </div>
     ${menuObj.types

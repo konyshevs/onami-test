@@ -1,6 +1,12 @@
 // STATE
 import { runAfterDate, runBeforeDate } from "./helpers.js";
 import { END_DATE, START_DATE } from "./config.js";
+import makiImg from "url:../img/maki.jpeg";
+import temakiImg from "url:../img/temaki.jpeg";
+import irodoriImg from "url:../img/irodori.jpeg";
+import nigiriImg from "url:../img/nigiri.jpeg";
+import inariImg from "url:../img/inari.jpeg";
+import inariSpeciaImg from "url:../img/inarispecial.jpeg";
 
 export const menuList = [];
 export let favorits = [];
@@ -122,6 +128,7 @@ export const state = {
         "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
       postScriptumEN: "",
       priceEN: "Nigiri/Seshimi",
+      imageUrl: nigiriImg,
       dishes: [],
       types: [
         { titleHE: "דגי ים", titleEN: "SEA FISH", dishes: [] },
@@ -153,6 +160,7 @@ export const state = {
         "Gunkan - rice ball wrapped with Nori & filled with fish / seafood / vegetables<br>Inari - sweet tofu pocket filled with rice, fish / seafood / vegetables",
       postScriptumEN: "",
       priceEN: "Gunkan/Inari",
+      imageUrl: inariImg,
       dishes: [],
     },
     {
@@ -163,6 +171,7 @@ export const state = {
       titleEN: "Inari Special",
       descriptionEN: "",
       postScriptumEN: "",
+      imageUrl: inariSpeciaImg,
       dishes: [],
     },
   ],
@@ -175,6 +184,7 @@ export const state = {
       titleEN: "Hosomaki",
       descriptionEN: "Thin roll (Cut into 8)",
       postScriptumEN: "",
+      imageUrl: makiImg,
       dishes: [],
     },
     {
@@ -194,6 +204,7 @@ export const state = {
     titleEN: "Temaki",
     descriptionEN: "Hand roll",
     postScriptumEN: "",
+    imageUrl: temakiImg,
     dishes: [],
   },
   irodori: [
@@ -204,6 +215,7 @@ export const state = {
       titleEN: "Irodori i/o",
       descriptionEN: "Inside-Out roll - cut into 4",
       postScriptumEN: "",
+      imageUrl: irodoriImg,
       dishes: [],
     },
     {
@@ -229,18 +241,21 @@ export const state = {
         titleEN: "VEGETARIAN",
         price: 140,
         dishes: [],
+        imageUrl: "",
       },
       {
         titleHE: "סקאנה",
         titleEN: "SAKANA",
         price: 210,
         dishes: [],
+        imageUrl: "",
       },
       {
         titleHE: "קאיסן",
         titleEN: "KAISEN",
         price: 230,
         dishes: [],
+        imageUrl: "",
       },
     ],
   },
@@ -2237,7 +2252,7 @@ new GlassWineWhite(
   "Muscadet",
   "Comte Leloup, Chereau-Carre, France",
   38,
-  2016
+  2017
 );
 new GlassWineWhite(
   "גוורצטרמינר",
