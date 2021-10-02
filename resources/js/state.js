@@ -2265,7 +2265,7 @@ new GlassWineWhite(
 new GlassWineWhite(
   "גראז' דה פאפא לבן",
   "לוינסון, ישראל",
-  "Garage De Papa White",
+  "Garage De Papa Blanc",
   "Lewinsohn, Israel",
   52,
   2020
@@ -2307,7 +2307,7 @@ new GlassWineRed(
 new GlassWineRed(
   "גראז' דה פאפא אדום",
   "לוינסון, ישראל",
-  "Garage De Papa Red",
+  "Garage De Papa Rouge",
   "Lewinsohn, Israel",
   56,
   2020
@@ -2387,7 +2387,7 @@ new WineWhite(
 new WineWhite(
   "גראז' דה פאפא לבן ",
   "לוינסון, ישראל",
-  "Garage De Papa White",
+  "Garage De Papa Blanc",
   "Lewinsohn, Israel",
   235,
   2020
@@ -2476,7 +2476,7 @@ new WineRed(
 new WineRed(
   "גראז' דה פאפא אדום",
   "לוינסון, ישראל",
-  "Garage De Papa Red",
+  "Garage De Papa Rouge",
   "Lewinsohn, Israel",
   235,
   2020
