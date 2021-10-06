@@ -1,12 +1,12 @@
 // STATE
 import { runAfterDate, runBeforeDate } from "./helpers.js";
 import { END_DATE, START_DATE } from "./config.js";
-import makiImg from "url:../img/maki.jpeg";
-import temakiImg from "url:../img/temaki.jpeg";
-import irodoriImg from "url:../img/irodori.jpeg";
-import nigiriImg from "url:../img/nigiri.jpeg";
-import inariImg from "url:../img/inari.jpeg";
-import inariSpeciaImg from "url:../img/inarispecial.jpeg";
+import makiImg from "url:../img/maki.jpg";
+import temakiImg from "url:../img/temaki.jpg";
+import irodoriImg from "url:../img/irodori.jpg";
+import nigiriImg from "url:../img/nigiri.jpg";
+import inariImg from "url:../img/inari.jpg";
+import inariSpeciaImg from "url:../img/inarispecial.jpg";
 
 export const menuList = [];
 export let favorits = [];
