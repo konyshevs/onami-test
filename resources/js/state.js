@@ -2084,13 +2084,13 @@ new Cocktail(
   48
 );
 
-// new Cocktail(
-//   "ביטלג'וס",
-//   "ג'ין, טקילה רפוסדו, קיווי ופסיפלורה",
-//   "Beetlejuice",
-//   "Gin, Tequila Reposado, kiwi & passion fruit",
-//   52
-// );
+new Cocktail(
+  "ביטלג'וס",
+  "ג'ין, טקילה רפוסדו, קיווי ופסיפלורה",
+  "Beetlejuice",
+  "Gin, Tequila Reposado, kiwi & passion fruit",
+  52
+);
 
 new Cocktail(
   "מינט ג'ולפ",
