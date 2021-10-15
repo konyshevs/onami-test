@@ -1,12 +1,12 @@
 // STATE
 import { runAfterDate, runBeforeDate } from "./helpers.js";
 import { END_DATE, START_DATE } from "./config.js";
-import makiImg from "url:../img/maki.jpg";
-import temakiImg from "url:../img/temaki.jpg";
-import irodoriImg from "url:../img/irodori.jpg";
-import nigiriImg from "url:../img/nigiri.jpg";
-import inariImg from "url:../img/inari.jpg";
-import inariSpeciaImg from "url:../img/inarispecial.jpg";
+import makiImg from "../img/maki.jpg";
+import temakiImg from "../img/temaki.jpg";
+import irodoriImg from "../img/irodori.jpg";
+import nigiriImg from "../img/nigiri.jpg";
+import inariImg from "../img/inari.jpg";
+import inariSpeciaImg from "../img/inarispecial.jpg";
 
 export const menuList = [];
 export let favorits = [];
@@ -946,17 +946,17 @@ const kuroUdon = new HotAppetiser(
 // SKEWERS
 const negima = new Skewer(
   "נגימה",
-  "פרגית עם בצל ירוק",
+  "פרגית עם בצל ירוק ברוטב יאקיטורי טארה",
   "Negima",
-  "Spring chicken & scallion",
+  "Spring chicken & scallion with yakitori tare sauce",
   28
 );
 
 const sakeYaki = new Skewer(
   "סאקה יאקי",
-  "סלמון",
+  "סלמון ברוטב יאקיטורי טארה",
   "Sake Yaki",
-  "Salmon fillet",
+  "Salmon fillet with yakitori tare sauce",
   28
 );
 
@@ -1605,7 +1605,7 @@ const ebiSakekawaTemaki = new Temaki(
   "אבי סאקה קאווה טמאקי",
   "שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
   "Ebi Sakekawa Temaki",
-  "Shrimp tempura, Salmon skin & avocado",
+  "Shrimp tempura, salmon skin & avocado",
   38
 );
 
@@ -1695,7 +1695,7 @@ const ebiSakekawaRoll = new Irodori(
   "אבי סאקה קאווה רול",
   "שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
   "Ebi Sakekawa Roll",
-  "Shrimp tempura, Salmon skin & avocado",
+  "Shrimp tempura, salmon skin & avocado",
   38
 );
 
@@ -1880,6 +1880,14 @@ const sakeSteak = new Menu(
   100
 );
 
+const ebiSakekawaTemakiLunch = new Temaki(
+  "אבי סאקה קאווה טמאקי",
+  "קונוס עם שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
+  "Ebi Sakekawa Temaki",
+  "Hand roll with shrimp tempura, salmon skin & avocado",
+  38
+);
+
 const lunchSushiTypeNigiri = {
   titleHE: "ניגירי (זוג):",
   titleEN: "Nigiri (a pair):",
@@ -1917,7 +1925,7 @@ state.lunch75.types[0].dishes = [
   ebiFurai,
   agedashiDoufu,
   sakemoriRoll,
-  ebiSakekawaTemaki,
+  ebiSakekawaTemakiLunch,
 ];
 state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu, yasaiUdon];
 state.lunch75.types[2].dishes = [
