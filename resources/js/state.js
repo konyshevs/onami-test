@@ -1,16 +1,15 @@
 // STATE
 import { runAfterDate, runBeforeDate } from "./helpers.js";
 import { END_DATE, START_DATE } from "./config.js";
-import makiImg from "../img/maki.jpg";
-import temakiImg from "../img/temaki.jpg";
-import irodoriImg from "../img/irodori.jpg";
-import nigiriImg from "../img/nigiri.jpg";
-import inariImg from "../img/inari.jpg";
-import inariSpeciaImg from "../img/inarispecial.jpg";
+import makiImg from "url:../img/maki.jpg";
+import temakiImg from "url:../img/temaki.jpg";
+import irodoriImg from "url:../img/irodori.jpg";
+import nigiriImg from "url:../img/nigiri.jpg";
+import inariImg from "url:../img/inari.jpg";
+import inariSpeciaImg from "url:../img/inarispecial.jpg";
 
 export const menuList = [];
 export let favorits = [];
-
 const init = function () {
   const storage = localStorage.getItem("favorits");
   if (storage) favorits = JSON.parse(storage);
