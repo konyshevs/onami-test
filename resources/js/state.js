@@ -1,12 +1,12 @@
 // STATE
 import { runAfterDate, runBeforeDate } from "./helpers.js";
 import { END_DATE, START_DATE } from "./config.js";
-import makiImg from "url:../img/maki.jpg";
-import temakiImg from "url:../img/temaki.jpg";
-import irodoriImg from "url:../img/irodori.jpg";
-import nigiriImg from "url:../img/nigiri.jpg";
-import inariImg from "url:../img/inari.jpg";
-import inariSpeciaImg from "url:../img/inarispecial.jpg";
+import makiImg from "../img/maki.jpg";
+import temakiImg from "../img/temaki.jpg";
+import irodoriImg from "../img/irodori.jpg";
+import nigiriImg from "../img/nigiri.jpg";
+import inariImg from "../img/inari.jpg";
+import inariSpeciaImg from "../img/inarispecial.jpg";
 
 export const menuList = [];
 export let favorits = [];
@@ -811,7 +811,15 @@ const harusameSalad = new ColdAppetiser(
   36
 );
 
-const midoriSalad = new ColdAppetiser(
+const rootSalad = new ColdAppetiser(
+  "סלט שורשים",
+  "סלק גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו רוטב וואפו",
+  "Root vegetables salad",
+  "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
+  42
+);
+
+new ColdAppetiser(
   "סלט מידורי",
   "סלט עלי חסה, רוקט, צנונית, מלפפון, תפוח, בצל ושקדים קלויים ברוטב למון ג'ויו (טבעוני, ללא גלוטן)",
   "Midori Salad",
@@ -836,7 +844,7 @@ const midoriSalad = new ColdAppetiser(
 //   36
 // );
 
-const boraYuzuAburaDoushi = new ColdAppetiser(
+new ColdAppetiser(
   "בורה יוזו אבורה דושי",
   "סשימי בורי בחיתוך דק צרוב בשמן שומשום חם ויוזו, סויה וג'ינג'ר",
   "Bora Yuzu Abura Doushi",
@@ -844,7 +852,7 @@ const boraYuzuAburaDoushi = new ColdAppetiser(
   58
 );
 
-const sakeAvocadoCocktail = new ColdAppetiser(
+new ColdAppetiser(
   "סאקה אבוקדו קוקטייל",
   "טרטר סלמון ואבוקדו עם סויה, ווסאבי קראנץ' בעיטור ביצי סלמון",
   "Sake & Avocado Cocktail",
@@ -852,7 +860,7 @@ const sakeAvocadoCocktail = new ColdAppetiser(
   62
 );
 
-const maguroYukke = new ColdAppetiser(
+new ColdAppetiser(
   "מגורו יוקה",
   "טרטר טונה מתובל בסויה, עירית וחלמון ביצת שליו נא",
   "Maguro Yukke",
@@ -860,7 +868,7 @@ const maguroYukke = new ColdAppetiser(
   72
 );
 
-const maguroTataki = new ColdAppetiser(
+new ColdAppetiser(
   "מגורו טטאקי",
   "סשימי טונה צרובה, רוטב ספייסי פונזו וג'ינג'ר טרי",
   "Maguro Tataki",
@@ -910,7 +918,7 @@ const ebiTempura = new HotAppetiser(
   44
 );
 
-const ikaGeso = new HotAppetiser(
+new HotAppetiser(
   "איקה ג׳סו",
   "ראשי קלמארי פריכים עם מיונז יפני",
   "Ika Geso",
@@ -918,7 +926,7 @@ const ikaGeso = new HotAppetiser(
   44
 );
 
-const zakanaButterShoyu = new HotAppetiser(
+new HotAppetiser(
   "סקאנה באטר שואיו",
   "נתחי בורי בחמאה, שום, סויה, סאקה, ג'ינג'ר ומירין",
   "Zakana Butter Shoyu",
@@ -926,7 +934,7 @@ const zakanaButterShoyu = new HotAppetiser(
   62
 );
 
-const kaisenButterShoyu = new HotAppetiser(
+new HotAppetiser(
   "קאיסן באטר שואיו",
   "פירות ים בחמאה, שום, סויה, סאקה, ג'ינג'ר ומירין",
   "Kaisen Butter Shoyu",
@@ -934,7 +942,7 @@ const kaisenButterShoyu = new HotAppetiser(
   64
 );
 
-const kuroUdon = new HotAppetiser(
+new HotAppetiser(
   "קורו אודון",
   "אטריות אודון שחורות עם שרימפ בחמאה, צ'ילי ושום",
   "Kuro Udon",
@@ -943,7 +951,7 @@ const kuroUdon = new HotAppetiser(
 );
 
 // SKEWERS
-const negima = new Skewer(
+new Skewer(
   "נגימה",
   "פרגית עם בצל ירוק ברוטב יאקיטורי טארה",
   "Negima",
@@ -951,7 +959,7 @@ const negima = new Skewer(
   28
 );
 
-const sakeYaki = new Skewer(
+new Skewer(
   "סאקה יאקי",
   "סלמון ברוטב יאקיטורי טארה",
   "Sake Yaki",
@@ -959,7 +967,7 @@ const sakeYaki = new Skewer(
   28
 );
 
-const ebiYaki = new Skewer("אבי יאקי", "שרימפ", "Ebi Yaki", "Shrimp", 28);
+new Skewer("אבי יאקי", "שרימפ", "Ebi Yaki", "Shrimp", 28);
 
 // MAID DISHES
 
@@ -972,7 +980,7 @@ const ingenDofu = new MainDish(
   true
 );
 
-const suzukiAgedashi = new MainDish(
+new MainDish(
   "סוזוקי אגדאשי",
   " פילה בס ובצל פריך מוגש לצד רוטב טנצויו חם ושבבי בוניטו",
   "Suzuki Agedashi",
@@ -988,7 +996,7 @@ const kaisenShougaItame = new MainDish(
   98
 );
 
-const zakanaChirashi = new MainDish(
+new MainDish(
   "סקאנה צ'יראשי",
   "סשימי סלמון, דניס, טונה, שרימפ, ביצי סלמון ואומלט יפני על אורז סושי בעיטור בצל ירוק ושומשום קלוי",
   "Zakana Chirashi",
@@ -1004,7 +1012,7 @@ const kurodaiSugatayaki = new MainDish(
   120
 );
 
-const sakamushi = new MainDish(
+new MainDish(
   "סקאמושי",
   "פילה לברק וירקות מאודים בסאקה. מוגש עם אורז מאודה",
   "Sakamushi",
@@ -1012,7 +1020,7 @@ const sakamushi = new MainDish(
   128
 );
 
-const wafuHireSteak = new MainDish(
+new MainDish(
   "וואפו הירה סטייק",
   "פילה בקר בגריל",
   "Wafu Hire Steak",
@@ -1021,7 +1029,7 @@ const wafuHireSteak = new MainDish(
 );
 
 // DESSERTS
-const gomaParfait = new Dessert(
+new Dessert(
   "גומא פרפה",
   "פרפה חלווה בציפוי שוקולד לבן על רוטב חלווה ומחית פיסטוק",
   "Goma Parfait",
@@ -1029,7 +1037,7 @@ const gomaParfait = new Dessert(
   48
 );
 
-const matchaBrulee = new Dessert(
+new Dessert(
   "מאצ'ה ברולה",
   "ברולה תה ירוק ושוקולד לבן (ללא גלוטן)",
   "Matcha Brulee",
@@ -1045,7 +1053,7 @@ const matchaBrulee = new Dessert(
 //   48
 // );
 
-const chocoreto = new Dessert(
+new Dessert(
   "צ׳וקורטו",
   "מוס שוקולד מריר, קרם פרלינה, שינקובה טראפל, קראמבל מיסו וטוויל קקאו",
   "Chocoreto",
@@ -1081,7 +1089,7 @@ new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximen
 // SESHIMI
 const sake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [20, 36]);
 
-const sakeTeriyaki = new SeshimiNigiri(
+new SeshimiNigiri(
   0,
   "סאקה טריאקי",
   "סלמון מבושל ברוטב טריאקי",
@@ -1116,23 +1124,9 @@ const shiroguchi = new SeshimiNigiri(
   [20, 40]
 );
 
-const maguro = new SeshimiNigiri(
-  0,
-  "מגורו",
-  "טונה",
-  "Maguro",
-  "Tuna",
-  [24, 50]
-);
+new SeshimiNigiri(0, "מגורו", "טונה", "Maguro", "Tuna", [24, 50]);
 
-const hamachi = new SeshimiNigiri(
-  0,
-  "המאצ'י",
-  "ילוטייל",
-  "Hamachi",
-  "Yellowtail",
-  [24, 50]
-);
+new SeshimiNigiri(0, "המאצ'י", "ילוטייל", "Hamachi", "Yellowtail", [24, 50]);
 
 const bora = new SeshimiNigiri(1, "בורה", "בורי", "Bora", "Mullet", [18, 34]);
 
@@ -1156,16 +1150,9 @@ const ebi = new SeshimiNigiri(
   [16, 30]
 );
 
-const hotate = new SeshimiNigiri(
-  2,
-  "הוטטה",
-  "סקלופ",
-  "Hotate",
-  "Scallop",
-  [24, 42]
-);
+new SeshimiNigiri(2, "הוטטה", "סקלופ", "Hotate", "Scallop", [24, 42]);
 
-const hotateTeriyaki = new SeshimiNigiri(
+new SeshimiNigiri(
   2,
   "הוטטה טריאקי",
   "סקלופ מבושל ברוטב טריאקי",
@@ -1174,15 +1161,7 @@ const hotateTeriyaki = new SeshimiNigiri(
   ["-", 26]
 );
 
-const avocado = new SeshimiNigiri(
-  3,
-  "אבוקדו",
-  "",
-  "Avocado",
-  "",
-  ["-", 14],
-  true
-);
+new SeshimiNigiri(3, "אבוקדו", "", "Avocado", "", ["-", 14], true);
 
 const tamago = new SeshimiNigiri(
   3,
@@ -1193,7 +1172,7 @@ const tamago = new SeshimiNigiri(
   [16, 22]
 );
 
-const shimaAji = new SeshimiNigiri(
+new SeshimiNigiri(
   4,
   "שימה אג'י",
   "טרחון",
@@ -1202,32 +1181,11 @@ const shimaAji = new SeshimiNigiri(
   [22, 44]
 );
 
-const hiramasa = new SeshimiNigiri(
-  4,
-  "היראמאסה",
-  "אינטיאס",
-  "Hiramasa",
-  "Amberjack",
-  [22, 46]
-);
+new SeshimiNigiri(4, "היראמאסה", "אינטיאס", "Hiramasa", "Amberjack", [22, 46]);
 
-const madai = new SeshimiNigiri(
-  4,
-  "מאדאי",
-  "פרידה",
-  "Madai",
-  "Red snapper",
-  [28, 56]
-);
+new SeshimiNigiri(4, "מאדאי", "פרידה", "Madai", "Red snapper", [28, 56]);
 
-const ohToro = new SeshimiNigiri(
-  4,
-  "או טורו",
-  "טונה שמנה",
-  "Oh-Toro",
-  "Fatty tuna",
-  [30, 66]
-);
+new SeshimiNigiri(4, "או טורו", "טונה שמנה", "Oh-Toro", "Fatty tuna", [30, 66]);
 
 // SESHIMI SPECIAL
 new SeshimiSpecial(
@@ -1316,7 +1274,7 @@ const gunkanKaisenCocktail = new InariGunkan(
   [26, 30]
 );
 
-const gunkanTobikoUzura = new InariGunkan(
+new InariGunkan(
   "טוביקו אוזורה",
   "ביצי דג דאון וחלמון ביצת שליו",
   "Tobiko Uzura",
@@ -1324,7 +1282,7 @@ const gunkanTobikoUzura = new InariGunkan(
   [28, 32]
 );
 
-const gunkanSpicyTekka = new InariGunkan(
+new InariGunkan(
   "ספייסי טקה",
   "טונה קצוצה עם בצל ירוק ושמן צ'ילי",
   "Spicy Tekka",
@@ -1332,7 +1290,7 @@ const gunkanSpicyTekka = new InariGunkan(
   [34, 38]
 );
 
-const gunkanUnagiMix = new InariGunkan(
+new InariGunkan(
   "אונאגי מיקס",
   "צלופח מבושל בטריאקי קצוץ, אבוקדו, אושינקו, שקדים קלויים, בצל ירוק ושומשום לבן",
   "Unagi Mix Teriyaki",
@@ -1340,7 +1298,7 @@ const gunkanUnagiMix = new InariGunkan(
   [34, 38]
 );
 
-const gunkanIkuraUzura = new InariGunkan(
+new InariGunkan(
   "איקורה אוזורה",
   "ביצי סלמון וחלמון ביצת שליו",
   "Ikura Uzura",
@@ -1348,7 +1306,7 @@ const gunkanIkuraUzura = new InariGunkan(
   [34, 38]
 );
 
-const gunkanKurumaMaguro = new InariGunkan(
+new InariGunkan(
   "קורומה מגורו",
   "ג'מבו שרימפ קצוץ, אבוקדו, בצל ירוק, שומשום שחור, טריאקי וספייסי מיונז עטוף בסשימי טונה",
   "Kuruma Maguro Gunkan",
@@ -1365,7 +1323,7 @@ const gunkanKurumaMaguro = new InariGunkan(
 // );
 
 // INARI SPECIAL
-const specialYasaiCocktail = new InariSpecial(
+new InariSpecial(
   "אינארי ספיישל יאסאי קוקטייל",
   "אינארי טמפורה, אספרגוס טמפורה, אבוקדו, צנון מוחמץ, בצל ירוק, שומשום, שקדים קלויים וטריאקי (טבעוני)",
   "Inari Special Yasai Cocktail",
@@ -1397,16 +1355,14 @@ const specialKuruma = new InariSpecial(
   "Inari tempura, prawn, avocado, black sesame seeds, scallion, spicy mayonnaise & teriyaki",
   32
 );
-
-const specialShiroZakana = new InariSpecial(
+new InariSpecial(
   "אינארי ספיישל שירו סקאנה",
   "אינארי טמפורה, דגים לבנים קצוצים, בצל ירוק, ביצי סלמון, אספרגוס טמפורה וספייסי מיונז",
   "Inari Special Shiro Zakana",
   "Inari tempura, white fish mix, scallion, salmon roe, asparagus tempura & spicy mayonnaise",
   34
 );
-
-const specialUnagiMix = new InariSpecial(
+new InariSpecial(
   "אינארי ספיישל אונאגי",
   "אינארי טמפורה, צלופח מבושל בטריאקי קצוץ, אבוקדו, אושינקו, שקדים קלויים, בצל ירוק ושומשום לבן",
   "Inari Unagi Mix",
@@ -1414,7 +1370,7 @@ const specialUnagiMix = new InariSpecial(
   38
 );
 
-const specialSpicyTekka = new InariSpecial(
+new InariSpecial(
   "אינארי ספיישל ספייסי טקה",
   "אינארי טמפורה, טונה קצוצה עם בצל ירוק, אספרגוס טמפורה ושמן צ'ילי",
   "Inari Spicy Tekka",
@@ -1422,7 +1378,7 @@ const specialSpicyTekka = new InariSpecial(
   38
 );
 
-const specialTobiko = new InariSpecial(
+new InariSpecial(
   "אינארי ספיישל טוביקו",
   "אינארי טמפורה, סלמון וטונה קצוצים, טוביקו וואסאבי, דלעת ממותקת, צנון מוחמץ, בצל סגול, בצל ירוק, אספרגוס טמפורה, טריאקי וספייסי מיונז",
   "Inari Special Tobiko",
@@ -1432,14 +1388,7 @@ const specialTobiko = new InariSpecial(
 
 // HOSOMAKI
 
-const avocadoMaki = new Hosomaki(
-  "אבוקדו מאקי",
-  "אבוקדו",
-  "Avocado Maki",
-  "Avocado",
-  18,
-  true
-);
+new Hosomaki("אבוקדו מאקי", "אבוקדו", "Avocado Maki", "Avocado", 18, true);
 
 const kanpyoTamagoMaki = new Hosomaki(
   "קאנפיו טמאגו מאקי",
@@ -1467,7 +1416,7 @@ const shiitakeMaki = new Hosomaki(
   true
 );
 
-const ebikyuMaki = new Hosomaki(
+new Hosomaki(
   "אביקיו מאקי",
   "שרימפ מאודה / בטמפורה ומלפפון",
   "Ebikyu Maki",
@@ -1475,7 +1424,7 @@ const ebikyuMaki = new Hosomaki(
   26
 );
 
-const sakekawaMaki = new Hosomaki(
+new Hosomaki(
   "סאקה קאווה מאקי",
   "סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ומלפפון (לא קריספי)",
   "Sakekawa Maki",
@@ -1491,7 +1440,7 @@ const californiaMaki = new Hosomaki(
   28
 );
 
-const torotakuMaki = new Hosomaki(
+new Hosomaki(
   "טורוטאקו מאקי",
   "סלמון שמן וצנון מוחמץ",
   "Torotaku Maki",
@@ -1523,7 +1472,7 @@ const ebiSakekawaMaki = new Hosomaki(
   32
 );
 
-const tekkaMaki = new Hosomaki("טקה מאקי", "טונה", "Tekka Maki", "Tuna", 34);
+new Hosomaki("טקה מאקי", "טונה", "Tekka Maki", "Tuna", 34);
 
 const spicyTekkaMaki = new Hosomaki(
   "ספייסי טקה מאקי",
@@ -1533,7 +1482,7 @@ const spicyTekkaMaki = new Hosomaki(
   34
 );
 
-const unakyuMaki = new Hosomaki(
+new Hosomaki(
   "אונקיו מאקי",
   "צלופח מבושל בטריאקי ומלפפון",
   "Unakyu Maki",
@@ -1560,7 +1509,7 @@ const californiaTemaki = new Temaki(
   30
 );
 
-const sakemoriTemaki = new Temaki(
+new Temaki(
   "סאקמורי טמאקי",
   "סלמון, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי), אבוקדו ומלפפון",
   "Sakemori Temaki",
@@ -1584,7 +1533,7 @@ const negiShiroZakanaTemaki = new Temaki(
   32
 );
 
-const sakeMixTemaki = new Temaki(
+new Temaki(
   "סאקה מיקס טמאקי",
   "סלמון קצוץ, ביצי סלמון, בצל ירוק, ושמן צ'ילי",
   "Sake Mix Temaki",
@@ -1592,7 +1541,7 @@ const sakeMixTemaki = new Temaki(
   32
 );
 
-const hokkaiTemaki = new Temaki(
+new Temaki(
   "הוקאיי טמאקי",
   "שרימפ ואספרגוס טמפורה עם אבוקדו",
   "Hokkai Temaki",
@@ -1608,7 +1557,7 @@ const ebiSakekawaTemaki = new Temaki(
   38
 );
 
-const spicyTekkaTemaki = new Temaki(
+new Temaki(
   "ספייסי טקה טמאקי",
   "טונה ובצל ירוק קצוצים, שמן צ'ילי ומלפפון",
   "Spicy Tekka Temaki",
@@ -1616,7 +1565,7 @@ const spicyTekkaTemaki = new Temaki(
   42
 );
 
-const onamiTemaki = new Temaki(
+new Temaki(
   "אונמי טמאקי",
   "שרימפ טמפורה, סלמון, טונה ומלפפון",
   "Onami Temaki",
@@ -1624,7 +1573,7 @@ const onamiTemaki = new Temaki(
   44
 );
 
-const unagiEbiTemaki = new Temaki(
+new Temaki(
   "אונאגי אבי טמאקי",
   "צלופח מבושל בטריאקי, שרימפ ואספרגוס בטמפורה, ביצי סלמון וספייסי מיונז",
   "Unagi Ebi Temaki",
@@ -1633,7 +1582,7 @@ const unagiEbiTemaki = new Temaki(
 );
 
 // IRODORI
-const vegiterianRoll = new Irodori(
+new Irodori(
   "רול צמחוני",
   "אבוקדו, שיטאקה, בצל ירוק, מלפפון, גזר, ספייסי מיונז וטריאקי",
   "Vegetarian Roll",
@@ -1674,7 +1623,7 @@ const californiaRoll = new Irodori(
   30
 );
 
-const beniToroRoll = new Irodori(
+new Irodori(
   "בני טורו רול",
   "סלמון שמן, מלפפון ובצל ירוק",
   "Beni Toro Roll",
@@ -1690,7 +1639,7 @@ const ebikyuRoll = new Irodori(
   32
 );
 
-const ebiSakekawaRoll = new Irodori(
+new Irodori(
   "אבי סאקה קאווה רול",
   "שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
   "Ebi Sakekawa Roll",
@@ -1706,7 +1655,7 @@ const shiroZakanaRoll = new Irodori(
   42
 );
 
-const spicyTekkaRoll = new Irodori(
+new Irodori(
   "ספייסי טקה רול",
   "טונה ובצל ירוק קצוצים, שמן צ'ילי, אבוקדו ואספרגוס",
   "Spicy Tekka Roll",
@@ -1722,7 +1671,7 @@ const hotateTobikoRoll = new Irodori(
   44
 );
 
-const onamiRoll = new Irodori(
+new Irodori(
   "אונמי רול",
   "שרימפ טמפורה, סלמון, טונה ומלפפון",
   "Onami Roll",
@@ -1730,7 +1679,7 @@ const onamiRoll = new Irodori(
   44
 );
 
-const unagiEbiRoll = new Irodori(
+new Irodori(
   "אונאגי אבי רול",
   "צלופח מבושל בטריאקי, שרימפ ואספרגוס בטמפורה, ביצי סלמון וספייסי מיונז",
   "Unagi Ebi Roll",
@@ -1738,7 +1687,7 @@ const unagiEbiRoll = new Irodori(
   50
 );
 
-const OnamiDream = new Irodori(
+new Irodori(
   "אונמי דרים",
   "אינארי טמפורה, שרימפ טמפורה, סלמון, ביצי סלמון, שיטאקה, טמאגו, צנון מוחמץ, אבוקדו, מלפפון וגזר",
   "Onami Dream",
@@ -1879,7 +1828,7 @@ const sakeSteak = new Menu(
   100
 );
 
-const ebiSakekawaTemakiLunch = new Temaki(
+const ebiSakekawaTemakiLunch = new Menu(
   "אבי סאקה קאווה טמאקי",
   "קונוס עם שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
   "Ebi Sakekawa Temaki",
@@ -1921,6 +1870,7 @@ const lunchSushiTypeGunkan = {
 state.lunch75.types[0].dishes = [
   omisoShiru,
   harusameSalad,
+  rootSalad,
   ebiFurai,
   agedashiDoufu,
   sakemoriRoll,

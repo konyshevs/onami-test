@@ -19,10 +19,11 @@
   "homepage": "https://github.com/konyshevs/onami-menu-app#readme",
   "devDependencies": {
     "@parcel/transformer-image": "^2.0.0-beta.2",
-    "parcel": "^2.0.0-beta.2"
+    "parcel": "^2.0.0"
   },
   "dependencies": {
     "core-js": "^3.18.1",
+    "firebase": "^9.1.3",
     "jquery": "^3.6.0"
   }
 }
