@@ -813,7 +813,7 @@ const harusameSalad = new ColdAppetiser(
 
 const rootSalad = new ColdAppetiser(
   "סלט שורשים",
-  "סלק, גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו ברוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
+  "אטריות תפוחי אדמה, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש טבעוני, ניתן לבקש ללא גלוטן)",
   "Root vegetables salad",
   "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
   42,
@@ -863,9 +863,9 @@ new ColdAppetiser(
 
 new ColdAppetiser(
   "מגורו יוקה",
-  "טרטר טונה מתובל בסויה, עירית וחלמון ביצת שליו נא",
+  "טרטר טונה וחלמון ביצת שליו נא",
   "Maguro Yukke",
-  "Tuna tartar seasoned with chive & soy sauce, served with quail egg yolk",
+  "Tuna tartar served with quail egg yolk",
   72
 );
 
