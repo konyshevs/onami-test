@@ -813,10 +813,11 @@ const harusameSalad = new ColdAppetiser(
 
 const rootSalad = new ColdAppetiser(
   "סלט שורשים",
-  "סלק גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו רוטב וואפו",
+  "סלק גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו רוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
   "Root vegetables salad",
   "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
-  42
+  42,
+  true
 );
 
 new ColdAppetiser(
