@@ -805,7 +805,7 @@ class WineCellar extends Wine {
 
 const harusameSalad = new ColdAppetiser(
   "סלט הרוסאמה",
-  "אטריות תפוחי אדמה, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש ללא גלוטן)",
+  "אטריות תפוחי אדמה, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש טבעוני, ניתן לבקש ללא גלוטן)",
   "Harusame Salad",
   "Cold potato noodles, scallion & salmon served with Wafu sauce",
   36
@@ -813,7 +813,7 @@ const harusameSalad = new ColdAppetiser(
 
 const rootSalad = new ColdAppetiser(
   "סלט שורשים",
-  "אטריות תפוחי אדמה, בצל ירוק וסלמון ברוטב וואפו (ניתן לבקש טבעוני, ניתן לבקש ללא גלוטן)",
+  "סלק, גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו ברוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
   "Root vegetables salad",
   "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
   42,
