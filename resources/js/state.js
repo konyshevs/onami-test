@@ -811,15 +811,6 @@ const harusameSalad = new ColdAppetiser(
   36
 );
 
-const rootSalad = new ColdAppetiser(
-  "סלט שורשים",
-  "סלק, גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו ברוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
-  "Root vegetables salad",
-  "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
-  42,
-  true
-);
-
 new ColdAppetiser(
   "סלט מידורי",
   "סלט עלי חסה, רוקט, צנונית, מלפפון, תפוח, בצל ושקדים קלויים ברוטב למון ג'ויו (טבעוני, ללא גלוטן)",
@@ -1745,6 +1736,15 @@ const vegetarianMixMaki = new Menu(
   "Vegetarian Mix Maki",
   gunkanVegetarian.descriptionEN,
   0
+);
+
+const rootSalad = new Menu(
+  "סלט שורשים",
+  "סלק, גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו ברוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
+  "Root vegetables salad",
+  "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
+  42,
+  true
 );
 
 const ebiFurai = new Menu(
