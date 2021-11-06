@@ -8,6 +8,8 @@ import nigiriImg from "../img/nigiri.jpg";
 import inariImg from "../img/inari.jpg";
 import inariSpeciaImg from "../img/inarispecial.jpg";
 
+// import { createDishDocument } from "./firebase/farebase.utils";
+
 export const menuList = [];
 export let favorits = [];
 const init = function () {
@@ -1021,13 +1023,13 @@ new MainDish(
 );
 
 // DESSERTS
-new Dessert(
-  "גומא פרפה",
-  "פרפה חלווה בציפוי שוקולד לבן על רוטב חלווה ומחית פיסטוק",
-  "Goma Parfait",
-  "Halva & white chocolate parfait, halva sauce & pistachio puree",
-  48
-);
+// new Dessert(
+//   "גומא פרפה",
+//   "פרפה חלווה בציפוי שוקולד לבן על רוטב חלווה ומחית פיסטוק",
+//   "Goma Parfait",
+//   "Halva & white chocolate parfait, halva sauce & pistachio puree",
+//   48
+// );
 
 new Dessert(
   "מאצ'ה ברולה",
@@ -1047,11 +1049,16 @@ new Dessert(
 
 new Dessert(
   "צ׳וקורטו",
-  "מוס שוקולד מריר, קרם פרלינה, שינקובה טראפל, קראמבל מיסו וטוויל קקאו",
+  "מוס שוקולד, בצק פילו, קראנץ' שוקולד,  ושקדים מקורמלים",
   "Chocoreto",
-  "Chocolate mousse, praline cream, shinkobe truffle, miso crumble & coco tuiles",
-  58
+  "Chocolate mousse, filo dough, chocolate crunch, and caramelized almonds",
+  48,
+  true
 );
+
+new Dessert("גלידת מאצ'ה", "כדור", "Matcha icecream", "", 16);
+
+new Dessert("סורבה פירות", "כדור", "Fruit sorbet", "", 16, true);
 
 // HOT DRINKS
 new Coffee("", "אספרסו", "", "Espresso", [12, 14]);

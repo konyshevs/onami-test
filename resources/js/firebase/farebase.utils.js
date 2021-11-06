@@ -1,16 +1,9 @@
-import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-
-const firebaseApp = initializeApp({
-  apiKey: "### FIREBASE API KEY ###",
-  authDomain: "### FIREBASE AUTH DOMAIN ###",
-  projectId: "### CLOUD FIRESTORE PROJECT ID ###",
-});
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { collection, addDoc } from "firebase/firestore";
+// import { getAnalytics } from "firebase/analytics";
+// import { collection, addDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,16 +20,20 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+export const db = getFirestore();
 
-try {
-  const docRef = await addDoc(collection(db, "users"), {
-    first: "Ada",
-    last: "Lovelace",
-    born: 1815,
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
+export const createDishDocument = async dish => {
+  if (!dish) return;
+  const dishRef = doc(db, "menu", `${dish.id}`);
+  const snapShot = await getDoc(dishRef);
+  if (!snapShot.exists()) {
+    try {
+      await setDoc(dishRef, dish);
+    } catch (error) {
+      console.log("Error creating a dish", error.message);
+    }
+  }
+  return dishRef;
+};
