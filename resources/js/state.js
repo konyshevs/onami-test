@@ -1043,11 +1043,19 @@ new Dessert(
 
 new Dessert(
   "צ׳וקורטו",
-  "מוס שוקולד, בצק פילו, קראנץ' שוקולד,  ושקדים מקורמלים",
+  "מוס שוקולד, דפי פילו, קראנץ' שוקולד,  ושקדים מקורמלים",
   "Chocoreto",
   "Chocolate mousse, filo dough, chocolate crunch, and caramelized almonds",
   48,
   true
+);
+
+new Dessert(
+  "טארט צנוברים",
+  "בצק פריך, פיננסייר צנוברים, קרמל מלוח, קרם ריקוטה וסירופ תפוזים",
+  "Pine nut tart",
+  "Tart dough, pine nut financier, salted caramel, ricotta cream & orange syrup",
+  52,
 );
 
 new Dessert("גלידת מאצ'ה", "כדור", "Matcha icecream", "", 16);
