@@ -1055,7 +1055,15 @@ new Dessert(
   "בצק פריך, פיננסייר צנוברים, קרמל מלוח, קרם ריקוטה וסירופ תפוזים",
   "Pine nut tart",
   "Tart dough, pine nut financier, salted caramel, ricotta cream & orange syrup",
-  52,
+  52
+);
+
+new Dessert(
+  "פנה קוטה",
+  "פנה קוטה למון גראס וג׳ינג׳ר, אגס מבושל ביין ושטרויזל חלב",
+  "Panna cotta",
+  "Panna cotta lemongrass & ginger, pear cooked in wine and milk streusel",
+  52
 );
 
 new Dessert("גלידת מאצ'ה", "כדור", "Matcha icecream", "", 16);
