@@ -1023,13 +1023,7 @@ new MainDish(
 );
 
 // DESSERTS
-// new Dessert(
-//   "גומא פרפה",
-//   "פרפה חלווה בציפוי שוקולד לבן על רוטב חלווה ומחית פיסטוק",
-//   "Goma Parfait",
-//   "Halva & white chocolate parfait, halva sauce & pistachio puree",
-//   48
-// );
+// git
 
 new Dessert(
   "מאצ'ה ברולה",
