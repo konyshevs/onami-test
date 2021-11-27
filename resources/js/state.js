@@ -2229,14 +2229,24 @@ new GlassWineWhite(
   38,
   2017
 );
-new GlassWineWhite(
+//  new GlassWineWhite(
+//  "גוורצטרמינר",
+//  "פלטר, ישראל",
+//  "Gewurztraminer",
+//  "Pelter, Israel",
+//  44,
+//  2020
+//  );
+
+  new GlassWineWhite(
   "גוורצטרמינר",
-  "פלטר, ישראל",
+  "פפאפנהיים, צרפת",
   "Gewurztraminer",
-  "Pelter, Israel",
+  "Pfaffenheim, France",
   44,
-  2020
-);
+  2018
+  );
+
 new GlassWineWhite(
   "גראז' דה פאפא לבן",
   "לוינסון, ישראל",
@@ -2324,13 +2334,22 @@ new WineWhite(
   2018
 );
 
+//new WineWhite(
+//  "גוורצטרמינר",
+//  "פלטר, ישראל",
+//  "Gewurztraminer",
+//  "Pelter, Israel",
+//  180,
+//  2020
+//);
+
 new WineWhite(
   "גוורצטרמינר",
-  "פלטר, ישראל",
+  "פפאפנהיים, צרפת",
   "Gewurztraminer",
-  "Pelter, Israel",
+  "Pfaffenheim, France",
   180,
-  2020
+  2018
 );
 
 new WineWhite(
@@ -2348,7 +2367,7 @@ new WineWhite(
   "Chablis Premier Cru",
   "Domaine Fourrey, France",
   220,
-  2019
+  2020
 );
 new WineWhite(
   "רוסאן-ויונייה",
