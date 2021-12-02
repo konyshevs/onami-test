@@ -1058,11 +1058,19 @@ new Dessert(
   52
 );
 
+// new Dessert(
+//   "פנה קוטה",
+//   "פנה קוטה למון גראס וג׳ינג׳ר, אגס מבושל ביין ושטרויזל חלב",
+//   "Panna cotta",
+//   "Panna cotta lemongrass & ginger, pear cooked in wine and milk streusel",
+//   52
+// );
+
 new Dessert(
-  "פנה קוטה",
-  "פנה קוטה למון גראס וג׳ינג׳ר, אגס מבושל ביין ושטרויזל חלב",
-  "Panna cotta",
-  "Panna cotta lemongrass & ginger, pear cooked in wine and milk streusel",
+  "טירמיסו",
+  "קרם מסקרפונה, זביונה, ביסקוטי, ליקר קלואה, אספרסו וטוויל קקאו",
+  "Tiramisu",
+  "Mascarpone cream, zabaione, biscotti, Kahlua liqueur, espresso",
   52
 );
 
@@ -2238,14 +2246,14 @@ new GlassWineWhite(
 //  2020
 //  );
 
-  new GlassWineWhite(
+new GlassWineWhite(
   "גוורצטרמינר",
   "פפאפנהיים, צרפת",
   "Gewurztraminer",
   "Pfaffenheim, France",
   44,
   2018
-  );
+);
 
 new GlassWineWhite(
   "גראז' דה פאפא לבן",
