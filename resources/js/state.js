@@ -25,7 +25,7 @@ export function changeFavoritesCount(operator) {
 }
 
 const lunchDescriptionHE =
-  "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות טריים-  ₪ 32 <br> כוס יין צהריים לבן / אדום / רוזה- 32 ₪";
+  "ארוחה עסקית מוגשת בימי חול בלבד א'- ה',<br> בין בשעות 12:00-18:00, ביום ו' בין השעות 12:00-16:00<br> ארוחה עסקית כוללת: מנה ראשונה ומנה עיקרית<br> בנוסף, קוקטייל צהריים על בסיס סאקה ופירות&nbspטריים&nbsp-&nbsp&nbsp₪&nbsp32 <br> כוס יין צהריים לבן / אדום / רוזה - 32 ₪";
 
 const lunchDescriptionEN =
   "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 32 ₪<br>wine of the month red / white / rose 32 ₪";
@@ -486,19 +486,27 @@ state.favorites.push(
 );
 
 class Menu {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+  constructor(
+    titleHE = "",
+    descriptionHE = "",
+    titleEN = "",
+    descriptionEN = "",
+    price,
+    isVegi
+  ) {
     this.titleHE = titleHE;
     this.descriptionHE = descriptionHE;
     this.titleEN = titleEN;
     this.descriptionEN = descriptionEN;
     this.price = price;
     this.isVegi = isVegi;
-    this._addID();
+    this.isActive = true;
+    this.addID();
     this._isFavorite();
     menuList.push(this);
   }
 
-  _addID() {
+  addID() {
     this.id = this.titleEN.toLowerCase().replaceAll(" ", "_");
   }
 
@@ -513,6 +521,7 @@ class ColdAppetiser extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.appetisers[0].dishes.push(this);
+    this.category = "coldAappetiser";
   }
 }
 
@@ -520,6 +529,7 @@ class HotAppetiser extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.appetisers[1].dishes.push(this);
+    this.category = "hotAppetiser";
   }
 }
 
@@ -527,6 +537,7 @@ class Skewer extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.skewers.dishes.push(this);
+    this.category = "skewer";
   }
 }
 
@@ -534,6 +545,7 @@ class MainDish extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.mainDishes.dishes.push(this);
+    this.category = "mainDishe";
   }
 }
 
@@ -541,6 +553,7 @@ class Dessert extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[0].dishes.push(this);
+    this.category = "dessert";
   }
 }
 
@@ -548,6 +561,7 @@ class Coffee extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[1].dishes.push(this);
+    this.category = "coffee";
   }
 }
 
@@ -555,6 +569,7 @@ class TeaInfusion extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[2].dishes.push(this);
+    this.category = "teaInfusion";
   }
 }
 
@@ -562,6 +577,7 @@ class Tea extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[3].dishes.push(this);
+    this.category = "tea";
   }
 }
 
@@ -569,22 +585,25 @@ class Port extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[4].dishes.push(this);
+    this.category = "port";
   }
 }
 
 class SeshimiNigiri extends Menu {
   constructor(
-    type,
     titleHE,
     descriptionHE,
     titleEN,
     descriptionEN,
     price,
-    isVegi
+    isVegi,
+    type
   ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.seshimi[0].types[type].dishes.push(this);
     state.seshimi[0].dishes.push(this);
+    this.category = "seshimiNigiri";
+    this.type = type;
   }
 }
 
@@ -592,6 +611,7 @@ class SeshimiSpecial extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.seshimi[1].dishes.push(this);
+    this.category = "seshimiSpecial";
   }
 }
 
@@ -599,6 +619,7 @@ class InariGunkan extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.inari[0].dishes.push(this);
+    this.category = "inariGunkan";
   }
 }
 
@@ -606,6 +627,7 @@ class InariSpecial extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.inari[1].dishes.push(this);
+    this.category = "inariSpecial";
   }
 }
 
@@ -613,6 +635,7 @@ class Hosomaki extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.hosomaki[0].dishes.push(this);
+    this.category = "hosomaki";
   }
 }
 
@@ -620,6 +643,7 @@ class HosomakiIngredient extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.hosomaki[1].dishes.push(this);
+    this.category = "hosomakiIngredient";
   }
 }
 
@@ -627,6 +651,7 @@ class Temaki extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.temaki.dishes.push(this);
+    this.category = "temaki";
   }
 }
 
@@ -634,6 +659,7 @@ class Irodori extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.irodori[0].dishes.push(this);
+    this.category = "irodori";
   }
 }
 
@@ -641,6 +667,7 @@ class IrodoriIngredient extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.irodori[1].dishes.push(this);
+    this.category = "irodoriIngredient";
   }
 }
 
@@ -648,6 +675,7 @@ class Cocktail extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.coctails.dishes.push(this);
+    this.category = "cocktail";
   }
 }
 
@@ -655,6 +683,7 @@ class Beer extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.sake[0].dishes.push(this);
+    this.category = "beer";
   }
 }
 
@@ -662,6 +691,7 @@ class Sake extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.sake[1].dishes.push(this);
+    this.category = "sake";
   }
 }
 
@@ -669,6 +699,7 @@ class SoftDrink extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.softDrinks.dishes.push(this);
+    this.category = "softDrink";
   }
 }
 
@@ -686,7 +717,7 @@ class Wine extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     this.vintage = vintage;
   }
-  _addID() {
+  addID() {
     this.id = `${this.titleEN
       .toLowerCase()
       .replaceAll(" ", "_")}_${this.descriptionEN
@@ -708,9 +739,9 @@ class WineGlass extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     this.vintage = vintage;
     state.wine[0].dishes.push(this);
-    this._addID();
+    this.addID();
   }
-  _addID() {
+  addID() {
     this.id = `${this.titleEN
       .toLowerCase()
       .replaceAll(" ", "_")}_${this.descriptionEN
@@ -745,9 +776,9 @@ class WineBottle extends Wine {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[1].dishes.push(this);
-    this._addID();
+    this.addID();
   }
-  _addID() {
+  addID() {
     this.id = `${this.titleEN
       .toLowerCase()
       .replaceAll(" ", "_")}_${this.descriptionEN
@@ -779,12 +810,20 @@ class WineRose extends WineBottle {
 }
 
 class WineCellar extends Wine {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+  constructor(
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    vintage
+  ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[2].dishes.push(this);
-    this._addID();
+    this.addID();
   }
-  _addID() {
+  addID() {
     this.id = `${this.titleEN
       .toLowerCase()
       .replaceAll(" ", "_")}_${this.descriptionEN
@@ -963,6 +1002,22 @@ new Skewer(
 
 new Skewer("אבי יאקי", "שרימפ", "Ebi Yaki", "Shrimp", 28);
 
+new Skewer(
+  "אספרה בייקון",
+  "אספרגוס עטוף בייקון",
+  "Aspara Bacon",
+  "Asparagus wrapped with bacon",
+  34
+);
+
+new Skewer(
+  "הוטטה בייקון",
+  "סקלופ עטוף בייקון ברוטב יקיטורי טרה",
+  "Hotate Bacon",
+  "Scallop wrapped with bacon with yakitori tare sauce",
+  42
+);
+
 // MAID DISHES
 
 const ingenDofu = new MainDish(
@@ -1104,105 +1159,162 @@ new Port("", "אוטימה 10", "", "Otima 10", 36);
 new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", 44);
 
 // SESHIMI
-const sake = new SeshimiNigiri(0, "סאקה", "סלמון", "Sake", "Salmon", [20, 36]);
+const sake = new SeshimiNigiri(
+  "סאקה",
+  "סלמון",
+  "Sake",
+  "Salmon",
+  [20, 36],
+  false,
+  0
+);
 
 new SeshimiNigiri(
-  0,
   "סאקה טריאקי",
   "סלמון מבושל ברוטב טריאקי",
   "Sake Teriyaki",
   "Cooked in teriyaki",
-  ["-", 22]
+  ["-", 22],
+  false,
+  0
 );
 
 const beniToro = new SeshimiNigiri(
-  0,
   "בני טורו",
   "סלמון שמן",
   "Beni-Toro",
   "Fatty salmon",
-  [20, 36]
+  [20, 36],
+  false,
+  0
 );
 
 const kurodai = new SeshimiNigiri(
-  0,
   "קורודאי",
   "דניס",
   "Kurodai",
   "Sea bream",
-  [20, 40]
+  [20, 40],
+  false,
+  0
 );
 const shiroguchi = new SeshimiNigiri(
-  0,
   "שירוגוצ‘י",
   "מוסר ים",
   "Shiroguchi",
   "Croaker",
-  [20, 40]
+  [20, 40],
+  false,
+  0
 );
 
-new SeshimiNigiri(0, "מגורו", "טונה", "Maguro", "Tuna", [24, 50]);
+new SeshimiNigiri("מגורו", "טונה", "Maguro", "Tuna", [24, 50], false, 0);
 
-new SeshimiNigiri(0, "המאצ'י", "ילוטייל", "Hamachi", "Yellowtail", [24, 50]);
+new SeshimiNigiri(
+  "המאצ'י",
+  "ילוטייל",
+  "Hamachi",
+  "Yellowtail",
+  [24, 50],
+  false,
+  0
+);
 
-const bora = new SeshimiNigiri(1, "בורה", "בורי", "Bora", "Mullet", [18, 34]);
+const bora = new SeshimiNigiri(
+  "בורה",
+  "בורי",
+  "Bora",
+  "Mullet",
+  [18, 34],
+  false,
+  1
+);
 
-const suzuki = new SeshimiNigiri(1, "סוזוקי", "בס", "Suzuki", "Bass", [18, 34]);
+const suzuki = new SeshimiNigiri(
+  "סוזוקי",
+  "בס",
+  "Suzuki",
+  "Bass",
+  [18, 34],
+  false,
+  1
+);
 
 const unagi = new SeshimiNigiri(
-  1,
   "אונאגי",
   "צלופח מבושל ברוטב טריאקי",
   "Unagi",
   "Eel cooked in teriyaki",
-  ["-", 30]
+  ["-", 30],
+  false,
+  1
 );
 
 const ebi = new SeshimiNigiri(
-  2,
   "אבי",
   "שרימפ מאודה",
   "Ebi",
   "Steamed shrimp",
-  [16, 30]
+  [16, 30],
+  false,
+  2
 );
 
-new SeshimiNigiri(2, "הוטטה", "סקלופ", "Hotate", "Scallop", [24, 42]);
+new SeshimiNigiri("הוטטה", "סקלופ", "Hotate", "Scallop", [24, 42], false, 2);
 
 new SeshimiNigiri(
-  2,
   "הוטטה טריאקי",
   "סקלופ מבושל ברוטב טריאקי",
   "Hotate Teriyaki",
   "Cooked in teriyaki",
-  ["-", 26]
+  ["-", 26],
+  false,
+  2
 );
 
-new SeshimiNigiri(3, "אבוקדו", "", "Avocado", "", ["-", 14], true);
+new SeshimiNigiri("אבוקדו", "", "Avocado", "", ["-", 14], true, 3);
 
 const tamago = new SeshimiNigiri(
-  3,
   "טמאגו",
   "אומלט יפני",
   "Tamago",
   "Japanese omelet",
-  [16, 22]
+  [16, 22],
+  false,
+  3
 );
 
 new SeshimiNigiri(
-  4,
   "שימה אג'י",
   "טרחון",
   "Shima-Aji",
   "Yellow jack",
-  [22, 44]
+  [22, 44],
+  false,
+  4
 );
 
-new SeshimiNigiri(4, "היראמאסה", "אינטיאס", "Hiramasa", "Amberjack", [22, 46]);
+new SeshimiNigiri(
+  "היראמאסה",
+  "אינטיאס",
+  "Hiramasa",
+  "Amberjack",
+  [22, 46],
+  false,
+  4
+);
 
-new SeshimiNigiri(4, "מאדאי", "פרידה", "Madai", "Red snapper", [28, 56]);
+new SeshimiNigiri("מאדאי", "פרידה", "Madai", "Red snapper", [28, 56], false, 4);
 
-new SeshimiNigiri(4, "או טורו", "טונה שמנה", "Oh-Toro", "Fatty tuna", [30, 66]);
+new SeshimiNigiri(
+  "או טורו",
+  "טונה שמנה",
+  "Oh-Toro",
+  "Fatty tuna",
+  [30, 66],
+  false,
+  4
+);
 
 // SESHIMI SPECIAL
 new SeshimiSpecial(
@@ -2501,6 +2613,7 @@ new WineCellar(
   "Ayalon Valley",
   "Clos De Gat, Israel",
   590,
+  false,
   2004
 );
 new WineCellar(
@@ -2509,6 +2622,7 @@ new WineCellar(
   "Merlot Sycra",
   "Clos De Gat, Israel",
   650,
+  false,
   2006
 );
 new WineCellar(
@@ -2517,6 +2631,7 @@ new WineCellar(
   "Amarone",
   "Tomassi, Italy",
   [750, 650],
+  false,
   "2006/2007"
 );
 new WineCellar(
@@ -2525,6 +2640,7 @@ new WineCellar(
   "Guado al Tasso Bolgheri",
   "Antinori, Italy",
   820,
+  false,
   2005
 );
 new WineCellar(
@@ -2533,6 +2649,7 @@ new WineCellar(
   "Cabernet Sauvignon Yarden",
   "Golan Heights, Israel",
   850,
+  false,
   2004
 );
 new WineCellar(
@@ -2541,6 +2658,7 @@ new WineCellar(
   "Grand Vin",
   "Domaine du Castel, Israel",
   850,
+  false,
   2007
 );
 new WineCellar(
@@ -2549,6 +2667,7 @@ new WineCellar(
   "Alion Vega Sicilia",
   "Spain",
   920,
+  false,
   2005
 );
 new WineCellar(
@@ -2557,6 +2676,7 @@ new WineCellar(
   "Yatir Forest",
   "Yatir, Israel",
   950,
+  false,
   2008
 );
 new WineCellar(
@@ -2565,6 +2685,7 @@ new WineCellar(
   "Rom Yarden",
   "Golan Heights, Israel",
   1350,
+  false,
   2006
 );
 new WineCellar(
@@ -2573,6 +2694,7 @@ new WineCellar(
   "Solaia Antinori",
   "Toscany, Italy",
   1800,
+  false,
   2004
 );
 new WineCellar(
@@ -2581,7 +2703,12 @@ new WineCellar(
   "Katzrin",
   "Golan Heights, Israel",
   [1800, 1500],
+  false,
   "2007/2008"
 );
 
 //Made by konyshevs
+
+export const dishCreators = {
+  coldAappetiser: () => new ColdAppetiser(),
+};

@@ -8,12 +8,17 @@ import {
   favoritesCount,
 } from "./state";
 
+import DishForm from "./pages/dishForm";
+import DishSelector from "./components/dish-selector.component";
+
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
   const lang = document.documentElement.lang.toUpperCase();
   const navConteiner = document.querySelector("#nav-container");
   const nav = document.querySelector("#nav");
   const menuBtn = document.querySelector(".menu-butt");
+  const adminBarElm = document.querySelector(".admin-bar");
+  const createDishBtn = document.querySelector(".create-dish");
 
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
@@ -28,10 +33,15 @@ $("document").ready(function () {
   ).getPropertyValue("--heading-color");
 
   let firstLoad = false;
+  let isAdmin = false;
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
-    if (!id) {
+    if (id === "admin") {
+      isAdmin = true;
+      adminBarElm.classList.remove("hidden");
+    }
+    if (!id || id === "admin") {
       id = "appetisers";
       firstLoad = true;
     }
@@ -39,7 +49,6 @@ $("document").ready(function () {
       .querySelectorAll(".nav-butt")
       .forEach(el => el.classList.remove("nav-btn-active"));
     document.getElementById(`${id}-btn`).classList.add("nav-btn-active");
-
     renderMenuPage(state[id]);
     document.body.scrollIntoView();
   };
@@ -99,6 +108,12 @@ $("document").ready(function () {
 
   // FAVORITS LOGIC
 
+  function FavoriteButton(dish) {
+    return `<i data-id="${
+      dish.id
+    }" class="far ${dish.isFavorite ? "fas" : ""} fa-heart favorite favorite-${lang}"></i>`;
+  }
+
   dishBlockEl.addEventListener("click", function (e) {
     if (!e.target.closest(".favorite")) return;
     e.target.classList.toggle("fas");
@@ -152,6 +167,51 @@ $("document").ready(function () {
     });
   }
 
+  //ADMIN LOGIC
+
+  function AdminButtons(dish) {
+    return ` <div class='admin-buttons'>
+    <i data-id="${
+      dish.id
+    }" class="fas toggle-dish fa-toggle-${dish.isActive ? "on" : "off"}"></i>
+    <i data-id="${dish.id}" class="edit fas fa-pen-square"></i>
+    </div>`;
+  }
+
+  if (lang === "HE") {
+    //Edit button
+    dishBlockEl.addEventListener("click", function (e) {
+      if (!e.target.closest(".edit")) return;
+      const id = e.target.dataset.id;
+      const dish = menuList.find(el => el.id === id);
+      dishBlockEl.innerHTML = "";
+      dishBlockEl.append(DishForm(dish, controlHashChange));
+    });
+
+    //Toggle button
+    dishBlockEl.addEventListener("click", function (e) {
+      const target = e.target;
+      if (!target.closest(".toggle-dish")) return;
+
+      if (target.classList.contains("fa-toggle-on")) {
+        target.classList.remove("fa-toggle-on");
+        target.classList.add("fa-toggle-off");
+      } else {
+        target.classList.remove("fa-toggle-off");
+        target.classList.add("fa-toggle-on");
+      }
+      const id = target.dataset.id;
+      const dish = menuList.find(el => el.id === id);
+      dish.isActive = !dish.isActive;
+    });
+
+    //Create dish button
+    createDishBtn.addEventListener("click", function () {
+      dishBlockEl.innerHTML = "";
+      dishBlockEl.append(DishSelector(controlHashChange));
+    });
+  }
+
   // MENU RENDERING
   function genDishMarkup(dish) {
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
@@ -161,9 +221,9 @@ $("document").ready(function () {
     return `<div class="dish">
      <div class="title-price-section">
         <div class="dish-title">
-        <i data-id="${
-          dish.id
-        }" class="far ${dish.isFavorite ? "fas" : ""} fa-heart favorite favorite-${lang}"></i>
+        ${isAdmin ? AdminButtons(dish) : FavoriteButton(dish)}
+       
+        
           <div>${dish[`title${lang}`]}</div>
           ${dish.isVegi ? '<div class="veg"></div>' : ""}
         </div>
@@ -184,11 +244,9 @@ $("document").ready(function () {
      <div class="title-price-section">
         <div class="dish-title">
         ${
-          favorite
-            ? `<i data-id="${dish.id}" class="far ${
-                dish.isFavorite ? "fas" : ""
-              } fa-heart favorite favorite-${lang}"></i>`
-            : ""
+          isAdmin
+            ? AdminButtons(dish)
+            : `${favorite ? FavoriteButton(dish) : ""}`
         }
           <div>${
             dish[`title${lang}`]

@@ -85,9 +85,9 @@ header .container {
   text-align: center;
 }
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 #logo-bar {
   padding: 10px 10px 0 10px;
@@ -396,6 +396,55 @@ main {
   margin: 0 auto;
   width: 150px;
   margin-top: 20px;
+}
+
+/* ADMIN */
+.admin-buttons {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.toggle-dish,
+.edit {
+  cursor: pointer;
+}
+
+.fa-toggle-on {
+  color: #50c878;
+}
+
+.fa-toggle-off {
+  color: red;
+}
+
+.admin-bar {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 3;
+  background-color: var(--color1);
+  color: #fff;
+}
+
+.admin-bar-conteiner {
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.admin-btn {
+  border: 1px solid white;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
 }
 
 /* #dish-props-container {
