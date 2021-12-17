@@ -24,6 +24,11 @@ html body {
   font-family: "Alef";
 }
 
+textarea {
+  font-family: "Alef";
+  font-size: 14px;
+}
+
 a {
   text-decoration: none;
   color: var(--color2);
@@ -32,6 +37,11 @@ a {
 p {
   margin: 0;
   padding: 0;
+}
+
+label {
+  color: var(--heading-color);
+  font-weight: bold;
 }
 
 .opacity-0 {
@@ -445,6 +455,11 @@ main {
   display: flex;
   flex-direction: column;
   max-width: 350px;
+}
+
+.label-checkbox {
+  font-weight: normal;
+  color: black;
 }
 
 /* #dish-props-container {

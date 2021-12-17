@@ -507,7 +507,8 @@ class Menu {
   }
 
   addID() {
-    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_");
+    if (this.titleEN) this.id = this.titleEN.toLowerCase().replaceAll(" ", "_");
+    else this.id = this.descriptionEN.toLowerCase().replaceAll(" ", "_");
   }
 
   _isFavorite() {
@@ -645,6 +646,11 @@ class HosomakiIngredient extends Menu {
     state.hosomaki[1].dishes.push(this);
     this.category = "hosomakiIngredient";
   }
+
+  addID() {
+    this.id =
+      this.descriptionEN.toLowerCase().replaceAll(" ", "_") + "_ingredient";
+  }
 }
 
 class Temaki extends Menu {
@@ -668,6 +674,10 @@ class IrodoriIngredient extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.irodori[1].dishes.push(this);
     this.category = "irodoriIngredient";
+  }
+  addID() {
+    this.id =
+      this.descriptionEN.toLowerCase().replaceAll(" ", "_") + "_ingredient_out";
   }
 }
 
@@ -734,11 +744,14 @@ class WineGlass extends Menu {
     titleEN,
     descriptionEN,
     price,
+    type,
     vintage = ""
   ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    this.type = type;
     this.vintage = vintage;
     state.wine[0].dishes.push(this);
+    state.wine[0].types[type].dishes.push(this);
     this.addID();
   }
   addID() {
@@ -751,31 +764,41 @@ class WineGlass extends Menu {
   }
 }
 
-class GlassWineWhite extends WineGlass {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[0].types[0].dishes.push(this);
-  }
-}
+// class GlassWineWhite extends WineGlass {
+//   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+//     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+//     state.wine[0].types[0].dishes.push(this);
+//   }
+// }
 
-class GlassWineRose extends WineGlass {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[0].types[1].dishes.push(this);
-  }
-}
+// class GlassWineRose extends WineGlass {
+//   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+//     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+//     state.wine[0].types[1].dishes.push(this);
+//   }
+// }
 
-class GlassWineRed extends WineGlass {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[0].types[2].dishes.push(this);
-  }
-}
+// class GlassWineRed extends WineGlass {
+//   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+//     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+//     state.wine[0].types[2].dishes.push(this);
+//   }
+// }
 
 class WineBottle extends Wine {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+  constructor(
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    type,
+    vintage
+  ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[1].dishes.push(this);
+    state.wine[1].types[type].dishes.push(this);
+    this.type = type;
     this.addID();
   }
   addID() {
@@ -788,26 +811,26 @@ class WineBottle extends Wine {
   }
 }
 
-class WineRed extends WineBottle {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[1].types[2].dishes.push(this);
-  }
-}
+// class WineRed extends WineBottle {
+//   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+//     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+//     state.wine[1].types[2].dishes.push(this);
+//   }
+// }
 
-class WineWhite extends WineBottle {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[1].types[0].dishes.push(this);
-  }
-}
+// class WineWhite extends WineBottle {
+//   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+//     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+//     state.wine[1].types[0].dishes.push(this);
+//   }
+// }
 
-class WineRose extends WineBottle {
-  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
-    state.wine[1].types[1].dishes.push(this);
-  }
-}
+// class WineRose extends WineBottle {
+//   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage) {
+//     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
+//     state.wine[1].types[1].dishes.push(this);
+//   }
+// }
 
 class WineCellar extends Wine {
   constructor(
@@ -850,6 +873,15 @@ const harusameSalad = new ColdAppetiser(
   "Harusame Salad",
   "Cold potato noodles, scallion & salmon served with Wafu sauce",
   36
+);
+
+const rootSalad = new ColdAppetiser(
+  "סלט שורשים",
+  "סלק, גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו ברוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
+  "Root vegetables salad",
+  "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
+  42,
+  true
 );
 
 new ColdAppetiser(
@@ -1153,7 +1185,7 @@ new Tea(
   "Rooibush Strawberry Cream (caffeine free)",
   12
 );
-new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (caffeine free)", 12);
+// new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (caffeine free)", 12);
 
 new Port("", "אוטימה 10", "", "Otima 10", 36);
 new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", 44);
@@ -1875,15 +1907,6 @@ const vegetarianMixMaki = new Menu(
   0
 );
 
-const rootSalad = new Menu(
-  "סלט שורשים",
-  "סלק, גזר, קולורבי, פפאיה ירוקה, וואסבי קראנץ', שקדים קלויים, עלי מיקרו ברוטב וואפו (טבעוני, ניתן לבקש ללא גלוטן)",
-  "Root vegetables salad",
-  "Beetroot, carrot, kohlrabi, green papaya, wasabi crunch, roasted almonds, micro green leaves with Wafu sauce",
-  42,
-  true
-);
-
 const ebiFurai = new Menu(
   "אבי פוראי",
   "שרימפ פריך בציפוי פאנקו בליווי מיונז יפני",
@@ -2341,270 +2364,308 @@ new Sake(
 //WINE
 
 // Glass
-new GlassWineWhite(
+new WineGlass(
   "מוסקדה",
   "גפנים בוגרות, שרו קארה, צרפת",
   "Muscadet",
   "Comte Leloup, Chereau-Carre, France",
   38,
+  0,
   2017
 );
-//  new GlassWineWhite(
+//  new WineGlass(
 //  "גוורצטרמינר",
 //  "פלטר, ישראל",
 //  "Gewurztraminer",
 //  "Pelter, Israel",
 //  44,
+//  0,
 //  2020
 //  );
 
-new GlassWineWhite(
+new WineGlass(
   "גוורצטרמינר",
   "פפאפנהיים, צרפת",
   "Gewurztraminer",
   "Pfaffenheim, France",
   44,
+  0,
   2018
 );
 
-new GlassWineWhite(
+new WineGlass(
   "גראז' דה פאפא לבן",
   "לוינסון, ישראל",
   "Garage De Papa Blanc",
   "Lewinsohn, Israel",
   52,
+  0,
   2020
 );
 
-new GlassWineWhite(
+new WineGlass(
   "סנסר",
   "דומיין ושרון, צרפת",
   "Sancerre",
   "Domaine Vacheron, France",
   58,
+  0,
   2020
 );
 
-new GlassWineRose(
+new WineGlass(
   "קרמאן דה לואר ל'אקסטרא",
   "לאנגלואה שאטו, צרפת",
   "Cremants De Loire L'Extra",
   "Langlois Chateau, France",
-  38
+  38,
+  1
 );
-new GlassWineRose(
+new WineGlass(
   "רוזה מאליז",
   "דומיין קארטרון, צרפת",
   "Rose Malyse",
   "Domaine Carteyron, France",
   40,
+  1,
   2020
 );
 
-new GlassWineRed(
+new WineGlass(
   "מנוט",
   "מאס מרטינט, ספרד",
   "Menut",
   "Mas Martinet, Spain",
   38,
+  2,
   2019
 );
-new GlassWineRed(
+new WineGlass(
   "גראז' דה פאפא אדום",
   "לוינסון, ישראל",
   "Garage De Papa Rouge",
   "Lewinsohn, Israel",
   56,
+  2,
   2020
 );
 
 // Bottles
-new WineWhite(
+new WineBottle(
   "ריזלינג",
   'בסטהיים, צרפת  (375 מ"ל)',
   "Riesling",
   "Bestheim, France  (375 ml)",
   75,
+  0,
   2018
 );
 
-new WineWhite(
+new WineBottle(
   "פינו גריג'יו",
   'לה טונלה, איטליה (375 מ"ל)',
   "Pinot Grigio",
   "LaTunella, Italy (375 ml)",
   85,
+  0,
   2020
 );
 
-new WineWhite(
+new WineBottle(
   "מוסקדה",
   "גפנים בוגרות, שרו קארה, צרפת",
   "Muscadet",
   "Comte Leloup, Chereau-Carre, France",
   155,
+  0,
   2016
 );
-new WineWhite(
+new WineBottle(
   "ריזלינג",
   'וילה בורקלין, ד"ר בורקלין וולף, גרמניה',
   "Riesling",
   "Villa Buerklin, Dr Buerklin Wolf, Germany",
   170,
+  0,
   2018
 );
 
-//new WineWhite(
+//new WineBottle(
 //  "גוורצטרמינר",
 //  "פלטר, ישראל",
 //  "Gewurztraminer",
 //  "Pelter, Israel",
 //  180,
+//  0,
 //  2020
 //);
 
-new WineWhite(
+new WineBottle(
   "גוורצטרמינר",
   "פפאפנהיים, צרפת",
   "Gewurztraminer",
   "Pfaffenheim, France",
   180,
+  0,
   2018
 );
 
-new WineWhite(
+new WineBottle(
   "שנסון",
   "קלו דה גת , ישראל",
   "Chanson",
   "Clos De Gat, Israel",
   190,
+  0,
   2020
 );
 
-new WineWhite(
+new WineBottle(
   "שבלי פרימייר קרו",
   "דומיין פורי, צרפת",
   "Chablis Premier Cru",
   "Domaine Fourrey, France",
   220,
+  0,
   2020
 );
-new WineWhite(
+new WineBottle(
   "רוסאן-ויונייה",
   "אחת, ישראל",
   "Roussanne-Viogniers",
   "Ahat, Israel",
   230,
+  0,
   2019
 );
 
-new WineWhite(
+new WineBottle(
   "גראז' דה פאפא לבן ",
   "לוינסון, ישראל",
   "Garage De Papa Blanc",
   "Lewinsohn, Israel",
   235,
+  0,
   2020
 );
 
-new WineWhite(
+new WineBottle(
   "סאנסר",
   "דומיין ושרון, צרפת",
   "Sancerre",
   "Domaine Vacheron, France",
   260,
+  0,
   2020
 );
 
-new WineRose(
+new WineBottle(
   "רוזה מאליז",
   "דומיין קארטרון, צרפת",
   "Rose Malyse",
   "Domaine Carteyron, France",
   170,
+  1,
   2020
 );
 
-new WineRose("רוזה", "מיראבל, צרפת", "Rose", "Miraval, France", 220, 2020);
+new WineBottle("רוזה", "מיראבל, צרפת", "Rose", "Miraval, France", 220, 1, 2020);
 
-new WineRose(
+new WineBottle(
   "קרמאן דה לואר ל'אקסטרא",
   "לאנגלואה שאטו, צרפת",
   "Cremants De Loire L'Extra",
   "Langlois Chateau, France",
-  170
+  170,
+  1
 );
 
-new WineRose(
+new WineBottle(
   "מואט&שנדו",
   "אימפריאל ברוט, צרפת",
   "Moet & Chandon",
   "Imperial Brut, France",
-  430
+  430,
+  1
 );
 
-new WineRose(
+new WineBottle(
   "בולינג'ר",
   "ספיישל קווה, צרפת",
   "Bollinger",
   "Special Cuvee, France",
-  620
+  620,
+  1
 );
 
-new WineRed(
+new WineBottle(
   "קוט דו רון בלרוש",
   'שאפוטייה, צרפת (375 מ"ל)',
   "Belleruche",
   "Cotes Du Rhone, France (375 ml)",
   80,
+  2,
   2019
 );
 
-new WineRed(
+new WineBottle(
   "מנוט",
   "מאס מרטינט, ספרד",
   "Menut",
   "Mas Martinet, Spain",
   170,
+  2,
   2019
 );
 
-new WineRed(
-  "פינו נואר",
-  "ויתקין, ישראל",
-  "Pinot Noir",
-  "Vitkin, Israel",
-  185,
-  2019
-);
+// new WineBottle(
+//   "פינו נואר",
+//   "ויתקין, ישראל",
+//   "Pinot Noir",
+//   "Vitkin, Israel",
+//   185,
+//   2,
+//   2019
+// );
 
-new WineRed(
+new WineBottle(
   "מרלו",
   "הראל, קלו דה גת, ישראל",
   "Merlot",
   "Har'el, Clos De Gat, Israel",
   210,
+  2,
   2018
 );
 
-new WineRed(
+new WineBottle(
   "גראז' דה פאפא אדום",
   "לוינסון, ישראל",
   "Garage De Papa Rouge",
   "Lewinsohn, Israel",
   235,
+  2,
   2020
 );
-new WineRed(
+new WineBottle(
   "אמרונה",
   'טומאסי, איטליה (375 מ"ל)',
   "Amarone",
   "Tommasi, Italy (375 ml)",
   240,
+  2,
   2016
 );
 
-new WineRed("אמרונה", "טומאסי, איטליה", "Amarone", "Tommasi, Italy", 360, 2016);
+new WineBottle(
+  "אמרונה",
+  "טומאסי, איטליה",
+  "Amarone",
+  "Tommasi, Italy",
+  360,
+  2,
+  2016
+);
 
 // Wine from the cellar
 new WineCellar(
@@ -2709,6 +2770,505 @@ new WineCellar(
 
 //Made by konyshevs
 
-export const dishCreators = {
-  coldAappetiser: () => new ColdAppetiser(),
+export const dishConstructors = {
+  coldAappetiser: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new ColdAppetiser(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  hotAppetiser: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new HotAppetiser(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  skewer: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Skewer(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  mainDishe: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new MainDish(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  dessert: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Dessert(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  coffee: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Coffee(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  teaInfusion: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new TeaInfusion(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  tea: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Tea(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  port: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Port(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  seshimiNigiri: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new SeshimiNigiri(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  seshimiSpecial: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new SeshimiSpecial(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  inariGunkan: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new InariGunkan(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  inariSpecial: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new InariSpecial(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  hosomaki: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Hosomaki(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  hosomakiIngredient: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new HosomakiIngredient(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  temaki: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Temaki(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  irodori: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Irodori(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  irodoriIngredient: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new IrodoriIngredient(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  wineGlass: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new WineGlass(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  wineBottle: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new WineBottle(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  wineCellar: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new WineCellar(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  beer: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Beer(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  sake: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Sake(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  cocktail: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Cocktail(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
+  softDrink: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new SoftDrink(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
 };

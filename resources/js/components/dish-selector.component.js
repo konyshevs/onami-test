@@ -1,4 +1,4 @@
-import { dishCreators } from "../state";
+import { dishConstructors } from "../state";
 import DishForm from "../pages/dishForm";
 const dishBlockEl = document.querySelector(".menu");
 
@@ -7,9 +7,8 @@ const DishSelector = controlHashChange => {
     const dishFormElms = document.querySelectorAll(".dish-form");
     const category = document.querySelector(".dish-category").value;
     console.log(category);
-    console.log(dishFormElms);
     if (dishFormElms[0]) dishFormElms.forEach(elm => (elm.innerHTML = ""));
-    dishBlockEl.append(DishForm(dishCreators[category](), controlHashChange));
+    dishBlockEl.append(DishForm({ category }));
   };
 
   const selectElm = document.createElement("select");

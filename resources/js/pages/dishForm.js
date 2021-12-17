@@ -1,3 +1,11 @@
+const createSelectElm = (contents, className = "select-type") => {
+  return `
+  <label>סוג הפריט</label>
+  <select class="${className}">
+  ${contents.map((content, i) => `<option value="${i}">${content}</option>`)}
+</select>`;
+};
+
 const DishForm = (dish, reranderMenu) => {
   const saveDishData = dish => {
     dish.titleHE = document.getElementById("titleHE").value;
@@ -53,23 +61,34 @@ const DishForm = (dish, reranderMenu) => {
       <input type="number" name="price2" id="price2" value="${
         Array.isArray(dish.price) ? dish.price[1] : ""
       }">
-      <div>
+      
       ${
         dish.category === "seshimiNigiri"
-          ? `
-      `
+          ? createSelectElm([
+              "דגי ים",
+              "מים תתוקים",
+              "פירוט ים",
+              "שונות",
+              "רק בעונה",
+            ])
           : ""
       }
+      ${
+        dish.category === "wineGlass" || dish.category === "wineBottle"
+          ? createSelectElm(["לבן", "אדום", "רוזה"])
+          : ""
+      }
+      <div>
           <input type="checkbox" name="isActive" id="isActive" ${
             dish.isActive ? "checked" : ""
           }>
-          <label for="isActive">פעיל</label>
+          <label class="label-checkbox" for="isActive">פעיל</label>
       </div>
       <div>
           <input type="checkbox" name="isVegi" id="isVegi" ${
             dish.isVegi ? "checked" : ""
           }>
-          <label for="isVegi">טבעוני</label>
+          <label class="label-checkbox" for="isVegi">טבעוני</label>
       </div>`;
   form.append(button);
 
