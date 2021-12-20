@@ -10,6 +10,7 @@ import {
 
 import DishForm from "./pages/dishForm";
 import DishSelector from "./components/dish-selector.component";
+import { FIRS_LOADED_PAGE, IS_SPACILALS_BUTTON_ACTIVE } from "./config";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -19,6 +20,7 @@ $("document").ready(function () {
   const menuBtn = document.querySelector(".menu-butt");
   const adminBarElm = document.querySelector(".admin-bar");
   const createDishBtn = document.querySelector(".create-dish");
+  const specialConteinerElm = document.getElementById("js-special-container");
 
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
@@ -42,7 +44,7 @@ $("document").ready(function () {
       adminBarElm.classList.remove("hidden");
     }
     if (!id || id === "admin") {
-      id = "appetisers";
+      id = FIRS_LOADED_PAGE;
       firstLoad = true;
     }
     document
@@ -444,13 +446,94 @@ $("document").ready(function () {
       })
       .join("");
   }
+  function renderSpecials(page) {
+    function genFavoritesMenuMarkup(menuObj) {
+      return `
+    <div class="menu-title">
+        <div class="">${menuObj[`title${lang}`]}</div>
+        <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
+    </div>
+    ${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
+    `;
+    }
+
+    const messageHE = `אין ספיישלים היום`;
+    const messageEN = `No specials today`;
+    if (!page.dishes[0])
+      return `<div class="pop-up-container">
+    <div class="pop-up">
+      <p>${lang === "HE" ? messageHE : messageEN}</p>
+    </div>
+  </div>`;
+
+    return (
+      `<div class="">
+      <div class="lunch-title">${page[`title${lang}`]}</div>
+      <div class="menu-description center">${page[`description${lang}`]}</div>
+  </div>` +
+      page.types
+        .map(menu => {
+          if (menu.dishes.length > 0) return genFavoritesMenuMarkup(menu);
+          else return "";
+        })
+        .join("")
+    );
+  }
+
+  function genSpiritMarkup(page) {
+    function genWineTypeMarkup(menuObj) {
+      return `
+      <div class="menu-title">
+      <div class="">${menuObj[`title${lang}`]}</div>
+      <div class="menu-description">${menuObj[`description${lang}`]}</div>
+  </div>
+  ${
+    menuObj.types
+      ? `${menuObj.types
+          .map(
+            type => `<div class="type-name">${type[`title${lang}`]}</div>
+        ${type.dishes.map(dish => genDishMarkup(dish)).join("")}`
+          )
+          .join("")}
+        <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
+      : `${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
+  <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
+  }`;
+    }
+    return page.map(menu => genWineTypeMarkup(menu)).join("");
+  }
 
   function renderMenuPage(page) {
     dishBlockEl.innerHTML = "";
-    if (page === state.appetisers && firstLoad) {
+    if (page === state.specials)
+      dishBlockEl.insertAdjacentHTML("beforeend", renderSpecials(page));
+    else if (page === state.seshimi)
+      dishBlockEl.insertAdjacentHTML(
+        "beforeend",
+        genSeshimiMarkup(page[0]) + genMenuMarkup(page[1])
+      );
+    else if (page === state.softDrinks)
+      dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(page, true));
+    else if (
+      page === state.lunch75 ||
+      page === state.lunch90 ||
+      page === state.lunch105
+    )
+      dishBlockEl.insertAdjacentHTML("beforeend", genLunchMarkup(page));
+    else if (page === state.combinations)
+      dishBlockEl.insertAdjacentHTML("beforeend", genCombitionsMarkup(page));
+    else if (page === state.wine) {
+      dishBlockEl.insertAdjacentHTML("beforeend", genWineMarkup(page));
+    } else if (page === state.favorites)
+      dishBlockEl.insertAdjacentHTML("beforeend", renderFavorites(page));
+    else if (page === state.wine)
+      dishBlockEl.insertAdjacentHTML("beforeend", genSpiritMarkup(page));
+    else if (Array.isArray(page))
       page.forEach(menu =>
         dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
       );
+    else dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(page));
+    if (firstLoad) {
       dishBlockEl.insertAdjacentHTML(
         "beforeend",
         `<div class="full-menu-btn btn">${
@@ -459,54 +542,23 @@ $("document").ready(function () {
       );
       firstLoad = false;
       $(".full-menu-btn").on("click", openCloseMenu);
-      return;
     }
-    if (page === state.seshimi)
-      return dishBlockEl.insertAdjacentHTML(
-        "beforeend",
-        genSeshimiMarkup(page[0]) + genMenuMarkup(page[1])
-      );
-    if (page === state.softDrinks)
-      return dishBlockEl.insertAdjacentHTML(
-        "beforeend",
-        genMenuMarkup(page, true)
-      );
-    if (
-      page === state.lunch75 ||
-      page === state.lunch90 ||
-      page === state.lunch105
-    )
-      return dishBlockEl.insertAdjacentHTML("beforeend", genLunchMarkup(page));
-
-    if (page === state.combinations)
-      return dishBlockEl.insertAdjacentHTML(
-        "beforeend",
-        genCombitionsMarkup(page)
-      );
-    if (page === state.wine) {
-      return dishBlockEl.insertAdjacentHTML("beforeend", genWineMarkup(page));
-    }
-
-    if (page === state.favorites)
-      return dishBlockEl.insertAdjacentHTML("beforeend", renderFavorites(page));
-    if (Array.isArray(page))
-      page.forEach(menu =>
-        dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(menu))
-      );
-    else dishBlockEl.insertAdjacentHTML("beforeend", genMenuMarkup(page));
   }
 
   function init() {
-    // window.addEventListener("resize", function (e) {
-    //   if (e.currentTarget.innerWidth > 480) {
-    //     navConteiner.style.display = "block";
-    //     nav.style.width = "150px";
-    //   }
-    //   if (e.currentTarget.innerWidth < 480) {
-    //     navConteiner.style.display = "none";
-    //     nav.style.width = "0";
-    //   }
-    // });
+    // Special menu button
+    if (IS_SPACILALS_BUTTON_ACTIVE) {
+      specialConteinerElm.insertAdjacentHTML(
+        "beforeend",
+        `
+      <a href="#specials">
+      <div class="nav-cat-title"></div>
+      <div id="specials-btn" class="nav-butt margin-top">
+      ${lang === "HE" ? "ספיישלים 2022" : "specials 2022"}
+      </div>
+    </a>`
+      );
+    }
 
     // @media query
     window.matchMedia("(max-width: 480px)").addListener(function (e) {

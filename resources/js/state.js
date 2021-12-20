@@ -31,12 +31,27 @@ const lunchDescriptionEN =
   "Lunch Menu is served from Sunday to Thursday, 12:00-18:00<br>and on Friday, 12:00-16:00 (exclude holidays)<br>Lunch menu includes: first course & main course<br>In addition, noon cocktail based on sake & fruits - 32 ₪<br>wine of the month red / white / rose 32 ₪";
 
 export const state = {
+  specials: {
+    titleHE: "ספיישלים 2022",
+    descriptionHE: "",
+    postScriptumHE: "",
+    titleEN: "Specials 2022",
+    descriptionEN: "",
+    postScriptumEN: "",
+    types: [
+      { titleHE: "ספיישל ראשונות", titleEN: "Special Appetisers", dishes: [] },
+      { titleHE: "ספיישל עיקריות", titleEN: "Special Main Dishes", dishes: [] },
+      { titleHE: "ספיישל סושי", titleEN: "Special Sushi", dishes: [] },
+      { titleHE: "ספיישל משקאות", titleEN: "Special Beverages", dishes: [] },
+    ],
+    dishes: [],
+  },
   appetisers: [
     {
       titleHE: "ראשונות קרות",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Cold appetisers",
+      titleEN: "Cold Appetisers",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -45,7 +60,7 @@ export const state = {
       titleHE: "ראשונות חמות",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Hot appetisers",
+      titleEN: "Hot Appetisers",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -64,7 +79,7 @@ export const state = {
     titleHE: "מנות עיקריות",
     descriptionHE: "",
     postScriptumHE: "שף <b>עידו כהן צדק</b>",
-    titleEN: "Main dishes",
+    titleEN: "Main Dishes",
     descriptionEN: "",
     postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
     dishes: [],
@@ -93,7 +108,7 @@ export const state = {
       titleHE: "תה חליטה",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Infusion tea",
+      titleEN: "Infusion Tea",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -102,7 +117,7 @@ export const state = {
       titleHE: "תיונים",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Tea bags",
+      titleEN: "Tea Bags",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -192,7 +207,7 @@ export const state = {
       titleHE: "תוספות אפשריות למאקי",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Optional ingredients",
+      titleEN: "Optional Ingredients",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -203,7 +218,7 @@ export const state = {
     descriptionHE: "קונוס נורי במילוי אורז / דג / פרי ים / ירקות",
     postScriptumHE: "",
     titleEN: "Temaki",
-    descriptionEN: "Hand roll",
+    descriptionEN: "Hand Roll",
     postScriptumEN: "",
     imageUrl: temakiImg,
     dishes: [],
@@ -223,7 +238,7 @@ export const state = {
       titleHE: "תוספות אפשריות (בחוץ)",
       descriptionHE: "",
       postScriptumHE: "",
-      titleEN: "Optional ingredients (outside)",
+      titleEN: "Optional Ingredients (outside)",
       descriptionEN: "",
       postScriptumEN: "",
       dishes: [],
@@ -452,9 +467,100 @@ export const state = {
     titleHE: "שתייה קלה",
     descriptionHE: "",
     postScriptumHE: "",
-    titleEN: "Soft drinks",
+    titleEN: "Soft Drinks",
     descriptionEN: "",
     postScriptumEN: "",
+    dishes: [],
+  },
+  spirits: {
+    titleHE: "אלכוהול",
+    descriptionHE: "",
+    postScriptumHE: "",
+    titleEN: "Spirits",
+    descriptionEN: "",
+    postScriptumEN: "",
+    types: {
+      aperitif: {
+        titleHE: "אפריטיף",
+        titleEN: "Aperitif",
+        dishes: [],
+      },
+      vodka: {
+        titleHE: "וודקה",
+        titleEN: "Vodka",
+        dishes: [],
+      },
+      rum: {
+        titleHE: "רום",
+        titleEN: "Rum",
+        dishes: [],
+      },
+      gin: {
+        titleHE: "ג'ין",
+        titleEN: "Gin",
+        dishes: [],
+      },
+      tequila: {
+        titleHE: "טקילה",
+        titleEN: "Tequila",
+        dishes: [],
+      },
+      anise: {
+        titleHE: "אניס",
+        titleEN: "Anise",
+        dishes: [],
+      },
+      cognac: {
+        titleHE: "קוניאק",
+        titleEN: "Cognac",
+        dishes: [],
+      },
+      liqueur: {
+        titleHE: "ליקרים",
+        titleEN: "Liqueur",
+        dishes: [],
+      },
+      digestif: {
+        titleHE: "דיז'סטיף",
+        titleEN: "Aperitif",
+        dishes: [],
+      },
+      portSherry: {
+        titleHE: "פורט & שרי",
+        titleEN: "Port & Sherry",
+        dishes: [],
+      },
+      scotch: {
+        titleHE: "ויסקי סקוטי",
+        titleEN: "Whisky Scotch",
+        dishes: [],
+      },
+      american: {
+        titleHE: "ויסקי אמריקאי",
+        titleEN: "American Whiskey",
+        dishes: [],
+      },
+      irish: {
+        titleHE: "ויסקי אירי",
+        titleEN: "Irish Whiskey",
+        dishes: [],
+      },
+      single: {
+        titleHE: "ויסקי סינגל מאלט",
+        titleEN: "Whisky Malt Single",
+        dishes: [],
+      },
+    },
+    dishes: [],
+  },
+  whisky: {
+    titleHE: "",
+    descriptionHE: "",
+    postScriptumHE: "",
+    titleEN: "Whisky",
+    descriptionEN: "",
+    postScriptumEN: "",
+    types: {},
     dishes: [],
   },
   favorites: [],
@@ -463,8 +569,12 @@ export const state = {
 // Adding skewers to appetisers
 state.appetisers.push(state.skewers);
 
+// Adding Port to Spirits
+state.spirits.types.portSherry.dishess = state.desserts[4].dishes;
+
 // Adding menus to favorites
 state.favorites.push(
+  state.specials,
   state.appetisers[0],
   state.appetisers[1],
   state.skewers,
@@ -482,7 +592,8 @@ state.favorites.push(
   state.wine[2],
   state.sake[0],
   state.sake[1],
-  state.coctails
+  state.coctails,
+  state.spirits
 );
 
 class Menu {
@@ -713,6 +824,23 @@ class SoftDrink extends Menu {
   }
 }
 
+class Spirit extends Menu {
+  constructor(
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type
+  ) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    this.category = "spirit";
+    this.type = type;
+    state.spirits.dishes.push(this);
+    state.spirits.types[type].dishes.push(this);
+  }
+}
 // Classes of Wine
 
 class Wine extends Menu {
@@ -856,6 +984,24 @@ class WineCellar extends Wine {
   }
 }
 
+class Special extends Menu {
+  constructor(
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type
+  ) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    this.category = "special";
+    this.type = type;
+    state.specials.dishes.push(this);
+    state.specials.types[type].dishes.push(this);
+  }
+}
+
 // COLD APPETISERS
 
 // const wakameSalad = new ColdAppetiser(
@@ -893,20 +1039,20 @@ new ColdAppetiser(
   true
 );
 
+new ColdAppetiser(
+  "איוואגקי",
+  "אוייסטר מוגש על קרח כתוש בליווי רוטב ספייסי פונזו",
+  "Iwa Gaki",
+  "Fresh oyster on crushed ice served with spicy ponzu sauce",
+  38
+);
+
 // const bottargaSoba = new ColdAppetiser(
 //   "בוטרגה סובה",
 //   "אטריות סובה עם בוטרגה, חלמון מגורד ואיקורה",
 //   "Bottarga Soba",
 //   "Soba noodles with bottarga, grated egg yolk & ikura",
 //   58
-// );
-
-// const iwaGaki = new ColdAppetiser(
-//   "איוואגקי",
-//   "אוייסטר מוגש על קרח כתוש בליווי רוטב ספייסי פונזו",
-//   "Iwa Gaki",
-//   "Fresh oyster on crushed ice served with spicy ponzu sauce",
-//   36
 // );
 
 new ColdAppetiser(
@@ -2768,9 +2914,130 @@ new WineCellar(
   "2007/2008"
 );
 
-//Made by konyshevs
+// aperitif: {
+
+// vodka: {
+
+// rum: {
+
+// gin: {
+
+// tequila: {
+
+// anise: {
+
+// cognac: {
+
+// liqueur: {
+
+// digestif: {
+
+// scotch: {
+
+// american: {
+
+// irish: {
+
+// single: {
+
+// Spirits
+new Spirit("אפרול", "", "Aperol", "", 28, false, "aperitif");
+new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 32, false, "vodka");
+new Spirit("בקרדי", "", "Bacardi", "", 32, false, "rum");
+new Spirit("גורדונ'ס", "", "Gordon`s", "", 32, false, "gin");
+new Spirit("מילאגרו בלאנקו", "", "Milagro Blanco", "", 44, false, "tequila");
+new Spirit("עראק אשקלון", "", "Arak Ashkalon", "", 28, false, "anise");
+new Spirit("הנסי V.S", "", "Hennessy V.S", "", 48, false, "cognac");
+new Spirit(
+  "אמרטו דיסארונו",
+  "",
+  "Amaretto Disaronno",
+  "",
+  34,
+  false,
+  "liqueur"
+);
+new Spirit("אוורנה", "", "Averna", "", 34, false, "digestif");
+new Spirit(
+  "ג'וני ווקר רד לייבל",
+  "",
+  "Jhonnie Walker Red",
+  "",
+  34,
+  false,
+  "scotch"
+);
+new Spirit("ג'ים בים לבן", "", "Jim Beam White", "", 38, false, "american");
+new Spirit("ג'יימסון", "", "Jameson", "", 36, false, "irish");
+new Spirit(
+  "גלנמורנג'י 10 שנים",
+  "",
+  "Glenmorangie 10",
+  "",
+  56,
+  false,
+  "single"
+);
+
+// Specials
+new Special(
+  "סולאייה אנטינורי",
+  "טוסקנה, איטליה",
+  "Solaia Antinori0",
+  "Toscany, Italy",
+  1800,
+  false,
+  0
+);
+new Special(
+  "סולאייה אנטינורי",
+  "טוסקנה, איטליה",
+  "Solaia Antinori1",
+  "Toscany, Italy",
+  1800,
+  false,
+  1
+);
+new Special(
+  "סולאייה אנטינורי",
+  "טוסקנה, איטליה",
+  "Solaia Antinori2",
+  "Toscany, Italy",
+  1800,
+  false,
+  2
+);
+new Special(
+  "סולאייה אנטינורי",
+  "טוסקנה, איטליה",
+  "Solaia Antinori3",
+  "Toscany, Italy",
+  1800,
+  false,
+  3
+);
 
 export const dishConstructors = {
+  special: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Special(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
   coldAappetiser: (
     titleHE,
     descriptionHE,
@@ -3271,4 +3538,26 @@ export const dishConstructors = {
       type,
       vintage
     ),
+  spirit: (
+    titleHE,
+    descriptionHE,
+    titleEN,
+    descriptionEN,
+    price,
+    isVegi,
+    type,
+    vintage
+  ) =>
+    new Spirit(
+      titleHE,
+      descriptionHE,
+      titleEN,
+      descriptionEN,
+      price,
+      isVegi,
+      type,
+      vintage
+    ),
 };
+
+//Made by konyshevs

@@ -12,7 +12,7 @@ const DishForm = (dish, reranderMenu) => {
     dish.titleEN = document.getElementById("titleEN").value;
     dish.descriptionHE = document.getElementById("descriptionHE").value;
     dish.descriptionEN = document.getElementById("descriptionEN").value;
-    const price = Number(document.getElementById("price").value);
+    const price = Number(document.getElementById("price").value) || "-";
     const price2 = Number(document.getElementById("price2").value);
     dish.price = price2 ? [price, price2] : price;
     dish.isActive = document.getElementById("isActive").checked;
@@ -53,11 +53,15 @@ const DishForm = (dish, reranderMenu) => {
       <input type="text" name="vintage" id="vintage" required value="${dish.vintage}">`
           : ""
       }
-      <label for="price">*מחיר</label>
+      <label for="price">${
+        dish.category === "seshimiNigiri" ? "מחיר ניגירי" : "מחיר"
+      }</label>
       <input type="number" name="price" id="price" required value="${
         Array.isArray(dish.price) ? dish.price[0] : dish.price
       }">
-      <label for="price2">מחיר נוסף</label>
+      <label for="price2">${
+        dish.category === "seshimiNigiri" ? "מחיר סשימי" : "מחיר נוסף"
+      }</label>
       <input type="number" name="price2" id="price2" value="${
         Array.isArray(dish.price) ? dish.price[1] : ""
       }">

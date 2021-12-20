@@ -163,7 +163,7 @@ nav {
 .nav-butt {
   cursor: pointer;
   margin: 0;
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
   font-size: 18px;
   transition: background-color 0.1s;
 }
@@ -172,7 +172,7 @@ nav {
   background-color: var(--color1-ligther);
 }
 
-#favorites-btn {
+.margin-top {
   margin-top: 20px;
 }
 

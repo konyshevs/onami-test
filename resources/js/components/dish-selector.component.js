@@ -16,8 +16,8 @@ const DishSelector = controlHashChange => {
 
   selectElm.onchange = () => createDish();
   selectElm.innerHTML = `
-       
           <option value="coldAappetiser">נא לבחור קטגוריה</option>
+          <option value="special">ספיישלים</option>
           <option value="coldAappetiser">ראשונות קרות</option>
           <option value="hotAppetiser">ראשונות חמות</option>
           <option value="skewer">שיפודי עץ על הגריל</option>
@@ -43,6 +43,7 @@ const DishSelector = controlHashChange => {
           <option value="sake">סאקה ואומשו</option>
           <option value="cocktail">קוקטיילים</option>
           <option value="softDrink">שתייה קלה</option>
+          <option value="spirit">אלכוהול</option>
   `;
 
   return selectElm;
