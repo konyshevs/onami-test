@@ -525,11 +525,6 @@ export const state = {
         titleEN: "Aperitif",
         dishes: [],
       },
-      portSherry: {
-        titleHE: "פורט & שרי",
-        titleEN: "Port & Sherry",
-        dishes: [],
-      },
       scotch: {
         titleHE: "ויסקי סקוטי",
         titleEN: "Whisky Scotch",
@@ -568,9 +563,6 @@ export const state = {
 
 // Adding skewers to appetisers
 state.appetisers.push(state.skewers);
-
-// Adding Port to Spirits
-state.spirits.types.portSherry.dishess = state.desserts[4].dishes;
 
 // Adding menus to favorites
 state.favorites.push(
@@ -2061,14 +2053,30 @@ const ebiFurai = new Menu(
   0
 );
 
-// const yasaiGomaItame = new Menu(
-//   "יאסאי גומה איטמה",
-//   "ירקות העונה וטופו מוקפצים עם סאקה ומוגשים עם רוטב גומה אאה",
-//   "Yasai Goma Itame",
-//   "Vegetables and tofu stir fried with sake. Served with goma sauce",
-//   0,
-//   true
-// );
+const yasayCurryRice = new Menu(
+  "יאסאי קארי רייס",
+  "קארי יפני, טופו, תפוח אדמה, גזר ובצל. מוגש עם אורז מאודה ובצל ירוק",
+  "Yasai Curry Rice",
+  "Golden curry, tofu, potato, carrot & onion. Served with steamed rice & scallion",
+  58,
+  true
+);
+
+const toriCurryRice = new Menu(
+  "טורי קארי רייס",
+  "קארי יפני, פרגית, תפוח אדמה, גזר ובצל. מוגש עם אורז מאודה ובצל ירוק",
+  "Tori Curry Rice",
+  "Golden curry, spring chicken, potato, carrot & onion. Served with steamed rice & scallion",
+  68
+);
+
+const kaisenCurryRice = new Menu(
+  "קאיסן קארי רייס",
+  "קארי יפני, שרימפ, קלמארי, תפוח אדמה, גזר ובצל. מוגש עם אורז מאודה ובצל ירוק",
+  "Kaisen Curry Rice",
+  "Golden curry, shrimp, calamari, potato, carrot & onion. Served with steamed rice & scallion",
+  62
+);
 
 const yasaiKareUdon = new Menu(
   "יאסאי קארה אודון",
@@ -2183,7 +2191,12 @@ state.lunch75.types[0].dishes = [
   sakemoriRoll,
   ebiSakekawaTemakiLunch,
 ];
-state.lunch75.types[1].dishes = [yasaiKareUdon, ingenDofu, yasaiUdon];
+state.lunch75.types[1].dishes = [
+  yasayCurryRice,
+  yasaiKareUdon,
+  ingenDofu,
+  yasaiUdon,
+];
 state.lunch75.types[2].dishes = [
   midoriRoll,
   yasaiCocktailRoll,
@@ -2195,6 +2208,7 @@ state.lunch75.types[2].dishes = [
 
 state.lunch90.types[0].dishes = state.lunch75.types[0].dishes;
 state.lunch90.types[1].dishes = [
+  toriCurryRice,
   toriKareUdon,
   wakadoriGrill,
   yakinikuLousujyu,
@@ -2215,6 +2229,7 @@ state.lunch105.types[0].dishes = [
   wafuYukke,
 ];
 state.lunch105.types[1].dishes = [
+  kaisenCurryRice,
   kaisenShougaItame,
   kaisenUdon,
   sakeSteak,
@@ -2443,9 +2458,9 @@ new Sake(
 
 new Sake(
   "אומשו צ'ויה",
-  'שיכר שזיפים (90/750 מ"ל)',
+  'שיכר שזיפים (90/650 מ"ל)',
   "Umeshu Choya",
-  "(90/750 ml)",
+  "(90/650 ml)",
   [34, 200]
 );
 

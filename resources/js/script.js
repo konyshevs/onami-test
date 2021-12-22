@@ -481,26 +481,18 @@ $("document").ready(function () {
   }
 
   function genSpiritMarkup(page) {
-    function genWineTypeMarkup(menuObj) {
-      return `
+    return `
       <div class="menu-title">
-      <div class="">${menuObj[`title${lang}`]}</div>
-      <div class="menu-description">${menuObj[`description${lang}`]}</div>
+      <div class="">${page[`title${lang}`]}</div>
+      <div class="menu-description">${page[`description${lang}`]}</div>
   </div>
-  ${
-    menuObj.types
-      ? `${menuObj.types
-          .map(
-            type => `<div class="type-name">${type[`title${lang}`]}</div>
-        ${type.dishes.map(dish => genDishMarkup(dish)).join("")}`
-          )
-          .join("")}
-        <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
-      : `${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
-  <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
-  }`;
-    }
-    return page.map(menu => genWineTypeMarkup(menu)).join("");
+  ${`${Object.keys(page.types)
+    .map(
+      key => `<div class="type-name">${page.types[key][`title${lang}`]}</div>
+    ${page.types[key].dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
+    )
+    .join("")}
+    <div class="menu-postscriptum">${page[`postScriptum${lang}`]}</div>`}`;
   }
 
   function renderMenuPage(page) {
@@ -526,7 +518,7 @@ $("document").ready(function () {
       dishBlockEl.insertAdjacentHTML("beforeend", genWineMarkup(page));
     } else if (page === state.favorites)
       dishBlockEl.insertAdjacentHTML("beforeend", renderFavorites(page));
-    else if (page === state.wine)
+    else if (page === state.spirits)
       dishBlockEl.insertAdjacentHTML("beforeend", genSpiritMarkup(page));
     else if (Array.isArray(page))
       page.forEach(menu =>
