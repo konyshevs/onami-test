@@ -10,8 +10,8 @@ import inariSpeciaImg from "../img/inarispecial.jpg";
 
 // import { createDishDocument } from "./firebase/farebase.utils";
 
-export const menuList = [];
-export const menuList2 = {};
+// export const menuList2 = [];
+export const menuList = {};
 
 export let favorits = [];
 const init = function () {
@@ -608,8 +608,8 @@ class Menu {
     this.isActive = true;
     this.addID();
     this._isFavorite();
-    menuList.push(this);
-    menuList2[this.id] = this;
+    // menuList2.push(this);
+    menuList[this.id] = this;
   }
 
   addID() {
@@ -3576,5 +3576,4 @@ export const dishConstructors = {
     ),
 };
 
-console.log(menuList2);
 //Made by konyshevs

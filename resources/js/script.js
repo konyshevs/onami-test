@@ -120,7 +120,7 @@ $("document").ready(function () {
     if (!e.target.closest(".favorite")) return;
     e.target.classList.toggle("fas");
     const id = e.target.dataset.id;
-    const dish = menuList.find(el => el.id === id);
+    const dish = menuList[id];
 
     if (dish.isFavorite) {
       dish.isFavorite = false;
@@ -185,7 +185,7 @@ $("document").ready(function () {
     dishBlockEl.addEventListener("click", function (e) {
       if (!e.target.closest(".edit")) return;
       const id = e.target.dataset.id;
-      const dish = menuList.find(el => el.id === id);
+      const dish = menuList[id];
       dishBlockEl.innerHTML = "";
       dishBlockEl.append(DishForm(dish, controlHashChange));
     });
@@ -203,7 +203,7 @@ $("document").ready(function () {
         target.classList.add("fa-toggle-on");
       }
       const id = target.dataset.id;
-      const dish = menuList.find(el => el.id === id);
+      const dish = menuList[id];
       dish.isActive = !dish.isActive;
     });
 
