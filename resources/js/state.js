@@ -11,6 +11,8 @@ import inariSpeciaImg from "../img/inarispecial.jpg";
 // import { createDishDocument } from "./firebase/farebase.utils";
 
 export const menuList = [];
+export const menuList2 = {};
+
 export let favorits = [];
 const init = function () {
   const storage = localStorage.getItem("favorits");
@@ -69,19 +71,19 @@ export const state = {
   skewers: {
     titleHE: "שיפודי עץ על הגריל",
     descriptionHE: "",
-    postScriptumHE: "שף <b>עידו כהן צדק</b>",
+    postScriptumHE: "",
     titleEN: "Skewers",
     descriptionEN: "",
-    postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
+    postScriptumEN: "",
     dishes: [],
   },
   mainDishes: {
     titleHE: "מנות עיקריות",
     descriptionHE: "",
-    postScriptumHE: "שף <b>עידו כהן צדק</b>",
+    postScriptumHE: "",
     titleEN: "Main Dishes",
     descriptionEN: "",
-    postScriptumEN: "Chef <b>Ido Cohen Zedek</b>",
+    postScriptumEN: "",
     dishes: [],
   },
 
@@ -607,6 +609,7 @@ class Menu {
     this.addID();
     this._isFavorite();
     menuList.push(this);
+    menuList2[this.id] = this;
   }
 
   addID() {
@@ -847,17 +850,9 @@ class Wine extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     this.vintage = vintage;
   }
-  addID() {
-    this.id = `${this.titleEN
-      .toLowerCase()
-      .replaceAll(" ", "_")}_${this.descriptionEN
-      .toLowerCase()
-      .replaceAll(" ", "_")
-      .replaceAll(",", "")}`;
-  }
 }
 
-class WineGlass extends Menu {
+class WineGlass extends Wine {
   constructor(
     titleHE,
     descriptionHE,
@@ -865,14 +860,12 @@ class WineGlass extends Menu {
     descriptionEN,
     price,
     type,
-    vintage = ""
+    vintage
   ) {
-    super(titleHE, descriptionHE, titleEN, descriptionEN, price);
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     this.type = type;
-    this.vintage = vintage;
     state.wine[0].dishes.push(this);
     state.wine[0].types[type].dishes.push(this);
-    this.addID();
   }
   addID() {
     this.id = `${this.titleEN
@@ -880,7 +873,7 @@ class WineGlass extends Menu {
       .replaceAll(" ", "_")}_${this.descriptionEN
       .toLowerCase()
       .replaceAll(" ", "_")
-      .replaceAll(",", "")}_glass_${this.vintage}`;
+      .replaceAll(",", "")}_glass`;
   }
 }
 
@@ -919,7 +912,6 @@ class WineBottle extends Wine {
     state.wine[1].dishes.push(this);
     state.wine[1].types[type].dishes.push(this);
     this.type = type;
-    this.addID();
   }
   addID() {
     this.id = `${this.titleEN
@@ -927,7 +919,7 @@ class WineBottle extends Wine {
       .replaceAll(" ", "_")}_${this.descriptionEN
       .toLowerCase()
       .replaceAll(" ", "_")
-      .replaceAll(",", "")}_bottle_${this.vintage}`;
+      .replaceAll(",", "")}_bottle`;
   }
 }
 
@@ -964,7 +956,6 @@ class WineCellar extends Wine {
   ) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, vintage);
     state.wine[2].dishes.push(this);
-    this.addID();
   }
   addID() {
     this.id = `${this.titleEN
@@ -972,7 +963,7 @@ class WineCellar extends Wine {
       .replaceAll(" ", "_")}_${this.descriptionEN
       .toLowerCase()
       .replaceAll(" ", "_")
-      .replaceAll(",", "")}_cellar_${this.vintage}`;
+      .replaceAll(",", "")}_cellar`;
   }
 }
 
@@ -3023,11 +3014,21 @@ new Special(
   2
 );
 new Special(
-  "סולאייה אנטינורי",
-  "טוסקנה, איטליה",
-  "Solaia Antinori3",
-  "Toscany, Italy",
-  1800,
+  "ג'אנגל בירד",
+  "רום פלנטיישן, קמפרי, אננס, סירופ אשכולית אדומה",
+  "Jungle Bird",
+  "Plantation rum, Campari, pineapple, red grapefruit syrup",
+  54,
+  false,
+  3
+);
+
+new Special(
+  "מרטיני תותים",
+  "תותים, קטל ואן ציטרון, סטולי וניל וקרמו דה לואר",
+  "Strawberry Martini",
+  "Strawberry, Ketel One Citroen, Stoli Vanil & Cremants De Loire",
+  54,
   false,
   3
 );
@@ -3575,4 +3576,5 @@ export const dishConstructors = {
     ),
 };
 
+console.log(menuList2);
 //Made by konyshevs
