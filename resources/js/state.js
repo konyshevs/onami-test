@@ -2552,7 +2552,7 @@ new WineGlass(
 new WineGlass(
   "קרמאן דה לואר ל'אקסטרא",
   "לאנגלואה שאטו, צרפת",
-  "Cremants De Loire L'Extra",
+  "Cremant De Loire L'Extra",
   "Langlois Chateau, France",
   38,
   1
@@ -2710,7 +2710,7 @@ new WineBottle("רוזה", "מיראבל, צרפת", "Rose", "Miraval, France", 
 new WineBottle(
   "קרמאן דה לואר ל'אקסטרא",
   "לאנגלואה שאטו, צרפת",
-  "Cremants De Loire L'Extra",
+  "Cremant De Loire L'Extra",
   "Langlois Chateau, France",
   170,
   1
@@ -3035,7 +3035,7 @@ new Special(
   "מרטיני תותים",
   "תותים, קטל ואן ציטרון, סטולי וניל וקרמו דה לואר",
   "Strawberry Martini",
-  "Strawberry, Ketel One Citroen, Stoli Vanil & Cremants De Loire",
+  "Strawberry, Ketel One Citroen, Stoli Vanil & Cremant De Loire",
   54,
   false,
   3
