@@ -43,14 +43,14 @@ $("document").ready(function () {
       isAdmin = true;
       adminBarElm.classList.remove("hidden");
     }
-    if (!id || id === "admin") {
+    if (!id || id === "admin" || !state[id]) {
       id = FIRS_LOADED_PAGE;
       firstLoad = true;
     }
     document
       .querySelectorAll(".nav-butt")
       .forEach(el => el.classList.remove("nav-btn-active"));
-    document.getElementById(`${id}-btn`).classList.add("nav-btn-active");
+    document.getElementById(`${id}-btn`)?.classList.add("nav-btn-active");
     renderMenuPage(state[id]);
     document.body.scrollIntoView();
   };
@@ -111,6 +111,10 @@ $("document").ready(function () {
   // FAVORITS LOGIC
 
   function FavoriteButton(dish) {
+    if (!dish) {
+      console.log("Dish is missing");
+      return "";
+    }
     return `<i data-id="${
       dish.id
     }" class="far ${dish.isFavorite ? "fas" : ""} fa-heart favorite favorite-${lang}"></i>`;
@@ -172,6 +176,10 @@ $("document").ready(function () {
   //ADMIN LOGIC
 
   function AdminButtons(dish) {
+    if (!dish) {
+      console.log("Dish is missing");
+      return "";
+    }
     return ` <div class='admin-buttons'>
     <i data-id="${
       dish.id
@@ -216,6 +224,10 @@ $("document").ready(function () {
 
   // MENU RENDERING
   function genDishMarkup(dish) {
+    if (!dish) {
+      console.log("Dish is missing");
+      return "";
+    }
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
     if (lang === "EN" && typeof dish.price[0] === "string")
       price = `${dish.price[1]}/${dish.price[0]}`;
@@ -236,6 +248,10 @@ $("document").ready(function () {
   }
 
   function genDishMarkupOneLine(dish, favorite = false) {
+    if (!dish) {
+      console.log("Dish is missing");
+      return "";
+    }
     const isString = item => typeof item === "string";
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
 
@@ -261,6 +277,10 @@ $("document").ready(function () {
   }
 
   function genMenuMarkup(menuObj, oneLine = false) {
+    if (!menuObj) {
+      console.log("Menu object is missing");
+      return "";
+    }
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
@@ -283,6 +303,10 @@ $("document").ready(function () {
     `;
   }
   function genSeshimiMarkup(menuObj) {
+    if (!menuObj) {
+      console.log("Menu object is missing");
+      return "";
+    }
     return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
@@ -308,7 +332,15 @@ $("document").ready(function () {
   }
 
   function genCombitionsMarkup(menuObj) {
+    if (!menuObj) {
+      console.log("Menu object is missing");
+      return "";
+    }
     function genDishMarkupOneLine(dish) {
+      if (!dish) {
+        console.log("Dish is missing");
+        return "";
+      }
       return `<div class="dish one-line">
        <div class="title-price-section">
           <div class="dish-title">
@@ -344,7 +376,12 @@ $("document").ready(function () {
   }
 
   function genLunchMarkup(lunchObj) {
+    if (!lunchObj) return "";
     function genDishMarkupOneLine(dish) {
+      if (!dish) {
+        console.log("Dish is missing");
+        return "";
+      }
       if (dish.isTypeTitle)
         return `
       <div class="dish one-line">
@@ -388,7 +425,12 @@ $("document").ready(function () {
   }
 
   function genWineMarkup(page) {
+    if (!page) return "";
     function genWineTypeMarkup(menuObj) {
+      if (!menuObj) {
+        console.log("Menu object is missing");
+        return "";
+      }
       return `
       <div class="menu-title">
       <div class="">${menuObj[`title${lang}`]}</div>
@@ -412,6 +454,10 @@ $("document").ready(function () {
 
   function renderFavorites(page) {
     function genFavoritesMenuMarkup(menuObj) {
+      if (!menuObj) {
+        console.log("Menu object is missing");
+        return "";
+      }
       return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
@@ -447,7 +493,12 @@ $("document").ready(function () {
       .join("");
   }
   function renderSpecials(page) {
+    if (!page) return "";
     function genFavoritesMenuMarkup(menuObj) {
+      if (!menuObj) {
+        console.log("Menu object is missing");
+        return "";
+      }
       return `
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
@@ -481,6 +532,7 @@ $("document").ready(function () {
   }
 
   function genSpiritMarkup(page) {
+    if (!page) return "";
     return `
       <div class="menu-title">
       <div class="">${page[`title${lang}`]}</div>
@@ -496,6 +548,7 @@ $("document").ready(function () {
   }
 
   function renderMenuPage(page) {
+    if (!page) return;
     dishBlockEl.innerHTML = "";
     if (page === state.specials)
       dishBlockEl.insertAdjacentHTML("beforeend", renderSpecials(page));

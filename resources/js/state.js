@@ -8,9 +8,6 @@ import nigiriImg from "../img/nigiri.jpg";
 import inariImg from "../img/inari.jpg";
 import inariSpeciaImg from "../img/inarispecial.jpg";
 
-// import { createDishDocument } from "./firebase/farebase.utils";
-
-// export const menuList2 = [];
 export const menuList = {};
 
 export let favorits = [];
@@ -43,8 +40,8 @@ export const state = {
     types: [
       { titleHE: "ספיישל ראשונות", titleEN: "Special Appetisers", dishes: [] },
       { titleHE: "ספיישל עיקריות", titleEN: "Special Main Dishes", dishes: [] },
-      { titleHE: "ספיישל סושי", titleEN: "Special Sushi", dishes: [] },
-      { titleHE: "ספיישל משקאות", titleEN: "Special Beverages", dishes: [] },
+      { titleHE: "", titleEN: "", dishes: [] },
+      { titleHE: "קוקטיילים", titleEN: "Coctails", dishes: [] },
     ],
     dishes: [],
   },
@@ -608,7 +605,6 @@ class Menu {
     this.isActive = true;
     this.addID();
     this._isFavorite();
-    // menuList2.push(this);
     menuList[this.id] = this;
   }
 
@@ -2350,6 +2346,14 @@ new Cocktail(
   52
 );
 
+// new Cocktail(
+//   "ג'אנגל בירד",
+//   "רום פלנטיישן, קמפרי, אננס, סירופ אשכולית אדומה",
+//   "Jungle Bird",
+//   "Plantation rum, Campari, pineapple, red grapefruit syrup",
+//   54,
+// );
+
 // BEER
 
 new Beer(
@@ -2966,33 +2970,57 @@ new Spirit(
 );
 
 // Specials
+
 new Special(
-  "סולאייה אנטינורי",
-  "טוסקנה, איטליה",
-  "Solaia Antinori0",
-  "Toscany, Italy",
-  1800,
-  false,
-  0
-);
-new Special(
-  "סולאייה אנטינורי",
-  "טוסקנה, איטליה",
-  "Solaia Antinori1",
-  "Toscany, Italy",
-  1800,
-  false,
-  1
-);
-new Special(
-  "סולאייה אנטינורי",
-  "טוסקנה, איטליה",
-  "Solaia Antinori2",
-  "Toscany, Italy",
-  1800,
+  "איוואגקי",
+  "אוייסטר ג׳ילרדו עם ספייסי פונזו",
+  "Iwagaki",
+  "Oyster served on crushed ice with spicy ponzu sauce",
+  38,
   false,
   2
 );
+
+new Special(
+  "סאקה און דה רוקס",
+  "סלמון קצוץ, איקורה, טוביקו שחור, בצל ירוק, שמן צ׳ילי על מאקי סלמון סקין קריספי ואבוקדו",
+  "Sake on the Rocks",
+  "Chopped salmon, salmon roe, flying fish roe, scallion, chili oil on salmon skin crispy & avocado maki",
+  88,
+  false,
+  2
+);
+
+new Special(
+  "6 צרובים",
+  "שש יח' ניגירי צרובים בלהבה. טונה, יילו טייל, וסלמון",
+  "6 Nigiri",
+  "6 pcs' of charred nigiri with an open flame. Tuna, yellow tail & salmon",
+  120,
+  false,
+  2
+);
+
+new Special(
+  "סשימי יוזו אבורה דושי ספיישל",
+  "סשימי טונה, סלמון, מוסר ים, דניס ובורי צרובים בשמן שומשום/צ׳ילי ברוטב סויה-יוזו",
+  "Sashimi Yuzu Abura Doushi Special",
+  "Sashimi of tuna, croaker, salmon, sea bream & grey mullet seared with hot sesame oil, yuzu & soy sauce",
+  128,
+  false,
+  2
+);
+
+new Special(
+  "נורימאקי  צמחוני",
+  "אבוקדו מגולגל עם אצת נורי במילוי מלפפון, שקדים קלויים, ווסאבי קרנץ׳, מיונז יפני וטריאקי",
+  "Vegi Norimaki",
+  "Avocado rolled with nori, cucumber, wasabi crunch, roasted almonds, teriyaki & mayonnaise ",
+  88,
+  false,
+  2
+);
+
 new Special(
   "ג'אנגל בירד",
   "רום פלנטיישן, קמפרי, אננס, סירופ אשכולית אדומה",
@@ -3556,5 +3584,4 @@ export const dishConstructors = {
     ),
 };
 
-console.log(menuList);
 //Made by konyshevs
