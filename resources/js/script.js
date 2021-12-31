@@ -228,6 +228,8 @@ $("document").ready(function () {
       console.log("Dish is missing");
       return "";
     }
+    if (!dish.isActive && !isAdmin) return "";
+
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
     if (lang === "EN" && typeof dish.price[0] === "string")
       price = `${dish.price[1]}/${dish.price[0]}`;
@@ -252,6 +254,9 @@ $("document").ready(function () {
       console.log("Dish is missing");
       return "";
     }
+
+    if (!dish.isActive && !isAdmin) return "";
+
     const isString = item => typeof item === "string";
     let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
 

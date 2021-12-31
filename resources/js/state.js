@@ -547,16 +547,16 @@ export const state = {
     },
     dishes: [],
   },
-  whisky: {
-    titleHE: "",
-    descriptionHE: "",
-    postScriptumHE: "",
-    titleEN: "Whisky",
-    descriptionEN: "",
-    postScriptumEN: "",
-    types: {},
-    dishes: [],
-  },
+  // whisky: {
+  //   titleHE: "",
+  //   descriptionHE: "",
+  //   postScriptumHE: "",
+  //   titleEN: "Whisky",
+  //   descriptionEN: "",
+  //   postScriptumEN: "",
+  //   types: {},
+  //   dishes: [],
+  // },
   favorites: [],
 };
 
@@ -862,6 +862,7 @@ class WineGlass extends Wine {
     this.type = type;
     state.wine[0].dishes.push(this);
     state.wine[0].types[type].dishes.push(this);
+    this.category = "wineGlass";
   }
   addID() {
     this.id = `${this.titleEN
@@ -908,6 +909,7 @@ class WineBottle extends Wine {
     state.wine[1].dishes.push(this);
     state.wine[1].types[type].dishes.push(this);
     this.type = type;
+    this.category = "wineBottle";
   }
   addID() {
     this.id = `${this.titleEN
@@ -2982,6 +2984,16 @@ new Special(
 );
 
 new Special(
+  "טאקויאקי",
+  "כדורי פנקייק יפניים במילוי תמנון, ג׳ינג׳ר כבוש ובצל ירוק. מוגש עם בוניטו, מיונז יפני וטריאקי",
+  "Takoyaki ",
+  "Japanese sphere shaped pancakes filled with octopus, beni shoga, scallion. Served with bonito, mayonnaise, teriyaki",
+  48,
+  false,
+  2
+);
+
+new Special(
   "סאקה און דה רוקס",
   "סלמון קצוץ, איקורה, טוביקו שחור, בצל ירוק, שמן צ׳ילי על מאקי סלמון סקין קריספי ואבוקדו",
   "Sake on the Rocks",
@@ -3033,9 +3045,9 @@ new Special(
 
 new Special(
   "מרטיני תותים",
-  "תותים, קטל ואן ציטרון, סטולי וניל וקרמו דה לואר",
+  "תותים, קטל ואן ציטרון, וקרמו דה לואר",
   "Strawberry Martini",
-  "Strawberry, Ketel One Citroen, Stoli Vanil & Cremant De Loire",
+  "Strawberry, Ketel One Citroen & Cremant De Loire",
   54,
   false,
   3

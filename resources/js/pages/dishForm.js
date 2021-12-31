@@ -1,23 +1,58 @@
-const createSelectElm = (contents, className = "select-type") => {
-  return `
-  <label>סוג הפריט</label>
-  <select class="${className}">
-  ${contents.map((content, i) => `<option value="${i}">${content}</option>`)}
-</select>`;
-};
+import { dishConstructors } from "../state";
 
-const DishForm = (dish, reranderMenu) => {
+const DishForm = (dish, reranderMenu, isNewDish = false) => {
+  const readDataFromForm = () => ({
+    titleHE: document.getElementById("titleHE").value,
+    titleEN: document.getElementById("titleEN").value,
+    descriptionHE: document.getElementById("descriptionHE").value,
+    descriptionEN: document.getElementById("descriptionEN").value,
+    price: Number(document.getElementById("price").value) || "-",
+    price2: Number(document.getElementById("price2").value),
+    isActive: document.getElementById("isActive").checked,
+    isVegi: document.getElementById("isVegi").checked,
+    type: document.querySelector(".select-type")?.value,
+    vintage: document.getElementById("vintage")?.value,
+  });
+
+  const createSelectElm = (contents, className = "select-type") => {
+    return `
+    <label>סוג הפריט</label>
+    <select class="${className}">
+    ${contents.map(
+      content => `<option value="${content[0]}">${content[1]}</option>`
+    )}
+  </select>`;
+  };
+
+  const createNewDish = constructor => {
+    const data = readDataFromForm();
+    console.log(data);
+    const price = data.price2 ? [data.price, data.price2] : data.price;
+    console.log(price);
+    constructor(
+      data.titleHE,
+      data.titleEN,
+      data.descriptionHE,
+      data.descriptionEN,
+      price,
+      // data.isActive,
+      data.isVegi,
+      data.type,
+      data.vintage
+    );
+  };
+
   const saveDishData = dish => {
-    dish.titleHE = document.getElementById("titleHE").value;
-    dish.titleEN = document.getElementById("titleEN").value;
-    dish.descriptionHE = document.getElementById("descriptionHE").value;
-    dish.descriptionEN = document.getElementById("descriptionEN").value;
-    const price = Number(document.getElementById("price").value) || "-";
-    const price2 = Number(document.getElementById("price2").value);
+    dish.titleHE = titleHeElm.value;
+    dish.titleEN = titleEnElm.value;
+    dish.descriptionHE = descriptionHeElm.value;
+    dish.descriptionEN = descriptionEnElm.value;
+    const price = priceElm.value || "-";
+    const price2 = price2Elm.value;
     dish.price = price2 ? [price, price2] : price;
-    dish.isActive = document.getElementById("isActive").checked;
-    dish.isVegi = document.getElementById("isVegi").checked;
-    if (dish.vintage) dish.vintage = document.getElementById("vintage").value;
+    dish.isActive = isActiveElm.checked;
+    dish.isVegi = isVegiElm.checked;
+    if (dish.vintage) dish.vintage = vintage.value;
     dish.addID();
     console.log(dish);
 
@@ -27,8 +62,10 @@ const DishForm = (dish, reranderMenu) => {
   const form = document.createElement("div");
   form.classList.add("form", "dish-form");
   const button = document.createElement("button");
-  button.textContent = "שמור";
-  button.onclick = () => saveDishData(dish);
+  button.textContent = isNewDish ? "צור מנה" : "שמור";
+  button.onclick = isNewDish
+    ? () => createNewDish(dishConstructors[dish.category])
+    : () => saveDishData(dish);
   form.innerHTML = `
       
       <label for="titleHE">*שם המנה</label>
@@ -67,19 +104,57 @@ const DishForm = (dish, reranderMenu) => {
       }">
       
       ${
-        dish.category === "seshimiNigiri"
+        dish.category === "seshimiNigiri" && isNewDish
           ? createSelectElm([
-              "דגי ים",
-              "מים תתוקים",
-              "פירוט ים",
-              "שונות",
-              "רק בעונה",
+              [0, "דגי ים"],
+              [1, "מים תתוקים"],
+              [2, "פירוט ים"],
+              [3, "שונות"],
+              [4, "רק בעונה"],
             ])
           : ""
       }
+      
       ${
-        dish.category === "wineGlass" || dish.category === "wineBottle"
-          ? createSelectElm(["לבן", "אדום", "רוזה"])
+        (dish.category === "wineGlass" && isNewDish) ||
+        (dish.category === "wineBottle" && isNewDish)
+          ? createSelectElm([
+              [0, "לבן"],
+              [1, "אדום"],
+              [2, "רוזה"],
+            ])
+          : ""
+      }
+
+      ${
+        dish.category === "spirit" && isNewDish
+          ? createSelectElm([
+              ["aperitif", "אפריטיף"],
+
+              ["vodka", "וודקה"],
+
+              ["rum", "רום"],
+
+              ["gin", "ג'ין"],
+
+              ["tequila", "טקילה"],
+
+              ["anise", "אניס"],
+
+              ["cognac", "קוניאק"],
+
+              ["liqueur", "ליקרים"],
+
+              ["digestif", "דיז'סטיף"],
+
+              ["scotch", "ויסקי סקוטי"],
+
+              ["american", "ויסקי אמריקאי"],
+
+              ["irish", "ויסקי אירי"],
+
+              ["single", "ויסקי סינגל מאלט"],
+            ])
           : ""
       }
       <div>
