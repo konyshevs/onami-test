@@ -2348,13 +2348,13 @@ new Cocktail(
   52
 );
 
-// new Cocktail(
-//   "ג'אנגל בירד",
-//   "רום פלנטיישן, קמפרי, אננס, סירופ אשכולית אדומה",
-//   "Jungle Bird",
-//   "Plantation rum, Campari, pineapple, red grapefruit syrup",
-//   54,
-// );
+new Cocktail(
+  "ג'אנגל בירד",
+  "רום פלנטיישן, קמפרי, אננס, סירופ אשכולית אדומה",
+  "Jungle Bird",
+  "Plantation rum, Campari, pineapple, red grapefruit syrup",
+  54
+);
 
 // BEER
 
