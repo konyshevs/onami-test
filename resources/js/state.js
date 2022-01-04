@@ -2316,13 +2316,13 @@ new Cocktail(
   48
 );
 
-new Cocktail(
-  "מרטיני וואסאבי",
-  "סטולי, סירופ וואסאבי ומיץ לימון טרי",
-  "Wasabi Martini",
-  "Stoli, homemade wasabi syrup & lemon juice",
-  48
-);
+// new Cocktail(
+//   "מרטיני וואסאבי",
+//   "סטולי, סירופ וואסאבי ומיץ לימון טרי",
+//   "Wasabi Martini",
+//   "Stoli, homemade wasabi syrup & lemon juice",
+//   48
+// );
 
 new Cocktail(
   "מרגריטה הדרים",
@@ -2509,7 +2509,7 @@ new WineGlass(
   "Comte Leloup, Chereau-Carre, France",
   38,
   0,
-  2017
+  2018
 );
 //  new WineGlass(
 //  "גוורצטרמינר",
@@ -2616,7 +2616,7 @@ new WineBottle(
   "Comte Leloup, Chereau-Carre, France",
   155,
   0,
-  2016
+  2018
 );
 new WineBottle(
   "ריזלינג",
