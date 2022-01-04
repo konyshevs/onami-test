@@ -2531,6 +2531,16 @@ new WineGlass(
   2018
 );
 
+//  new WineGlass(
+//  "גוורצטרמינר",
+//  "ירדן, רמת הגולן, ישראל",
+//  "Gewurztraminer",
+//  "Pelter, Golan Heights, Israel",
+//  44,
+//  0,
+//  2020
+//  );
+
 new WineGlass(
   "גראז' דה פאפא לבן",
   "לוינסון, ישראל",
@@ -2550,6 +2560,16 @@ new WineGlass(
   0,
   2020
 );
+
+// new WineGlass(
+//   "דומיניק קורנה",
+//   "מקון-שאנטרה, צרפת",
+//   "Dominique Cornin",
+//   "Mâcon-Chaintré, France",
+//   52,
+//   0,
+//   2020
+// );
 
 new WineGlass(
   "קרמאן דה לואר ל'אקסטרא",
@@ -2587,6 +2607,27 @@ new WineGlass(
   2,
   2020
 );
+
+// new WineGlass(
+//   "סירה",
+//   "קלו דה גת, הראל, ישראל",
+//   "Sirah",
+//   "Clos de Gat, Harel, Israel",
+//   52,
+//   2,
+//   2017
+// );
+
+// new WineGlass(
+//   "סימון ביז",
+//   'בורגון פרייר, צרפת',
+//   "Simon Bize",
+//   "Bourgogne Perrieres",
+//   64,
+//   2,
+//   2017
+// );
+
 
 // Bottles
 new WineBottle(
@@ -2638,6 +2679,16 @@ new WineBottle(
 //  2020
 //);
 
+//  new WineBottle(
+//  "גוורצטרמינר",
+//  "ירדן, רמת הגולן, ישראל",
+//  "Gewurztraminer",
+//  "Pelter, Golan Heights, Israel",
+//  180,
+//  0,
+//  2020
+//  );
+
 new WineBottle(
   "גוורצטרמינר",
   "פפאפנהיים, צרפת",
@@ -2676,6 +2727,16 @@ new WineBottle(
   0,
   2019
 );
+
+// new WineBottle(
+//   "דומיניק קורנה",
+//   "מקון-שאנטרה, צרפת",
+//   "Dominique Cornin",
+//   "Mâcon-Chaintré, France",
+//   230,
+//   0,
+//   2020
+// );
 
 new WineBottle(
   "גראז' דה פאפא לבן ",
@@ -2766,6 +2827,16 @@ new WineBottle(
 //   2019
 // );
 
+// new WineBottle(
+//   "סירה",
+//   "קלו דה גת, הראל, ישראל",
+//   "Sirah",
+//   "Clos de Gat, Harel, Israel",
+//   195,
+//   2,
+//   2017
+// );
+
 new WineBottle(
   "מרלו",
   "הראל, קלו דה גת, ישראל",
@@ -2794,6 +2865,16 @@ new WineBottle(
   2,
   2016
 );
+
+// new WineBottle(
+//   "סימון ביז",
+//   'בורגון פרייר, צרפת',
+//   "Simon Bize",
+//   "Bourgogne Perrieres",
+//   290,
+//   2,
+//   2017
+// );
 
 new WineBottle(
   "אמרונה",
