@@ -2598,36 +2598,35 @@ new WineGlass(
   2,
   2019
 );
+// new WineGlass(
+//   "גראז' דה פאפא אדום",
+//   "לוינסון, ישראל",
+//   "Garage De Papa Rouge",
+//   "Lewinsohn, Israel",
+//   56,
+//   2,
+//   2020
+// );
+
 new WineGlass(
-  "גראז' דה פאפא אדום",
-  "לוינסון, ישראל",
-  "Garage De Papa Rouge",
-  "Lewinsohn, Israel",
-  56,
+  "סירה",
+  "קלו דה גת, הראל, ישראל",
+  "Sirah",
+  "Clos de Gat, Harel, Israel",
+  52,
   2,
-  2020
+  2017
 );
 
-// new WineGlass(
-//   "סירה",
-//   "קלו דה גת, הראל, ישראל",
-//   "Sirah",
-//   "Clos de Gat, Harel, Israel",
-//   52,
-//   2,
-//   2017
-// );
-
-// new WineGlass(
-//   "סימון ביז",
-//   'בורגון פרייר, צרפת',
-//   "Simon Bize",
-//   "Bourgogne Perrieres",
-//   64,
-//   2,
-//   2017
-// );
-
+new WineGlass(
+  "סימון ביז",
+  "בורגון פרייר, צרפת",
+  "Simon Bize",
+  "Bourgogne Perrieres",
+  64,
+  2,
+  2017
+);
 
 // Bottles
 new WineBottle(
@@ -2827,15 +2826,15 @@ new WineBottle(
 //   2019
 // );
 
-// new WineBottle(
-//   "סירה",
-//   "קלו דה גת, הראל, ישראל",
-//   "Sirah",
-//   "Clos de Gat, Harel, Israel",
-//   195,
-//   2,
-//   2017
-// );
+new WineBottle(
+  "סירה",
+  "קלו דה גת, הראל, ישראל",
+  "Sirah",
+  "Clos de Gat, Harel, Israel",
+  195,
+  2,
+  2017
+);
 
 new WineBottle(
   "מרלו",
@@ -2847,15 +2846,16 @@ new WineBottle(
   2018
 );
 
-new WineBottle(
-  "גראז' דה פאפא אדום",
-  "לוינסון, ישראל",
-  "Garage De Papa Rouge",
-  "Lewinsohn, Israel",
-  235,
-  2,
-  2020
-);
+// new WineBottle(
+//   "גראז' דה פאפא אדום",
+//   "לוינסון, ישראל",
+//   "Garage De Papa Rouge",
+//   "Lewinsohn, Israel",
+//   235,
+//   2,
+//   2020
+// );
+
 new WineBottle(
   "אמרונה",
   'טומאסי, איטליה (375 מ"ל)',
@@ -2866,15 +2866,15 @@ new WineBottle(
   2016
 );
 
-// new WineBottle(
-//   "סימון ביז",
-//   'בורגון פרייר, צרפת',
-//   "Simon Bize",
-//   "Bourgogne Perrieres",
-//   290,
-//   2,
-//   2017
-// );
+new WineBottle(
+  "סימון ביז",
+  "בורגון פרייר, צרפת",
+  "Simon Bize",
+  "Bourgogne Perrieres",
+  290,
+  2,
+  2017
+);
 
 new WineBottle(
   "אמרונה",
