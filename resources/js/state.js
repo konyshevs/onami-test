@@ -1078,7 +1078,7 @@ new ColdAppetiser(
 
 new ColdAppetiser(
   "מאטסוקאווה זוקורי",
-  "סשימי פרידה צרובה  בסאקה בליווי רוטב פונזו לימונים	(עונתי)",
+  "סשימי פרידה צרובה  בסאקה בליווי רוטב פונזו לימונים	(לפעמים יש)",
   "Matsukawa Zukuri",
   "Broiled red snapper slices with lemon ponzu sauce (Only in season)",
   72
