@@ -1076,6 +1076,14 @@ new ColdAppetiser(
   72
 );
 
+new ColdAppetiser(
+  "מאטסוקאווה זוקורי",
+  "סשימי פרידה צרובה  בסאקה בליווי רוטב פונזו לימונים	(עונתי)",
+  "Matsukawa Zukuri",
+  "Broiled red snapper slices with lemon ponzu sauce (Only in season)",
+  72
+);
+
 // HOT APPETISERS
 // const spicyEdamame = new HotAppetiser(
 //   "ספייסי אדה ממה",
@@ -1486,13 +1494,6 @@ new SeshimiSpecial(
   "רול של סשימי טונה במילוי רוקט טרי (חתוך&nbspל-4)",
   "Maguro Rocket",
   "Tuna sashimi roll filled with fresh rocket (cut&nbspinto&nbsp4)",
-  72
-);
-new SeshimiSpecial(
-  "מאטסוקאווה זוקורי",
-  "סשימי פרידה צרובה  בסאקה בליווי רוטב פונזו לימונים	(עונתי)",
-  "Matsukawa Zukuri",
-  "Broiled red snapper slices with lemon ponzu sauce (Only in season)",
   72
 );
 
@@ -2521,31 +2522,41 @@ new WineGlass(
 //  2020
 //  );
 
+// new WineGlass(
+//   "גוורצטרמינר",
+//   "פפאפנהיים, צרפת",
+//   "Gewurztraminer",
+//   "Pfaffenheim, France",
+//   44,
+//   0,
+//   2018
+// );
+
 new WineGlass(
   "גוורצטרמינר",
-  "פפאפנהיים, צרפת",
+  "ירדן, רמת הגולן, ישראל",
   "Gewurztraminer",
-  "Pfaffenheim, France",
+  "Pelter, Golan Heights, Israel",
   44,
   0,
-  2018
+  2020
 );
 
-//  new WineGlass(
-//  "גוורצטרמינר",
-//  "ירדן, רמת הגולן, ישראל",
-//  "Gewurztraminer",
-//  "Pelter, Golan Heights, Israel",
-//  44,
-//  0,
-//  2020
-//  );
+// new WineGlass(
+//   "גראז' דה פאפא לבן",
+//   "לוינסון, ישראל",
+//   "Garage De Papa Blanc",
+//   "Lewinsohn, Israel",
+//   52,
+//   0,
+//   2020
+// );
 
 new WineGlass(
-  "גראז' דה פאפא לבן",
-  "לוינסון, ישראל",
-  "Garage De Papa Blanc",
-  "Lewinsohn, Israel",
+  "דומיניק קורנה",
+  "מקון-שאנטרה, צרפת",
+  "Dominique Cornin",
+  "Mâcon-Chaintré, France",
   52,
   0,
   2020
@@ -2560,16 +2571,6 @@ new WineGlass(
   0,
   2020
 );
-
-// new WineGlass(
-//   "דומיניק קורנה",
-//   "מקון-שאנטרה, צרפת",
-//   "Dominique Cornin",
-//   "Mâcon-Chaintré, France",
-//   52,
-//   0,
-//   2020
-// );
 
 new WineGlass(
   "קרמאן דה לואר ל'אקסטרא",
@@ -2678,25 +2679,25 @@ new WineBottle(
 //  2020
 //);
 
-//  new WineBottle(
-//  "גוורצטרמינר",
-//  "ירדן, רמת הגולן, ישראל",
-//  "Gewurztraminer",
-//  "Pelter, Golan Heights, Israel",
-//  180,
-//  0,
-//  2020
-//  );
-
 new WineBottle(
   "גוורצטרמינר",
-  "פפאפנהיים, צרפת",
+  "ירדן, רמת הגולן, ישראל",
   "Gewurztraminer",
-  "Pfaffenheim, France",
+  "Pelter, Golan Heights, Israel",
   180,
   0,
-  2018
+  2020
 );
+
+// new WineBottle(
+//   "גוורצטרמינר",
+//   "פפאפנהיים, צרפת",
+//   "Gewurztraminer",
+//   "Pfaffenheim, France",
+//   180,
+//   0,
+//   2018
+// );
 
 new WineBottle(
   "שנסון",
@@ -2727,25 +2728,25 @@ new WineBottle(
   2019
 );
 
-// new WineBottle(
-//   "דומיניק קורנה",
-//   "מקון-שאנטרה, צרפת",
-//   "Dominique Cornin",
-//   "Mâcon-Chaintré, France",
-//   230,
-//   0,
-//   2020
-// );
-
 new WineBottle(
-  "גראז' דה פאפא לבן ",
-  "לוינסון, ישראל",
-  "Garage De Papa Blanc",
-  "Lewinsohn, Israel",
-  235,
+  "דומיניק קורנה",
+  "מקון-שאנטרה, צרפת",
+  "Dominique Cornin",
+  "Mâcon-Chaintré, France",
+  230,
   0,
   2020
 );
+
+// new WineBottle(
+//   "גראז' דה פאפא לבן ",
+//   "לוינסון, ישראל",
+//   "Garage De Papa Blanc",
+//   "Lewinsohn, Israel",
+//   235,
+//   0,
+//   2020
+// );
 
 new WineBottle(
   "סאנסר",
