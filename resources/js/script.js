@@ -121,9 +121,12 @@ $("document").ready(function () {
   }
 
   dishBlockEl.addEventListener("click", function (e) {
-    if (!e.target.closest(".favorite")) return;
-    e.target.classList.toggle("fas");
-    const id = e.target.dataset.id;
+    if (!e.target.closest(".dish-title")) return;
+    const target =
+      e.target.closest(".favorite") || e.target.previousElementSibling;
+    if (!target) return;
+    target.classList.toggle("fas");
+    const id = target.dataset.id;
     const dish = menuList[id];
 
     if (dish.isFavorite) {
