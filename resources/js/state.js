@@ -3188,7 +3188,8 @@ new Spirit(
 new Spirit("פטרון סילבר", "", "Patron Silver", "", 62, false, "tequila");
 new Spirit("פטרון רפוסאדו", "", "Patron Reposado", "", 70, false, "tequila");
 new Spirit("פטרון אנייחו", "", "Patron Anejo", "", 82, false, "tequila");
-new Spirit("קוארבו 1800", "", "Cuervo 1800", "", 88, false, "tequila");
+new Spirit("1800 רזרבה", "", 
+           "1800 Reserva", "", 88, false, "tequila");
 new Spirit(
   "רזרבה דה לה פמילייה",
   "",
@@ -3201,7 +3202,7 @@ new Spirit(
 
 new Spirit("עראק אשקלון", "", "Arak Ashkalon", "", 28, false, "anise");
 new Spirit("אוזו מטקסה", "", "Ouzo Metaxa", "", 36, false, "anise");
-new Spirit("סמבוקה", "", "Sambuca", "", 38, false, "anise");
+new Spirit("סמבוקה לוקסרדו שחורה", "", "Sambuca Luxardo", "", 38, false, "anise");
 new Spirit("פרנו", "", "Pernod", "", 42, false, "anise");
 new Spirit("ריכארד", "", "Ricard", "", 44, false, "anise");
 
