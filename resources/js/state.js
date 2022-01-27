@@ -521,22 +521,17 @@ export const state = {
       },
       digestif: {
         titleHE: "דיז'סטיף",
-        titleEN: "Aperitif",
+        titleEN: "Dejestiv",
         dishes: [],
       },
-      scotch: {
-        titleHE: "ויסקי סקוטי",
-        titleEN: "Whisky Scotch",
+      blended: {
+        titleHE: "ויסקי בלנדד",
+        titleEN: "Blended Whisky",
         dishes: [],
       },
       american: {
         titleHE: "ויסקי אמריקאי",
         titleEN: "American Whiskey",
-        dishes: [],
-      },
-      irish: {
-        titleHE: "ויסקי אירי",
-        titleEN: "Irish Whiskey",
         dishes: [],
       },
       single: {
@@ -1426,7 +1421,7 @@ new Tea(
 );
 // new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (caffeine free)", 12);
 
-new Port("", "אוטימה 10", "", "Otima 10", 36);
+new Port("", "אוטימה 10", "", "Otima 10", 38);
 new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", 44);
 
 // SESHIMI
@@ -3111,7 +3106,7 @@ new WineCellar(
 
 // digestif: {
 
-// scotch: {
+// blended: {
 
 // american: {
 
@@ -3120,20 +3115,105 @@ new WineCellar(
 // single: {
 
 // Spirits
-new Spirit("אפרול", "", "Aperol", "", 28, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-// new Spirit("", "", "", "", 0, false, "aperitif");
-new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 32, false, "vodka");
-new Spirit("בקרדי", "", "Bacardi", "", 32, false, "rum");
-new Spirit("גורדונ'ס", "", "Gordon`s", "", 32, false, "gin");
-new Spirit("מילאגרו בלאנקו", "", "Milagro Blanco", "", 44, false, "tequila");
+new Spirit("מרטיני ביאנקו", "", "Martini bianco", "", 30, false, "aperitif");
+new Spirit("אפרול", "", "Aperol", "", 32, false, "aperitif");
+new Spirit("קמפרי", "", "Campari", "", 32, false, "aperitif");
+new Spirit("צ'ינאר", "", "Chinar", "", 32, false, "aperitif");
+new Spirit("נוילי פראט לבן", "", "Noilly Prat Dry", "", 34, false, "aperitif");
+new Spirit(
+  "נוילי פראט אדום",
+  "",
+  "Noilly Prat Rouge",
+  "",
+  34,
+  false,
+  "aperitif"
+);
+new Spirit("פימס", "", "Pimm's No 1", "", 34, false, "aperitif");
+new Spirit("אנטיקה פורמולה", "", "Antica Formula", "", 38, false, "aperitif");
+
+new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 34, false, "vodka");
+new Spirit("זוברובקה", "", "Zubrowka", "", 38, false, "vodka");
+new Spirit("קטל ואן", "", "Ketel 1", "", 40, false, "vodka");
+new Spirit("בלבדר", "", "Belvedere", "", 48, false, "vodka");
+new Spirit("גריי גוס", "", "Gray Goose", "", 48, false, "vodka");
+
+new Spirit("פלנטיישן 3", "", "Plantation 3", "", 36, false, "rum");
+new Spirit(
+  "קפטן מורגן ספייס",
+  "",
+  "Captain Morgan Spiced",
+  "",
+  40,
+  false,
+  "rum"
+);
+new Spirit("קפטן מורגן בלאק", "", "Captain Morgan Black", "", 44, false, "rum");
+new Spirit("זקאפה 23", "", "Zacapa 23", "", 70, false, "rum");
+
+new Spirit("גורדונ'ס", "", "Gordon`s", "", 34, false, "gin");
+new Spirit("בומביי ספייר", "", "Bombay Sapphire", "", 42, false, "gin");
+new Spirit("טנקירי טן", "", "Tanqueray  10", "", 46, false, "gin");
+new Spirit("רוקו", "", "Roku", "", 48, false, "gin");
+new Spirit("הנדריקס", "", "Hendrick's", "", 50, false, "gin");
+
+new Spirit("מילאגרו סילבר", "", "Milagro Silver", "", 48, false, "tequila");
+new Spirit(
+  "דון חוליו בלאנקו",
+  "",
+  "Don Julio Blanco",
+  "",
+  62,
+  false,
+  "tequila"
+);
+new Spirit(
+  "דון חוליו רפוסאדו",
+  "",
+  "Don Julio Reposado",
+  "",
+  76,
+  false,
+  "tequila"
+);
+new Spirit(
+  "דון חוליו אנייחו",
+  "",
+  "Don Julio Anejo ",
+  "",
+  94,
+  false,
+  "tequila"
+);
+new Spirit("פטרון סילבר", "", "Patron Silver", "", 62, false, "tequila");
+new Spirit("פטרון רפוסאדו", "", "Patron Reposado", "", 70, false, "tequila");
+new Spirit("פטרון אנייחו", "", "Patron Anejo", "", 82, false, "tequila");
+new Spirit("קוארבו 1800", "", "Cuervo 1800", "", 88, false, "tequila");
+new Spirit(
+  "רזרבה דה לה פמילייה",
+  "",
+  "Reserva de la Familia",
+  "",
+  130,
+  false,
+  "tequila"
+);
+
 new Spirit("עראק אשקלון", "", "Arak Ashkalon", "", 28, false, "anise");
-new Spirit("הנסי V.S", "", "Hennessy V.S", "", 48, false, "cognac");
+new Spirit("אוזו מטקסה", "", "Ouzo Metaxa", "", 36, false, "anise");
+new Spirit("סמבוקה", "", "Sambuca", "", 38, false, "anise");
+new Spirit("פרנו", "", "Pernod", "", 42, false, "anise");
+new Spirit("ריכארד", "", "Ricard", "", 44, false, "anise");
+
+new Spirit("הנסי V.S", "", "Hennessy V.S", "", 50, false, "cognac");
+new Spirit("אוטרד VSOP", "", "Otard V.S.O.P", "", 80, false, "cognac");
+new Spirit("הנסי VSOP", "", "Hennessy V.S.O.P", "", 84, false, "cognac");
+new Spirit("רמי מרטן VSOP", "", "Remy Martin V.S.O.P", "", 88, false, "cognac");
+new Spirit("אוטרד XO", "", "Otard X.O", "", 135, false, "cognac");
+new Spirit("רמי מרטן XO", "", "Remy martin X.O", "", 155, false, "cognac");
+new Spirit("הנסי XO", "", "Hennessy X.O", "", 170, false, "cognac");
+
+new Spirit("פסואה", "", "Passoa", "", 30, false, "liqueur");
 new Spirit(
   "אמרטו דיסארונו",
   "",
@@ -3143,18 +3223,103 @@ new Spirit(
   false,
   "liqueur"
 );
-new Spirit("אוורנה", "", "Averna", "", 34, false, "digestif");
+new Spirit("קלואה", "", "Kahlua", "", 34, false, "liqueur");
+new Spirit("מידורי", "", "Midori", "", 40, false, "liqueur");
+new Spirit("קוואנטרו", "", "Cuantro", "", 42, false, "liqueur");
+new Spirit("פרנג'ליקו", "", "Frangelico", "", 44, false, "liqueur");
+new Spirit("סאטורן קומפורט", "", "Southern Comfort", "", 46, false, "liqueur");
+new Spirit("דרמבוי", "", "Drambuie", "", 48, false, "liqueur");
 new Spirit(
-  "ג'וני ווקר רד לייבל",
+  "ג'ק דניאלס דבש",
   "",
-  "Jhonnie Walker Red",
+  "Jack Daniel's Honey",
   "",
-  34,
+  58,
   false,
-  "scotch"
+  "liqueur"
 );
-new Spirit("ג'ים בים לבן", "", "Jim Beam White", "", 38, false, "american");
-new Spirit("ג'יימסון", "", "Jameson", "", 36, false, "irish");
+new Spirit("שארטרז ירוק", "", "Chartreuse Green", "", 60, false, "liqueur");
+new Spirit("שמבורד", "", "Chambord", "", 60, false, "liqueur");
+new Spirit(
+  "גרנד מרינייה אדום",
+  "",
+  "Grand Marnier Red",
+  "",
+  62,
+  false,
+  "liqueur"
+);
+new Spirit("בנדיקטין", "", "Benedictine", "", 72, false, "liqueur");
+new Spirit("סן ז'רמן", "", "St-Germain", "", 72, false, "liqueur");
+
+new Spirit("אוורנה", "", "Averna", "", 38, false, "digestif");
+new Spirit("בחרובקה", "", "Becherovka", "", 38, false, "digestif");
+new Spirit("פרנה ברנקה", "", "Fernet Branca", "", 42, false, "digestif");
+new Spirit("ייגרמייסטר", "", "Jagermeister", "", 44, false, "digestif");
+new Spirit(
+  "יוליוס בלאן דה גליליי",
+  "",
+  "Blanc de Galilee",
+  "",
+  56,
+  false,
+  "digestif"
+);
+new Spirit(
+  "יוליוס מאר דה גליליי",
+  "",
+  "Marc de Galilee",
+  "",
+  60,
+  false,
+  "digestif"
+);
+
+new Spirit("ג'יימסון", "", "Jameson", "", 36, false, "blended");
+new Spirit(
+  "ג'וני ווקר בלק לייבל",
+  "",
+  "Jhonnie Walker Black",
+  "",
+  48,
+  false,
+  "blended"
+);
+new Spirit("שיבאס ריגל", "", "Chivas Regal", "", 54, false, "blended");
+new Spirit(
+  "ג'וני ווקר גולד לייבל",
+  "",
+  "Jhonnie Walker Gold ",
+  "",
+  66,
+  false,
+  "blended"
+);
+new Spirit(
+  "'וני ווקר בלו לייבל",
+  "",
+  "Jhonnie Walker Blue",
+  "",
+  145,
+  false,
+  "blended"
+);
+
+new Spirit("ויילד טרקי", "", "Wild Turkey 81", "", 36, false, "american");
+new Spirit("ג'ק דניאלס", "", "Jack Daniel's", "", 48, false, "american");
+new Spirit("מייקרס מארק", "", "Maker's mark", "", 62, false, "american");
+new Spirit("ג'נטלמן ג'ק", "", "Gentleman Jack", "", 62, false, "american");
+new Spirit("נוב קריק", "", "Knob Creek", "", 72, false, "american");
+
+new Spirit(
+  "גלנליווט פאונדרס רזרב",
+  "",
+  "Glenlivet Founder's Reserve",
+  "",
+  52,
+  false,
+  "single"
+);
 new Spirit(
   "גלנמורנג'י 10 שנים",
   "",
@@ -3164,6 +3329,22 @@ new Spirit(
   false,
   "single"
 );
+new Spirit("גלנפידיך 12", "", "Glenfidich 12", "", 62, false, "single");
+new Spirit(
+  "בלויני 12 דאבלווד",
+  "",
+  "Balvenie Double Wood 12",
+  "",
+  82,
+  false,
+  "single"
+);
+new Spirit("מקאלן 12", "", "Macallan 12", "", 84, false, "single");
+new Spirit("טאליסקר 10", "", "Talisker 10", "", 88, false, "single");
+new Spirit("גלנפידיך 15", "", "Glenfidich 15", "", 88, false, "single");
+new Spirit("לה פרויג", "", "Laphroaig 10", "", 96, false, "single");
+new Spirit("לגבולין 16", "", "Lagavulin 16", "", 115, false, "single");
+new Spirit("גלנפידיך 18", "", "Glenfidich 18", "", 115, false, "single");
 
 // Specials
 
