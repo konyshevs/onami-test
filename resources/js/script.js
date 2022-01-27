@@ -22,6 +22,8 @@ $("document").ready(function () {
   const createDishBtn = document.querySelector(".create-dish");
   const specialConteinerElm = document.getElementById("js-special-container");
 
+  console.log(JSON.stringify(state.spirits.dishes))
+  
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
     "--color1"
