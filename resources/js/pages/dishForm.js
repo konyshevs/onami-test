@@ -24,11 +24,10 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
   </select>`;
   };
 
+  // button functions
   const createNewDish = constructor => {
     const data = readDataFromForm();
-    console.log(data);
     const price = data.price2 ? [data.price, data.price2] : data.price;
-    console.log(price);
     constructor(
       data.titleHE,
       data.titleEN,
@@ -43,29 +42,39 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
   };
 
   const saveDishData = dish => {
-    dish.titleHE = titleHeElm.value;
-    dish.titleEN = titleEnElm.value;
-    dish.descriptionHE = descriptionHeElm.value;
-    dish.descriptionEN = descriptionEnElm.value;
-    const price = priceElm.value || "-";
-    const price2 = price2Elm.value;
-    dish.price = price2 ? [price, price2] : price;
-    dish.isActive = isActiveElm.checked;
-    dish.isVegi = isVegiElm.checked;
-    if (dish.vintage) dish.vintage = vintage.value;
+    const data = readDataFromForm();
+    const price = data.price2 ? [data.price, data.price2] : data.price;
+
+    dish.titleHE = data.titleHE;
+    dish.titleEN = data.titleEN;
+    dish.descriptionHE = data.descriptionHE;
+    dish.descriptionEN = data.descriptionEN;
+    dish.price = price;
+    dish.isActive = data.isActive;
+    dish.isVegi = data.isVegi;
+    if (dish.vintage) dish.vintage = data.vintage;
     dish.addID();
     console.log(dish);
 
     reranderMenu();
   };
 
+  const deleteDish = dish => {
+    if (!confirm(`למחוק פריט "${dish.titleHE}"?`)) return;
+    dish.remove();
+    reranderMenu();
+  };
+  const cancel = () => reranderMenu();
   const form = document.createElement("div");
   form.classList.add("form", "dish-form");
-  const button = document.createElement("button");
-  button.textContent = isNewDish ? "צור מנה" : "שמור";
-  button.onclick = isNewDish
-    ? () => createNewDish(dishConstructors[dish.category])
-    : () => saveDishData(dish);
+
+  const createButton = (content, func) => {
+    const button = document.createElement("button");
+    button.insertAdjacentHTML("beforeend", content);
+    button.onclick = func;
+    return button;
+  };
+
   form.innerHTML = `
       
       <label for="titleHE">*שם המנה</label>
@@ -169,7 +178,24 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
           }>
           <label class="label-checkbox" for="isVegi">טבעוני</label>
       </div>`;
-  form.append(button);
+
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.classList.add("formButtonsContainer");
+  buttonsContainer.append(
+    createButton(
+      isNewDish ? "צור מנה" : "שמור",
+      isNewDish
+        ? () => createNewDish(dishConstructors[dish.category])
+        : () => saveDishData(dish)
+    )
+  );
+  buttonsContainer.append(createButton("ביטול", () => cancel()));
+  if (!isNewDish)
+    buttonsContainer.append(
+      createButton('<i class="far fa-trash-alt"></i>', () => deleteDish(dish))
+    );
+
+  form.append(buttonsContainer);
 
   return form;
 };

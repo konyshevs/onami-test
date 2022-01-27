@@ -31,10 +31,10 @@ const lunchDescriptionEN =
 
 export const state = {
   specials: {
-    titleHE: "ספיישלים 2022",
+    titleHE: "ספיישלים",
     descriptionHE: "",
     postScriptumHE: "",
-    titleEN: "Specials 2022",
+    titleEN: "Specials",
     descriptionEN: "",
     postScriptumEN: "",
     types: [
@@ -619,12 +619,21 @@ class Menu {
       favoritesCount++;
     }
   }
+
+  _removeItem(arr) {
+    const index = arr.findIndex(elm => elm.id === this.id);
+    arr.splice(index, 1);
+    delete menuList[this.id];
+  }
 }
 class ColdAppetiser extends Menu {
   constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.appetisers[0].dishes.push(this);
-    this.category = "coldAappetiser";
+    this.category = "coldAppetiser";
+  }
+  remove() {
+    this._removeItem(state.appetisers[0].dishes);
   }
 }
 
@@ -634,6 +643,9 @@ class HotAppetiser extends Menu {
     state.appetisers[1].dishes.push(this);
     this.category = "hotAppetiser";
   }
+  remove() {
+    this._removeItem(state.appetisers[1].dishes);
+  }
 }
 
 class Skewer extends Menu {
@@ -641,6 +653,9 @@ class Skewer extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.skewers.dishes.push(this);
     this.category = "skewer";
+  }
+  remove() {
+    this._removeItem(state.skewers.dishes);
   }
 }
 
@@ -650,6 +665,9 @@ class MainDish extends Menu {
     state.mainDishes.dishes.push(this);
     this.category = "mainDishe";
   }
+  remove() {
+    this._removeItem(state.mainDishes.dishes);
+  }
 }
 
 class Dessert extends Menu {
@@ -657,6 +675,9 @@ class Dessert extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[0].dishes.push(this);
     this.category = "dessert";
+  }
+  remove() {
+    this._removeItem(state.desserts[0].dishes);
   }
 }
 
@@ -666,6 +687,9 @@ class Coffee extends Menu {
     state.desserts[1].dishes.push(this);
     this.category = "coffee";
   }
+  remove() {
+    this._removeItem(state.desserts[1].dishes);
+  }
 }
 
 class TeaInfusion extends Menu {
@@ -673,6 +697,9 @@ class TeaInfusion extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[2].dishes.push(this);
     this.category = "teaInfusion";
+  }
+  remove() {
+    this._removeItem(state.desserts[2].dishes);
   }
 }
 
@@ -682,6 +709,9 @@ class Tea extends Menu {
     state.desserts[3].dishes.push(this);
     this.category = "tea";
   }
+  remove() {
+    this._removeItem(state.desserts[3].dishes);
+  }
 }
 
 class Port extends Menu {
@@ -689,6 +719,9 @@ class Port extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[4].dishes.push(this);
     this.category = "port";
+  }
+  remove() {
+    this._removeItem(state.desserts[4].dishes);
   }
 }
 
@@ -708,6 +741,10 @@ class SeshimiNigiri extends Menu {
     this.category = "seshimiNigiri";
     this.type = type;
   }
+  remove() {
+    this._removeItem(state.seshimi[0].dishes);
+    this._removeItem(state.seshimi[0].types[this.type].dishes);
+  }
 }
 
 class SeshimiSpecial extends Menu {
@@ -715,6 +752,9 @@ class SeshimiSpecial extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.seshimi[1].dishes.push(this);
     this.category = "seshimiSpecial";
+  }
+  remove() {
+    this._removeItem(state.seshimi[1].dishes);
   }
 }
 
@@ -724,6 +764,9 @@ class InariGunkan extends Menu {
     state.inari[0].dishes.push(this);
     this.category = "inariGunkan";
   }
+  remove() {
+    this._removeItem(state.inari[0].dishes);
+  }
 }
 
 class InariSpecial extends Menu {
@@ -732,6 +775,9 @@ class InariSpecial extends Menu {
     state.inari[1].dishes.push(this);
     this.category = "inariSpecial";
   }
+  remove() {
+    this._removeItem(state.inari[1].dishes);
+  }
 }
 
 class Hosomaki extends Menu {
@@ -739,6 +785,9 @@ class Hosomaki extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.hosomaki[0].dishes.push(this);
     this.category = "hosomaki";
+  }
+  remove() {
+    this._removeItem(state.hosomaki[0].dishes);
   }
 }
 
@@ -753,6 +802,10 @@ class HosomakiIngredient extends Menu {
     this.id =
       this.descriptionEN.toLowerCase().replaceAll(" ", "_") + "_ingredient";
   }
+
+  remove() {
+    this._removeItem(state.hosomaki[1].dishes);
+  }
 }
 
 class Temaki extends Menu {
@@ -761,6 +814,10 @@ class Temaki extends Menu {
     state.temaki.dishes.push(this);
     this.category = "temaki";
   }
+
+  remove() {
+    this._removeItem(state.temaki.dishes);
+  }
 }
 
 class Irodori extends Menu {
@@ -768,6 +825,10 @@ class Irodori extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.irodori[0].dishes.push(this);
     this.category = "irodori";
+  }
+
+  remove() {
+    this._removeItem(state.irodori[0].dishes);
   }
 }
 
@@ -781,6 +842,10 @@ class IrodoriIngredient extends Menu {
     this.id =
       this.descriptionEN.toLowerCase().replaceAll(" ", "_") + "_ingredient_out";
   }
+
+  remove() {
+    this._removeItem(state.irodori[1].dishes);
+  }
 }
 
 class Cocktail extends Menu {
@@ -788,6 +853,10 @@ class Cocktail extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.coctails.dishes.push(this);
     this.category = "cocktail";
+  }
+
+  remove() {
+    this._removeItem(state.coctails.dishes);
   }
 }
 
@@ -797,6 +866,10 @@ class Beer extends Menu {
     state.sake[0].dishes.push(this);
     this.category = "beer";
   }
+
+  remove() {
+    this._removeItem(state.sake[0].dishes);
+  }
 }
 
 class Sake extends Menu {
@@ -805,6 +878,10 @@ class Sake extends Menu {
     state.sake[1].dishes.push(this);
     this.category = "sake";
   }
+
+  remove() {
+    this._removeItem(state.sake[1].dishes);
+  }
 }
 
 class SoftDrink extends Menu {
@@ -812,6 +889,10 @@ class SoftDrink extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price);
     state.softDrinks.dishes.push(this);
     this.category = "softDrink";
+  }
+
+  remove() {
+    this._removeItem(state.softDrinks.dishes);
   }
 }
 
@@ -830,6 +911,11 @@ class Spirit extends Menu {
     this.type = type;
     state.spirits.dishes.push(this);
     state.spirits.types[type].dishes.push(this);
+  }
+
+  remove() {
+    this._removeItem(state.spirits.dishes);
+    this._removeItem(state.spirits.types[this.type].dishes);
   }
 }
 // Classes of Wine
@@ -871,6 +957,11 @@ class WineGlass extends Wine {
       .toLowerCase()
       .replaceAll(" ", "_")
       .replaceAll(",", "")}_glass`;
+  }
+
+  remove() {
+    this._removeItem(state.wine[0].dishes);
+    this._removeItem(state.wine[0].types[this.type].dishes);
   }
 }
 
@@ -919,6 +1010,11 @@ class WineBottle extends Wine {
       .replaceAll(" ", "_")
       .replaceAll(",", "")}_bottle`;
   }
+
+  remove() {
+    this._removeItem(state.wine[1].dishes);
+    this._removeItem(tate.wine[1].types[this.type].dishes);
+  }
 }
 
 // class WineRed extends WineBottle {
@@ -963,6 +1059,10 @@ class WineCellar extends Wine {
       .replaceAll(" ", "_")
       .replaceAll(",", "")}_cellar`;
   }
+
+  remove() {
+    this._removeItem(state.wine[2].dishes);
+  }
 }
 
 class Special extends Menu {
@@ -980,6 +1080,11 @@ class Special extends Menu {
     this.type = type;
     state.specials.dishes.push(this);
     state.specials.types[type].dishes.push(this);
+  }
+
+  remove() {
+    this._removeItem(state.specials.dishes);
+    this._removeItem(state.specials.types[this.type].dishes);
   }
 }
 
@@ -3016,6 +3121,13 @@ new WineCellar(
 
 // Spirits
 new Spirit("אפרול", "", "Aperol", "", 28, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
+// new Spirit("", "", "", "", 0, false, "aperitif");
 new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 32, false, "vodka");
 new Spirit("בקרדי", "", "Bacardi", "", 32, false, "rum");
 new Spirit("גורדונ'ס", "", "Gordon`s", "", 32, false, "gin");

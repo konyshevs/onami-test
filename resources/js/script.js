@@ -10,7 +10,7 @@ import {
 
 import DishForm from "./pages/dishForm";
 import DishSelector from "./components/dish-selector.component";
-import { FIRS_LOADED_PAGE, IS_SPACILALS_BUTTON_ACTIVE } from "./config";
+import { FIRS_LOADED_PAGE, IS_SPACIALS_BUTTON_ACTIVE } from "./config";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -600,14 +600,14 @@ $("document").ready(function () {
 
   function init() {
     // Special menu button
-    if (IS_SPACILALS_BUTTON_ACTIVE) {
+    if (IS_SPACIALS_BUTTON_ACTIVE) {
       specialConteinerElm.insertAdjacentHTML(
         "beforeend",
         `
       <a href="#specials">
       <div class="nav-cat-title"></div>
       <div id="specials-btn" class="nav-butt margin-top">
-      ${lang === "HE" ? "ספיישלים 2022" : "specials 2022"}
+      ${lang === "HE" ? "ספיישלים" : "specials"}
       </div>
     </a>`
       );

@@ -7,7 +7,7 @@ const DishSelector = controlHashChange => {
     const category = document.querySelector(".dish-category").value;
     console.log(category);
     if (dishFormElms[0]) dishFormElms.forEach(elm => (elm.innerHTML = ""));
-    dishBlockEl.append(DishForm({ category }, "_", true));
+    dishBlockEl.append(DishForm({ category }, controlHashChange, true));
   };
 
   const selectElm = document.createElement("select");

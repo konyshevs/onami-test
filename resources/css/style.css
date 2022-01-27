@@ -462,6 +462,17 @@ main {
   color: black;
 }
 
+.formButtonsContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.formButtonsContainer button {
+  width: 30%;
+  font-size: 20px;
+}
+
 /* #dish-props-container {
   background-color: var(--color1-opacity);
 }
