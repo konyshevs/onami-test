@@ -3129,7 +3129,7 @@ new Spirit(
   false,
   "aperitif"
 );
-new Spirit("פימס", "", "Pimm's No 1", "", 34, false, "aperitif");
+new Spirit(" פימס No 1", "", "Pimm's No 1", "", 34, false, "aperitif");
 new Spirit("אנטיקה פורמולה", "", "Antica Formula", "", 38, false, "aperitif");
 
 new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 34, false, "vodka");
