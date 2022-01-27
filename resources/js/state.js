@@ -3349,7 +3349,7 @@ new Spirit("גלנפידיך 18", "", "Glenfidich 18", "", 115, false, "single")
 
 // Specials
 
-new Special(
+/* new Special(
   "איוואגקי",
   "אוייסטר ג׳ילרדו עם ספייסי פונזו",
   "Iwagaki",
@@ -3427,7 +3427,7 @@ new Special(
   54,
   false,
   3
-);
+); */
 
 export const dishConstructors = {
   special: (
