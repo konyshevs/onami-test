@@ -22,7 +22,6 @@ $("document").ready(function () {
   const createDishBtn = document.querySelector(".create-dish");
   const specialConteinerElm = document.getElementById("js-special-container");
 
-  
   // css colors
   const color1 = getComputedStyle(document.documentElement).getPropertyValue(
     "--color1"
@@ -601,7 +600,7 @@ $("document").ready(function () {
 
   function init() {
     // Special menu button
-    if (IS_SPACIALS_BUTTON_ACTIVE) {
+    if (IS_SPACIALS_BUTTON_ACTIVE || isAdmin) {
       specialConteinerElm.insertAdjacentHTML(
         "beforeend",
         `
@@ -632,6 +631,19 @@ $("document").ready(function () {
     ifPopUpStorage();
     popUpRender();
     // renderMenuPage(state.appetisers);
+
+    if (IS_SPACIALS_BUTTON_ACTIVE || isAdmin) {
+      specialConteinerElm.insertAdjacentHTML(
+        "beforeend",
+        `
+      <a href="#specials">
+      <div class="nav-cat-title"></div>
+      <div id="specials-btn" class="nav-butt margin-top">
+      ${lang === "HE" ? "ספיישלים" : "specials"}
+      </div>
+    </a>`
+      );
+    }
   }
   init();
 });

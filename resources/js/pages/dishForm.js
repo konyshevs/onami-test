@@ -39,6 +39,8 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
       data.type,
       data.vintage
     );
+    alert(`פריט "${data.titleHE}" נשמר בהצלחה`);
+    reranderMenu();
   };
 
   const saveDishData = dish => {
@@ -62,6 +64,7 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
   const deleteDish = dish => {
     if (!confirm(`למחוק פריט "${dish.titleHE}"?`)) return;
     dish.remove();
+    alert(`"${dish.titleHE}" היה ונעלם`);
     reranderMenu();
   };
   const cancel = () => reranderMenu();
@@ -111,7 +114,14 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
       <input type="number" name="price2" id="price2" value="${
         Array.isArray(dish.price) ? dish.price[1] : ""
       }">
-      
+      ${
+        dish.category === "special" && isNewDish
+          ? createSelectElm([
+              [0, "מנה"],
+              [1, "קוקטייל"],
+            ])
+          : ""
+      }
       ${
         dish.category === "seshimiNigiri" && isNewDish
           ? createSelectElm([
@@ -156,11 +166,9 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
 
               ["digestif", "דיז'סטיף"],
 
-              ["scotch", "ויסקי סקוטי"],
+              ["blended", "ויסקי בלנדד"],
 
               ["american", "ויסקי אמריקאי"],
-
-              ["irish", "ויסקי אירי"],
 
               ["single", "ויסקי סינגל מאלט"],
             ])

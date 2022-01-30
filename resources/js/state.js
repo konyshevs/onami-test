@@ -38,8 +38,8 @@ export const state = {
     descriptionEN: "",
     postScriptumEN: "",
     types: [
-      { titleHE: "ספיישל ראשונות", titleEN: "Special Appetisers", dishes: [] },
-      { titleHE: "ספיישל עיקריות", titleEN: "Special Main Dishes", dishes: [] },
+      // { titleHE: "ספיישל ראשונות", titleEN: "Special Appetisers", dishes: [] },
+      // { titleHE: "ספיישל עיקריות", titleEN: "Special Main Dishes", dishes: [] },
       { titleHE: "", titleEN: "", dishes: [] },
       { titleHE: "קוקטיילים", titleEN: "Coctails", dishes: [] },
     ],
@@ -3188,8 +3188,7 @@ new Spirit(
 new Spirit("פטרון סילבר", "", "Patron Silver", "", 62, false, "tequila");
 new Spirit("פטרון רפוסאדו", "", "Patron Reposado", "", 70, false, "tequila");
 new Spirit("פטרון אנייחו", "", "Patron Anejo", "", 82, false, "tequila");
-new Spirit("1800 רזרבה", "", 
-           "1800 Reserva", "", 88, false, "tequila");
+new Spirit("1800 רזרבה", "", "1800 Reserva", "", 88, false, "tequila");
 new Spirit(
   "רזרבה דה לה פמילייה",
   "",
@@ -3202,7 +3201,15 @@ new Spirit(
 
 new Spirit("עראק אשקלון", "", "Arak Ashkalon", "", 28, false, "anise");
 new Spirit("אוזו מטקסה", "", "Ouzo Metaxa", "", 36, false, "anise");
-new Spirit("סמבוקה לוקסרדו שחורה", "", "Sambuca Luxardo", "", 38, false, "anise");
+new Spirit(
+  "סמבוקה לוקסרדו שחורה",
+  "",
+  "Sambuca Luxardo",
+  "",
+  38,
+  false,
+  "anise"
+);
 new Spirit("פרנו", "", "Pernod", "", 42, false, "anise");
 new Spirit("ריכארד", "", "Ricard", "", 44, false, "anise");
 
@@ -3349,14 +3356,14 @@ new Spirit("גלנפידיך 18", "", "Glenfidich 18", "", 115, false, "single")
 
 // Specials
 
-/* new Special(
+new Special(
   "איוואגקי",
   "אוייסטר ג׳ילרדו עם ספייסי פונזו",
   "Iwagaki",
   "Oyster served on crushed ice with spicy ponzu sauce",
   38,
   false,
-  2
+  0
 );
 
 new Special(
@@ -3366,7 +3373,7 @@ new Special(
   "Japanese sphere shaped pancakes filled with octopus, beni shoga, scallion. Served with bonito, mayonnaise, teriyaki",
   48,
   false,
-  2
+  0
 );
 
 new Special(
@@ -3376,7 +3383,7 @@ new Special(
   "Chopped salmon, salmon roe, flying fish roe, scallion, chili oil on salmon skin crispy & avocado maki",
   88,
   false,
-  2
+  0
 );
 
 new Special(
@@ -3386,7 +3393,7 @@ new Special(
   "6 pcs' of charred nigiri with an open flame. Tuna, yellow tail & salmon",
   120,
   false,
-  2
+  0
 );
 
 new Special(
@@ -3396,7 +3403,7 @@ new Special(
   "Sashimi of tuna, croaker, salmon, sea bream & grey mullet seared with hot sesame oil, yuzu & soy sauce",
   128,
   false,
-  2
+  0
 );
 
 new Special(
@@ -3406,7 +3413,7 @@ new Special(
   "Avocado rolled with nori, cucumber, wasabi crunch, roasted almonds, teriyaki & mayonnaise ",
   88,
   false,
-  2
+  0
 );
 
 new Special(
@@ -3416,7 +3423,7 @@ new Special(
   "Plantation rum, Campari, pineapple, red grapefruit syrup",
   54,
   false,
-  3
+  1
 );
 
 new Special(
@@ -3426,8 +3433,8 @@ new Special(
   "Strawberry, Ketel One Citroen & Cremant De Loire",
   54,
   false,
-  3
-); */
+  1
+);
 
 export const dishConstructors = {
   special: (
