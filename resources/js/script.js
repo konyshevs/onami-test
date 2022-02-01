@@ -10,7 +10,12 @@ import {
 
 import DishForm from "./pages/dishForm";
 import DishSelector from "./components/dish-selector.component";
-import { FIRS_LOADED_PAGE, IS_SPACIALS_BUTTON_ACTIVE } from "./config";
+import {
+  FIRS_LOADED_PAGE,
+  IS_SPACIALS_BUTTON_ACTIVE,
+  SERVER_URL,
+} from "./config";
+import { postData } from "./helpers";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -20,6 +25,7 @@ $("document").ready(function () {
   const menuBtn = document.querySelector(".menu-butt");
   const adminBarElm = document.querySelector(".admin-bar");
   const createDishBtn = document.querySelector(".create-dish");
+  const fetchDishesBtn = document.querySelector(".save-changes");
   const specialConteinerElm = document.getElementById("js-special-container");
 
   // css colors
@@ -222,6 +228,24 @@ $("document").ready(function () {
     createDishBtn.addEventListener("click", function () {
       dishBlockEl.innerHTML = "";
       dishBlockEl.append(DishSelector(controlHashChange));
+    });
+
+    //Save changes button
+    // fetchDishesBtn.addEventListener("click", function () {
+    //   postData(SERVER_URL, 'POST', menuList);
+
+    //   alert("שינויים נשלחו לממשק");
+    // });
+    fetchDishesBtn.addEventListener("click", function () {
+      fetch(SERVER_URL)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          console.log(JSON.parse(data));
+        });
+
+      alert("שינויים נשלחו לממשק");
     });
   }
 

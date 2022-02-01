@@ -2,3 +2,4 @@
 // export const END_DATE = new Date(2022, 1, 1, 2);
 export const FIRS_LOADED_PAGE = "appetisers";
 export const IS_SPACIALS_BUTTON_ACTIVE = false;
+export const SERVER_URL = "http://localhost:3000/";
