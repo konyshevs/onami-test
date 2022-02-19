@@ -3,7 +3,7 @@
 // export const FIRS_LOADED_PAGE = "appetisers";
 // export const IS_SPACIALS_BUTTON_ACTIVE = false;
 // export const SERVER_URL = "http://localhost:3000/";
-export const SERVER_URL = "https://boiling-waters-66982.herokuapp.com/";
+export const SERVER_URL = "https://onami-menu.herokuapp.com/";
 
 export const TIMEOUT_SEC = 15;
 
