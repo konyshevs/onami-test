@@ -44,8 +44,19 @@ label {
   font-weight: bold;
 }
 
-.opacity-0 {
-  opacity: 0;
+header {
+  height: 82px;
+  overflow: visible;
+  position: fixed;
+  width: 100%;
+  background: var(--color1);
+  z-index: 9999;
+  /* box-shadow: 0 2px 10px var(--color1); */
+}
+
+header .container {
+  padding: 0;
+  height: 0;
 }
 
 .btn {
@@ -67,21 +78,6 @@ label {
   background-color: var(--heading-color-light);
 }
 
-header {
-  height: 82px;
-  overflow: visible;
-  position: fixed;
-  width: 100%;
-  background: var(--color1);
-  z-index: 9999;
-  /* box-shadow: 0 2px 10px var(--color1); */
-}
-
-header .container {
-  padding: 0;
-  height: 0;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -89,14 +85,6 @@ header .container {
   padding: 0 10px;
   min-width: 280px;
   max-width: 1024px;
-}
-
-.center {
-  text-align: center;
-}
-
-.hidden {
-  display: none;
 }
 
 #logo-bar {
@@ -241,6 +229,40 @@ main {
 
 .ok-btn {
   margin: 0 auto;
+}
+
+/* LOADING ROLL */
+.spin-wrapper {
+  display: none;
+  background-color: var(--color1-opacity);
+  backdrop-filter: blur(5px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+}
+
+.roll-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50%;
+  height: 100%;
+}
+
+.roll-container img,
+.pop-up-container img {
+  animation: rotate 2s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .menu {
@@ -443,11 +465,23 @@ main {
   padding: 0;
 }
 
+.create-dish {
+  margin-right: 150px;
+}
+
 .admin-btn {
   border: 1px solid white;
   width: 50%;
   text-align: center;
   cursor: pointer;
+}
+
+.specials-config-btns {
+  padding-right: 30px;
+}
+
+.specials-config-btn {
+  font-size: 20px;
 }
 
 /* FORM */
@@ -482,3 +516,21 @@ main {
   width: 10px;
   color: #041bb5;
 } */
+
+/* STRAITH CLASSES */
+.opacity-0 {
+  opacity: 0;
+}
+
+.font-weight-normal {
+  font-weight: 300;
+}
+
+.hidden {
+  display: none;
+}
+
+.text-align-center {
+  text-align: center;
+}
+/* / */

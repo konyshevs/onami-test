@@ -5,7 +5,6 @@ const DishSelector = controlHashChange => {
   const createDish = () => {
     const dishFormElms = document.querySelectorAll(".dish-form");
     const category = document.querySelector(".dish-category").value;
-    console.log(category);
     if (dishFormElms[0]) dishFormElms.forEach(elm => (elm.innerHTML = ""));
     dishBlockEl.append(DishForm({ category }, controlHashChange, true));
   };
@@ -15,9 +14,9 @@ const DishSelector = controlHashChange => {
 
   selectElm.onchange = () => createDish();
   selectElm.innerHTML = `
-          <option value="coldAappetiser">נא לבחור קטגוריה</option>
+          <option value="coldAppetiser">נא לבחור קטגוריה</option>
           <option value="special">ספיישלים</option>
-          <option value="coldAappetiser">ראשונות קרות</option>
+          <option value="coldAppetiser">ראשונות קרות</option>
           <option value="hotAppetiser">ראשונות חמות</option>
           <option value="skewer">שיפודי עץ על הגריל</option>
           <option value="mainDishe">מנות עיקריות</option>
@@ -43,6 +42,7 @@ const DishSelector = controlHashChange => {
           <option value="cocktail">קוקטיילים</option>
           <option value="softDrink">שתייה קלה</option>
           <option value="spirit">אלכוהול</option>
+          <option value="lunch">רק בעסקיות</option>
   `;
 
   return selectElm;

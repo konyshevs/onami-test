@@ -1,3 +1,13 @@
+import { TIMEOUT_SEC } from "./config.js";
+
+export const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long! Timeout after ${s} second`));
+    }, s * 1000);
+  });
+};
+
 export const runAfterDate = function (date, func) {
   const now = new Date();
   if (now > date) return func();
@@ -12,24 +22,23 @@ export const runBeforeDate = function (date, func) {
   }
 };
 
-export async function postData(url = "", data = {}) {
+export const AJAX = async function (url, uploadData = undefined) {
   try {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return await response.json(); // parses JSON response into native JavaScript objects
+    const fetchPro = uploadData
+      ? fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(uploadData),
+        })
+      : fetch(url);
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
-}
+};

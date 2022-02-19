@@ -17,6 +17,7 @@ const init = function () {
 };
 init();
 
+export let config = {};
 export let favoritesCount = 0;
 export function changeFavoritesCount(operator) {
   if (operator === "+") favoritesCount++;
@@ -274,6 +275,15 @@ export const state = {
       },
     ],
   },
+  lunch: {
+    dishes: [],
+    titleHE: "רק בעסקיות",
+    titleEN: "Lunch only",
+    descriptionHE: "",
+    postScriptumHE: "",
+    descriptionEN: "",
+    postScriptumEN: "",
+  },
   lunch75: {
     titleHE: "עסקית 80 ₪",
     descriptionHE: lunchDescriptionHE,
@@ -478,68 +488,68 @@ export const state = {
     titleEN: "Spirits",
     descriptionEN: "",
     postScriptumEN: "",
-    types: {
-      aperitif: {
+    types: [
+      {
         titleHE: "אפריטיף",
         titleEN: "Aperitif",
         dishes: [],
       },
-      vodka: {
+      {
         titleHE: "וודקה",
         titleEN: "Vodka",
         dishes: [],
       },
-      rum: {
+      {
         titleHE: "רום",
         titleEN: "Rum",
         dishes: [],
       },
-      gin: {
+      {
         titleHE: "ג'ין",
         titleEN: "Gin",
         dishes: [],
       },
-      tequila: {
+      {
         titleHE: "טקילה",
         titleEN: "Tequila",
         dishes: [],
       },
-      anise: {
+      {
         titleHE: "אניס",
         titleEN: "Anise",
         dishes: [],
       },
-      cognac: {
+      {
         titleHE: "קוניאק",
         titleEN: "Cognac",
         dishes: [],
       },
-      liqueur: {
+      {
         titleHE: "ליקרים",
         titleEN: "Liqueur",
         dishes: [],
       },
-      digestif: {
+      {
         titleHE: "דיז'סטיף",
         titleEN: "Dejestiv",
         dishes: [],
       },
-      blended: {
+      {
         titleHE: "ויסקי בלנדד",
         titleEN: "Blended Whisky",
         dishes: [],
       },
-      american: {
+      {
         titleHE: "ויסקי אמריקאי",
         titleEN: "American Whiskey",
         dishes: [],
       },
-      single: {
+      {
         titleHE: "ויסקי סינגל מאלט",
         titleEN: "Whisky Malt Single",
         dishes: [],
       },
-    },
+    ],
     dishes: [],
   },
   // whisky: {
@@ -742,6 +752,10 @@ class Coffee extends Menu {
     state.desserts[1].dishes.push(this);
     this.category = "coffee";
   }
+
+  addID() {
+    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_") + "_coffee";
+  }
 }
 
 class TeaInfusion extends Menu {
@@ -749,6 +763,10 @@ class TeaInfusion extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[2].dishes.push(this);
     this.category = "teaInfusion";
+  }
+
+  addID() {
+    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_") + "_teaInfusion";
   }
 }
 
@@ -758,6 +776,9 @@ class Tea extends Menu {
     state.desserts[3].dishes.push(this);
     this.category = "tea";
   }
+  addID() {
+    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_") + "_tea";
+  }
 }
 
 class Port extends Menu {
@@ -765,6 +786,18 @@ class Port extends Menu {
     super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
     state.desserts[4].dishes.push(this);
     this.category = "port";
+  }
+
+  addID() {
+    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_") + "_port";
+  }
+}
+
+class Lunch extends Menu {
+  constructor(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi) {
+    super(titleHE, descriptionHE, titleEN, descriptionEN, price, isVegi);
+    state.lunch.dishes.push(this);
+    this.category = "lunch";
   }
 }
 
@@ -826,8 +859,7 @@ class HosomakiIngredient extends Menu {
   }
 
   addID() {
-    this.id =
-      this.descriptionEN.toLowerCase().replaceAll(" ", "_") + "_ingredient";
+    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_") + "_ingredient";
   }
 }
 
@@ -855,7 +887,7 @@ class IrodoriIngredient extends Menu {
   }
   addID() {
     this.id =
-      this.descriptionEN.toLowerCase().replaceAll(" ", "_") + "_ingredient_out";
+      this.titleEN.toLowerCase().replaceAll(" ", "_") + "_ingredient_out";
   }
 }
 
@@ -1377,29 +1409,29 @@ new Dessert("גלידת מאצ'ה", "כדור", "Matcha icecream", "", 16);
 new Dessert("סורבה פירות", "כדור", "Fruit sorbet", "", 16, true);
 
 // HOT DRINKS
-new Coffee("", "אספרסו", "", "Espresso", [12, 14]);
-new Coffee("", "אמריקנו", "", "Americano", 14);
-new Coffee("", "הפוך", "", "Cappuccino", [14, 16]);
+new Coffee("אספרסו", "", "Espresso", "", [12, 14]);
+new Coffee("אמריקנו", "", "Americano", "", 14);
+new Coffee("הפוך", "", "Cappuccino", "", [14, 16]);
 
-new TeaInfusion("", "תה ירוק יפני", "", "Japanese Green Tea", 24);
-new Tea("", "אינגליש ברקפסט", "", "English Breakfast", 12);
-new Tea("", "ארל גריי", "", "Earl Grey", 12);
-new Tea("", "ירוק פירות טרופים", "", "Green tea with Fruits", 12);
-new Tea("", "ירוק יסמין", "", "Green tea with Jasmine", 12);
-new Tea("", "תפוח עץ", "", "Apple Tea", 12);
-new Tea("", "פירות יער", "", "Wild Berries Tea", 12);
-new Tea("", "קמומיל (ללא&nbspקפאין)", "", "Chamomile (caffeine free)", 12);
+new TeaInfusion("תה ירוק יפני", "", "Japanese Green Tea", "", 24);
+new Tea("אינגליש ברקפסט", "", "English Breakfast", "", 12);
+new Tea("ארל גריי", "", "Earl Grey", "", 12);
+new Tea("ירוק פירות טרופים", "", "Green tea with Fruits", "", 12);
+new Tea("ירוק יסמין", "", "Green tea with Jasmine", "", 12);
+new Tea("תפוח עץ", "", "Apple Tea", "", 12);
+new Tea("פירות יער", "", "Wild Berries Tea", "", 12);
+new Tea("קמומיל (ללא&nbspקפאין)", "", "Chamomile (caffeine free)", "", 12);
 new Tea(
-  "",
   "רויבוש תות (ללא&nbspקפאין)",
   "",
   "Rooibush Strawberry Cream (caffeine free)",
+  "",
   12
 );
-// new Tea("", "ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (caffeine free)", 12);
+new Tea("ג'ינסנג (ללא&nbspקפאין)", "", "Ginseng (caffeine free)", "", 12);
 
-new Port("", "אוטימה 10", "", "Otima 10", 38);
-new Port("", "דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", 44);
+new Port("אוטימה 10", "", "Otima 10", "", 38);
+new Port("דון גוידו פדרו חימנז", "", "Don Guido Pedro Ximenez", "", 44);
 
 // SESHIMI
 new SeshimiNigiri("סאקה", "סלמון", "Sake", "Salmon", [20, 36], false, 0);
@@ -1409,7 +1441,7 @@ new SeshimiNigiri(
   "סלמון מבושל ברוטב טריאקי",
   "Sake Teriyaki",
   "Cooked in teriyaki",
-  ["-", 22],
+  [22, 0],
   false,
   0
 );
@@ -1465,7 +1497,7 @@ new SeshimiNigiri(
   "צלופח מבושל ברוטב טריאקי",
   "Unagi",
   "Eel cooked in teriyaki",
-  ["-", 30],
+  [30, 0],
   false,
   1
 );
@@ -1487,12 +1519,12 @@ new SeshimiNigiri(
   "סקלופ מבושל ברוטב טריאקי",
   "Hotate Teriyaki",
   "Cooked in teriyaki",
-  ["-", 26],
+  [26, 0],
   false,
   2
 );
 
-new SeshimiNigiri("אבוקדו", "", "Avocado", "", ["-", 14], true, 3);
+new SeshimiNigiri("אבוקדו", "", "Avocado", "", [14, 0], true, 3);
 
 new SeshimiNigiri(
   "טמאגו",
@@ -1833,14 +1865,14 @@ new Hosomaki(
 );
 
 // HOSOMAKI Ingredients
-new HosomakiIngredient("", "צנון מוחמץ", "", "Pickled radish", 5);
-new HosomakiIngredient("", "דלעת ממותקת", "", "Kanpyo", 5);
-new HosomakiIngredient("", "טמאגו", "", "Tamago", 5);
-new HosomakiIngredient("", "שקדים קלויים", "", "Roasted Almonds", 5);
-new HosomakiIngredient("", "שיטאקה/אספרגוס", "", "Shiitake / Asparagus", 6);
-new HosomakiIngredient("", "פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", 6);
-new HosomakiIngredient("", "ביצי דג דאון", "", "Flying Fish roe", 12);
-new HosomakiIngredient("", "ביצי סלמון", "", "Salmon roe", 14);
+new HosomakiIngredient("צנון מוחמץ", "", "Pickled radish", "", 5);
+new HosomakiIngredient("דלעת ממותקת", "", "Kanpyo", "", 5);
+new HosomakiIngredient("טמאגו", "", "Tamago", "", 5);
+new HosomakiIngredient("שקדים קלויים", "", "Roasted Almonds", "", 5);
+new HosomakiIngredient("שיטאקה/אספרגוס", "", "Shiitake / Asparagus", "", 6);
+new HosomakiIngredient("פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", "", 6);
+new HosomakiIngredient("ביצי דג דאון", "", "Flying Fish roe", "", 12);
+new HosomakiIngredient("ביצי סלמון", "", "Salmon roe", "", 14);
 
 // TEMAKI
 new Temaki(
@@ -2038,17 +2070,17 @@ new Irodori(
 );
 
 // IRODORI INGRIDIENTS
-new IrodoriIngredient("", "שקדים קלויים", "", "Roasted almonds", 5);
-new IrodoriIngredient("", "פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", 6);
-new IrodoriIngredient("", "אבוקדו", "", "Avocado", 6);
-new IrodoriIngredient("", "ביצי דג דאון", "", "Flying fish roe", 12);
-new IrodoriIngredient("", "סלמון", "", "Salmon", 16);
-new IrodoriIngredient("", "דניס", "", "Sea bream", 20);
-new IrodoriIngredient("", "טונה", "", "Tuna", 26);
+new IrodoriIngredient("שקדים קלויים", "", "Roasted almonds", "", 5);
+new IrodoriIngredient("פולי וואסאבי קראנץ‘", "", "Wasabi crunch beans", "", 6);
+new IrodoriIngredient("אבוקדו", "", "Avocado", "", 6);
+new IrodoriIngredient("ביצי דג דאון", "", "Flying fish roe", "", 12);
+new IrodoriIngredient("סלמון", "", "Salmon", "", 16);
+new IrodoriIngredient("דניס", "", "Sea bream", "", 20);
+new IrodoriIngredient("טונה", "", "Tuna", "", 26);
 
 //LUNCH MENU
 
-new Menu(
+new Lunch(
   "נגי שירו סקאנה רול",
   "דגים לבנים קצוצים, בצל ירוק, מלפפון וגזר",
   "Negi Shiro Zakana Roll",
@@ -2056,7 +2088,7 @@ new Menu(
   28
 );
 
-new Menu(
+new Lunch(
   "בורה מאקי",
   "בורי, אבוקדו ובצל ירוק",
   "Bora Maki",
@@ -2064,7 +2096,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "קאיסן קוקטייל מאקי",
   "שרימפ, סקלופ וקלמארי קצוצים, ביצי סלמון, בצל ירוק, ספייסי מיונז וטריאקי",
   "Kaisen Cocktail Maki",
@@ -2072,7 +2104,7 @@ new Menu(
   30
 );
 
-new Menu(
+new Lunch(
   "מיקס צמחוני מאקי",
   "שיטאקה, אבוקדו, מלפפון, גזר, בצל ירוק, ספייסי מיונז וטריאקי",
   "Vegetarian Mix Maki",
@@ -2080,7 +2112,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "אבי פוראי",
   "שרימפ פריך בציפוי פאנקו בליווי מיונז יפני",
   "Ebi Furai",
@@ -2088,7 +2120,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "יאסאי קארי רייס",
   "קארי יפני, טופו, תפוח אדמה, גזר ובצל. מוגש עם אורז מאודה ובצל ירוק",
   "Yasai Curry Rice",
@@ -2097,7 +2129,7 @@ new Menu(
   true
 );
 
-new Menu(
+new Lunch(
   "טורי קארי רייס",
   "קארי יפני, פרגית, תפוח אדמה, גזר ובצל. מוגש עם אורז מאודה ובצל ירוק",
   "Tori Curry Rice",
@@ -2105,7 +2137,7 @@ new Menu(
   68
 );
 
-new Menu(
+new Lunch(
   "קאיסן קארי רייס",
   "קארי יפני, שרימפ, קלמארי, תפוח אדמה, גזר ובצל. מוגש עם אורז מאודה ובצל ירוק",
   "Kaisen Curry Rice",
@@ -2113,7 +2145,7 @@ new Menu(
   62
 );
 
-new Menu(
+new Lunch(
   "יאסאי קארה אודון",
   "אטריות קמח חיטה, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף (טבעוני)",
   "Yasai Kare Udon",
@@ -2122,7 +2154,7 @@ new Menu(
   true
 );
 
-new Menu(
+new Lunch(
   "יאסאי אודון",
   "מרק עם אטריות אודון, ברוקולי, שמפיניון, גזר, וואקמה, ביצה חצי קשה ובצל ירוק",
   "Yasai Udon",
@@ -2130,7 +2162,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "טורי קארה אודון",
   "אטריות קמח חיטה, עוף, שעועית ירוקה, גזר ונבטים מוקפצים ברוטב קארי יפני חריף",
   "Tori Kare Udon",
@@ -2138,7 +2170,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "וואקאדורי גריל",
   "פרגית בגריל עם בצל מוקפץ ואורז שום",
   "Wakadori Grill",
@@ -2146,7 +2178,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "יאקיניקו לוסוג'יו",
   "נתחי אנטריקוט מוקפצים עם בצל ברוטב יאקיניקו בעיטור בצל ירוק ושומשום. מוגש על אורז מאודה",
   "Yakiniku Lousujyu",
@@ -2154,7 +2186,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "טורי ראמן",
   "ציר עוף, אטריות ראמן, פרגית, נבטים, ביצה חצי קשה, פטריית אוזן ובצל ירוק",
   "Tori Ramen",
@@ -2162,7 +2194,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "קאיסן אודון",
   "מרק אטריות אודון, שרימפ, סקלופ, קלמארי, ברוקולי, פטריות שמפיניון, אצות וואקאמה, ביצה חצי קשה ובצל ירוק",
   "Kaisen Udon",
@@ -2170,7 +2202,7 @@ new Menu(
   0
 );
 
-new Menu(
+new Lunch(
   "סאקה סטייק",
   "פילה סלמון בגריל",
   "Sake Steak",
@@ -2178,7 +2210,7 @@ new Menu(
   100
 );
 
-new Menu(
+new Lunch(
   "אבי סאקה קאווה טמאקי",
   "קונוס עם שרימפ טמפורה, סלמון סקין (קצוץ עם ספייסי מיונז, בצל ירוק וטריאקי) ואבוקדו",
   "Ebi Sake kawa Temaki",
@@ -3092,80 +3124,40 @@ new WineCellar(
 // single: {
 
 // Spirits
-new Spirit("מרטיני ביאנקו", "", "Martini bianco", "", 30, false, "aperitif");
-new Spirit("אפרול", "", "Aperol", "", 32, false, "aperitif");
-new Spirit("קמפרי", "", "Campari", "", 32, false, "aperitif");
-new Spirit("צ'ינאר", "", "Chinar", "", 32, false, "aperitif");
-new Spirit("נוילי פראט לבן", "", "Noilly Prat Dry", "", 34, false, "aperitif");
-new Spirit(
-  "נוילי פראט אדום",
-  "",
-  "Noilly Prat Rouge",
-  "",
-  34,
-  false,
-  "aperitif"
-);
-new Spirit(" פימס No 1", "", "Pimm's No 1", "", 34, false, "aperitif");
-new Spirit("אנטיקה פורמולה", "", "Antica Formula", "", 38, false, "aperitif");
+new Spirit("מרטיני ביאנקו", "", "Martini bianco", "", 30, false, 0);
+new Spirit("אפרול", "", "Aperol", "", 32, false, 0);
+new Spirit("קמפרי", "", "Campari", "", 32, false, 0);
+new Spirit("צ'ינאר", "", "Chinar", "", 32, false, 0);
+new Spirit("נוילי פראט לבן", "", "Noilly Prat Dry", "", 34, false, 0);
+new Spirit("נוילי פראט אדום", "", "Noilly Prat Rouge", "", 34, false, 0);
+new Spirit(" פימס No 1", "", "Pimm's No 1", "", 34, false, 0);
+new Spirit("אנטיקה פורמולה", "", "Antica Formula", "", 38, false, 0);
 
-new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 34, false, "vodka");
-new Spirit("זוברובקה", "", "Zubrowka", "", 38, false, "vodka");
-new Spirit("קטל ואן", "", "Ketel 1", "", 40, false, "vodka");
-new Spirit("בלבדר", "", "Belvedere", "", 48, false, "vodka");
-new Spirit("גריי גוס", "", "Gray Goose", "", 48, false, "vodka");
+new Spirit("סטוליצ'ניה", "", "Stolichnaya", "", 34, false, 1);
+new Spirit("זוברובקה", "", "Zubrowka", "", 38, false, 1);
+new Spirit("קטל ואן", "", "Ketel 1", "", 40, false, 1);
+new Spirit("בלבדר", "", "Belvedere", "", 48, false, 1);
+new Spirit("גריי גוס", "", "Gray Goose", "", 48, false, 1);
 
-new Spirit("פלנטיישן 3", "", "Plantation 3", "", 36, false, "rum");
-new Spirit(
-  "קפטן מורגן ספייס",
-  "",
-  "Captain Morgan Spiced",
-  "",
-  40,
-  false,
-  "rum"
-);
-new Spirit("קפטן מורגן בלאק", "", "Captain Morgan Black", "", 44, false, "rum");
-new Spirit("זקאפה 23", "", "Zacapa 23", "", 70, false, "rum");
+new Spirit("פלנטיישן 3", "", "Plantation 3", "", 36, false, 2);
+new Spirit("קפטן מורגן ספייס", "", "Captain Morgan Spiced", "", 40, false, 2);
+new Spirit("קפטן מורגן בלאק", "", "Captain Morgan Black", "", 44, false, 2);
+new Spirit("זקאפה 23", "", "Zacapa 23", "", 70, false, 2);
 
-new Spirit("גורדונ'ס", "", "Gordon`s", "", 34, false, "gin");
-new Spirit("בומביי ספייר", "", "Bombay Sapphire", "", 42, false, "gin");
-new Spirit("טנקירי טן", "", "Tanqueray  10", "", 46, false, "gin");
-new Spirit("רוקו", "", "Roku", "", 48, false, "gin");
-new Spirit("הנדריקס", "", "Hendrick's", "", 50, false, "gin");
+new Spirit("גורדונ'ס", "", "Gordon`s", "", 34, false, 3);
+new Spirit("בומביי ספייר", "", "Bombay Sapphire", "", 42, false, 3);
+new Spirit("טנקירי טן", "", "Tanqueray  10", "", 46, false, 3);
+new Spirit("רוקו", "", "Roku", "", 48, false, 3);
+new Spirit("הנדריקס", "", "Hendrick's", "", 50, false, 3);
 
-new Spirit("מילאגרו סילבר", "", "Milagro Silver", "", 48, false, "tequila");
-new Spirit(
-  "דון חוליו בלאנקו",
-  "",
-  "Don Julio Blanco",
-  "",
-  62,
-  false,
-  "tequila"
-);
-new Spirit(
-  "דון חוליו רפוסאדו",
-  "",
-  "Don Julio Reposado",
-  "",
-  76,
-  false,
-  "tequila"
-);
-new Spirit(
-  "דון חוליו אנייחו",
-  "",
-  "Don Julio Anejo ",
-  "",
-  94,
-  false,
-  "tequila"
-);
-new Spirit("פטרון סילבר", "", "Patron Silver", "", 62, false, "tequila");
-new Spirit("פטרון רפוסאדו", "", "Patron Reposado", "", 70, false, "tequila");
-new Spirit("פטרון אנייחו", "", "Patron Anejo", "", 82, false, "tequila");
-new Spirit("1800 רזרבה", "", "1800 Reserva", "", 88, false, "tequila");
+new Spirit("מילאגרו סילבר", "", "Milagro Silver", "", 48, false, 4);
+new Spirit("דון חוליו בלאנקו", "", "Don Julio Blanco", "", 62, false, 4);
+new Spirit("דון חוליו רפוסאדו", "", "Don Julio Reposado", "", 76, false, 4);
+new Spirit("דון חוליו אנייחו", "", "Don Julio Anejo ", "", 94, false, 4);
+new Spirit("פטרון סילבר", "", "Patron Silver", "", 62, false, 4);
+new Spirit("פטרון רפוסאדו", "", "Patron Reposado", "", 70, false, 4);
+new Spirit("פטרון אנייחו", "", "Patron Anejo", "", 82, false, 4);
+new Spirit("1800 רזרבה", "", "1800 Reserva", "", 88, false, 4);
 new Spirit(
   "רזרבה דה לה פמילייה",
   "",
@@ -3173,94 +3165,46 @@ new Spirit(
   "",
   130,
   false,
-  "tequila"
+  4
 );
 
-new Spirit("עראק אשקלון", "", "Arak Ashkalon", "", 28, false, "anise");
-new Spirit("אוזו מטקסה", "", "Ouzo Metaxa", "", 36, false, "anise");
-new Spirit(
-  "סמבוקה לוקסרדו שחורה",
-  "",
-  "Sambuca Luxardo",
-  "",
-  38,
-  false,
-  "anise"
-);
-new Spirit("פרנו", "", "Pernod", "", 42, false, "anise");
-new Spirit("ריכארד", "", "Ricard", "", 44, false, "anise");
+new Spirit("עראק אשקלון", "", "Arak Ashkalon", "", 28, false, 5);
+new Spirit("אוזו מטקסה", "", "Ouzo Metaxa", "", 36, false, 5);
+new Spirit("סמבוקה לוקסרדו שחורה", "", "Sambuca Luxardo", "", 38, false, 5);
+new Spirit("פרנו", "", "Pernod", "", 42, false, 5);
+new Spirit("ריכארד", "", "Ricard", "", 44, false, 5);
 
-new Spirit("הנסי V.S", "", "Hennessy V.S", "", 50, false, "cognac");
-new Spirit("אוטרד VSOP", "", "Otard V.S.O.P", "", 80, false, "cognac");
-new Spirit("הנסי VSOP", "", "Hennessy V.S.O.P", "", 84, false, "cognac");
-new Spirit("רמי מרטן VSOP", "", "Remy Martin V.S.O.P", "", 88, false, "cognac");
-new Spirit("אוטרד XO", "", "Otard X.O", "", 135, false, "cognac");
-new Spirit("רמי מרטן XO", "", "Remy martin X.O", "", 155, false, "cognac");
-new Spirit("הנסי XO", "", "Hennessy X.O", "", 170, false, "cognac");
+new Spirit("הנסי V.S", "", "Hennessy V.S", "", 50, false, 6);
+new Spirit("אוטרד VSOP", "", "Otard V.S.O.P", "", 80, false, 6);
+new Spirit("הנסי VSOP", "", "Hennessy V.S.O.P", "", 84, false, 6);
+new Spirit("רמי מרטן VSOP", "", "Remy Martin V.S.O.P", "", 88, false, 6);
+new Spirit("אוטרד XO", "", "Otard X.O", "", 135, false, 6);
+new Spirit("רמי מרטן XO", "", "Remy martin X.O", "", 155, false, 6);
+new Spirit("הנסי XO", "", "Hennessy X.O", "", 170, false, 6);
 
-new Spirit("פסואה", "", "Passoa", "", 30, false, "liqueur");
-new Spirit(
-  "אמרטו דיסארונו",
-  "",
-  "Amaretto Disaronno",
-  "",
-  34,
-  false,
-  "liqueur"
-);
-new Spirit("קלואה", "", "Kahlua", "", 34, false, "liqueur");
-new Spirit("מידורי", "", "Midori", "", 40, false, "liqueur");
-new Spirit("קוואנטרו", "", "Cuantro", "", 42, false, "liqueur");
-new Spirit("פרנג'ליקו", "", "Frangelico", "", 44, false, "liqueur");
-new Spirit("סאטורן קומפורט", "", "Southern Comfort", "", 46, false, "liqueur");
-new Spirit("דרמבוי", "", "Drambuie", "", 48, false, "liqueur");
-new Spirit(
-  "ג'ק דניאלס דבש",
-  "",
-  "Jack Daniel's Honey",
-  "",
-  58,
-  false,
-  "liqueur"
-);
-new Spirit("שארטרז ירוק", "", "Chartreuse Green", "", 60, false, "liqueur");
-new Spirit("שמבורד", "", "Chambord", "", 60, false, "liqueur");
-new Spirit(
-  "גרנד מרינייה אדום",
-  "",
-  "Grand Marnier Red",
-  "",
-  62,
-  false,
-  "liqueur"
-);
-new Spirit("סן ז'רמן", "", "St-Germain", "", 68, false, "liqueur");
-new Spirit("בנדיקטין", "", "Benedictine", "", 72, false, "liqueur");
+new Spirit("פסואה", "", "Passoa", "", 30, false, 7);
+new Spirit("אמרטו דיסארונו", "", "Amaretto Disaronno", "", 34, false, 7);
+new Spirit("קלואה", "", "Kahlua", "", 34, false, 7);
+new Spirit("מידורי", "", "Midori", "", 40, false, 7);
+new Spirit("קוואנטרו", "", "Cuantro", "", 42, false, 7);
+new Spirit("פרנג'ליקו", "", "Frangelico", "", 44, false, 7);
+new Spirit("סאטורן קומפורט", "", "Southern Comfort", "", 46, false, 7);
+new Spirit("דרמבוי", "", "Drambuie", "", 48, false, 7);
+new Spirit("ג'ק דניאלס דבש", "", "Jack Daniel's Honey", "", 58, false, 7);
+new Spirit("שארטרז ירוק", "", "Chartreuse Green", "", 60, false, 7);
+new Spirit("שמבורד", "", "Chambord", "", 60, false, 7);
+new Spirit("גרנד מרינייה אדום", "", "Grand Marnier Red", "", 62, false, 7);
+new Spirit("סן ז'רמן", "", "St-Germain", "", 68, false, 7);
+new Spirit("בנדיקטין", "", "Benedictine", "", 72, false, 7);
 
-new Spirit("אוורנה", "", "Averna", "", 38, false, "digestif");
-new Spirit("בחרובקה", "", "Becherovka", "", 38, false, "digestif");
-new Spirit("פרנה ברנקה", "", "Fernet Branca", "", 42, false, "digestif");
-new Spirit("ייגרמייסטר", "", "Jagermeister", "", 44, false, "digestif");
-new Spirit(
-  "יוליוס בלאן דה גליליי",
-  "",
-  "Blanc de Galilee",
-  "",
-  56,
-  false,
-  "digestif"
-);
-new Spirit(
-  "יוליוס מאר דה גליליי",
-  "",
-  "Marc de Galilee",
-  "",
-  60,
-  false,
-  "digestif"
-);
+new Spirit("אוורנה", "", "Averna", "", 38, false, 8);
+new Spirit("בחרובקה", "", "Becherovka", "", 38, false, 8);
+new Spirit("פרנה ברנקה", "", "Fernet Branca", "", 42, false, 8);
+new Spirit("ייגרמייסטר", "", "Jagermeister", "", 44, false, 8);
+new Spirit("יוליוס בלאן דה גליליי", "", "Blanc de Galilee", "", 56, false, 8);
+new Spirit("יוליוס מאר דה גליליי", "", "Marc de Galilee", "", 60, false, 8);
 
-new Spirit("ג'יימסון", "", "Jameson", "", 36, false, "blended");
+new Spirit("ג'יימסון", "", "Jameson", "", 36, false, 9);
 new Spirit(
   "ג'וני ווקר בלק לייבל",
   "",
@@ -3268,9 +3212,9 @@ new Spirit(
   "",
   48,
   false,
-  "blended"
+  9
 );
-new Spirit("שיבאס ריגל", "", "Chivas Regal", "", 54, false, "blended");
+new Spirit("שיבאס ריגל", "", "Chivas Regal", "", 54, false, 9);
 new Spirit(
   "ג'וני ווקר גולד לייבל",
   "",
@@ -3278,23 +3222,23 @@ new Spirit(
   "",
   66,
   false,
-  "blended"
+  9
 );
 new Spirit(
-  "'וני ווקר בלו לייבל",
+  "ג'וני ווקר בלו לייבל",
   "",
   "Jhonnie Walker Blue",
   "",
   145,
   false,
-  "blended"
+  9
 );
 
-new Spirit("ויילד טרקי", "", "Wild Turkey 81", "", 36, false, "american");
-new Spirit("ג'ק דניאלס", "", "Jack Daniel's", "", 48, false, "american");
-new Spirit("מייקרס מארק", "", "Maker's mark", "", 62, false, "american");
-new Spirit("ג'נטלמן ג'ק", "", "Gentleman Jack", "", 62, false, "american");
-new Spirit("נוב קריק", "", "Knob Creek", "", 72, false, "american");
+new Spirit("ויילד טרקי", "", "Wild Turkey 81", "", 36, false, 10);
+new Spirit("ג'ק דניאלס", "", "Jack Daniel's", "", 48, false, 10);
+new Spirit("מייקרס מארק", "", "Maker's mark", "", 62, false, 10);
+new Spirit("ג'נטלמן ג'ק", "", "Gentleman Jack", "", 62, false, 10);
+new Spirit("נוב קריק", "", "Knob Creek", "", 72, false, 10);
 
 new Spirit(
   "גלנליווט פאונדרס רזרב",
@@ -3303,18 +3247,10 @@ new Spirit(
   "",
   52,
   false,
-  "single"
+  11
 );
-new Spirit(
-  "גלנמורנג'י 10 שנים",
-  "",
-  "Glenmorangie 10",
-  "",
-  56,
-  false,
-  "single"
-);
-new Spirit("גלנפידיך 12", "", "Glenfidich 12", "", 62, false, "single");
+new Spirit("גלנמורנג'י 10 שנים", "", "Glenmorangie 10", "", 56, false, 11);
+new Spirit("גלנפידיך 12", "", "Glenfidich 12", "", 62, false, 11);
 new Spirit(
   "בלויני 12 דאבלווד",
   "",
@@ -3322,14 +3258,14 @@ new Spirit(
   "",
   82,
   false,
-  "single"
+  11
 );
-new Spirit("מקאלן 12", "", "Macallan 12", "", 84, false, "single");
-new Spirit("טאליסקר 10", "", "Talisker 10", "", 88, false, "single");
-new Spirit("גלנפידיך 15", "", "Glenfidich 15", "", 88, false, "single");
-new Spirit("לה פרויג", "", "Laphroaig 10", "", 96, false, "single");
-new Spirit("לגבולין 16", "", "Lagavulin 16", "", 115, false, "single");
-// new Spirit("גלנפידיך 18", "", "Glenfidich 18", "", 115, false, "single");
+new Spirit("מקאלן 12", "", "Macallan 12", "", 84, false, 11);
+new Spirit("טאליסקר 10", "", "Talisker 10", "", 88, false, 11);
+new Spirit("גלנפידיך 15", "", "Glenfidich 15", "", 88, false, 11);
+new Spirit("לה פרויג", "", "Laphroaig 10", "", 96, false, 11);
+new Spirit("לגבולין 16", "", "Lagavulin 16", "", 115, false, 11);
+new Spirit("גלנפידיך 18", "", "Glenfidich 18", "", 115, false, 11);
 
 // Specials
 

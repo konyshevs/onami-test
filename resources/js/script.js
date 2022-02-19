@@ -1,21 +1,28 @@
 import $, { map } from "jquery";
 import "core-js/stable";
-import {
-  menuList,
-  state,
-  favorits,
-  changeFavoritesCount,
-  favoritesCount,
-} from "./state";
+// import {
+//   config,
+//   menuList,
+//   state,
+//   favorits,
+//   changeFavoritesCount,
+//   favoritesCount,
+// } from "./state";
 
 import DishForm from "./pages/dishForm";
 import DishSelector from "./components/dish-selector.component";
+import { SERVER_URL, ADMIN_PASS } from "./config";
+
+import { AJAX } from "./helpers";
+
 import {
-  FIRS_LOADED_PAGE,
-  IS_SPACIALS_BUTTON_ACTIVE,
-  SERVER_URL,
-} from "./config";
-import { postData } from "./helpers";
+  favorits,
+  getMenu,
+  state,
+  changeFavoritesCount,
+  favoritesCount,
+  config,
+} from "./state-server-test";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -42,15 +49,34 @@ $("document").ready(function () {
 
   let firstLoad = false;
   let isAdmin = false;
+  let isTest = false;
+  let menuList;
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
-    if (id === "admin") {
+    if (id === "test") {
+      isTest = true;
+    }
+    // if (id === "admin") {
+    //   if (prompt("סיסמה") === ADMIN_PASS) {
+    //     isAdmin = true;
+    //     adminBarElm.classList.remove("hidden");
+    //     $("#favorites-btn").css({ display: "none" });
+    //     addSpecialsButton();
+    //     addOnlyLunchButton();
+    //   } else {
+    //     alert("סיסמה לא נכונה!");
+    //   }
+    // }
+    if (id === "test" || id === "admin") {
       isAdmin = true;
       adminBarElm.classList.remove("hidden");
+      $("#favorites-btn").css({ display: "none" });
+      addSpecialsButton();
+      addOnlyLunchButton();
     }
-    if (!id || id === "admin" || !state[id]) {
-      id = FIRS_LOADED_PAGE;
+    if (!id || id === "admin" || id === "test" || !state[id]) {
+      id = config.isSpecialsFirstPage ? "specials" : "appetisers";
       firstLoad = true;
     }
     document
@@ -84,7 +110,34 @@ $("document").ready(function () {
     );
   }
 
-  shake(".menu-butt");
+  const addSpecialsButton = () => {
+    if (document.getElementById("#specials-btn")) return;
+    specialConteinerElm.insertAdjacentHTML(
+      "beforeend",
+      `
+    <a href="#specials">
+    <div class="nav-cat-title"></div>
+    <div id="specials-btn" class="nav-butt margin-top">
+    ${lang === "HE" ? "ספיישלים" : "specials"}
+    </div>
+  </a>`
+    );
+  };
+
+  const addOnlyLunchButton = () => {
+    if (document.getElementById("#lunch-btn")) return;
+    specialConteinerElm.insertAdjacentHTML(
+      "beforeend",
+      `
+    <a href="#lunch">
+    <div class="nav-cat-title"></div>
+    <div id="lunch-btn" class="nav-butt margin-top">
+    ${lang === "HE" ? "רק בעסקיות" : "Only in lunch"}
+    </div>
+  </a>`
+    );
+  };
+
   // OPEN/CLOSE MENU
   function openCloseMenu() {
     if (window.outerWidth > 480) return;
@@ -222,6 +275,7 @@ $("document").ready(function () {
       const id = target.dataset.id;
       const dish = menuList[id];
       dish.isActive = !dish.isActive;
+      dish.updated = true;
     });
 
     //Create dish button
@@ -230,22 +284,49 @@ $("document").ready(function () {
       dishBlockEl.append(DishSelector(controlHashChange));
     });
 
+    //Specials page config butns
+    dishBlockEl.addEventListener("click", function (e) {
+      const target = e.target;
+      if (!target.closest(".specials-config-btn")) return;
+
+      if (target.classList.contains("fa-toggle-on")) {
+        target.classList.remove("fa-toggle-on");
+        target.classList.add("fa-toggle-off");
+      } else {
+        target.classList.remove("fa-toggle-off");
+        target.classList.add("fa-toggle-on");
+      }
+      if (target.classList.contains("toggle-isSpecialsOn")) {
+        config.isSpecialsOn = !config.isSpecialsOn;
+        console.log(config.isSpecialsOn);
+      }
+      if (target.classList.contains("toggle-isSpecialsFirstPage")) {
+        config.isSpecialsFirstPage = !config.isSpecialsFirstPage;
+        console.log(config.isSpecialsFirstPage);
+      }
+      config.updated = true;
+    });
+
     //Save changes button
-    // fetchDishesBtn.addEventListener("click", function () {
-    //   postData(SERVER_URL, 'POST', menuList);
-
-    //   alert("שינויים נשלחו לממשק");
-    // });
     fetchDishesBtn.addEventListener("click", function () {
-      fetch(SERVER_URL)
-        .then(response => {
-          return response.json();
-        })
+      if (!confirm("לשלוח שינויים לממשק?")) return;
+      if (isTest)
+        return alert("You can't send menu updates to the server in Test Mode");
+      $(".spin-wrapper").css("display", "block");
+      for (let key in menuList) {
+        if (menuList[key].isFavorite) menuList[key].isFavorite = false;
+      }
+      AJAX(SERVER_URL, { menu: Object.values(menuList), config })
         .then(data => {
-          console.log(JSON.parse(data));
+          $(".spin-wrapper").css("display", "none");
+          alert("שינויים נשלחו לממשק");
+          console.log(data);
+        })
+        .catch(err => {
+          $(".spin-wrapper").css("display", "none");
+          alert("משהו קרה והנתונים לא נשמרו. נשו לשלוח שנית");
+          console.log(err);
         });
-
-      alert("שינויים נשלחו לממשק");
     });
   }
 
@@ -284,11 +365,15 @@ $("document").ready(function () {
 
     if (!dish.isActive && !isAdmin) return "";
 
-    const isString = item => typeof item === "string";
-    let price = Array.isArray(dish.price) ? dish.price.join("/") : dish.price;
-
-    if (lang === "EN" && isString(dish.price[0]))
-      price = `${dish.price[1]}/${dish.price[0]}`;
+    const genPraceMarkup = price => {
+      if (Array.isArray(price)) {
+        return price[1] === 0 && lang === "HE"
+          ? `-/${price[0]}`
+          : `${price[0] || "-"}/${price[1] || "-"}`;
+      }
+      return price;
+    };
+    const price = genPraceMarkup(dish.price);
 
     return `<div class="dish one-line">
      <div class="title-price-section">
@@ -298,9 +383,12 @@ $("document").ready(function () {
             ? AdminButtons(dish)
             : `${favorite ? FavoriteButton(dish) : ""}`
         }
-          <div>${
-            dish[`title${lang}`]
-          }<span class="dish-description"> ${dish[`description${lang}`]}</span></div>
+          <div class ="${
+            dish.category === "hosomakiIngredient" ||
+            dish.category === "irodoriIngredient"
+              ? "font-weight-normal"
+              : ""
+          }">${dish[`title${lang}`]}<span class="dish-description"> ${dish[`description${lang}`]}</span></div>
           ${dish.isVegi ? '<div class="veg"></div>' : ""}
         </div>
         <div class="dish-price dish-price-${lang}">${price ? "₪" : ""} ${price}</div>
@@ -326,7 +414,7 @@ $("document").ready(function () {
     </div>
     ${menuObj.dishes
       .map(dish =>
-        !dish.titleHE || oneLine
+        !dish.descriptionHE || oneLine
           ? genDishMarkupOneLine(dish)
           : genDishMarkup(dish)
       )
@@ -385,7 +473,7 @@ $("document").ready(function () {
     }
 
     return `
-    <div class="lunch-title center">
+    <div class="lunch-title text-align-center">
         <div class="">${menuObj[`title${lang}`]}</div>
     </div>
     ${menuObj.types
@@ -440,7 +528,7 @@ $("document").ready(function () {
     return `
   <div class="">
       <div class="lunch-title">${lunchObj[`title${lang}`]}</div>
-      <div class="menu-description center">${
+      <div class="menu-description text-align-center">${
         lunchObj[`description${lang}`]
       }</div>
   </div>
@@ -532,6 +620,7 @@ $("document").ready(function () {
         return "";
       }
       return `
+
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
         <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
@@ -541,8 +630,9 @@ $("document").ready(function () {
     }
 
     const messageHE = `אין ספיישלים היום`;
+    specials - config - btns;
     const messageEN = `No specials today`;
-    if (!page.dishes[0])
+    if (!page.dishes.some(dish => (dish.isActive = true)))
       return `<div class="pop-up-container">
     <div class="pop-up">
       <p>${lang === "HE" ? messageHE : messageEN}</p>
@@ -552,7 +642,23 @@ $("document").ready(function () {
     return (
       `<div class="">
       <div class="lunch-title">${page[`title${lang}`]}</div>
-      <div class="menu-description center">${page[`description${lang}`]}</div>
+      ${
+        isAdmin
+          ? `
+      <div class='specials-config-btns'><i class="fas specials-config-btn toggle-isSpecialsOn fa-toggle-${
+        config.isSpecialsOn ? "on" : "off"
+      }"></i> עמוד ספיישלים פעיל
+      <br>
+      <i class="fas specials-config-btn toggle-isSpecialsFirstPage fa-toggle-${
+        config.isSpecialsFirstPage ? "on" : "off"
+      }"></i> עמוד ספיישלים הוא עמוד הראשי</div>
+      `
+          : ""
+      }
+    
+      <div class="menu-description text-align-center">${
+        page[`description${lang}`]
+      }</div>
   </div>` +
       page.types
         .map(menu => {
@@ -622,21 +728,7 @@ $("document").ready(function () {
     }
   }
 
-  function init() {
-    // Special menu button
-    if (IS_SPACIALS_BUTTON_ACTIVE || isAdmin) {
-      specialConteinerElm.insertAdjacentHTML(
-        "beforeend",
-        `
-      <a href="#specials">
-      <div class="nav-cat-title"></div>
-      <div id="specials-btn" class="nav-butt margin-top">
-      ${lang === "HE" ? "ספיישלים" : "specials"}
-      </div>
-    </a>`
-      );
-    }
-
+  async function init() {
     // @media query
     window.matchMedia("(max-width: 480px)").addListener(function (e) {
       if (e.matches) {
@@ -650,24 +742,30 @@ $("document").ready(function () {
       }
     });
 
-    controlHashChange();
-    window.addEventListener("hashchange", controlHashChange, false);
-    ifPopUpStorage();
-    popUpRender();
-    // renderMenuPage(state.appetisers);
+    try {
+      menuList = await getMenu();
 
-    if (IS_SPACIALS_BUTTON_ACTIVE || isAdmin) {
-      specialConteinerElm.insertAdjacentHTML(
-        "beforeend",
-        `
-      <a href="#specials">
-      <div class="nav-cat-title"></div>
-      <div id="specials-btn" class="nav-butt margin-top">
-      ${lang === "HE" ? "ספיישלים" : "specials"}
-      </div>
-    </a>`
-      );
+      // Special menu button
+      if (config.isSpecialsOn) addSpecialsButton();
+
+      shake(".menu-butt");
+      controlHashChange();
+      window.addEventListener("hashchange", controlHashChange, false);
+      ifPopUpStorage();
+      popUpRender();
+    } catch (err) {
+      document.querySelector(".roll-container").innerHTML =
+        lang === "HE"
+          ? "מתנצלים אבל משהו השתבש.  נסו לרענן את העמוד!"
+          : "Sorry, but something has gone wrong. Try to refresh the page!";
     }
+
+    // if (config.isSpecialsOn) addSpecialsButton();
+    // shake(".menu-butt");
+    // controlHashChange();
+    // window.addEventListener("hashchange", controlHashChange, false);
+    // ifPopUpStorage();
+    // popUpRender();
   }
   init();
 });
