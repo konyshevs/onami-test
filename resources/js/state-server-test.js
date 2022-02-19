@@ -59,9 +59,9 @@ export const sortDishes = (category = undefined) => {
 };
 
 export const pushDishesToState = () => {
-  clearDishes();
-  createCombitanions();
-  createLunch();
+  // clearDishes();
+  // createCombitanions();
+  // createLunch();
 
   for (let key in menuList) {
     const dish = menuList[key];
@@ -76,7 +76,7 @@ export const pushDishesToState = () => {
       map[dish.category].types[dish.type].dishes.push(dish);
     }
   }
-  sortDishes();
+  // sortDishes();
   console.log("Sorted dishes pushed to the emty state");
 };
 
