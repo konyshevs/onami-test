@@ -31,7 +31,7 @@ const clearDishes = () => {
   console.log("Dishes cleared");
 };
 
-export const sortDishes = category => {
+export const sortDishes = (category = undefined) => {
   const compare = (a, b) => {
     let priceA, priceB;
     priceA = Number(Array.isArray(a.price) ? a.price[0] : a.price);
