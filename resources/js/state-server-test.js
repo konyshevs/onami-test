@@ -21,7 +21,7 @@ init();
 
 const clearDishes = () => {
   for (let key in map) {
-    category = map[key];
+    const category = map[key];
 
     category.dishes = [];
     if (category.types) {
@@ -59,9 +59,9 @@ export const sortDishes = (category = undefined) => {
 };
 
 export const pushDishesToState = () => {
-  // clearDishes();
-  // createCombitanions();
-  // createLunch();
+  clearDishes();
+  createCombitanions();
+  createLunch();
 
   for (let key in menuList) {
     const dish = menuList[key];
