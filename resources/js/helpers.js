@@ -1,6 +1,6 @@
 "use strict";
 import { TIMEOUT_SEC } from "./config.js";
-const promiseRetry = require("promise-retry");
+import promiseRetry from "promise-retry";
 
 export const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -52,6 +52,38 @@ const retryConfig = {
   factor: 2,
   randomize: false,
 };
+
+// export function retry(fn, attempt = 1, retries = 10, err = null) {
+//   console.log(`Attempt number ${attempt}.`);
+//   if (!retries) {
+//     return Promise.reject(err);
+//   }
+//   return fn().catch(err => {
+//     return setTimeout(() => {
+//       retry(fn, attempt + 1, retries - 1, err);
+//     }, 1000);
+//   });
+// }
+
+// export const AJAX = async function (url = SERVER_URL, uploadData = undefined) {
+//   try {
+//     const fetchPro = uploadData
+//       ? fetch(url, {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(uploadData),
+//         })
+//       : fetch(url);
+//     const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+//     const data = await res.json();
+//     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+//     return data;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
 
 export const AJAX = async function (url, uploadData = undefined) {
   try {
