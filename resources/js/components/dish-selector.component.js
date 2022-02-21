@@ -1,3 +1,4 @@
+"use strict";
 import DishForm from "../pages/dishForm";
 const dishBlockEl = document.querySelector(".menu");
 

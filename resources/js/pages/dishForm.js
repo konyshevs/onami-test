@@ -1,4 +1,4 @@
-import { dishConstructors } from "../state";
+"use strict";
 import {
   deleleDish,
   pushDishesToState,
