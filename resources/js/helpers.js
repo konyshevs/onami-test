@@ -133,6 +133,7 @@ const retryConfig = {
 export const fetchPlus = (url, retries = 0, timeout = 1000) =>
   fetch(url)
     .then(res => {
+      console.log(res);
       console.log("Retries left: " + retries);
       if (res.ok) {
         return res.json();
