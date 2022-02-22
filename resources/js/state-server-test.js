@@ -1,5 +1,5 @@
 // STATE
-import { runAfterDate, runBeforeDate, AJAX } from "./helpers.js";
+import { runAfterDate, runBeforeDate, fetchPlus } from "./helpers.js";
 import { END_DATE, START_DATE, SERVER_URL } from "./config.js";
 
 import makiImg from "../img/maki.jpg";
@@ -926,7 +926,7 @@ const createCombitanions = () => {
 
 export const getMenu = async () => {
   try {
-    const data = JSON.parse(await AJAX(SERVER_URL));
+    const data = JSON.parse(await fetchPlus(SERVER_URL, 5));
     config = data.config;
     delete config._id;
     data.menu.forEach(dish => {

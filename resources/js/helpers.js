@@ -85,26 +85,61 @@ const retryConfig = {
 //   }
 // };
 
-export const AJAX = async function (url, uploadData = undefined) {
-  try {
-    const fetchPro = promiseRetry(retryConfig, (retry, number) => {
-      console.log(`Attempt number ${number}.`);
-      return uploadData
-        ? fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(uploadData),
-          }).catch(retry)
-        : fetch(url).catch(retry);
-    });
+// export const AJAX = async function (url, uploadData = undefined) {
+//   try {
+//     const fetchPro = promiseRetry(retryConfig, (retry, number) => {
+//       console.log(`Attempt number ${number}.`);
+//       return uploadData
+//         ? fetch(url, {
+//             method: "POST",
+//             headers: {
+//               "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(uploadData),
+//           }).catch(retry)
+//         : fetch(url).catch(retry);
+//     });
 
-    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
-    const data = await res.json();
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
+//     const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+//     const data = await res.json();
+//     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+//     return data;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+
+// export const AJAX = async function (url, uploadData = undefined) {
+//   try {
+//     const fetchPro = uploadData
+//       ? fetch(url, {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(uploadData),
+//         })
+//       : fetch(url);
+
+//     const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+//     const data = await res.json();
+//     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+//     return data;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
+
+export const fetchPlus = (url, retries = 0, timeout = 1000) =>
+  fetch(url)
+    .then(res => {
+      console.log("Retries left: " + retries);
+      if (res.ok) {
+        return res.json();
+      }
+      if (retries > 0) {
+        return setTimeout(() => fetchPlus(url, retries - 1), timeout);
+      }
+      throw new Error(res.status);
+    })
+    .catch(error => console.error(error.message));
