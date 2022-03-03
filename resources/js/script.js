@@ -1,6 +1,8 @@
 "use strict";
 import $, { map } from "jquery";
 import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 // import {
 //   config,
 //   menuList,
