@@ -1,9 +1,9 @@
 "use strict";
 import {
-  deleleDish,
   pushDishesToState,
   Dish,
   sortDishes,
+  inputTypes,
 } from "../state-server-test";
 
 const DishForm = (dish, reranderMenu, isNewDish = false) => {
@@ -47,7 +47,7 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
     ${contents.map(
       content =>
         `<option value="${content[0]}" ${
-          selectedType === content[0] ? "selected" : ""
+          selectedType == content[0] ? "selected" : ""
         }>${content[1]}</option>`
     )}
   </select>`;
@@ -157,75 +157,14 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
         Array.isArray(dish.price) ? dish.price[1] : ""
       }">
       ${
-        dish.category === "special"
-          ? createSelectElm(
-              [
-                [0, "מנה"],
-                [1, "קינוח"],
-                [2, "קוקטייל"],
-              ],
-              dish.type
-            )
-          : ""
-      }
-      ${
-        dish.category === "seshimiNigiri"
-          ? createSelectElm(
-              [
-                [0, "דגי ים"],
-                [1, "מים תתוקים"],
-                [2, "פירוט ים"],
-                [3, "שונות"],
-                [4, "רק בעונה"],
-              ],
-              dish.type
-            )
+        inputTypes[dish.category]
+          ? createSelectElm(inputTypes[dish.category], dish.type)
           : ""
       }
       
       ${
         dish.category === "wineGlass" || dish.category === "wineBottle"
-          ? createSelectElm(
-              [
-                [0, "לבן"],
-                [1, "רוזה"],
-                [2, "אדום"],
-              ],
-              dish.type
-            )
-          : ""
-      }
-
-      ${
-        dish.category === "spirit"
-          ? createSelectElm(
-              [
-                ["0", "אפריטיף"],
-
-                ["1", "וודקה"],
-
-                ["2", "רום"],
-
-                ["3", "ג'ין"],
-
-                ["4", "טקילה"],
-
-                ["5", "אניס"],
-
-                ["6", "קוניאק"],
-
-                ["7", "ליקרים"],
-
-                ["8", "דיז'סטיף"],
-
-                ["9", "ויסקי בלנדד"],
-
-                ["10", "ויסקי אמריקאי"],
-
-                ["11", "ויסקי סינגל מאלט"],
-              ],
-              dish.type
-            )
+          ? createSelectElm(inputTypes.wine, dish.type)
           : ""
       }
       <div>
