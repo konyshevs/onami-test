@@ -351,7 +351,9 @@ $("document").ready(function () {
         ${isAdmin ? AdminButtons(dish) : FavoriteButton(dish)}
        
         
-          <div>${dish[`title${lang}`]}</div>
+          <div>${
+            dish[`title${lang}`]
+          } ${dish.isSpecial ? '<span class="special-sign">special</span>' : ""}</div>
           ${dish.isVegi ? '<div class="veg"></div>' : ""}
         </div>
         <div class="dish-price dish-price-${lang}">${price ? "₪" : ""} ${price}</div>
@@ -609,7 +611,11 @@ $("document").ready(function () {
 
     return page
       .map(menu => {
-        if (menu.dishes.filter(dish => dish.isFavorite).length > 0)
+        if (
+          menu.dishes
+            .filter(dish => dish.isFavorite)
+            .some(dish => dish.isActive)
+        )
           return genFavoritesMenuMarkup(menu);
         else return "";
       })
@@ -617,7 +623,7 @@ $("document").ready(function () {
   }
   function renderSpecials(page) {
     if (!page) return "";
-    function genFavoritesMenuMarkup(menuObj) {
+    function genSpecialsMenuMarkup(menuObj) {
       if (!menuObj) {
         console.log("Menu object is missing");
         return "";
@@ -635,7 +641,7 @@ $("document").ready(function () {
     const messageHE = `אין ספיישלים היום`;
     specials - config - btns;
     const messageEN = `No specials today`;
-    if (!page.dishes.some(dish => (dish.isActive = true)))
+    if (!page.dishes.some(dish => dish.isActive) && !isAdmin)
       return `<div class="pop-up-container">
     <div class="pop-up">
       <p>${lang === "HE" ? messageHE : messageEN}</p>
@@ -665,7 +671,8 @@ $("document").ready(function () {
   </div>` +
       page.types
         .map(menu => {
-          if (menu.dishes.length > 0) return genFavoritesMenuMarkup(menu);
+          if (menu.dishes.some(dish => dish.isActive) || isAdmin)
+            return genSpecialsMenuMarkup(menu);
           else return "";
         })
         .join("")

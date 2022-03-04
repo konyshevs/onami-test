@@ -14,6 +14,7 @@
   --color2: white;
   --heading-color: #50c878;
   --heading-color-light: #6ad08c;
+  --special-color: #e74c3c;
 }
 
 html body {
@@ -428,6 +429,13 @@ main {
   margin: 0 auto;
   width: 150px;
   margin-top: 20px;
+}
+
+.special-sign {
+  color: var(--special-color);
+  font-size: 12px;
+  font-style: italic;
+  text-transform: uppercase;
 }
 
 /* ADMIN */

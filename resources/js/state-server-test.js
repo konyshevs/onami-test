@@ -75,6 +75,18 @@ export const pushDishesToState = () => {
     if (dish.type || dish.type === 0) {
       map[dish.category].types[dish.type].dishes.push(dish);
     }
+    if (dish.isSpecial && dish.category !== "special") {
+      if (dish.category === "dessert") map.special.types[1].dishes.push(dish);
+      else if (dish.category === "cocktail")
+        map.special.types[2].dishes.push(dish);
+      else if (
+        dish.category === "wineGlass" ||
+        dish.category === "wineBottle" ||
+        dish.category === "wineCellar"
+      ) {
+        map.special.types[3].dishes.push(dish);
+      } else map.special.types[0].dishes.push(dish);
+    }
   }
   sortDishes();
   console.log("Sorted dishes pushed to the emty state");
@@ -102,11 +114,10 @@ export const state = {
     descriptionEN: "",
     postScriptumEN: "",
     types: [
-      // { titleHE: "ספיישל ראשונות", titleEN: "Special Appetisers", dishes: [] },
-      // { titleHE: "ספיישל עיקריות", titleEN: "Special Main Dishes", dishes: [] },
       { titleHE: "", titleEN: "", dishes: [] },
       { titleHE: "קינוחים", titleEN: "Desserts", dishes: [] },
       { titleHE: "קוקטיילים", titleEN: "Coctails", dishes: [] },
+      { titleHE: "יינות", titleEN: "Wine", dishes: [] },
     ],
     dishes: [],
   },
@@ -718,6 +729,7 @@ export class Dish {
     type,
     vintage,
     isActive,
+    isSpecial,
     category,
   }) {
     this.titleHE = titleHE || "";
@@ -730,14 +742,16 @@ export class Dish {
     this.category = category || "global";
     this.updated = true;
     this.createDate = new Date();
+    this.isSpecial = isSpecial;
     if (vintage) this.vintage = vintage;
-    if (type) this.type = type;
+    if (type || type === 0) this.type = type;
     this.addID();
     menuList[this.id] = this;
   }
 
   addID() {
-    this.id = this.titleEN.toLowerCase().replaceAll(" ", "_") + this.category;
+    this.id =
+      this.titleEN.toLowerCase().replaceAll(" ", "_") + "_" + this.category;
   }
 }
 

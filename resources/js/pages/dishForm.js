@@ -30,15 +30,11 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
       price,
       isActive: document.getElementById("isActive").checked,
       isVegi: document.getElementById("isVegi").checked,
+      isSpecial: document.getElementById("isSpecial").checked,
       type: Number(document.querySelector(".select-type")?.value),
       vintage: document.getElementById("vintage")?.value,
     };
   };
-
-  // const addID = (dish)=>{
-  //   if (dish.titleEN) dish.id = dish.titleEN.toLowerCase().replaceAll(" ", "_");
-  //   else dish.id = dish.descriptionEN.toLowerCase().replaceAll(" ", "_");
-  // }
 
   const createSelectElm = (contents, selectedType) => {
     return `
@@ -67,6 +63,7 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
       price: data.price,
       isActive: data.isActive,
       isVegi: data.isVegi,
+      isSpecial: data.isSpecial,
       type: data.type,
       vintage: data.vintage,
       category,
@@ -82,21 +79,22 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
     if (!data) return;
     const typeChanged =
       dish.type || dish.type === 0 ? dish.type !== data.type : false;
-    const priceChanged = dish.price !== price;
+    const priceChanged = dish.price != data.price;
+    const isSpecialChanged = dish.isSpecial !== data.isSpecial;
 
     dish.titleHE = data.titleHE;
     dish.titleEN = data.titleEN;
     dish.descriptionHE = data.descriptionHE;
     dish.descriptionEN = data.descriptionEN;
     dish.price = data.price;
-    dish.isActive = data.isActive;
     dish.isVegi = data.isVegi;
+    dish.isSpecial = data.isSpecial;
+    dish.isActive = data.isActive;
     if (dish.type || dish.type === 0) dish.type = data.type;
     if (dish.vintage) dish.vintage = data.vintage;
     dish.updated = true;
-
-    if (typeChanged) pushDishesToState();
-    else if (priceChanged) sortDishes(dish.category);
+    if (typeChanged || isSpecialChanged) pushDishesToState();
+    if (priceChanged) sortDishes(dish.category);
     console.log(dish);
     reranderMenu();
   };
@@ -131,11 +129,11 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
         dish.descriptionHE || ""
       }</textarea>
       <label for="titleEN">*שם המנה באנגלית</label>
-      <input type="text" name="titleEN" id="titleEN" required value="${
+      <input lang="en" dir="ltr" type="text" name="titleEN" id="titleEN" required value="${
         dish.titleEN || ""
       }">
       <label for="decription-EN">תיאור המנה באנגלית</label>
-      <textarea name="descriptionEN" id="descriptionEN" cols="30" rows="4" required>${
+      <textarea dir="ltr" lang="en" name="descriptionEN" id="descriptionEN" cols="30" rows="4" required>${
         dish.descriptionEN || ""
       }</textarea>
       ${
@@ -178,7 +176,13 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
             dish.isVegi ? "checked" : ""
           }>
           <label class="label-checkbox" for="isVegi">טבעוני</label>
-      </div>`;
+      </div>
+      <div>
+      <input type="checkbox" name="isSpecial" id="isSpecial" ${
+        dish.isSpecial || dish.category === "special" ? "checked" : ""
+      }>
+      <label class="label-checkbox" for="isSpecial">ספיישל</label>
+  </div>`;
 
   const buttonsContainer = document.createElement("div");
   buttonsContainer.classList.add("formButtonsContainer");
