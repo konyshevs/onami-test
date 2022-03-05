@@ -76,6 +76,7 @@ export const pushDishesToState = () => {
       map[dish.category].types[dish.type].dishes.push(dish);
     }
     if (dish.isSpecial && dish.category !== "special") {
+      map.special.dishes.push(dish);
       if (dish.category === "dessert") map.special.types[1].dishes.push(dish);
       else if (dish.category === "cocktail")
         map.special.types[2].dishes.push(dish);
