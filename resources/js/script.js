@@ -671,7 +671,10 @@ $("document").ready(function () {
   </div>` +
       page.types
         .map(menu => {
-          if (menu.dishes.some(dish => dish.isActive) || isAdmin)
+          if (
+            menu.dishes.some(dish => dish.isActive) ||
+            (isAdmin && menu.dishes.length > 0)
+          )
             return genSpecialsMenuMarkup(menu);
           else return "";
         })
