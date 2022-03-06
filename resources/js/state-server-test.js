@@ -110,10 +110,8 @@ export const state = {
   specials: {
     titleHE: "ספיישלים",
     descriptionHE: "",
-    postScriptumHE: "",
     titleEN: "Specials",
     descriptionEN: "",
-    postScriptumEN: "",
     types: [
       { titleHE: "", titleEN: "", dishes: [] },
       { titleHE: "קינוחים", titleEN: "Desserts", dishes: [] },
@@ -126,38 +124,30 @@ export const state = {
     {
       titleHE: "ראשונות קרות",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Cold Appetisers",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
     {
       titleHE: "ראשונות חמות",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Hot Appetisers",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
   ],
   skewers: {
     titleHE: "שיפודי עץ על הגריל",
     descriptionHE: "",
-    postScriptumHE: "",
     titleEN: "Skewers",
     descriptionEN: "",
-    postScriptumEN: "",
     dishes: [],
   },
   mainDishes: {
     titleHE: "מנות עיקריות",
     descriptionHE: "",
-    postScriptumHE: "",
     titleEN: "Main Dishes",
     descriptionEN: "",
-    postScriptumEN: "",
     dishes: [],
   },
 
@@ -165,46 +155,36 @@ export const state = {
     {
       titleHE: "קינוחים",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Desserts",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
     {
       titleHE: "קפה",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Coffee",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
     {
       titleHE: "תה חליטה",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Infusion Tea",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
     {
       titleHE: "תיונים",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Tea Bags",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
     {
       titleHE: "פורט & שרי",
       descriptionHE: "",
-      postScriptumHE: "",
       titleEN: "Port & Sherry",
       descriptionEN: "",
-      postScriptumEN: "",
       dishes: [],
     },
   ],
@@ -213,12 +193,12 @@ export const state = {
       titleHE: "סשימי / ניגירי",
       descriptionHE:
         "סשימי - פילה דג או פרי ים ללא אורז<br> ניגירי - כדור אורז ועליו נתח דג / פרי ים / ירק",
-      postScriptumHE: "",
+
       priceHE: "סשימי/ניגירי",
       titleEN: "Nigiri / Seshimi",
       descriptionEN:
         "Nigiri - rice ball topped with fish or seafood<br>Seshimi - fish or seafood fillet without rice",
-      postScriptumEN: "",
+
       priceEN: "Nigiri/Seshimi",
       imageUrl: nigiriImg,
       dishes: [],
@@ -233,10 +213,10 @@ export const state = {
     {
       titleHE: "סשימי ספיישל",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "Seshimi Special",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
     },
   ],
@@ -245,12 +225,12 @@ export const state = {
       titleHE: "אינרי / גונקן",
       descriptionHE:
         "אינרי - כיס טופו מתקתק במילוי אורז, דג / פרי ים / ירקות<br>גונקן - כדור אורז עטוף באצה במילוי דג / פרי ים / ירקות",
-      postScriptumHE: "",
+
       priceHE: "אינרי/גונקן",
       titleEN: "Gunkan / Inari",
       descriptionEN:
         "Gunkan - rice ball wrapped with Nori & filled with fish / seafood / vegetables<br>Inari - sweet tofu pocket filled with rice, fish / seafood / vegetables",
-      postScriptumEN: "",
+
       priceEN: "Gunkan/Inari",
       imageUrl: inariImg,
       dishes: [],
@@ -259,10 +239,10 @@ export const state = {
       titleHE: "אינארי ספיישל",
       descriptionHE:
         "כדור אורז עטוף אינארי בטמפורה ואצת נורי במילוי דג / פרי ים / ירקות",
-      postScriptumHE: "",
+
       titleEN: "Inari Special",
       descriptionEN: "",
-      postScriptumEN: "",
+
       imageUrl: inariSpeciaImg,
       dishes: [],
     },
@@ -272,30 +252,30 @@ export const state = {
     {
       titleHE: "הוסומקי",
       descriptionHE: "אצת נורי במילוי אורז, דג / פרי ים / ירקות (חתוך ל-8))",
-      postScriptumHE: "",
+
       titleEN: "Hosomaki",
       descriptionEN: "Thin roll (Cut into 8)",
-      postScriptumEN: "",
+
       imageUrl: makiImg,
       dishes: [],
     },
     {
       titleHE: "תוספות אפשריות למאקי",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "Optional Ingredients",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
     },
   ],
   temaki: {
     titleHE: "טמקי - קונוס",
     descriptionHE: "קונוס נורי במילוי אורז / דג / פרי ים / ירקות",
-    postScriptumHE: "",
+
     titleEN: "Temaki",
     descriptionEN: "Hand Roll",
-    postScriptumEN: "",
+
     imageUrl: temakiImg,
     dishes: [],
   },
@@ -303,30 +283,30 @@ export const state = {
     {
       titleHE: "אירודורי - IO",
       descriptionHE: "אורז עוטף אצה במילוי ירק / פרי ים / דג (חתוך ל-4)",
-      postScriptumHE: "",
+
       titleEN: "Irodori i/o",
       descriptionEN: "Inside-Out roll - cut into 4",
-      postScriptumEN: "",
+
       imageUrl: irodoriImg,
       dishes: [],
     },
     {
       titleHE: "תוספות אפשריות (בחוץ)",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "Optional Ingredients (outside)",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
     },
   ],
   combinations: {
     titleHE: "קומבינציות",
     descriptionHE: "",
-    postScriptumHE: "",
+
     titleEN: "Combinations",
     descriptionEN: "",
-    postScriptumEN: "",
+
     types: [
       {
         titleHE: "צמחונית",
@@ -356,17 +336,16 @@ export const state = {
     titleHE: "רק בעסקיות",
     titleEN: "Lunch only",
     descriptionHE: "",
-    postScriptumHE: "",
+
     descriptionEN: "",
-    postScriptumEN: "",
   },
   lunch75: {
     titleHE: "עסקית 80 ₪",
     descriptionHE: lunchDescriptionHE,
-    postScriptumHE: "",
+
     titleEN: "Lunch 80 ₪",
     descriptionEN: lunchDescriptionEN,
-    postScriptumEN: "",
+
     types: [
       {
         titleHE: "מנה ראשונה",
@@ -395,10 +374,10 @@ export const state = {
   lunch90: {
     titleHE: "עסקית 95 ₪",
     descriptionHE: lunchDescriptionHE,
-    postScriptumHE: "",
+
     titleEN: "Lunch 95 ₪",
     descriptionEN: lunchDescriptionEN,
-    postScriptumEN: "",
+
     types: [
       {
         titleHE: "מנה ראשונה",
@@ -427,10 +406,10 @@ export const state = {
   lunch105: {
     titleHE: "עסקית 110 ₪",
     descriptionHE: lunchDescriptionHE,
-    postScriptumHE: "",
+
     titleEN: "Lunch 110 ₪",
     descriptionEN: lunchDescriptionEN,
-    postScriptumEN: "",
+
     types: [
       {
         titleHE: "מנה ראשונה",
@@ -460,10 +439,10 @@ export const state = {
     {
       titleHE: "יין בכוסות",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "WINE BY THE GLASS",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
       types: [
         {
@@ -486,10 +465,10 @@ export const state = {
     {
       titleHE: "יין בבקבוק",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "WINE BY THE BOTTLE",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
       types: [
         {
@@ -512,10 +491,10 @@ export const state = {
     {
       titleHE: "יינות מתיישנים",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "FROM THE CELLAR",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
     },
   ],
@@ -523,47 +502,47 @@ export const state = {
     {
       titleHE: "בירות",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "BEER",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
     },
     {
       titleHE: "סאקה ואומשו",
       descriptionHE: "",
-      postScriptumHE: "",
+
       titleEN: "UMESHU & SAKE",
       descriptionEN: "",
-      postScriptumEN: "",
+
       dishes: [],
     },
   ],
   coctails: {
     titleHE: "קוקטיילים",
     descriptionHE: "",
-    postScriptumHE: "",
+
     titleEN: "Coctails",
     descriptionEN: "",
-    postScriptumEN: "",
+
     dishes: [],
   },
   softDrinks: {
     titleHE: "שתייה קלה",
     descriptionHE: "",
-    postScriptumHE: "",
+
     titleEN: "Soft Drinks",
     descriptionEN: "",
-    postScriptumEN: "",
+
     dishes: [],
   },
   spirits: {
     titleHE: "אלכוהול",
     descriptionHE: "",
-    postScriptumHE: "",
+
     titleEN: "Spirits",
     descriptionEN: "",
-    postScriptumEN: "",
+
     types: [
       {
         titleHE: "אפריטיף",

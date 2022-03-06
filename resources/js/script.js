@@ -54,6 +54,8 @@ $("document").ready(function () {
   let isAdmin = false;
   let isTest = false;
   let menuList;
+  let isSpacialsBtnRendered = false;
+  let isOnlyLunchBtnRendered = false;
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
@@ -114,7 +116,8 @@ $("document").ready(function () {
   }
 
   const addSpecialsButton = () => {
-    if (document.getElementById("#specials-btn")) return;
+    if (isSpacialsBtnRendered) return;
+    isSpacialsBtnRendered = true;
     specialConteinerElm.insertAdjacentHTML(
       "beforeend",
       `
@@ -128,7 +131,8 @@ $("document").ready(function () {
   };
 
   const addOnlyLunchButton = () => {
-    if (document.getElementById("#lunch-btn")) return;
+    if (isOnlyLunchBtnRendered) return;
+    isOnlyLunchBtnRendered = true;
     specialConteinerElm.insertAdjacentHTML(
       "beforeend",
       `
@@ -150,6 +154,7 @@ $("document").ready(function () {
       $(".menu-butt").css({ color: color1, "background-color": color2 });
       $("#nav-container").css({ display: "flex" });
       $("html,body").css("overflow", "hidden");
+      $(".menu-sign").toggleClass("fa-bars fa-times");
     } else {
       $("#nav").animate({ width: 0 }, 200);
       $(".menu-butt").css({ color: color2, "background-color": headingColor });
@@ -157,6 +162,7 @@ $("document").ready(function () {
         $("#nav-container").css({ display: "none" });
       }, 200);
       $("html,body").css("overflow", "auto");
+      $(".menu-sign").toggleClass("fa-bars fa-times");
     }
   }
 
@@ -423,9 +429,7 @@ $("document").ready(function () {
           ? genDishMarkupOneLine(dish)
           : genDishMarkup(dish)
       )
-      .join("")}
-    <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>
-    `;
+      .join("")}`;
   }
   function genSeshimiMarkup(menuObj) {
     if (!menuObj) {
@@ -452,8 +456,7 @@ $("document").ready(function () {
 
       ${type.dishes.map(dish => genDishMarkupOneLine(dish, true)).join("")}`
       )
-      .join("")}
-      <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`;
+      .join("")}`;
   }
 
   function genCombitionsMarkup(menuObj) {
@@ -568,10 +571,8 @@ $("document").ready(function () {
             type => `<div class="type-name">${type[`title${lang}`]}</div>
         ${type.dishes.map(dish => genDishMarkup(dish)).join("")}`
           )
-          .join("")}
-        <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
-      : `${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}
-  <div class="menu-postscriptum">${menuObj[`postScriptum${lang}`]}</div>`
+          .join("")}`
+      : `${menuObj.dishes.map(dish => genDishMarkup(dish)).join("")}`
   }`;
     }
     return page.map(menu => genWineTypeMarkup(menu)).join("");
@@ -694,8 +695,7 @@ $("document").ready(function () {
       key => `<div class="type-name">${page.types[key][`title${lang}`]}</div>
     ${page.types[key].dishes.map(dish => genDishMarkupOneLine(dish)).join("")}`
     )
-    .join("")}
-    <div class="menu-postscriptum">${page[`postScriptum${lang}`]}</div>`}`;
+    .join("")}`}`;
   }
 
   function renderMenuPage(page) {

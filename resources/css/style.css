@@ -69,7 +69,7 @@ header .container {
   border-radius: 5px;
   cursor: pointer;
   height: 20px;
-  width: 80px;
+  /* width: 80px; */
   font-weight: bold;
   padding-bottom: 9px;
   padding-left: 3px;
@@ -111,6 +111,11 @@ header .container {
   margin-top: 9px;
   position: relative;
   background-color: var(--heading-color);
+  width: 110px;
+}
+.menu-butt i {
+  position: relative;
+  top: 2px;
 }
 
 #nav-container {
@@ -271,11 +276,11 @@ main {
 }
 
 .menu-HE {
-  margin: 55px 150px 0 0;
+  margin: 35px 150px 0 0;
 }
 
 .menu-EN {
-  margin: 55px 0 0 150px;
+  margin: 35px 0 0 150px;
 }
 
 .menu-title {
@@ -283,7 +288,7 @@ main {
   border-bottom: 1px solid var(--color1);
   font-weight: bold;
   font-size: 18px;
-  /* margin-top: 20px; */
+  margin-top: 20px;
 }
 
 .menu-img-container {
