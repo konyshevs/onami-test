@@ -13,11 +13,8 @@ export const menuList = {};
 export let favorits = [];
 export let config = {};
 
-const init = async function () {
-  const storage = localStorage.getItem("favorits");
-  if (storage) favorits = JSON.parse(storage);
-};
-init();
+const storage = localStorage.getItem("favorits");
+if (storage) favorits = JSON.parse(storage);
 
 const clearDishes = () => {
   for (let key in map) {
@@ -66,7 +63,7 @@ export const pushDishesToState = () => {
   for (let key in menuList) {
     const dish = menuList[key];
     if (dish.deleted) continue;
-    if (favorits.includes(dish.id)) {
+    if (favorits.includes(dish.id) && dish.isActive) {
       dish.isFavorite = true;
       favoritesCount++;
     }
