@@ -272,15 +272,15 @@ main {
 }
 
 .menu {
-  padding: 45px 10px 40px 10px;
+  padding: 55px 10px 40px 10px;
 }
 
 .menu-HE {
-  margin: 35px 150px 0 0;
+  margin: 45px 150px 0 0;
 }
 
 .menu-EN {
-  margin: 35px 0 0 150px;
+  margin: 45px 0 0 150px;
 }
 
 .menu-title {
@@ -289,6 +289,10 @@ main {
   font-weight: bold;
   font-size: 18px;
   margin-top: 20px;
+}
+
+.menu-title:first-child {
+  margin-top: 0;
 }
 
 .menu-img-container {
@@ -393,7 +397,6 @@ main {
   font-weight: bold;
   font-size: 20px;
   text-align: center;
-  margin-top: 20px;
 }
 
 .lunch-type {
