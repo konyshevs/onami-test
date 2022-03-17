@@ -137,9 +137,13 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
         dish.descriptionEN || ""
       }</textarea>
       ${
-        dish.vintage
+        dish.category === "wineGlass" ||
+        dish.category === "wineBottle" ||
+        dish.category === "wineCellar"
           ? `<label for="vintage">בציר</label>
-      <input type="text" name="vintage" id="vintage" required value="${dish.vintage}">`
+      <input type="text" name="vintage" id="vintage" required value="${
+        dish.vintage || ""
+      }">`
           : ""
       }
       <label for="price">${
