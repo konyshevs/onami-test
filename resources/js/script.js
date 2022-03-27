@@ -56,6 +56,7 @@ $("document").ready(function () {
   let menuList;
   let isSpacialsBtnRendered = false;
   let isOnlyLunchBtnRendered = false;
+  let isNoActiveBtnRendered = false;
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
@@ -69,6 +70,7 @@ $("document").ready(function () {
         $("#favorites-btn").css({ display: "none" });
         addSpecialsButton();
         addOnlyLunchButton();
+        addNoActiveButton();
       } else {
         alert("סיסמה לא נכונה!");
       }
@@ -79,6 +81,7 @@ $("document").ready(function () {
       $("#favorites-btn").css({ display: "none" });
       addSpecialsButton();
       addOnlyLunchButton();
+      addNoActiveButton();
     }
     if (!id || id === "admin" || id === "test" || !state[id]) {
       id = config.isSpecialsFirstPage ? "specials" : "appetisers";
@@ -140,6 +143,21 @@ $("document").ready(function () {
     <div class="nav-cat-title"></div>
     <div id="lunch-btn" class="nav-butt margin-top">
     ${lang === "HE" ? "רק בעסקיות" : "Only in lunch"}
+    </div>
+  </a>`
+    );
+  };
+
+  const addNoActiveButton = () => {
+    if (isNoActiveBtnRendered) return;
+    isNoActiveBtnRendered = true;
+    specialConteinerElm.insertAdjacentHTML(
+      "beforeend",
+      `
+    <a href="#noActive">
+    <div class="nav-cat-title"></div>
+    <div id="lunch-btn" class="nav-butt margin-top">
+    ${lang === "HE" ? "מנות לא פעילות" : "No active"}
     </div>
   </a>`
     );
@@ -526,7 +544,7 @@ $("document").ready(function () {
           <div class="dish-title">
             <div>${
               dish[`title${lang}`]
-            }<span class="dish-description"> ${dish[`description${lang}`]}${dish.price >= 100 ? "(+ 20 ₪)" : ""}</span></div>
+            }<span class="dish-description"> ${dish[`description${lang}`]}${dish.type === 4 ? ` ${lang === "HE" ? "(רק בעונה)" : "(Only in season)"}` : ""}${dish.price >= 100 ? "(+ 20 ₪)" : ""}</span></div>
             ${dish.isVegi ? '<div class="veg"></div>' : ""}
           </div>
        </div>

@@ -17,21 +17,22 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
     const price1 = document.getElementById("price").value;
     const price2 = document.getElementById("price2").value;
     const price = price2 ? [Number(price1), Number(price2)] : Number(price1);
-    const titleHE = document.getElementById("titleHE").value;
-    const titleEN = document.getElementById("titleEN").value;
+    const titleHE = document.getElementById("titleHE").value.trim();
+    const titleEN = document.getElementById("titleEN").value.trim();
+    const type = document.querySelector(".select-type")?.value;
     if (!titleHE) return alert("שם המנה הוא שדה חובה");
     if (!titleEN) return alert("שם המנה באנגלית הוא שדה חובה");
     if (!price1) return alert("מחיר הוא שדה חובה");
     return {
       titleHE,
       titleEN,
-      descriptionHE: document.getElementById("descriptionHE").value,
-      descriptionEN: document.getElementById("descriptionEN").value,
+      descriptionHE: document.getElementById("descriptionHE").value.trim(),
+      descriptionEN: document.getElementById("descriptionEN").value.trim(),
       price,
       isActive: document.getElementById("isActive").checked,
       isVegi: document.getElementById("isVegi").checked,
       isSpecial: document.getElementById("isSpecial").checked,
-      type: Number(document.querySelector(".select-type")?.value),
+      type: type ? Number(type) : undefined,
       vintage: document.getElementById("vintage")?.value,
     };
   };

@@ -792,6 +792,7 @@ const createLunch = () => {
   state.lunch90.types[0].dishes = state.lunch75.types[0].dishes;
   state.lunch90.types[1].dishes = [
     menuList.tori_curry_rice,
+    menuList.shiromi_donlunch,
     menuList.tori_kare_udon,
     menuList.wakadori_grill,
     menuList.yakiniku_lousujyu,
@@ -803,6 +804,8 @@ const createLunch = () => {
     menuList.bora_maki,
     menuList.sakemori_roll,
     menuList.ebikyu_roll,
+    menuList.shiroguchi_roll_lunch,
+    menuList.katsuo_roll_lunch,
     menuList.kaisen_cocktail_maki,
   ];
 
@@ -828,6 +831,8 @@ const createLunch = () => {
     menuList.shiroguchi,
     menuList.tamago,
     menuList.ebi,
+    menuList.spanish_mackerel_seshimiNigiri,
+    menuList.katsuo_seshimiNigiri,
 
     lunchSushiTypeSeshimi,
     menuList.sake,
@@ -838,6 +843,8 @@ const createLunch = () => {
     menuList.shiroguchi,
     menuList.tamago,
     menuList.ebi,
+    menuList.spanish_mackerel_seshimiNigiri,
+    menuList.katsuo_seshimiNigiri,
 
     lunchSushiTypeIrodori,
     menuList.california_roll,
