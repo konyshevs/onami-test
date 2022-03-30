@@ -1,5 +1,5 @@
 "use strict";
-import $, { map } from "jquery";
+import $ from "jquery";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
@@ -25,6 +25,7 @@ import {
   changeFavoritesCount,
   favoritesCount,
   config,
+  map,
 } from "./state-server-test";
 
 $("document").ready(function () {
@@ -60,6 +61,9 @@ $("document").ready(function () {
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
+    if (id === "no-active") {
+      return renderNoActiv();
+    }
     if (id === "test") {
       isTest = true;
     }
@@ -154,7 +158,7 @@ $("document").ready(function () {
     specialConteinerElm.insertAdjacentHTML(
       "beforeend",
       `
-    <a href="#noActive">
+    <a href="#no-active">
     <div class="nav-cat-title"></div>
     <div id="lunch-btn" class="nav-butt margin-top">
     ${lang === "HE" ? "מנות לא פעילות" : "No active"}
@@ -358,6 +362,18 @@ $("document").ready(function () {
   }
 
   // MENU RENDERING
+  const renderNoActiv = () => {
+    const keys = Object.keys(map);
+    dishBlockEl.innerHTML = "";
+    keys.forEach(key => {
+      if (map[key].dishes.some(dish => dish.isActive === false))
+        dishBlockEl.insertAdjacentHTML(
+          "beforeend",
+          genMenuMarkup(map[key], false, true)
+        );
+    });
+  };
+
   function genDishMarkup(dish) {
     if (!dish) {
       console.log("Dish is missing");
@@ -425,7 +441,7 @@ $("document").ready(function () {
    </div>`;
   }
 
-  function genMenuMarkup(menuObj, oneLine = false) {
+  function genMenuMarkup(menuObj, oneLine = false, noActiveOnly = false) {
     if (!menuObj) {
       console.log("Menu object is missing");
       return "";
@@ -434,19 +450,27 @@ $("document").ready(function () {
     <div class="menu-title">
         <div class="">${menuObj[`title${lang}`]}</div>
         ${
-          menuObj.imageUrl
+          menuObj.imageUrl && !noActiveOnly
             ? `<div class="menu-img-container"><div class="menu-img-wrapper"><img class="menu-img" src="${menuObj.imageUrl}" alt="${menuObj.titleEN}"></div></div>`
             : ""
         }
-        <div class="menu-description">${menuObj[`description${lang}`]}</div>
+        ${
+          !noActiveOnly
+            ? `<div class="menu-description">${
+                menuObj[`description${lang}`]
+              }</div>`
+            : ""
+        }
         <div class="price-description">${menuObj[`price${lang}`] || ""}</div>
     </div>
     ${menuObj.dishes
-      .map(dish =>
-        !dish.descriptionHE || oneLine
-          ? genDishMarkupOneLine(dish)
-          : genDishMarkup(dish)
-      )
+      .map(dish => {
+        if ((noActiveOnly && !dish.isActive) || !noActiveOnly) {
+          return !dish.descriptionHE || oneLine
+            ? genDishMarkupOneLine(dish)
+            : genDishMarkup(dish);
+        } else return "";
+      })
       .join("")}`;
   }
   function genSeshimiMarkup(menuObj) {
@@ -538,13 +562,17 @@ $("document").ready(function () {
       </div>
     </div>
       `;
-
-      return `<div class="dish one-line">
+      if (dish.isActive)
+        return `<div class="dish one-line">
        <div class="title-price-section">
           <div class="dish-title">
-            <div>${
-              dish[`title${lang}`]
-            }<span class="dish-description"> ${dish[`description${lang}`]}${dish.type === 4 ? ` ${lang === "HE" ? "(רק בעונה)" : "(Only in season)"}` : ""}${dish.price >= 100 ? "(+ 20 ₪)" : ""}</span></div>
+            <div>${dish[`title${lang}`]}<span class="dish-description"> ${
+          dish[`description${lang}`]
+        }${
+          dish.type === 4
+            ? ` ${lang === "HE" ? "(רק בעונה)" : "(Only in season)"}`
+            : ""
+        }${dish.price >= 100 ? "(+ 20 ₪)" : ""}</span></div>
             ${dish.isVegi ? '<div class="veg"></div>' : ""}
           </div>
        </div>

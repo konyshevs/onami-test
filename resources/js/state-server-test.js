@@ -634,7 +634,7 @@ state.favorites.push(
   state.spirits
 );
 
-const map = {
+export const map = {
   coldAppetiser: state.appetisers[0],
   hotAppetiser: state.appetisers[1],
   skewer: state.skewers,
@@ -797,6 +797,7 @@ const createLunch = () => {
     menuList.wakadori_grill,
     menuList.yakiniku_lousujyu,
     menuList.tori_ramen,
+    menuList.suzuki_agedashi,
   ];
   state.lunch90.types[2].dishes = [
     menuList.negi_shiro_zakana_maki,
