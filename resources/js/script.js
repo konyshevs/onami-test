@@ -75,6 +75,11 @@ $("document").ready(function () {
         addSpecialsButton();
         addOnlyLunchButton();
         addNoActiveButton();
+        renderNoActiv();
+        document
+          .getElementById("no-active-btn")
+          ?.classList.add("nav-btn-active");
+        return;
       } else {
         alert("סיסמה לא נכונה!");
       }
@@ -160,7 +165,7 @@ $("document").ready(function () {
       `
     <a href="#no-active">
     <div class="nav-cat-title"></div>
-    <div id="lunch-btn" class="nav-butt margin-top">
+    <div id="no-active-btn" class="nav-butt margin-top">
     ${lang === "HE" ? "מנות לא פעילות" : "No active"}
     </div>
   </a>`
