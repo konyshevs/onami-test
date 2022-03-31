@@ -9,6 +9,8 @@ import {
 } from "../state-server-test";
 
 const DishForm = (dish, reranderMenu, isNewDish = false) => {
+  document.querySelector(".admin-bar")?.classList.add("hidden");
+
   window.onbeforeunload = function (e) {
     var dialogText = "אם השינויים לא נשלחו לממשק הם לא ישמרו";
     e.returnValue = dialogText;

@@ -61,9 +61,7 @@ $("document").ready(function () {
 
   const controlHashChange = function () {
     let id = window.location.hash.slice(1);
-    if (id === "no-active") {
-      return renderNoActiv();
-    }
+
     if (id === "test") {
       isTest = true;
     }
@@ -96,6 +94,9 @@ $("document").ready(function () {
       id = config.isSpecialsFirstPage ? "specials" : "appetisers";
       firstLoad = true;
     }
+    if (isAdmin) adminBarElm.classList.remove("hidden");
+    if (id === "no-active") return renderNoActiv();
+
     document
       .querySelectorAll(".nav-butt")
       .forEach(el => el.classList.remove("nav-btn-active"));

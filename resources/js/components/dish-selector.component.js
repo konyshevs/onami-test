@@ -3,6 +3,8 @@ import DishForm from "../pages/dishForm";
 const dishBlockEl = document.querySelector(".menu");
 
 const DishSelector = controlHashChange => {
+  document.querySelector(".admin-bar")?.classList.add("hidden");
+
   const createDish = () => {
     const dishFormElms = document.querySelectorAll(".dish-form");
     const category = document.querySelector(".dish-category").value;
