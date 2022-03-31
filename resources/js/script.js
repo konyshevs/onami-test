@@ -370,7 +370,11 @@ $("document").ready(function () {
   // MENU RENDERING
   const renderNoActiv = () => {
     const keys = Object.keys(map);
-    dishBlockEl.innerHTML = "";
+    dishBlockEl.innerHTML = `
+    <div class="lunch-title">
+    <div class="">מנות לא פעילות</div>
+</div>
+    `;
     keys.forEach(key => {
       if (map[key].dishes.some(dish => dish.isActive === false))
         dishBlockEl.insertAdjacentHTML(
