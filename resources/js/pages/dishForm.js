@@ -4,6 +4,8 @@ import {
   Dish,
   sortDishes,
   inputTypes,
+  genId,
+  menuList,
 } from "../state-server-test";
 
 const DishForm = (dish, reranderMenu, isNewDish = false) => {
@@ -54,9 +56,14 @@ const DishForm = (dish, reranderMenu, isNewDish = false) => {
   const createNewDish = (Constructor, category) => {
     const data = readDataFromForm();
     if (!data) return;
-
+    const id = genId(data.titleEN, category);
+    if (menuList[id])
+      return alert(
+        `פריט "${data.titleEN}" כבר קיים. נסו לשנות את שם הפריט באנגלית`
+      );
     console.log(data);
     new Constructor({
+      id,
       titleHE: data.titleHE,
       titleEN: data.titleEN,
       descriptionHE: data.descriptionHE,

@@ -708,7 +708,9 @@ export class Dish {
     isActive,
     isSpecial,
     category,
+    id,
   }) {
+    this.id = id;
     this.titleHE = titleHE || "";
     this.descriptionHE = descriptionHE || "";
     this.titleEN = titleEN || "";
@@ -722,15 +724,12 @@ export class Dish {
     this.isSpecial = isSpecial;
     if (vintage) this.vintage = vintage;
     if (type || type === 0) this.type = type;
-    this.addID();
     menuList[this.id] = this;
   }
-
-  addID() {
-    this.id =
-      this.titleEN.toLowerCase().replaceAll(" ", "_") + "_" + this.category;
-  }
 }
+
+export const genId = (title, category) =>
+  title.toLowerCase().replaceAll(" ", "_") + "_" + category;
 
 // LUNCH
 const createLunch = () => {
