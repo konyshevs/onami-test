@@ -3,14 +3,14 @@ import $ from "jquery";
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-// import {
-//   config,
-//   menuList,
-//   state,
-//   favorits,
-//   changeFavoritesCount,
-//   favoritesCount,
-// } from "./state";
+import {
+  config,
+  menuList,
+  state,
+  favorits,
+  changeFavoritesCount,
+  favoritesCount,
+} from "./state";
 
 import DishForm from "./pages/dishForm";
 import DishSelector from "./components/dish-selector.component";
@@ -18,15 +18,15 @@ import { SERVER_URL, ADMIN_PASS } from "./config";
 
 import { AJAX } from "./helpers";
 
-import {
-  favorits,
-  getMenu,
-  state,
-  changeFavoritesCount,
-  favoritesCount,
-  config,
-  map,
-} from "./state-server-test";
+// import {
+//   favorits,
+//   getMenu,
+//   state,
+//   changeFavoritesCount,
+//   favoritesCount,
+//   config,
+//   map,
+// } from "./state-server-test";
 
 $("document").ready(function () {
   const dishBlockEl = document.querySelector(".menu");
@@ -811,30 +811,30 @@ $("document").ready(function () {
       }
     });
 
-    try {
-      menuList = await getMenu();
+//     try {
+//       menuList = await getMenu();
 
-      // Special menu button
-      if (config.isSpecialsOn) addSpecialsButton();
+//       // Special menu button
+//       if (config.isSpecialsOn) addSpecialsButton();
 
-      shake(".menu-butt");
-      controlHashChange();
-      window.addEventListener("hashchange", controlHashChange, false);
-      ifPopUpStorage();
-      popUpRender();
-    } catch (err) {
-      document.querySelector(".roll-container").innerHTML =
-        lang === "HE"
-          ? "מתנצלים אבל משהו השתבש.  נסו לרענן את העמוד!"
-          : "Sorry, but something has gone wrong. Try to refresh the page!";
-    }
+//       shake(".menu-butt");
+//       controlHashChange();
+//       window.addEventListener("hashchange", controlHashChange, false);
+//       ifPopUpStorage();
+//       popUpRender();
+//     } catch (err) {
+//       document.querySelector(".roll-container").innerHTML =
+//         lang === "HE"
+//           ? "מתנצלים אבל משהו השתבש.  נסו לרענן את העמוד!"
+//           : "Sorry, but something has gone wrong. Try to refresh the page!";
+//     }
 
-    // if (config.isSpecialsOn) addSpecialsButton();
-    // shake(".menu-butt");
-    // controlHashChange();
-    // window.addEventListener("hashchange", controlHashChange, false);
-    // ifPopUpStorage();
-    // popUpRender();
+    if (config.isSpecialsOn) addSpecialsButton();
+    shake(".menu-butt");
+    controlHashChange();
+    window.addEventListener("hashchange", controlHashChange, false);
+    ifPopUpStorage();
+    popUpRender();
   }
   init();
 });
