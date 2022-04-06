@@ -829,12 +829,12 @@ $("document").ready(function () {
           : "Sorry, but something has gone wrong. Try to refresh the page!";
     }
 
-//     if (config.isSpecialsOn) addSpecialsButton();
-//     shake(".menu-butt");
-//     controlHashChange();
-//     window.addEventListener("hashchange", controlHashChange, false);
-//     ifPopUpStorage();
-//     popUpRender();
+    //     if (config.isSpecialsOn) addSpecialsButton();
+    //     shake(".menu-butt");
+    //     controlHashChange();
+    //     window.addEventListener("hashchange", controlHashChange, false);
+    //     ifPopUpStorage();
+    //     popUpRender();
   }
   init();
 });
