@@ -40,11 +40,14 @@ $("document").ready(function () {
   const specialConteinerElm = document.getElementById("js-special-container");
 
   // css colors
-  const color1 = getComputedStyle(document.documentElement).getPropertyValue(
-    "--color1"
+  const green = getComputedStyle(document.documentElement).getPropertyValue(
+    "--green"
   );
-  const color2 = getComputedStyle(document.documentElement).getPropertyValue(
-    "--color2"
+  const black = getComputedStyle(document.documentElement).getPropertyValue(
+    "--black"
+  );
+  const white = getComputedStyle(document.documentElement).getPropertyValue(
+    "--white"
   );
 
   const headingColor = getComputedStyle(
@@ -179,13 +182,13 @@ $("document").ready(function () {
     const width = $("#nav").css("width");
     if (width == "0px") {
       $("#nav").animate({ width: "150px" }, 200);
-      $(".menu-butt").css({ color: color1, "background-color": color2 });
+      $(".menu-butt").css({ color: black});
       $("#nav-container").css({ display: "flex" });
       $("html,body").css("overflow", "hidden");
       $(".menu-sign").toggleClass("fa-bars fa-times");
     } else {
       $("#nav").animate({ width: 0 }, 200);
-      $(".menu-butt").css({ color: color2, "background-color": headingColor });
+      $(".menu-butt").css({ color: white });
       setTimeout(function () {
         $("#nav-container").css({ display: "none" });
       }, 200);
@@ -803,8 +806,8 @@ $("document").ready(function () {
       if (e.matches) {
         navConteiner.style.display = "none";
         nav.style.width = "0";
-        menuBtn.style.cssText =
-          "color: var(--color2); background-color: var(--heading-color);";
+        // menuBtn.style.cssText =
+        //   "color: var(--black); background-color: var(--heading-color);";
       } else {
         navConteiner.style.display = "block";
         nav.style.width = "150px";
