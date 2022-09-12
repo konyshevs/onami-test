@@ -124,7 +124,7 @@ $("document").ready(function () {
     }
     $(thing).animate(
       {
-        left: 0,
+        left: 8,
         top: 0,
       },
       interval

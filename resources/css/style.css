@@ -120,10 +120,11 @@ header .container {
 
 .menu-butt {
   display: none;
-  margin-top: 9px;
+  margin-top: 17px;
   position: relative;
   /* background-color: var(--white); */
   width: 110px;
+  left: 8px;
 }
 .menu-butt i {
   position: relative;
